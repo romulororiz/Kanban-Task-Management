@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 // Define routes
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/boards', require('./routes/boardRoutes'));
+app.use('/api/columns', require('./routes/columnRoutes'));
 
 // Error handler middleware
 app.use(errorHandler);
