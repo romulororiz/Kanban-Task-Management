@@ -24,4 +24,13 @@ const updateBoardValidator = [
 	check('columns').not().isEmpty().withMessage('Columns cannot be empty'),
 ];
 
-module.exports = { addBoardValidator, updateBoardValidator };
+// Add Column validation
+const addColumnValidator = [
+	check('name').not().isEmpty().withMessage('Name cannot be empty'),
+];
+
+module.exports = {
+	addBoardValidator,
+	updateBoardValidator,
+	addColumnValidator,
+};
