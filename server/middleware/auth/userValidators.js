@@ -1,5 +1,5 @@
 const { check } = require('express-validator');
-const User = require('../models/userModel');
+const User = require('../../models/userModel');
 const bcrypt = require('bcryptjs');
 
 // Validation for email and password

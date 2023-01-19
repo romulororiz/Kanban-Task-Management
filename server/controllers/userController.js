@@ -2,7 +2,7 @@ const User = require('../models/userModel');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
-const generateToken = require('../middleware/generateToken');
+const generateToken = require('../middleware/auth/generateToken');
 
 // @route   POST api/users/register
 // @desc    Register a new user

@@ -3,11 +3,17 @@ const { registerUser, loginUser } = require('../controllers/userController');
 const {
 	validateRegistration,
 	validateLogin,
-} = require('../middleware/userValidators');
+} = require('../middleware/auth/userValidators');
 const router = express.Router();
 
-router
-	.post('/register', validateRegistration, registerUser)
-	.post('/login', validateLogin, loginUser);
+// @route   POST api/users/register
+// @desc    Register a user
+// @access  Public
+router.post('/register', validateRegistration, registerUser);
+
+// @route   POST api/users/login
+// @desc    Login a user
+// @access  Public
+router.post('/login', validateLogin, loginUser);
 
 module.exports = router;
