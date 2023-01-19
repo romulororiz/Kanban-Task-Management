@@ -3,24 +3,19 @@ const User = require('../models/userModel');
 const Board = require('../models/boardModel');
 const Column = require('../models/columnModel');
 const Task = require('../models/taskModel');
-const Subtask = require('../models/subtaskModel');
 const { validationResult } = require('express-validator');
 
 // @route   GET api/boards
 // @desc    Get all boards
 // @access  Private
 const getBoards = asyncHandler(async (req, res) => {
-	// get user id from req.user.id
-	const user = await User.findById(req.user.id);
-
-	if (!user) {
-		res.status(404);
-		throw new Error('User not found');
-	}
-
 	try {
 		// Get all boards for user
-		const boards = await Board.find({ user: req.user.id });
+		const boards = await Board.find({ user: req.user.id }).populate({
+			path: 'columns',
+			model: 'Column',
+		});
+
 		res.status(200).json(boards);
 	} catch (error) {
 		res.status(500);
@@ -37,24 +32,23 @@ const createBoard = asyncHandler(async (req, res) => {
 
 	const { name, columns } = req.body;
 
-	// get user id from req.user.id
-	const user = await User.findById(req.user.id);
-
-	if (!user) {
-		res.status(404);
-		throw new Error('User not found');
-	}
-
 	try {
-		const board = await Board.create({
+		// Create a new board with a columns array
+		const board = new Board({
 			name,
-			columns: columns.map(column => {
-				return new Column({
-					name: column.name,
-				});
-			}),
 			user: req.user.id,
 		});
+
+		// Add columns to board
+		for (let i = 0; i < columns.length; i++) {
+			const column = new Column({
+				name: columns[i].name,
+				board: board._id,
+			});
+
+			board.columns.push(column);
+			await column.save();
+		}
 
 		const createdBoard = await board.save();
 		res.status(201).json(createdBoard);
@@ -76,12 +70,12 @@ const updateBoard = asyncHandler(async (req, res) => {
 
 	const { name, columns } = req.body;
 
-	// get user id from req.user.id
-	const user = await User.findById(req.user.id);
+	// check if user owns board
+	const board = await Board.findById(req.params.id);
 
-	if (!user) {
-		res.status(404);
-		throw new Error('User not found');
+	if (board.user.toString() !== req.user.id) {
+		res.status(401);
+		throw new Error('Not authorized');
 	}
 
 	try {
@@ -108,8 +102,56 @@ const updateBoard = asyncHandler(async (req, res) => {
 	}
 });
 
+// @route   DELETE api/boards/:id
+// @desc    Delete a board
+// @access  Private
+const deleteBoard = asyncHandler(async (req, res) => {
+	const board = await Board.findById(req.params.id);
+
+	// check if user owns board
+	if (board.user.toString() !== req.user.id) {
+		res.status(401);
+		throw new Error('Not authorized');
+	}
+
+	try {
+		if (board) {
+			await board.remove();
+			res.status(200).json({ message: 'Board removed' });
+		} else {
+			res.status(404);
+			throw new Error('Board not found');
+		}
+	} catch (error) {
+		res.status(400);
+		throw new Error(error);
+	}
+});
+
+// @route   GET api/boards/:id/columns
+// @desc    Get all columns for a board
+// @access  Private
+const getBoardColumns = asyncHandler(async (req, res) => {
+	try {
+		const board = await Board.findById(req.params.id);
+
+		if (board) {
+			const columns = await Column.find({ board: req.params.id });
+			res.status(200).json(columns);
+		} else {
+			res.status(404);
+			throw new Error('Board not found');
+		}
+	} catch (error) {
+		res.status(400);
+		throw new Error(error);
+	}
+});
+
 module.exports = {
 	getBoards,
 	createBoard,
 	updateBoard,
+	deleteBoard,
+	getBoardColumns,
 };

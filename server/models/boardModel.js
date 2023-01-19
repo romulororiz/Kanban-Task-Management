@@ -14,42 +14,6 @@ const boardSchema = new mongoose.Schema(
 			{
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Column',
-				name: {
-					type: String,
-					required: true,
-				},
-				tasks: [
-					{
-						type: mongoose.Schema.Types.ObjectId,
-						ref: 'Task',
-						title: {
-							type: String,
-							required: true,
-						},
-						description: {
-							type: String,
-							required: true,
-						},
-						status: {
-							type: String,
-							required: true,
-						},
-						subtasks: [
-							{
-								type: mongoose.Schema.Types.ObjectId,
-								ref: 'Subtask',
-								title: {
-									type: String,
-									required: true,
-								},
-								isCompleted: {
-									type: Boolean,
-									required: true,
-								},
-							},
-						],
-					},
-				],
 			},
 		],
 	},
@@ -57,6 +21,17 @@ const boardSchema = new mongoose.Schema(
 		timestamps: true,
 	}
 );
+
+// Delete all columns and tasks when a board is deleted
+boardSchema.pre('remove', async function (next) {
+	try {
+		await this.model('Column').deleteMany({ board: this._id });
+		await this.model('Task').deleteMany({ column: { $in: this.columns } });
+		next();
+	} catch (err) {
+		next(err);
+	}
+});
 
 const Board = mongoose.model('Board', boardSchema);
 
