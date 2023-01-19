@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Define routes
-app.route('/').get((req, res) => res.send('API is running...'));
+app.use('/api/users', require('./routes/userRoutes'));
 
 // Error handler middleware
 app.use(errorHandler);
