@@ -119,9 +119,45 @@ const deleteTask = asyncHandler(async (req, res) => {
 // @route PUT api/tasks/:id
 // @desc Update a task
 // @access Private
-const updateTask = asyncHandler(async (req, res) => {});
+const updateTask = asyncHandler(async (req, res) => {
+	const { title, description, column } = req.body;
+
+	try {
+		// Find task by id
+		const task = await Task.findById(req.params.id);
+
+		// Check if task exists
+		if (!task) {
+			res.status(404);
+			throw new Error('Task not found');
+		}
+
+		// Check if user owns task
+		if (task.user.toString() !== req.user.id) {
+			res.status(401);
+			throw new Error('Not authorized');
+		}
+
+		// Update task
+		const updatedTask = await Task.findByIdAndUpdate(
+			req.params.id,
+			{
+				title,
+				description,
+				column,
+			},
+			{ new: true }
+		);
+
+		res.status(200).json(updatedTask);
+	} catch (error) {
+		res.status(500);
+		throw new Error(error);
+	}
+});
 module.exports = {
 	getTasks,
 	createTask,
 	deleteTask,
+	updateTask,
 };
