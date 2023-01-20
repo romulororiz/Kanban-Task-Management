@@ -16,7 +16,18 @@ const columnValidator = [
 		.withMessage('Name should be less than 10 characters'),
 ];
 
+// add a task validation
+const taskValidator = [
+	check('title').not().isEmpty().withMessage('Title cannot be empty'),
+	check('description')
+		.not()
+		.isEmpty()
+		.withMessage('Description cannot be empty'),
+	check('column').not().isEmpty().withMessage('Column cannot be empty'),
+];
+
 module.exports = {
 	boardValidator,
 	columnValidator,
+	taskValidator,
 };
