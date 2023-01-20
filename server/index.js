@@ -24,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/boards', require('./routes/boardRoutes'));
 app.use('/api/columns', require('./routes/columnRoutes'));
+app.use('/api/tasks', require('./routes/taskRoutes'));
 
 // Error handler middleware
 app.use(errorHandler);

@@ -1,8 +1,6 @@
 const asyncHandler = require('express-async-handler');
-const User = require('../models/userModel');
 const Board = require('../models/boardModel');
 const Column = require('../models/columnModel');
-const Task = require('../models/taskModel');
 const { validationResult } = require('express-validator');
 
 // @route   GET api/boards
@@ -65,7 +63,7 @@ const updateBoard = asyncHandler(async (req, res) => {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	const { name, columns } = req.body;
+	const { name } = req.body;
 
 	// check if user owns board
 	const board = await Board.findById(req.params.id);
@@ -125,19 +123,22 @@ const deleteBoard = asyncHandler(async (req, res) => {
 // @desc    Get all columns for a board
 // @access  Private
 const getBoardColumns = asyncHandler(async (req, res) => {
-	// check if user owns board
-	const board = await Board.findById(req.params.id);
+	// check if user owns board and populate columns
+	const board = await Board.findById(req.params.id).populate('columns');
 
 	if (board.user.toString() !== req.user.id) {
 		res.status(401);
 		throw new Error('Not authorized');
-	} 
+	}
 
 	try {
-		const board = await Board.findById(req.params.id);
-
 		if (board) {
-			const columns = await Column.find({ board: req.params.id });
+			// Get all columns for board and populate tasks
+			const columns = await Column.find({ board: req.params.id }).populate({
+				path: 'tasks',
+				model: 'Task',
+			});
+
 			res.status(200).json(columns);
 		} else {
 			res.status(404);
