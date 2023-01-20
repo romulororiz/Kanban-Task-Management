@@ -131,7 +131,7 @@ const getBoardColumns = asyncHandler(async (req, res) => {
 	if (board.user.toString() !== req.user.id) {
 		res.status(401);
 		throw new Error('Not authorized');
-	}
+	} 
 
 	try {
 		const board = await Board.findById(req.params.id);

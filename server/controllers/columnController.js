@@ -70,4 +70,46 @@ const deleteColumn = asyncHandler(async (req, res) => {
 	}
 });
 
-module.exports = { createColumn, deleteColumn };
+// @route PUT api/columns/:id
+// @desc Update a column
+// @access Private
+const updateColumn = asyncHandler(async (req, res) => {
+	// Check for validation errors from middleware
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(400).json({ errors: errors.array() });
+	}
+
+	const { name } = req.body;
+
+	try {
+		// Find column by id
+		const column = await Column.findById(req.params.id);
+
+		// Check if column exists
+		if (!column) {
+			res.status(404);
+			throw new Error('Column not found');
+		}
+
+		// Check if user owns the board that the column is on
+		const board = await Board.findById(column.board);
+		const user = await User.findById(req.user.id);
+
+		if (board.user.toString() !== user._id.toString()) {
+			res.status(401);
+			throw new Error('Not authorized');
+		}
+
+		column.name = name;
+
+		const updatedColumn = await column.save();
+
+		res.status(200).json(updatedColumn);
+	} catch (error) {
+		res.status(500);
+		throw new Error(error);
+	}
+});
+
+module.exports = { createColumn, deleteColumn, updateColumn };
