@@ -27,6 +27,10 @@ const updateBoardValidator = [
 // Add Column validation
 const addColumnValidator = [
 	check('name').not().isEmpty().withMessage('Name cannot be empty'),
+	// length of name should be less than 10
+	check('name')
+		.isLength({ max: 10 })
+		.withMessage('Name should be less than 10 characters'),
 ];
 
 module.exports = {

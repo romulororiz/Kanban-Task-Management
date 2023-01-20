@@ -11,10 +11,7 @@ const { validationResult } = require('express-validator');
 const getBoards = asyncHandler(async (req, res) => {
 	try {
 		// Get all boards for user
-		const boards = await Board.find({ user: req.user.id }).populate({
-			path: 'columns',
-			model: 'Column',
-		});
+		const boards = await Board.find({ user: req.user.id }).populate('columns');
 
 		res.status(200).json(boards);
 	} catch (error) {
@@ -83,14 +80,10 @@ const updateBoard = asyncHandler(async (req, res) => {
 
 		if (board) {
 			board.name = name;
-			board.columns = columns.map(column => {
-				return new Column({
-					name: column.name,
-				});
-			});
 			board.user = req.user.id;
 
 			const updatedBoard = await board.save();
+
 			res.status(201).json(updatedBoard);
 		} else {
 			res.status(404);
@@ -132,6 +125,14 @@ const deleteBoard = asyncHandler(async (req, res) => {
 // @desc    Get all columns for a board
 // @access  Private
 const getBoardColumns = asyncHandler(async (req, res) => {
+	// check if user owns board
+	const board = await Board.findById(req.params.id);
+
+	if (board.user.toString() !== req.user.id) {
+		res.status(401);
+		throw new Error('Not authorized');
+	}
+
 	try {
 		const board = await Board.findById(req.params.id);
 
