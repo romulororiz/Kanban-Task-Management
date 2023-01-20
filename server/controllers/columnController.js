@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const Board = require('../models/boardModel');
 const Column = require('../models/columnModel');
 const { validationResult } = require('express-validator');
+const Task = require('../models/taskModel');
 
 // @route POST api/columns
 // @desc Create a column
@@ -14,24 +15,28 @@ const createColumn = asyncHandler(async (req, res) => {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
+	// check if board exists
+	const board = await Board.findById(req.params.id);
+	if (!board) {
+		res.status(404);
+		throw new Error('Board not found');
+	}
+
 	const { name } = req.body;
 
 	try {
 		// Create a new column
-		const column = new Column({
-			name,
-			board: req.params.id,
-		});
-
-		// Save column to database
-		const savedColumn = await column.save();
+		const updatedColumn = await Column.findByIdAndUpdate(
+			req.params.id,
+			{ $set: name },
+			{ new: true }
+		);
 
 		// Add column to board
-		const board = await Board.findById(req.params.id);
-		board.columns.push(savedColumn._id);
+		board.columns.push(updatedColumn._id);
 		await board.save();
 
-		res.status(200).json(savedColumn);
+		res.status(200).json(updatedColumn);
 	} catch (error) {
 		res.status(500);
 		throw new Error(error);
@@ -101,9 +106,17 @@ const updateColumn = asyncHandler(async (req, res) => {
 			throw new Error('Not authorized');
 		}
 
-		column.name = name;
+		const updatedColumn = await Column.findByIdAndUpdate(
+			req.params.id,
+			{ name },
+			{ new: true }
+		);
 
-		const updatedColumn = await column.save();
+		// Update status of all tasks associated with the column
+		await Task.updateMany(
+			{ column: req.params.id },
+			{ status: updatedColumn.name }
+		);
 
 		res.status(200).json(updatedColumn);
 	} catch (error) {

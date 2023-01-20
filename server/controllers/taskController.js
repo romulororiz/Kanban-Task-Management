@@ -2,33 +2,15 @@ const asyncHandler = require('express-async-handler');
 const Column = require('../models/columnModel');
 const Task = require('../models/taskModel');
 const { validationResult } = require('express-validator');
+const Subtask = require('../models/subtaskModel');
 
 // @route   GET api/tasks
 // @desc    Get all tasks
 // @access  Private
 const getTasks = asyncHandler(async (req, res) => {
 	try {
-		// Get all tasks for that column
+		// Get all tasks for that column checking the board user id
 		const tasks = await Task.find({ user: req.user.id });
-		res.status(200).json(tasks);
-	} catch (error) {
-		res.status(500);
-		throw new Error(error);
-	}
-});
-
-// @route   GET api/tasks/:columnId
-// @desc    Get all tasks for a column
-// @access  Private
-const getTasksByColumn = asyncHandler(async (req, res) => {
-	// get column from column id
-	const column = await Column.findById(req.params.columnId);
-
-	try {
-		// Get all tasks for that column
-		const tasks = await Task.find({
-			status: column.name,
-		});
 		res.status(200).json(tasks);
 	} catch (error) {
 		res.status(500);
@@ -67,15 +49,20 @@ const createTask = asyncHandler(async (req, res) => {
 	}
 
 	try {
-		// Create a new task with a columns array
+		// Create a new task inside the columns array
 		const task = new Task({
 			title,
 			description,
-			column,
+			column: columnData._id,
 			status: columnData.name,
 			user: req.user.id,
 		});
 
+		// Add task to column
+		columnData.tasks.push(task);
+		await columnData.save();
+
+		// Save task to database
 		const createdTask = await task.save();
 		res.status(201).json(createdTask);
 	} catch (error) {
@@ -92,6 +79,9 @@ const deleteTask = asyncHandler(async (req, res) => {
 		// Find task by id
 		const task = await Task.findById(req.params.id);
 
+		// find column by id
+		const column = await Column.findById(task.column);
+
 		// Check if task exists
 		if (!task) {
 			res.status(404);
@@ -104,8 +94,21 @@ const deleteTask = asyncHandler(async (req, res) => {
 			throw new Error('Not authorized');
 		}
 
+		// Find all subtasks associated with the task
+		const subtasks = await Subtask.find({ task: task._id });
+
+		// Delete all subtasks associated with the task
+		subtasks.forEach(async subtask => {
+			await subtask.remove();
+		});
+
 		// Delete task
 		await task.remove();
+
+		// Remove the reference to the task in the column
+		column.tasks.pull(task._id);
+		await column.save();
+
 		res.status(200).json({ message: 'Task removed' });
 	} catch (error) {
 		res.status(500);
@@ -113,9 +116,12 @@ const deleteTask = asyncHandler(async (req, res) => {
 	}
 });
 
+// @route PUT api/tasks/:id
+// @desc Update a task
+// @access Private
+const updateTask = asyncHandler(async (req, res) => {});
 module.exports = {
 	getTasks,
 	createTask,
-	getTasksByColumn,
 	deleteTask,
 };
