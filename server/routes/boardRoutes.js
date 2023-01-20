@@ -7,10 +7,7 @@ const {
 	deleteBoard,
 	getBoardColumns,
 } = require('../controllers/boardController');
-const {
-	addBoardValidator,
-	updateBoardValidator,
-} = require('../middleware/board/boardValidators');
+const { boardValidator } = require('../middleware/board/boardValidators');
 const protectRoute = require('../middleware/auth/authMiddleware');
 
 // BOARD ROUTES
@@ -22,12 +19,12 @@ router.route('/').get(protectRoute, getBoards);
 // @route   POST api/boards/create
 // @desc    Create a board
 // @access  Private
-router.route('/create').post(protectRoute, addBoardValidator, createBoard);
+router.route('/create').post(protectRoute, boardValidator, createBoard);
 
 // @route   PUT api/boards/:id
 // @desc    Update a board
 // @access  Private
-router.route('/:id').put(protectRoute, updateBoardValidator, updateBoard);
+router.route('/:id').put(protectRoute, boardValidator, updateBoard);
 
 // @route   DELETE api/boards/:id
 // @desc    Delete a board
