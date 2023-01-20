@@ -10,7 +10,7 @@ const Subtask = require('../models/subtaskModel');
 const getTasks = asyncHandler(async (req, res) => {
 	try {
 		// Get all tasks for that column checking the board user id
-		const tasks = await Task.find({ user: req.user.id });
+		const tasks = await Task.find({ user: req.user.id }).populate('subtasks');
 		res.status(200).json(tasks);
 	} catch (error) {
 		res.status(500);

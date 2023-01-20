@@ -26,17 +26,19 @@ const createColumn = asyncHandler(async (req, res) => {
 
 	try {
 		// Create a new column
-		const updatedColumn = await Column.findByIdAndUpdate(
-			req.params.id,
-			{ $set: name },
-			{ new: true }
-		);
+		const column = new Column({
+			name,
+			board: req.params.id,
+		});
+
+		// Save column to database
+		const savedColumn = await column.save();
 
 		// Add column to board
-		board.columns.push(updatedColumn._id);
+		board.columns.push(savedColumn._id);
 		await board.save();
 
-		res.status(200).json(updatedColumn);
+		res.status(200).json(savedColumn);
 	} catch (error) {
 		res.status(500);
 		throw new Error(error);

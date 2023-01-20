@@ -26,8 +26,18 @@ const taskValidator = [
 	check('column').not().isEmpty().withMessage('Column cannot be empty'),
 ];
 
+// add a subtask validation
+const subtaskValidator = [
+	check('title').not().isEmpty().withMessage('Title cannot be empty'),
+	check('isCompleted')
+		.not()
+		.isEmpty()
+		.withMessage('isCompleted cannot be empty'),
+];
+
 module.exports = {
 	boardValidator,
 	columnValidator,
 	taskValidator,
+	subtaskValidator,
 };
