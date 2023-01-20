@@ -8,8 +8,6 @@
 		"client": "npm run dev --prefix client",
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
 		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm i --prefix client && npm run build --prefix client",
-		"data:import": "node server/seeder",
-		"data:destroy": "node server/seeder -d",
 		"start-server": "node server/index.js"
 	},
 	"author": "Romulo Roriz",
