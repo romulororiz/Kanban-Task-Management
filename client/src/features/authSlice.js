@@ -3,7 +3,7 @@ import authService from './authService';
 import Cookies from 'js-cookie';
 
 // get user from cookie
-const user = JSON.parse(Cookies.get('user'));
+const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
 
 const initialState = {
 	user: user ? user : null,
@@ -18,7 +18,7 @@ export const register = createAsyncThunk(
 	'auth/register',
 	async (userData, { rejectWithValue }) => {
 		try {
-			const response = await authService.register(userData);
+			const response = await authService.registerUser(userData);
 			return response;
 		} catch (error) {
 			const message =
@@ -37,7 +37,7 @@ export const login = createAsyncThunk(
 	'auth/login',
 	async (userData, { rejectWithValue }) => {
 		try {
-			const response = await authService.login(userData);
+			const response = await authService.loginUser(userData);
 			return response;
 		} catch (error) {
 			const message =
@@ -64,10 +64,10 @@ const authSlice = createSlice({
 	extraReducers: builder => {
 		builder
 			// Register
-			.addCase(register.pending, (state, action) => {
+			.addCase(register.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(register.fulfilled, (state, action) => {
+			.addCase(register.fulfilled, state => {
 				state.isLoading = false;
 				state.isSuccess = true;
 				// get user data from cookie
@@ -81,10 +81,10 @@ const authSlice = createSlice({
 				state.message = action.payload;
 			})
 			// Login
-			.addCase(login.pending, (state, action) => {
+			.addCase(login.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(login.fulfilled, (state, action) => {
+			.addCase(login.fulfilled, state => {
 				state.isLoading = false;
 				state.isSuccess = true;
 				// get user data from cookie
@@ -97,8 +97,10 @@ const authSlice = createSlice({
 				state.message = action.payload;
 			})
 			// Logout
-			.addCase(logout.fulfilled, (state, action) => {
+			.addCase(logout.fulfilled, state => {
 				state.user = null;
 			});
 	},
 });
+
+export default authSlice.reducer;
