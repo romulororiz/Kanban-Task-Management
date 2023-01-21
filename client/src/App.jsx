@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 function App() {
 	return (
 		<>
-			<Router>
-				<Routes>{/* Implement routes */}</Routes>
-			</Router>
+			<div className='App'>
+				<h1>Kanban</h1>
+			</div>
 		</>
 	);
 }
