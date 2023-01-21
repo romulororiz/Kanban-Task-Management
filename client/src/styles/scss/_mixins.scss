@@ -1,1 +1,121 @@
 @import 'variables', 'breakpoints';
+
+// ------------------------------
+// Headings
+// ------------------------------
+
+@mixin headingXl {
+	font-size: $heading-xl;
+	line-height: 30px;
+	font-weight: 700;
+}
+
+@mixin headingLg {
+	font-size: $heading-lg;
+	line-height: 23px;
+	font-weight: 700;
+}
+
+@mixin headingMd {
+	font-size: $heading-md;
+	line-height: 19px;
+	font-weight: 700;
+}
+
+@mixin headingSm {
+	font-size: $heading-sm;
+	line-height: 15px;
+	font-weight: 700;
+	kerning: 2.4px;
+}
+
+// ------------------------------
+// Text
+// ------------------------------
+
+@mixin textL {
+	font-size: $font-size-l;
+	line-height: 23px;
+	font-weight: 400;
+}
+
+// ------------------------------
+// Buttons
+// ------------------------------
+@mixin button {
+	padding: 6px 12px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	border-radius: 24px;
+}
+
+@mixin buttonPrimary {
+	@include button;
+	background-color: $primary-purple;
+	color: $primary-white;
+
+	&:hover {
+		background-color: $secondary-purple;
+	}
+}
+
+@mixin buttonSecondary {
+	@include button;
+	background-color: rgba($primary-purple, 0.1);
+	color: $primary-purple;
+
+	&:hover {
+		background-color: rgba($primary-purple, 0.25);
+	}
+}
+
+@mixin buttonDestructive {
+	@include button;
+	background-color: $primary-red;
+	color: $primary-white;
+
+	&:hover {
+		background-color: $secondary-red;
+	}
+}
+
+// ------------------------------
+// Inputs
+// ------------------------------
+
+@mixin input {
+	padding: 6px 12px;
+	background-color: $primary-white;
+	outline: none;
+	border-radius: 4px;
+
+	&::placeholder {
+		color: $primary-black;
+		opacity: 0.25;
+	}
+}
+
+@mixin inputText {
+	@include input;
+	border: 1px solid $primary-gray;
+	color: $primary-black;
+}
+
+@mixin inputTextError {
+	@include inputText;
+	border: 1px solid $primary-red;
+}
+
+@mixin inputDropdown {
+	@include input;
+	border: 1px solid $primary-purple;
+	color: $primary-black;
+}
+
+@mixin checkbox {
+	&:checked {
+		background-color: $primary-purple;
+		color: $primary-white;
+	}
+}

@@ -29,8 +29,9 @@ a {
 html,
 body {
 	height: 100%;
-	background-color: #f0f4f7;
+	background-color: $secondary-gray;
 }
+
 body {
 	-webkit-font-smoothing: antialiased;
 	font-family: 'Plus Jakarta Sans', Poppins, -apple-system, system-ui,

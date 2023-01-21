@@ -1,1 +1,42 @@
+//  -----------------------------
+//  Theme Colors
+//  -----------------------------
 
+// Purple
+$primary-purple: #635fc7;
+$secondary-purple: #a8a4ff;
+$tertiary-purple: linear-gradient(
+	180deg,
+	#e9effa 0%,
+	rgba(233, 239, 250, 0.5) 100%
+);
+
+// gray
+$primary-gray: #828fa3;
+$secondary-gray: #f4f7fd;
+
+// red
+$primary-red: #ea5555;
+$secondary-red: #ff9898;
+
+// black
+$primary-black: #000112;
+
+// white
+$primary-white: #ffffff;
+
+//  ---------------------------
+//  Heading Sizes
+//  ---------------------------
+
+$heading-xl: 24px;
+$heading-lg: 18px;
+$heading-md: 15px;
+$heading-sm: 12px;
+
+// ---------------------------
+//  Font Sizes
+//  ---------------------------
+
+$font-size-l: 13px;
+$font-size-m: 12px;
