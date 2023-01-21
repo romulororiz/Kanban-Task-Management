@@ -22,7 +22,7 @@ const registerUser = asyncHandler(async (req, res) => {
 	const hashedPassword = await bcrypt.hash(password, salt);
 
 	try {
-		// Create new user
+		// create new user
 		const newUser = await User.create({
 			firstName,
 			lastName,
@@ -30,21 +30,20 @@ const registerUser = asyncHandler(async (req, res) => {
 			password: hashedPassword,
 		});
 
-		// Create a new token and save it to a cookie
+		// create a new token and save it to a cookie
 		const token = generateToken(newUser._id);
 
 		// Set cookie options
 		const options = {
-			expires: new Date(
-				Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000 // 30 days
-			),
+			maxAge: 24 * 60 * 60 * 1000, // 30 days
 			httpOnly: true,
 		};
 
 		// Set cookie
 		res.cookie('token', token, options);
 
-		// Return new user
+		// Return user
+
 		res.status(201).json({
 			_id: newUser._id,
 			firstName: newUser.firstName,
@@ -81,9 +80,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
 		// Set cookie options
 		const options = {
-			expires: new Date(
-				Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000 // 30 days
-			),
+			maxAge: 24 * 60 * 60 * 1000, // 30 days
 			httpOnly: true,
 		};
 
