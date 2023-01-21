@@ -76,13 +76,27 @@ const loginUser = asyncHandler(async (req, res) => {
 			email,
 		});
 
+		// create a new token and save it to a cookie
+		const token = generateToken(user._id);
+
+		// Set cookie options
+		const options = {
+			expires: new Date(
+				Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000 // 30 days
+			),
+			httpOnly: true,
+		};
+
+		// Set cookie
+		res.cookie('token', token, options);
+
+		// Return user
 		res.status(200).json({
 			_id: user._id,
 			firstName: user.firstName,
 			lastName: user.lastName,
 			email: user.email,
 			boards: user.boards,
-			token: generateToken(user._id),
 		});
 	} catch (error) {
 		res.status(500);
