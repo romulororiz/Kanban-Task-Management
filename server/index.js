@@ -4,7 +4,8 @@ const path = require('path');
 const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
-const errorHandler = require('./middleware/errorHandler');
+const cookieParser = require('cookie-parser');
+const errorHandler = require('./middleware/error/errorHandler');
 const port = process.env.PORT || 5000;
 
 // Connect DB
@@ -12,6 +13,9 @@ connectDB();
 
 // Init express app
 const app = express();
+
+// Initialize cookie parser
+app.use(cookieParser());
 
 // Resolve cors
 app.use(cors());

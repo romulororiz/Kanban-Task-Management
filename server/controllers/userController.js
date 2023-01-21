@@ -30,6 +30,20 @@ const registerUser = asyncHandler(async (req, res) => {
 			password: hashedPassword,
 		});
 
+		// Create a new token and save it to a cookie
+		const token = generateToken(newUser._id);
+
+		// Set cookie options
+		const options = {
+			expires: new Date(
+				Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000 // 30 days
+			),
+			httpOnly: true,
+		};
+
+		// Set cookie
+		res.cookie('token', token, options);
+
 		// Return new user
 		res.status(201).json({
 			_id: newUser._id,
@@ -37,7 +51,6 @@ const registerUser = asyncHandler(async (req, res) => {
 			lastName: newUser.lastName,
 			email: newUser.email,
 			boards: newUser.boards,
-			token: generateToken(newUser._id),
 		});
 	} catch (error) {
 		res.status(500);
