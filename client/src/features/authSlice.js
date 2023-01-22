@@ -10,7 +10,7 @@ const initialState = {
 	isError: false,
 	isLoading: false,
 	isSuccess: false,
-	message: '',
+	errors: [],
 };
 
 // Register new user
@@ -40,13 +40,8 @@ export const login = createAsyncThunk(
 			const response = await authService.loginUser(userData);
 			return response;
 		} catch (error) {
-			const message =
-				(error.response &&
-					error.response.data &&
-					error.response.data.message) ||
-				error.message ||
-				error.toString();
-			return rejectWithValue(message);
+			const errors = error.response.data.errors;
+			return rejectWithValue(errors);
 		}
 	}
 );
@@ -78,7 +73,7 @@ const authSlice = createSlice({
 				state.isLoading = false;
 				state.isError = true;
 				state.isSuccess = false;
-				state.message = action.payload;
+				state.errors = action.payload;
 			})
 			// Login
 			.addCase(login.pending, state => {
@@ -94,7 +89,7 @@ const authSlice = createSlice({
 			.addCase(login.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.message = action.payload;
+				state.errors = action.payload;
 			})
 			// Logout
 			.addCase(logout.fulfilled, state => {
