@@ -18,12 +18,6 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		boards: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'Board',
-			},
-		],
 	},
 	{
 		timestamps: true,

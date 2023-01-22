@@ -18,7 +18,7 @@ const getTasks = asyncHandler(async (req, res) => {
 	}
 });
 
-// @route   POST api/tasks/create
+// @route   POST api/tasks/columnId/create
 // @desc    Create a task
 // @access  Private
 const createTask = asyncHandler(async (req, res) => {
@@ -28,7 +28,9 @@ const createTask = asyncHandler(async (req, res) => {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	const { title, description, column } = req.body;
+	const { title, description } = req.body;
+
+	const { columnId } = req.params;
 
 	// check if theres at least one column in the board before creating a task
 	const columns = await Column.find({ board: req.params.id });
@@ -40,10 +42,10 @@ const createTask = asyncHandler(async (req, res) => {
 	}
 
 	// Retrieve column from column id
-	const columnData = await Column.findById(column);
+	const column = await Column.findById(columnId);
 
 	// check if column exists
-	if (!columnData) {
+	if (!column) {
 		res.status(400);
 		throw new Error('Column not found');
 	}
@@ -53,14 +55,14 @@ const createTask = asyncHandler(async (req, res) => {
 		const task = new Task({
 			title,
 			description,
-			column: columnData._id,
-			status: columnData.name,
+			column: column._id,
+			status: column.name,
 			user: req.user.id,
 		});
 
 		// Add task to column
-		columnData.tasks.push(task);
-		await columnData.save();
+		column.tasks.push(task);
+		await column.save();
 
 		// Save task to database
 		const createdTask = await task.save();

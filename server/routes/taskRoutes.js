@@ -18,7 +18,7 @@ router.route('/').get(protectRoute, getTasks);
 // @route   POST api/tasks/create
 // @desc    Create a task
 // @access  Private
-router.route('/create').post(protectRoute, taskValidator, createTask);
+router.route('/:columnId/create').post(protectRoute, taskValidator, createTask);
 
 // @route   DELETE api/tasks/:id
 // @desc    Delete a task

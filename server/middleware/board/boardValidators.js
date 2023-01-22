@@ -4,7 +4,6 @@ const Board = require('../../models/boardModel');
 // Validation for title and columns
 const boardValidator = [
 	check('name').not().isEmpty().withMessage('Name cannot be empty'),
-	check('columns').not().isEmpty().withMessage('Columns cannot be empty'),
 ];
 
 // Add Column validation
@@ -23,7 +22,6 @@ const taskValidator = [
 		.not()
 		.isEmpty()
 		.withMessage('Description cannot be empty'),
-	check('column').not().isEmpty().withMessage('Column cannot be empty'),
 ];
 
 // add a subtask validation

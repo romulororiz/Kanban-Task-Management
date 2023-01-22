@@ -44,17 +44,6 @@ const createBoard = asyncHandler(async (req, res) => {
 			user: req.user.id,
 		});
 
-		// Add columns to board
-		for (let i = 0; i < columns.length; i++) {
-			const column = new Column({
-				name: columns[i].name,
-				board: board._id,
-			});
-
-			board.columns.push(column);
-			await column.save();
-		}
-
 		const createdBoard = await board.save();
 		res.status(201).json(createdBoard);
 	} catch (error) {
