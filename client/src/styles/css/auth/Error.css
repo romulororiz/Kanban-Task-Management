@@ -1,0 +1,9 @@
+.kanban__auth-login-error {
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 700;
+  kerning: 2.4px;
+  padding: 0.2rem 0;
+  font-weight: 500;
+  color: #ea5555;
+}
