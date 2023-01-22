@@ -1,0 +1,51 @@
+@import '../variables', '../breakpoints', '../mixins';
+
+.kanban__auth-card {
+	width: 100%;
+	max-width: 940px;
+	min-height: 600px;
+	margin: 0 2rem;
+	display: flex;
+	@include textL;
+	background-color: $primary-white;
+	border-radius: 10px;
+	box-shadow: $box-shadow;
+
+	.kanban__auth-card__left-side {
+		color: $primary-white;
+		flex: 1;
+		max-width: 320px;
+		display: flex;
+		justify-content: center;
+
+		.kanban__auth-card__left-side_container {
+			background: url('../../../assets/auth/bg-sidebar-desktop.svg') no-repeat
+				center center;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			padding: 0 1rem;
+			margin: 0 1rem;
+
+			.kanban__auth-card__left-side_container-logo {
+				width: 100%;
+				max-width: 200px;
+				margin-bottom: 2rem;
+				display: flex;
+				justify-content: center;
+			}
+
+			.kanban__auth-card__left-side_container-text {
+			}
+		}
+	}
+
+	.kanban__auth-card__right-side {
+		flex: 2;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
