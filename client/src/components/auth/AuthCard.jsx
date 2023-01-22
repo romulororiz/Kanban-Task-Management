@@ -1,8 +1,9 @@
 import logo from '@assets/auth/logo-light.svg';
 import '@styles/scss/auth/AuthCard.scss';
 import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 
-const AuthCard = ({ form, setLoginForm, setRegisterForm }) => {
+const AuthCard = ({ form, setForm }) => {
 	return (
 		<div className='kanban__auth-card'>
 			<div className='kanban__auth-card__left-side'>
@@ -20,7 +21,11 @@ const AuthCard = ({ form, setLoginForm, setRegisterForm }) => {
 			</div>
 			<div className='kanban__auth-card__right-side'>
 				<div className='kanban__auth-card__right-side_container'>
-					<LoginForm />
+					{form === 'login' ? (
+						<LoginForm setForm={setForm} />
+					) : (
+						<RegisterForm setForm={setForm} />
+					)}
 				</div>
 			</div>
 		</div>
