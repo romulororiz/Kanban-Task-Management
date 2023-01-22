@@ -21,13 +21,8 @@ export const register = createAsyncThunk(
 			const response = await authService.registerUser(userData);
 			return response;
 		} catch (error) {
-			const message =
-				(error.response &&
-					error.response.data &&
-					error.response.data.message) ||
-				error.message ||
-				error.toString();
-			return rejectWithValue(message);
+			const errors = error.response.data.errors;
+			return rejectWithValue(errors);
 		}
 	}
 );
@@ -55,7 +50,11 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
-	reducers: {},
+	reducers: {
+		clearErrors: state => {
+			state.errors = [];
+		},
+	},
 	extraReducers: builder => {
 		builder
 			// Register
@@ -98,4 +97,5 @@ const authSlice = createSlice({
 	},
 });
 
+export const { clearErrors } = authSlice.actions;
 export default authSlice.reducer;
