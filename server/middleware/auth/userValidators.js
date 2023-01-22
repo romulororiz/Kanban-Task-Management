@@ -17,6 +17,16 @@ const validatePassword = [
 		.withMessage('Password must contain a number')
 		.matches(/[!@#$%^&*(),.?":{}|<>]/)
 		.withMessage('Password must contain a special character'),
+
+	check('confirmPassword')
+		.custom((confirmPassword, { req }) => {
+			if (confirmPassword !== req.body.password) {
+				throw new Error('Passwords do not match');
+			}
+			return true;
+		})
+		.isLength({ min: 6, max: 15 })
+		.withMessage('Password should be between 6 to 15 chars long'),
 ];
 
 // Validation for user registration
@@ -44,7 +54,6 @@ const validateRegistration = [
 			throw new Error('User already exists');
 		}
 	}),
-
 	validatePassword,
 ];
 

@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import Error from './Error';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import '@styles/scss/auth/LoginForm.scss';
+import { clearErrors } from '@features/authSlice';
+import { useCallback } from 'react';
 
 const LoginForm = () => {
 	const [formData, setFormData] = useState({
@@ -19,7 +21,7 @@ const LoginForm = () => {
 	const { email, password } = formData;
 
 	// extract errors from state
-	const { errors: loginErrors, isError } = useSelector(state => state.auth);
+	const { errors: loginErrors } = useSelector(state => state.auth);
 
 	// initialize dispatch
 	const dispatch = useDispatch();
@@ -47,35 +49,37 @@ const LoginForm = () => {
 	}, [passwordShown]);
 
 	// onChange handler for form inputs
-	const onChange = e => {
+	const onChange = useCallback(e => {
 		const { name, value } = e.target;
 
 		setFormData(prevState => ({
 			...prevState,
 			[name]: value,
 		}));
-	};
+	}, []);
 
 	// onSubmit handler for form
-	const onSubmit = e => {
-		e.preventDefault();
+	const onSubmit = useCallback(
+		e => {
+			e.preventDefault();
 
-		const userData = {
-			email,
-			password,
-		};
+			const userData = {
+				email,
+				password,
+			};
 
-		if (!errors.length) {
-			dispatch(login(userData));
-		}
-	};
+			// dispatch register action if no errors
+			if (!errors.length) {
+				dispatch(login(userData));
+			}
+		},
+		[errors, email, password, dispatch]
+	);
 
 	// handle password visibility
-	const togglePasswordVisiblity = () => {
+	const togglePasswordVisibility = () => {
 		setPasswordShown(passwordShown => !passwordShown);
 	};
-
-	console.log(errors);
 
 	return (
 		<div className='kanban__auth-login'>
@@ -98,7 +102,7 @@ const LoginForm = () => {
 							}
 							type='email'
 							name='email'
-							placeholder='e.g Stephen King'
+							placeholder='e.g stephenking@lorem.com'
 							onChange={onChange}
 						/>
 						<Error errors={errors} errorParam='email' />
@@ -117,18 +121,18 @@ const LoginForm = () => {
 								type='password'
 								name='password'
 								id='password'
-								placeholder='e.g stephenking@lorem.com'
+								placeholder='Your password'
 								onChange={onChange}
 							/>
 							{passwordShown ? (
-								<FaEyeSlash
-									className='kanban__auth-login_form-input_password-icon'
-									onClick={togglePasswordVisiblity}
-								/>
-							) : (
 								<FaEye
 									className='kanban__auth-login_form-input_password-icon'
-									onClick={togglePasswordVisiblity}
+									onClick={togglePasswordVisibility}
+								/>
+							) : (
+								<FaEyeSlash
+									className='kanban__auth-login_form-input_password-icon'
+									onClick={togglePasswordVisibility}
 								/>
 							)}
 						</div>
@@ -137,7 +141,10 @@ const LoginForm = () => {
 				</div>
 				<div className='kanban__auth-login_form-btn kanban__auth-login_form-register'>
 					<p>
-						Don't have an account? <Link to='/auth/register'>Register</Link>
+						Don't have an account?{' '}
+						<Link to='/auth/register' onClick={() => dispatch(clearErrors())}>
+							Register
+						</Link>
 					</p>
 					<button type='submit'>Login</button>
 				</div>

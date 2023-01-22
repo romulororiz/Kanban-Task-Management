@@ -15,11 +15,17 @@ const registerUser = asyncHandler(async (req, res) => {
 	}
 
 	// Destructure request body
-	const { firstName, lastName, email, password } = req.body;
+	const { firstName, lastName, email, password, confirmPassword } = req.body;
 
 	// Hash password
 	const salt = await bcrypt.genSalt(10);
 	const hashedPassword = await bcrypt.hash(password, salt);
+
+	// check if password and confirm password match
+	if (password !== confirmPassword) {
+		res.status(400);
+		throw new Error('Passwords do not match');
+	}
 
 	try {
 		// create new user
