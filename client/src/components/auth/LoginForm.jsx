@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '@features/authSlice';
+import { login, clearErrors } from '@features/auth/authSlice';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import Error from './Error';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import '@styles/scss/auth/LoginForm.scss';
-import { clearErrors } from '@features/authSlice';
 import { useCallback } from 'react';
 
 const LoginForm = () => {

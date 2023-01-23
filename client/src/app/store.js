@@ -1,6 +1,6 @@
 // create redux toolkit store
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from '@features/authSlice';
+import authReducer from '@features/auth/authSlice';
 
 export default configureStore({
 	reducer: {

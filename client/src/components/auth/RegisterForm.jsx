@@ -2,10 +2,9 @@ import Error from './Error';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { register } from '@features/authSlice';
+import { register, clearErrors } from '@features/auth/authSlice';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import '@styles/scss/auth/RegisterForm.scss';
-import { clearErrors } from '@features/authSlice';
 import { useCallback } from 'react';
 
 const RegisterForm = () => {
