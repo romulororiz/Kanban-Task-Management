@@ -1,0 +1,48 @@
+@import '../variables', '../mixins', '../breakpoints';
+
+.kanban__header {
+	height: 96px;
+	background-color: $primary-white;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+	position: relative;
+
+	.kanban__header-logo {
+		position: absolute;
+		left: 40px;
+		z-index: 100;
+	}
+
+	.kanban__header-container {
+		margin-left: 300px;
+		padding: 0 2rem;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.kanban__header-board_name {
+			@include headingXl;
+		}
+
+		.kanban__header-board_actions {
+			display: flex;
+
+			button {
+				@include buttonPrimary;
+				display: flex;
+				align-items: center;
+				margin-right: 1rem;
+
+				img {
+					margin-right: 0.5rem;
+				}
+			}
+
+			.kanban__header-board_actions-menu {
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+			}
+		}
+	}
+}
