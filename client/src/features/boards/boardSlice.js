@@ -15,7 +15,7 @@ const initialState = {
 // Get all boards
 export const getBoards = createAsyncThunk(
 	'board/getBoards',
-	async (_, { rejectWithValue }) => {
+	async ({ rejectWithValue }) => {
 		try {
 			const response = await boardService.getBoards();
 			return response;
