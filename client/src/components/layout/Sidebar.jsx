@@ -6,7 +6,7 @@ import HideSidebar from '@assets/dashboard/icon-hide-sidebar.svg';
 import BoardSvg from '@assets/dashboard/icon-board.svg';
 import '@styles/scss/layout/Sidebar.scss';
 
-const Sidebar = ({ showSidebar }) => {
+const Sidebar = ({ showSidebar, setShowSidebar }) => {
 	const [errors, setErrors] = useState([]);
 	const [activeBoard, setActiveBoard] = useState(null);
 
@@ -31,7 +31,11 @@ const Sidebar = ({ showSidebar }) => {
 	// handle loading
 
 	return (
-		<div className='kanban__sidebar'>
+		<div
+			className={`kanban__sidebar ${
+				showSidebar ? 'kanban__sidebar-show' : 'kanban__sidebar-hide'
+			}`}
+		>
 			<div className='kanban__sidebar-boards_container'>
 				<h1>All Boards ({boards.length})</h1>
 				{isLoading ? (
@@ -54,9 +58,9 @@ const Sidebar = ({ showSidebar }) => {
 					<p>toogle</p>
 					<p>icon</p>
 				</div>
-				<div className='kanban__sidebar-hide'>
+				<div className='kanban__sidebar-hide-container'>
 					<img src={HideSidebar} alt='hide sidebar' />
-					<p>Hide Sidebar</p>
+					<p onClick={() => setShowSidebar(false)}>Hide Sidebar</p>
 				</div>
 			</div>
 		</div>
