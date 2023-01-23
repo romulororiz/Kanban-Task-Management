@@ -3,13 +3,21 @@
 .kanban__header {
 	height: 96px;
 	background-color: $primary-white;
-	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 	position: relative;
+	border-bottom: 1px solid darken($color: $secondary-gray, $amount: 5%);
 
 	.kanban__header-logo {
+		height: 100%;
+		display: flex;
+		align-items: center;
 		position: absolute;
 		left: 40px;
 		z-index: 100;
+		padding: 0rem 2rem 0rem 0;
+	}
+
+	.kanban__header-logo_no-sidebar {
+		border-right: 1px solid darken($color: $secondary-gray, $amount: 5%);
 	}
 
 	.kanban__header-container {
@@ -44,5 +52,9 @@
 				cursor: pointer;
 			}
 		}
+	}
+
+	.kanban__header-container_no-sidebar {
+		margin-left: 230px;
 	}
 }

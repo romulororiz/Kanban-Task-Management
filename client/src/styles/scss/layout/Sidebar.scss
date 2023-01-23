@@ -9,7 +9,7 @@
 	background-color: #fff;
 	transition: $ease-1;
 	z-index: 100;
-	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+	border-right: 1px solid darken($color: $secondary-gray, $amount: 5%);
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -44,12 +44,13 @@
 			border-radius: 6px;
 		}
 
-		.kanban__sidebar-hide {
+		.kanban__sidebar-hide-container {
 			display: flex;
 			padding: 1rem 1.5rem;
 			margin-right: 1rem;
 			border-radius: 0px 100px 100px 0px;
 			@include headingMd;
+			transition: $ease-1;
 
 			&:hover {
 				background-color: rgba($secondary-purple, 0.1);
@@ -70,4 +71,12 @@
 			}
 		}
 	}
+}
+
+.kanban__sidebar-hide {
+	transform: translateX(-100%);
+}
+
+.kanban__sidebar-show {
+	transform: translateX(0);
 }
