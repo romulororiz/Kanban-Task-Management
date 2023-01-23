@@ -68,11 +68,11 @@ const authSlice = createSlice({
 				const user = JSON.parse(Cookies.get('user'));
 				state.user = user;
 			})
-			.addCase(register.rejected, (state, action) => {
+			.addCase(register.rejected, (state, { payload }) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.isSuccess = false;
-				state.errors = action.payload;
+				state.errors = payload;
 			})
 			// Login
 			.addCase(login.pending, state => {
@@ -85,10 +85,10 @@ const authSlice = createSlice({
 				const user = JSON.parse(Cookies.get('user'));
 				state.user = user;
 			})
-			.addCase(login.rejected, (state, action) => {
+			.addCase(login.rejected, (state, { payload }) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.errors = action.payload;
+				state.errors = payload;
 			})
 			// Logout
 			.addCase(logout.fulfilled, state => {
