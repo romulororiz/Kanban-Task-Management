@@ -18,6 +18,33 @@ const getTasks = asyncHandler(async (req, res) => {
 	}
 });
 
+// @route   GET api/tasks/:id
+// @desc    Get a task by id
+// @access  Private
+const getTaskById = asyncHandler(async (req, res) => {
+	try {
+		// Get task by id
+		const task = await Task.findById(req.params.id).populate('subtasks');
+
+		// Check if task exists
+		if (!task) {
+			res.status(404);
+			throw new Error('Task not found');
+		}
+
+		// Check if task belongs to user
+		if (task.user.toString() !== req.user.id) {
+			res.status(401);
+			throw new Error('Not authorized');
+		}
+
+		res.status(200).json(task);
+	} catch (error) {
+		res.status(500);
+		throw new Error(error);
+	}
+});
+
 // @route   POST api/tasks/columnId/create
 // @desc    Create a task
 // @access  Private
@@ -159,6 +186,7 @@ const updateTask = asyncHandler(async (req, res) => {
 });
 module.exports = {
 	getTasks,
+	getTaskById,
 	createTask,
 	deleteTask,
 	updateTask,

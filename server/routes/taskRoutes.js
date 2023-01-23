@@ -5,6 +5,7 @@ const {
 	createTask,
 	deleteTask,
 	updateTask,
+	getTaskById,
 } = require('../controllers/taskController');
 const { taskValidator } = require('../middleware/board/boardValidators');
 const protectRoute = require('../middleware/auth/authMiddleware');
@@ -14,6 +15,11 @@ const protectRoute = require('../middleware/auth/authMiddleware');
 // @desc    Get all tasks
 // @access  Private
 router.route('/').get(protectRoute, getTasks);
+
+// @route   GET api/tasks/:id
+// @desc    Get a task by id
+// @access  Private
+router.route('/:id').get(protectRoute, getTaskById);
 
 // @route   POST api/tasks/create
 // @desc    Create a task
