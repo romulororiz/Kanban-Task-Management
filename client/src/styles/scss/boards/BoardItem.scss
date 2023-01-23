@@ -1,0 +1,40 @@
+@import '../variables', '../mixins', '../breakpoints';
+
+.kanban__board-item {
+	display: flex;
+	padding: 12px 100px 12px 40px;
+	margin: 0 30px 0 0;
+	border-radius: 0px 100px 100px 0px;
+	align-items: center;
+	justify-content: flex-start;
+	cursor: pointer;
+	@include headingMd;
+	transition: $ease-1;
+
+	&:hover {
+		background-color: rgba($primary-purple, 0.1);
+		color: $primary-purple;
+
+		svg path {
+			fill: $primary-purple;
+		}
+	}
+
+	// Change to when board is active
+	&:first-child {
+		background-color: $primary-purple;
+		color: $primary-white;
+
+		svg path {
+			fill: $primary-white;
+		}
+	}
+
+	svg {
+		margin-right: 12px;
+	}
+}
+
+.kanban__board-item--active {
+	background-color: $primary-purple;
+}
