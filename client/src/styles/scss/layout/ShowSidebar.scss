@@ -1,0 +1,15 @@
+@import '../variables', '../breakpoints';
+
+.kanban__show-sidebar {
+	background-color: $primary-purple;
+	position: absolute;
+	left: 0;
+	bottom: 5rem;
+	padding: 22px;
+	border-radius: 0px 100px 100px 0px;
+	cursor: pointer;
+
+	img {
+		width: 20px;
+	}
+}
