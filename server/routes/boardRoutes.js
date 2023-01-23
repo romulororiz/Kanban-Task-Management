@@ -6,6 +6,7 @@ const {
 	updateBoard,
 	deleteBoard,
 	getBoardColumns,
+	getBoard,
 } = require('../controllers/boardController');
 const { boardValidator } = require('../middleware/board/boardValidators');
 const protectRoute = require('../middleware/auth/authMiddleware');
@@ -15,6 +16,11 @@ const protectRoute = require('../middleware/auth/authMiddleware');
 // @desc    Get all boards
 // @access  Private
 router.route('/').get(protectRoute, getBoards);
+
+// @route   GET api/boards/:id
+// @desc    Get a board
+// @access  Private
+router.route('/:id').get(protectRoute, getBoard);
 
 // @route   POST api/boards/create
 // @desc    Create a board

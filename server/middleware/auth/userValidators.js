@@ -5,10 +5,11 @@ const bcrypt = require('bcryptjs');
 // Validation for email and password
 const validateEmail = [
 	check('email')
-		.normalizeEmail()
 		.isEmail()
-		.withMessage('Please enter a valid email address'),
+		.withMessage('Please enter a valid email address')
+		.normalizeEmail(),
 ];
+
 const validatePassword = [
 	check('password')
 		.isLength({ min: 6, max: 15 })
@@ -17,16 +18,18 @@ const validatePassword = [
 		.withMessage('Password must contain a number')
 		.matches(/[!@#$%^&*(),.?":{}|<>]/)
 		.withMessage('Password must contain a special character'),
-
-	check('confirmPassword')
-		.custom((confirmPassword, { req }) => {
-			if (confirmPassword !== req.body.password) {
-				throw new Error('Passwords do not match');
+	// check password with user password
+	check('password').custom(async (password, { req }) => {
+		const user = await User.findOne({
+			email: req.body.email,
+		});
+		if (user) {
+			const isMatch = await bcrypt.compare(password, user.password);
+			if (!isMatch && password !== '') {
+				throw new Error('Incorrect password');
 			}
-			return true;
-		})
-		.isLength({ min: 6, max: 15 })
-		.withMessage('Password should be between 6 to 15 chars long'),
+		}
+	}),
 ];
 
 // Validation for user registration
@@ -35,14 +38,15 @@ const validateRegistration = [
 	// Check first name
 	check('firstName')
 		.isLength({ min: 2 })
-		.withMessage('First name must be at least 2 chars long'),
+		.withMessage('First name must be at least 2 chars long')
+		.notEmpty({ ignore_whitespace: true })
+		.withMessage('First name cannot be empty'),
 
 	// Check last name
 	check('lastName')
 		.isLength({ min: 2 })
 		.withMessage('Last name must be at least 2 chars long')
-		.not()
-		.isEmpty({ ignore_whitespace: true })
+		.notEmpty({ ignore_whitespace: true })
 		.withMessage('Last name cannot be empty'),
 
 	validateEmail,
@@ -55,6 +59,15 @@ const validateRegistration = [
 		}
 	}),
 	validatePassword,
+	check('confirmPassword')
+		.custom((confirmPassword, { req }) => {
+			if (confirmPassword !== req.body.password) {
+				throw new Error('Passwords do not match');
+			}
+			return true;
+		})
+		.isLength({ min: 6, max: 15 })
+		.withMessage('Password should be between 6 to 15 chars long'),
 ];
 
 // Validation for user login
@@ -65,12 +78,9 @@ const validateLogin = [
 		const user = await User.findOne({
 			email,
 		});
-		if (!user) {
+
+		if (!user && req.body.password !== '') {
 			throw new Error('User does not exist');
-		}
-		const isMatch = await bcrypt.compare(req.body.password, user.password);
-		if (!isMatch) {
-			throw new Error('Invalid credentials');
 		}
 	}),
 

@@ -35,7 +35,7 @@ const createBoard = asyncHandler(async (req, res) => {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	const { name, columns } = req.body;
+	const { name } = req.body;
 
 	try {
 		// Create a new board with a columns array
@@ -48,6 +48,43 @@ const createBoard = asyncHandler(async (req, res) => {
 		res.status(201).json(createdBoard);
 	} catch (error) {
 		res.status(400);
+		throw new Error(error);
+	}
+});
+
+// @route   GET api/boards/:id
+// @desc    Get a board by id
+// @access  Private
+const getBoard = asyncHandler(async (req, res) => {
+	// check if user owns board
+	const board = await Board.findById(req.params.id);
+
+	if (board.user.toString() !== req.user.id) {
+		res.status(401);
+		throw new Error('Not authorized');
+	}
+
+	try {
+		const board = await Board.findById(req.params.id).populate({
+			path: 'columns',
+			populate: {
+				path: 'tasks',
+				model: 'Task',
+				populate: {
+					path: 'subtasks',
+					model: 'Subtask',
+				},
+			},
+		});
+
+		if (board) {
+			res.status(200).json(board);
+		} else {
+			res.status(404);
+			throw new Error('Board not found');
+		}
+	} catch (error) {
+		res.status(500);
 		throw new Error(error);
 	}
 });
@@ -160,6 +197,7 @@ const getBoardColumns = asyncHandler(async (req, res) => {
 
 module.exports = {
 	getBoards,
+	getBoard,
 	createBoard,
 	updateBoard,
 	deleteBoard,
