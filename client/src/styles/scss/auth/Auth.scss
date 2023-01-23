@@ -1,6 +1,18 @@
+@import '../variables', '../breakpoints', '../mixins';
+
 .kanban__auth {
 	min-height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+@include xs {
+	// make mobile bg at the top of the page
+	.kanban__auth-body {
+		background: url('../../../assets/auth/bg-sidebar-mobile.svg') no-repeat
+			center top;
+
+		width: 100%;
+	}
 }

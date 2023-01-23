@@ -7,11 +7,28 @@
 	height: 100%;
 	margin-left: 2rem;
 
+	// Media queries
+	@include md {
+		margin-left: 0;
+		padding: 0 1rem;
+	}
+
 	.kanban__auth-login_heading {
 		width: 100%;
 		margin-top: 3rem;
 		margin-bottom: 2rem;
-		@include headingMd;
+		@include headingLg;
+
+		// Media queries
+		@include md {
+			@include headingMd;
+			margin-bottom: 0.5rem;
+		}
+
+		@include sm {
+			text-align: left;
+			@include headingSm;
+		}
 
 		h1 {
 			margin-bottom: 1rem;
@@ -21,6 +38,12 @@
 			color: $primary-gray;
 			@include headingMd;
 			font-weight: 400;
+
+			// Media queries
+			@include sm {
+				@include headingSm;
+				font-weight: 400;
+			}
 		}
 	}
 
@@ -33,11 +56,23 @@
 		flex-direction: column;
 		justify-content: space-between;
 
+		// Media queries
+		@include md {
+			padding: 2rem 0;
+		}
+
 		.kanban__auth-login_form-input {
 			display: flex;
 			flex-direction: column;
 			align-items: left;
 			margin-bottom: 1rem;
+
+			// Media queries
+			label {
+				@include headingSm;
+				font-weight: 400;
+				margin-bottom: 0.5rem;
+			}
 
 			.kanban__auth-login_form-input_password-wrapper {
 				position: relative;
@@ -58,6 +93,15 @@
 			input {
 				@include inputText;
 				border: 1px solid lighten($primary-gray, 20%);
+
+				// Media queries
+				@include md {
+					width: 100%;
+				}
+
+				@include sm {
+					width: 100%;
+				}
 			}
 
 			.kanban__auth-login_form-input_error {
@@ -68,26 +112,46 @@
 		.kanban__auth-login_form-btn {
 			display: flex;
 			justify-content: space-between;
-            align-items: center;
+			align-items: center;
+			width: 100%;
+
+			// Media queries
+			@include lg {
+				flex-direction: column-reverse;
+				text-align: center;
+
+				button {
+					margin-bottom: 1rem;
+				}
+			}
+
+			@include md {
+				position: relative;
+				margin-top: 2rem;
+
+				button {
+					display: block;
+					width: 100%;
+				}
+			}
 
 			button {
 				@include buttonPrimary;
-                padding: .5rem 3rem;
+				padding: 0.5rem 3rem;
 				background-color: #483eff;
+				border-radius: 5px;
 			}
 		}
 
 		.kanban__auth-login_form-register {
-            display: flex;
-            
-            
+			display: flex;
 
 			a {
-                color: $primary-purple;
-                @include headingSm;
-                font-weight: 500;
-                text-decoration: none;
-            }	
+				color: $primary-purple;
+				@include headingSm;
+				font-weight: 500;
+				text-decoration: none;
+			}
 		}
 	}
 }

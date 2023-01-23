@@ -7,10 +7,27 @@
 	height: 100%;
 	margin-left: 2rem;
 
+	// Media queries
+	@include md {
+		margin-left: 0;
+		padding: 0 1rem;
+	}
+
 	.kanban__auth-register_heading {
 		width: 100%;
 		margin-top: 3rem;
 		@include headingMd;
+
+		// Media queries
+		@include md {
+			@include headingSm;
+			margin-top: 2rem;
+		}
+
+		@include sm {
+			text-align: left;
+			@include headingSm;
+		}
 
 		h1 {
 			margin-bottom: 1rem;
@@ -20,6 +37,12 @@
 			color: $primary-gray;
 			@include headingMd;
 			font-weight: 400;
+
+			// Media queries
+			@include sm {
+				@include headingSm;
+				font-weight: 400;
+			}
 		}
 	}
 
@@ -30,17 +53,30 @@
 		font-weight: 500;
 		display: flex;
 		flex-direction: column;
-        position: relative;
+		position: relative;
+
+		@include lg {
+			padding: 2rem 0;
+		}
+
+		@include md {
+			padding: 2rem 0 0 0;
+		}
 
 		.kanban__auth-register_form-inputs_wrapper {
 			width: 100%;
 			justify-content: space-between;
 			display: flex;
-            gap: 1rem;
+			gap: 1rem;
 
-           .kanban__auth-register_form-input {
-                width: 100%;
-           }
+			@include lg {
+				flex-direction: column;
+				gap: 0;
+			}
+
+			.kanban__auth-register_form-input {
+				width: 100%;
+			}
 		}
 
 		.kanban__auth-register_form-input {
@@ -48,6 +84,19 @@
 			flex-direction: column;
 			align-items: left;
 			margin-bottom: 1rem;
+
+			// Media queries
+			@include lg {
+				width: 100%;
+				margin-bottom: 0.5rem;
+			}
+
+			// Media queries
+			label {
+				@include headingSm;
+				font-weight: 400;
+				margin-bottom: 0.5rem;
+			}
 
 			.kanban__auth-register_form-input_password-wrapper {
 				position: relative;
@@ -68,6 +117,15 @@
 			input {
 				@include inputText;
 				border: 1px solid lighten($primary-gray, 20%);
+
+				// Media queries
+				@include md {
+					width: 100%;
+				}
+
+				@include sm {
+					width: 100%;
+				}
 			}
 
 			.kanban__auth-register_form-input_error {
@@ -76,22 +134,50 @@
 		}
 
 		.kanban__auth-register_form-btn {
-            width: 100%;
+			width: 100%;
 			display: flex;
 			justify-content: space-between;
-            position: absolute;
-            bottom: 0;
-            padding-right: 4rem;
+			align-items: center;
+			position: absolute;
+			bottom: 0;
+			padding-right: 4rem;
+
+			// Media queries
+			@include lg {
+				flex-direction: column-reverse;
+				align-items: center;
+				text-align: center;
+				padding-right: 0;
+
+				button {
+					margin-bottom: 0.5rem;
+				}
+			}
+
+			@include md {
+				position: relative;
+				margin-top: 2rem;
+
+				button {
+					display: block;
+					width: 100%;
+				}
+			}
 
 			button {
 				@include buttonPrimary;
 				padding: 0.5rem 3rem;
 				background-color: #483eff;
+				border-radius: 5px;
 			}
 		}
 
 		.kanban__auth-register_form-register {
 			display: flex;
+
+			@include md {
+				font-size: $font-size-m;
+			}
 
 			a {
 				color: $primary-purple;

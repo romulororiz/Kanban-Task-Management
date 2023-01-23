@@ -11,12 +11,20 @@
 	border-radius: 10px;
 	box-shadow: $box-shadow;
 
+	@include sm {
+		min-height: auto;
+	}
+
 	.kanban__auth-card__left-side {
 		color: $primary-white;
 		flex: 1;
 		max-width: 320px;
 		display: flex;
 		justify-content: center;
+
+		@include sm {
+			display: none;
+		}
 
 		.kanban__auth-card__left-side_container {
 			background: url('../../../assets/auth/bg-sidebar-desktop.svg') no-repeat

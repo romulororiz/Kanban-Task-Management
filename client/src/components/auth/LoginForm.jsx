@@ -26,6 +26,8 @@ const LoginForm = () => {
 	// initialize dispatch
 	const dispatch = useDispatch();
 
+	console.log(errors);
+
 	// set errors to loginErrors if there are any
 	useEffect(() => {
 		if (loginErrors) {

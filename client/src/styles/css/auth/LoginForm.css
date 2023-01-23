@@ -12,13 +12,36 @@
   height: 100%;
   margin-left: 2rem;
 }
+@media screen and (max-width: 550px) {
+  .kanban__auth-login {
+    margin-left: 0;
+    padding: 0 1rem;
+  }
+}
 .kanban__auth-login .kanban__auth-login_heading {
   width: 100%;
   margin-top: 3rem;
   margin-bottom: 2rem;
-  font-size: 15px;
-  line-height: 19px;
+  font-size: 18px;
+  line-height: 23px;
   font-weight: 700;
+}
+@media screen and (max-width: 550px) {
+  .kanban__auth-login .kanban__auth-login_heading {
+    font-size: 15px;
+    line-height: 19px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .kanban__auth-login .kanban__auth-login_heading {
+    text-align: left;
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 700;
+    kerning: 2.4px;
+  }
 }
 .kanban__auth-login .kanban__auth-login_heading h1 {
   margin-bottom: 1rem;
@@ -29,6 +52,15 @@
   line-height: 19px;
   font-weight: 700;
   font-weight: 400;
+}
+@media screen and (max-width: 480px) {
+  .kanban__auth-login .kanban__auth-login_heading p {
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 700;
+    kerning: 2.4px;
+    font-weight: 400;
+  }
 }
 .kanban__auth-login .kanban__auth-login_form {
   width: 100%;
@@ -46,6 +78,11 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
+@media screen and (max-width: 550px) {
+  .kanban__auth-login .kanban__auth-login_form {
+    padding: 2rem 0;
+  }
+}
 .kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-input {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -58,6 +95,14 @@
   -ms-flex-align: left;
   align-items: left;
   margin-bottom: 1rem;
+}
+.kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-input label {
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 700;
+  kerning: 2.4px;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
 }
 .kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-input .kanban__auth-login_form-input_password-wrapper {
   position: relative;
@@ -102,6 +147,16 @@
   color: #000112;
   opacity: 0.25;
 }
+@media screen and (max-width: 550px) {
+  .kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-input input {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-input input {
+    width: 100%;
+  }
+}
 .kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-input .kanban__auth-login_form-input_error {
   padding: 6px 12px;
   background-color: #ffffff;
@@ -141,6 +196,29 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  width: 100%;
+}
+@media screen and (max-width: 768px) {
+  .kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-btn {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-btn button {
+    margin-bottom: 1rem;
+  }
+}
+@media screen and (max-width: 550px) {
+  .kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-btn {
+    position: relative;
+    margin-top: 2rem;
+  }
+  .kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-btn button {
+    display: block;
+    width: 100%;
+  }
 }
 .kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-btn button {
   padding: 12px 32px;
@@ -154,6 +232,7 @@
   color: #ffffff;
   padding: 0.5rem 3rem;
   background-color: #483eff;
+  border-radius: 5px;
 }
 .kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-btn button:hover {
   background-color: #a8a4ff;

@@ -8,13 +8,23 @@ const Auth = () => {
 
 	const location = useLocation();
 
-	// render different forms based on the path
 	useEffect(() => {
+		// render different forms based on the path
 		if (location.pathname === '/auth/login') {
 			setForm('login');
 		} else if (location.pathname === '/auth/register') {
 			setForm('register');
 		}
+
+		// add class to body if users is on auth route
+		if (location.pathname.startsWith('/auth')) {
+			document.body.classList.add('kanban__auth-body');
+		}
+
+		// remove class from body if users is not on auth route
+		return () => {
+			document.body.classList.remove('kanban__auth-body');
+		};
 	}, [location]);
 
 	return (

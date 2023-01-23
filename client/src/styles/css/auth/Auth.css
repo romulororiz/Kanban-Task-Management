@@ -10,3 +10,10 @@
   -ms-flex-pack: center;
   justify-content: center;
 }
+
+@media screen and (max-width: 375px) {
+  .kanban__auth-body {
+    background: url("../../../assets/auth/bg-sidebar-mobile.svg") no-repeat center top;
+    width: 100%;
+  }
+}
