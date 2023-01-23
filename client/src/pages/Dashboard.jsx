@@ -1,4 +1,4 @@
-const Boards = () => {
+const Dashboard = () => {
 	return (
 		<div>
 			<h1>Boards</h1>
@@ -6,4 +6,4 @@ const Boards = () => {
 	);
 };
 
-export default Boards;
+export default Dashboard;
