@@ -4,9 +4,10 @@ import useWindowSize from '@hooks/useWindowSize';
 import Header from '@components/layout/Header';
 import Sidebar from '@components/layout/Sidebar';
 import { Outlet } from 'react-router-dom';
+import '@styles/scss/layout/Layout.scss';
 
 const Layout = () => {
-	const [showSidebar, setShowSidebar] = useState(false);
+	const [showSidebar, setShowSidebar] = useState(true);
 
 	// get user
 	const { user } = useAuthStatus();
@@ -15,16 +16,20 @@ const Layout = () => {
 	const windowSize = useWindowSize();
 
 	useEffect(() => {
-		if (windowSize.width > 550) {
+		if (windowSize.width < 550) {
 			setShowSidebar(false);
 		}
 	}, [windowSize]);
 
 	return (
-		<div className='kanban__layout'>
-			<Sidebar showSidebar={showSidebar} />
-			<Header user={user} />
-			<main className='kanban__main-content'>
+		<div>
+			<Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+			<Header user={user} showSidebar={showSidebar} />
+			<main
+				className={`kanban__main-content ${
+					showSidebar && 'kanban__main-content_sidebar'
+				}`}
+			>
 				<Outlet />
 			</main>
 		</div>
