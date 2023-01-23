@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBoards } from '@features/boards/boardSlice';
 import BoardItem from '@components/board/BoardItem';
+import hideSidebar from '@assets/dashboard/icon-hide-sidebar.svg';
 import '@styles/scss/layout/Sidebar.scss';
 
 const Sidebar = ({ showSidebar }) => {
@@ -50,7 +51,7 @@ const Sidebar = ({ showSidebar }) => {
 					<p>icon</p>
 				</div>
 				<div className='kanban__sidebar-hide'>
-					<p>icon</p>
+					<img src={hideSidebar} alt='hide sidebar' />
 					<p>Hide Sidebar</p>
 				</div>
 			</div>

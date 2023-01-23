@@ -7,9 +7,12 @@
 	border-radius: 0px 100px 100px 0px;
 	align-items: center;
 	justify-content: flex-start;
-	cursor: pointer;
-	@include headingMd;
+	@include headingSm;
 	transition: $ease-1;
+
+	span {
+		cursor: pointer;
+	}
 
 	&:hover {
 		background-color: rgba($primary-purple, 0.1);

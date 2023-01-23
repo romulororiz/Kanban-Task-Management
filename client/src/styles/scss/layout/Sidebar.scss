@@ -24,6 +24,7 @@
 			letter-spacing: 2.4px;
 			margin-bottom: 20px;
 			padding-left: 40px;
+			text-transform: uppercase;
 		}
 	}
 
@@ -45,13 +46,27 @@
 
 		.kanban__sidebar-hide {
 			display: flex;
-			margin: 0 1rem;
-			padding: 0.5rem;
+			padding: 1rem 1.5rem;
+			margin-right: 1rem;
+			border-radius: 0px 100px 100px 0px;
+			@include headingMd;
+
+			&:hover {
+				background-color: rgba($secondary-purple, 0.1);
+				color: $primary-purple;
+
+				img {
+					filter: brightness(0) saturate(100%) invert(31%) sepia(97%)
+						saturate(771%) hue-rotate(215deg) brightness(94%) contrast(82%);
+				}
+			}
+
+			img {
+				margin-right: 1rem;
+			}
 
 			p {
-				&:first-child {
-					margin-right: 1rem;
-				}
+				cursor: pointer;
 			}
 		}
 	}
