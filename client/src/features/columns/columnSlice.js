@@ -67,53 +67,41 @@ const columnSlice = createSlice({
 			.addCase(createColumn.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(createColumn.fulfilled, (state, { payload }) => {
+			.addCase(createColumn.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
 				// create a new column
 				const newColumn = {
-					_id: payload._id,
-					name: payload.name,
-					board: payload.board,
+					_id: action.payload._id,
+					name: action.payload.name,
+					board: action.payload.board,
 				};
 				state.columns.push(newColumn);
 			})
-			.addCase(createColumn.rejected, (state, { payload }) => {
+			.addCase(createColumn.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.isSuccess = false;
-				state.errors = payload;
+				state.errors = action.payload;
 			})
 			.addCase(getBoardColumns.pending, state => {
 				state.isLoading = true;
-				state.isError = false;
-				state.isSuccess = false;
-				state.errors = [];
 			})
 			.addCase(getBoardColumns.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.isError = false;
 				state.isSuccess = true;
-				state.errors = [];
 				state.columns = action.payload;
 			})
 			.addCase(getBoardColumns.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.isSuccess = false;
-				state.errors = action.payload.errors;
+				state.errors = action.payload;
 			})
 			.addCase(deleteColumn.pending, state => {
 				state.isLoading = true;
-				state.isError = false;
-				state.isSuccess = false;
-				state.errors = [];
 			})
 			.addCase(deleteColumn.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.isError = false;
 				state.isSuccess = true;
-				state.errors = [];
 				state.columns = state.columns.filter(
 					column => column._id !== action.payload._id
 				);
@@ -121,32 +109,26 @@ const columnSlice = createSlice({
 			.addCase(deleteColumn.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.isSuccess = false;
-				state.errors = action.payload.errors;
+				state.errors = action.payload;
 			})
 			.addCase(updateColumn.pending, state => {
 				state.isLoading = true;
-				state.isError = false;
-				state.isSuccess = false;
-				state.errors = [];
 			})
 			.addCase(updateColumn.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.isError = false;
 				state.isSuccess = true;
-				state.errors = [];
-				state.columns = state.columns.map(column => {
-					if (column._id === action.payload._id) {
-						return action.payload;
-					}
-					return column;
-				});
+				const updatedColumn = action.payload;
+				// check if column id matches action payload id
+				const index = state.columns.findIndex(
+					column => column._id === updatedColumn._id
+				);
+				// if it does, update the column
+				state.columns.splice(index, 1, updatedColumn);
 			})
 			.addCase(updateColumn.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.isSuccess = false;
-				state.errors = action.payload.errors;
+				state.errors = action.payload;
 			});
 	},
 });

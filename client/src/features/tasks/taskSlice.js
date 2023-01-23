@@ -86,7 +86,14 @@ const taskSlice = createSlice({
 		builder.addCase(createTask.fulfilled, (state, action) => {
 			state.isLoading = false;
 			state.isSuccess = true;
-			state.task = action.payload;
+			// create new task and add to tasks array
+			const newTask = {
+				_id: action.payload._id,
+				title: action.payload.title,
+				description: action.payload.description,
+				column: action.payload.column,
+			};
+			state.tasks.push(newTask);
 		});
 		builder.addCase(createTask.rejected, (state, action) => {
 			state.isLoading = false;
@@ -125,7 +132,12 @@ const taskSlice = createSlice({
 		builder.addCase(updateTask.fulfilled, (state, action) => {
 			state.isLoading = false;
 			state.isSuccess = true;
-			state.task = action.payload;
+			const updatedTask = action.payload;
+			// find the task in the tasks array and update it
+			const taskIndex = state.tasks.findIndex(
+				task => task._id === updatedTask._id
+			);
+			state.tasks.splice(taskIndex, 1, updatedTask);
 		});
 		builder.addCase(updateTask.rejected, (state, action) => {
 			state.isLoading = false;
@@ -138,7 +150,8 @@ const taskSlice = createSlice({
 		builder.addCase(deleteTask.fulfilled, (state, action) => {
 			state.isLoading = false;
 			state.isSuccess = true;
-			state.task = action.payload;
+			// remove the task from the tasks array
+			state.tasks.filter(task => task._id !== action.payload);
 		});
 		builder.addCase(deleteTask.rejected, (state, action) => {
 			state.isLoading = false;
