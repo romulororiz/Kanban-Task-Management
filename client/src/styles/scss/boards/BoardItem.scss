@@ -2,39 +2,53 @@
 
 .kanban__board-item {
 	display: flex;
-	padding: 12px 100px 12px 40px;
+	padding: 12px 50px 12px 40px;
 	margin: 0 30px 0 0;
 	border-radius: 0px 100px 100px 0px;
 	align-items: center;
 	justify-content: flex-start;
-	@include headingSm;
+	@include headingMd;
 	transition: $ease-1;
-
-	span {
-		cursor: pointer;
-	}
 
 	&:hover {
 		background-color: rgba($primary-purple, 0.1);
 		color: $primary-purple;
 
-		svg path {
-			fill: $primary-purple;
+		img {
+			filter: brightness(0) saturate(100%) invert(33%) sepia(97%) saturate(565%)
+				hue-rotate(206deg) brightness(96%) contrast(80%);
 		}
 	}
 
-	// Change to when board is active
-	&:first-child {
-		background-color: $primary-purple;
-		color: $primary-white;
-
-		svg path {
-			fill: $primary-white;
-		}
-	}
-
-	svg {
+	.kanban__board-item_icon {
 		margin-right: 12px;
+	}
+
+	.kanban__board-item_text {
+		cursor: pointer;
+	}
+}
+
+.kanban__board-item_create {
+	color: $primary-purple;
+
+	img {
+		filter: brightness(0) saturate(100%) invert(33%) sepia(97%) saturate(565%)
+			hue-rotate(206deg) brightness(96%) contrast(80%);
+	}
+
+	.kanban__board-item_text_create {
+		display: flex;
+		align-items: center;
+
+		img {
+			width: 8px;
+			height: 8px;
+			margin: 0;
+			margin-right: 5px;
+			filter: brightness(0) saturate(100%) invert(33%) sepia(97%) saturate(565%)
+				hue-rotate(206deg) brightness(96%) contrast(80%);
+		}
 	}
 }
 

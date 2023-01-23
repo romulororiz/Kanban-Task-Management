@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBoards } from '@features/boards/boardSlice';
 import BoardItem from '@components/board/BoardItem';
-import hideSidebar from '@assets/dashboard/icon-hide-sidebar.svg';
+import HideSidebar from '@assets/dashboard/icon-hide-sidebar.svg';
+import BoardSvg from '@assets/dashboard/icon-board.svg';
 import '@styles/scss/layout/Sidebar.scss';
 
 const Sidebar = ({ showSidebar }) => {
@@ -43,6 +44,9 @@ const Sidebar = ({ showSidebar }) => {
 						))}
 					</div>
 				)}
+				<div className='kanban__sidebar-create_board'>
+					<BoardItem text='Create New Board' />
+				</div>
 			</div>
 			<div className='kanban__sidebar-bottom_container'>
 				<div className='kanban__sidebar-toggle'>
@@ -51,7 +55,7 @@ const Sidebar = ({ showSidebar }) => {
 					<p>icon</p>
 				</div>
 				<div className='kanban__sidebar-hide'>
-					<img src={hideSidebar} alt='hide sidebar' />
+					<img src={HideSidebar} alt='hide sidebar' />
 					<p>Hide Sidebar</p>
 				</div>
 			</div>
