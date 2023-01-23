@@ -5,7 +5,6 @@ const {
 	createBoard,
 	updateBoard,
 	deleteBoard,
-	getBoardColumns,
 	getBoard,
 } = require('../controllers/boardController');
 const { boardValidator } = require('../middleware/board/boardValidators');
@@ -36,11 +35,5 @@ router.route('/:id').put(protectRoute, boardValidator, updateBoard);
 // @desc    Delete a board
 // @access  Private
 router.route('/:id').delete(protectRoute, deleteBoard);
-
-// COLUMNS ROUTES
-// @route   GET api/boards/:id/columns
-// @desc    Get all columns for a board
-// @access  Private
-router.route('/:id/columns').get(protectRoute, getBoardColumns);
 
 module.exports = router;

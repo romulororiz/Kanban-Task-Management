@@ -4,6 +4,7 @@ const {
 	createColumn,
 	deleteColumn,
 	updateColumn,
+	getBoardColumns,
 } = require('../controllers/columnController');
 const { columnValidator } = require('../middleware/board/boardValidators');
 const protectRoute = require('../middleware/auth/authMiddleware');
@@ -13,6 +14,11 @@ const protectRoute = require('../middleware/auth/authMiddleware');
 // @desc    Create a column
 // @access  Private
 router.route('/:id/create').post(protectRoute, columnValidator, createColumn);
+
+// @route   GET api/columns/:boardId
+// @desc    Get all columns for a board
+// @access  Private
+router.route('/:id').get(protectRoute, getBoardColumns);
 
 // @route   DELETE api/columns/:id
 // @desc    Delete a column

@@ -155,51 +155,10 @@ const deleteBoard = asyncHandler(async (req, res) => {
 	}
 });
 
-// @route   GET api/boards/:id/columns
-// @desc    Get all columns for a board
-// @access  Private
-const getBoardColumns = asyncHandler(async (req, res) => {
-	// check if user owns board and populate columns
-	const board = await Board.findById(req.params.id).populate('columns');
-
-	// check if board exists
-	if (!board) {
-		res.status(404);
-		throw new Error('Board not found');
-	}
-
-	if (board.user.toString() !== req.user.id) {
-		res.status(401);
-		throw new Error('Not authorized');
-	}
-
-	try {
-		if (board) {
-			// Get all columns for board and populate tasks
-			const columns = await Column.find({ board: req.params.id }).populate({
-				path: 'tasks',
-				populate: {
-					path: 'subtasks',
-					model: 'Subtask',
-				},
-			});
-
-			res.status(200).json(columns);
-		} else {
-			res.status(404);
-			throw new Error('Board not found');
-		}
-	} catch (error) {
-		res.status(400);
-		throw new Error(error);
-	}
-});
-
 module.exports = {
 	getBoards,
 	getBoard,
 	createBoard,
 	updateBoard,
 	deleteBoard,
-	getBoardColumns,
 };
