@@ -1,6 +1,5 @@
 const asyncHandler = require('express-async-handler');
 const Board = require('../models/boardModel');
-const Column = require('../models/columnModel');
 const { validationResult } = require('express-validator');
 
 // @route   GET api/boards

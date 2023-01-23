@@ -1,7 +1,6 @@
 // create a slice of state for the board
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import boardService from './boardService';
-import Cookies from 'js-cookie';
 
 const initialState = {
 	boards: [],
@@ -15,10 +14,9 @@ const initialState = {
 // Get all boards
 export const getBoards = createAsyncThunk(
 	'board/getBoards',
-	async ({ rejectWithValue }) => {
+	async (_, { rejectWithValue }) => {
 		try {
-			const response = await boardService.getBoards();
-			return response;
+			return await boardService.getBoards();
 		} catch (error) {
 			const errors = error.response.data.errors;
 			return rejectWithValue(errors);
@@ -31,8 +29,7 @@ export const createBoard = createAsyncThunk(
 	'board/createBoard',
 	async (boardData, { rejectWithValue }) => {
 		try {
-			const response = await boardService.createBoard(boardData);
-			return response;
+			return await boardService.createBoard(boardData);
 		} catch (error) {
 			const errors = error.response.data.errors;
 			return rejectWithValue(errors);
@@ -45,8 +42,7 @@ export const getBoardById = createAsyncThunk(
 	'board/getBoardById',
 	async (boardId, { rejectWithValue }) => {
 		try {
-			const response = await boardService.getBoardById(boardId);
-			return response;
+			return await boardService.getBoardById(boardId);
 		} catch (error) {
 			const errors = error.response.data.errors;
 			return rejectWithValue(errors);
@@ -59,8 +55,7 @@ export const updateBoard = createAsyncThunk(
 	'board/updateBoard',
 	async (boardData, { rejectWithValue }) => {
 		try {
-			const response = await boardService.updateBoard(boardData);
-			return response;
+			return await boardService.updateBoard(boardData);
 		} catch (error) {
 			const errors = error.response.data.errors;
 			return rejectWithValue(errors);
@@ -73,8 +68,7 @@ export const deleteBoard = createAsyncThunk(
 	'board/deleteBoard',
 	async (boardId, { rejectWithValue }) => {
 		try {
-			const response = await boardService.deleteBoard(boardId);
-			return response;
+			return await boardService.deleteBoard(boardId);
 		} catch (error) {
 			const errors = error.response.data.errors;
 			return rejectWithValue(errors);
