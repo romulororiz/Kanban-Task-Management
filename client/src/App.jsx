@@ -20,19 +20,23 @@ function App() {
 				<Routes>
 					<Route element={<Layout />}>
 						<Route path='/' element={<PrivateRoute />}>
-							<Route exact path='/' element={<Navigate to='/dashboard' />} />
+							<Route
+								exact
+								path='/'
+								element={<Navigate to='/dashboard/boards' />}
+							/>
 						</Route>
-						<Route path='/dashboard' element={<PrivateRoute />}>
-							<Route path='/dashboard' element={<Dashboard />} />
+						<Route path='/dashboard/boards' element={<PrivateRoute />}>
+							<Route path='/dashboard/boards' element={<Dashboard />} />
 						</Route>
 					</Route>
 					<Route
 						path='/auth/login'
-						element={user ? <Navigate to='/dashboard' /> : <Auth />}
+						element={user ? <Navigate to='/dashboard/boards' /> : <Auth />}
 					/>
 					<Route
 						path='/auth/register'
-						element={user ? <Navigate to='/dashboard' /> : <Auth />}
+						element={user ? <Navigate to='/dashboard/boards' /> : <Auth />}
 					/>
 				</Routes>
 			</Router>
