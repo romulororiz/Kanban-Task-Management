@@ -5,6 +5,15 @@ const Column = require('../models/columnModel');
 const { validationResult } = require('express-validator');
 const Task = require('../models/taskModel');
 
+const generateRandomColor = () => {
+	const letters = '0123456789ABCDEF';
+	let color = '#';
+	for (let i = 0; i < 6; i++) {
+		color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color;
+};
+
 // @route POST api/columns
 // @desc Create a column
 // @access Private
@@ -29,6 +38,7 @@ const createColumn = asyncHandler(async (req, res) => {
 		const column = new Column({
 			name,
 			board: req.params.id,
+			color: generateRandomColor(),
 		});
 
 		// Save column to database
@@ -48,9 +58,6 @@ const createColumn = asyncHandler(async (req, res) => {
 // @route GET api/columns/:boardId
 // @desc Get all columns for a board
 // @access Private
-// @route   GET api/boards/:id/columns
-// @desc    Get all columns for a board
-// @access  Private
 const getBoardColumns = asyncHandler(async (req, res) => {
 	// check if user owns board and populate columns
 	const board = await Board.findById(req.params.id).populate('columns');
@@ -67,21 +74,16 @@ const getBoardColumns = asyncHandler(async (req, res) => {
 	}
 
 	try {
-		if (board) {
-			// Get all columns for board and populate tasks
-			const columns = await Column.find({ board: req.params.id }).populate({
-				path: 'tasks',
-				populate: {
-					path: 'subtasks',
-					model: 'Subtask',
-				},
-			});
+		// Get all columns for board and populate tasks
+		const columns = await Column.find({ board: req.params.id }).populate({
+			path: 'tasks',
+			populate: {
+				path: 'subtasks',
+				model: 'Subtask',
+			},
+		});
 
-			res.status(200).json(columns);
-		} else {
-			res.status(404);
-			throw new Error('Board not found');
-		}
+		res.status(200).json(columns);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);

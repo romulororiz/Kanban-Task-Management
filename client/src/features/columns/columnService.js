@@ -5,12 +5,13 @@ const API_URL = '/api/columns';
 // create a column
 const createColumn = async (boardId, columnData) => {
 	const response = await axios.post(`${API_URL}/${boardId}/create`, columnData);
+
 	return response.data;
 };
 
 // get all columns for a board
-const getBoardColumns = boardId => {
-	const response = axios.get(`${API_URL}/${boardId}`);
+const getBoardColumns = async boardId => {
+	const response = await axios.get(`${API_URL}/${boardId}`);
 
 	return response.data;
 };

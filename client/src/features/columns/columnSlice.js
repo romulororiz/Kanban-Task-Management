@@ -11,7 +11,7 @@ const initialState = {
 
 // create a column
 export const createColumn = createAsyncThunk(
-	'client/createColumn',
+	'column/createColumn',
 	async ({ boardId, columnData }, thunkAPI) => {
 		try {
 			return await columnService.createColumn(boardId, columnData);

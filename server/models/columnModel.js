@@ -11,10 +11,16 @@ const columnSchema = new mongoose.Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Board',
 		},
-		tasks: [{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Task',
-		}],
+		color: {
+			type: String,
+			required: true,
+		},
+		tasks: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Task',
+			},
+		],
 	},
 	{
 		timestamps: true,
@@ -33,15 +39,15 @@ columnSchema.pre('remove', async function (next) {
 
 // Update all tasks when a column is updated
 columnSchema.pre('findOneAndUpdate', async function (next) {
-    const update = this.getUpdate();
-    if(update.name) {
-        const tasks = await Task.find({column: this._conditions._id});
-        tasks.forEach(async task => {
-            task.status = update.name;
-            await task.save();
-        });
-    }
-    next();
+	const update = this.getUpdate();
+	if (update.name) {
+		const tasks = await Task.find({ column: this._conditions._id });
+		tasks.forEach(async task => {
+			task.status = update.name;
+			await task.save();
+		});
+	}
+	next();
 });
 
 const Column = mongoose.model('Column', columnSchema);
