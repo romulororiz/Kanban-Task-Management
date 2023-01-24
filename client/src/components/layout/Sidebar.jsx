@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { getBoards } from '@features/boards/boardSlice';
 import BoardListItem from '@components/board/BoardListItem';
 import HideSidebar from '@assets/dashboard/icon-hide-sidebar.svg';
@@ -11,8 +12,9 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 	const [errors, setErrors] = useState([]);
 	const [activeBoard, setActiveBoard] = useState(null);
 
-	// initialize dispatch
+	// initialize dispatch and navigate
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const {
 		boards,
@@ -29,7 +31,10 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 		dispatch(getBoards());
 	}, []);
 
-	// handle loading
+	// handle active board
+	const handleActiveBoard = boardId => {
+		setActiveBoard(boardId);
+	};
 
 	return (
 		<div
@@ -48,7 +53,15 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 				) : (
 					<div className='kanban__sidebar-boards'>
 						{boards.map(board => (
-							<BoardListItem key={board._id} board={board} />
+							<BoardListItem
+								key={board._id}
+								board={board}
+								isActive={board._id === activeBoard}
+								onClick={boardId => {
+									handleActiveBoard(boardId);
+									navigate(`/dashboard/boards/${boardId}`);
+								}}
+							/>
 						))}
 					</div>
 				)}

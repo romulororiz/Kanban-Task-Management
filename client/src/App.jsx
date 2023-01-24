@@ -11,7 +11,6 @@ import Layout from '@components/layout/Layout';
 import Dashboard from '@pages/Dashboard';
 
 function App() {
-	// check if user is logged in
 	const { user } = useAuthStatus();
 
 	return (
