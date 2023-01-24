@@ -1,28 +1,43 @@
-import '@styles/scss/boards/Column.scss';
 import TaskItem from './TaskItem';
-import { generateRandomColor } from '../../utils/generateRandomColor';
+import { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBoardTasks } from '../../features/tasks/taskSlice';
+import { useParams } from 'react-router-dom';
+import '@styles/scss/boards/Column.scss';
 
-const Column = ({ name }) => {
-	// generate a random color for the column title marker
-	const color = generateRandomColor();
+const Column = ({ column }) => {
+	// get name from column
+	const { name, _id } = column;
+
+	// get tasks from store
+	const { tasks } = useSelector(state => state.task);
+
+	// initialize dispatch
+	const dispatch = useDispatch();
+
+	// get boardId from url
+	const { id: boardId } = useParams();
+
+	// get tasks from column
+	useEffect(() => {
+		dispatch(getBoardTasks(boardId));
+	}, [boardId]);
 
 	return (
 		<div className='kanban__dashboard-column'>
 			<div className='kanban__dashboard-column_heading'>
 				<div
 					className='kanban__dashboard-column_title-marker'
-					style={{ backgroundColor: color }}
+					style={{ backgroundColor: column.color }}
 				></div>
-				<h3 className='kanban__dashboard-column_title'>Todo</h3>
+				<h3 className='kanban__dashboard-column_title'>{`${name} (${
+					tasks.filter(task => task.column === _id).length
+				})`}</h3>
 			</div>
-			<TaskItem />
-			<TaskItem />
-			<TaskItem />
-			<TaskItem />
-			<TaskItem />
-			<TaskItem />
-			<TaskItem />
-			<TaskItem />
+			{tasks &&
+				tasks
+					.filter(task => task.column === _id)
+					.map(task => <TaskItem key={task._id} task={task} />)}
 		</div>
 	);
 };
