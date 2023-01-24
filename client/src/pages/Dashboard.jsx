@@ -3,12 +3,19 @@ import Column from '@components/board/Column';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getBoardColumns } from '@features/columns/columnSlice';
+import { getBoards } from '@features/boards/boardSlice';
 import Add from '@assets/dashboard/icon-add-task-mobile.svg';
 import '@styles/scss/boards/Dashboard.scss';
-import Spinner from '../components/Spinner';
+import Spinner from '@components/Spinner';
 
 const Dashboard = () => {
+	// get columns from store
 	const { columns, isLoading, isError } = useSelector(state => state.column);
+
+	// get boards from store
+	const { boards } = useSelector(state => state.board);
+
+	console.log(boards);
 
 	// initialize dispatch
 	const dispatch = useDispatch();
@@ -18,6 +25,7 @@ const Dashboard = () => {
 
 	// get columns for the board that's being viewed
 	useEffect(() => {
+		dispatch(getBoards());
 		dispatch(getBoardColumns(boardId));
 	}, [dispatch, boardId]);
 
@@ -29,7 +37,11 @@ const Dashboard = () => {
 			</div>
 		);
 
-	return columns.length > 0 ? (
+	return boards.length <= 0 ? (
+		<div className='kanban__dashboard-empty_boards'>
+			You have no boards. Create a board to get started.
+		</div>
+	) : columns.length > 0 ? (
 		<div className='kanban__dashboard-board'>
 			{columns.map(column => (
 				<Column key={column._id} column={column} />

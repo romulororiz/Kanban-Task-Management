@@ -30,8 +30,6 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 		isLoading,
 	} = useSelector(state => state.board);
 
-	console.log(boards);
-
 	// check for active board
 	useEffect(() => {
 		if (boardId) {

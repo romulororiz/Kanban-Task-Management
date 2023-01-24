@@ -85,7 +85,6 @@ const RegisterForm = () => {
 		setPasswordShown(passwordShown ? false : true);
 	};
 
-	console.log(errors);
 
 	return (
 		<div className='kanban__auth-register'>
