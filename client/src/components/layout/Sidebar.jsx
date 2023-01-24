@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { getBoards } from '@features/boards/boardSlice';
 import BoardListItem from '@components/board/BoardListItem';
 import HideSidebar from '@assets/dashboard/icon-hide-sidebar.svg';
 import LogoDark from '@assets/dashboard/logo-dark.svg';
 import ToggleSwitch from './ToggleSwitch';
 import '@styles/scss/layout/Sidebar.scss';
+import Spinner from '../Spinner';
 
 const Sidebar = ({ showSidebar, setShowSidebar }) => {
 	const [errors, setErrors] = useState([]);
@@ -16,6 +17,9 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	// get id from params
+	const { id: boardId } = useParams();
+
 	const {
 		boards,
 		isError,
@@ -23,6 +27,14 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 		isLoading,
 	} = useSelector(state => state.board);
 
+	// check for active board
+	useEffect(() => {
+		if (boardId) {
+			setActiveBoard(boardId);
+		}
+	}, [boardId]);
+
+	// get all boards
 	useEffect(() => {
 		if (isError) {
 			setErrors(boardErrors);
@@ -31,9 +43,10 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 		dispatch(getBoards());
 	}, []);
 
-	// handle active board
-	const handleActiveBoard = boardId => {
-		setActiveBoard(boardId);
+	// handle on click
+	const handleOnClick = booardId => {
+		setActiveBoard(booardId);
+		navigate(`/dashboard/boards/${booardId}`);
 	};
 
 	return (
@@ -48,8 +61,9 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 				</div>
 				<h1>All Boards ({boards.length})</h1>
 				{isLoading ? (
-					// TODO ADD SPINNER
-					'Loading...'
+					<div className='kanban__sidebar-spinner'>
+						<Spinner />
+					</div>
 				) : (
 					<div className='kanban__sidebar-boards'>
 						{boards.map(board => (
@@ -57,10 +71,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 								key={board._id}
 								board={board}
 								isActive={board._id === activeBoard}
-								onClick={boardId => {
-									handleActiveBoard(boardId);
-									navigate(`/dashboard/boards/${boardId}`);
-								}}
+								onClick={handleOnClick}
 							/>
 						))}
 					</div>
