@@ -15,9 +15,26 @@
 	align-items: flex-start;
 	justify-content: space-between;
 	color: $primary-gray;
+	z-index: 1;
+
+	@include lg {
+		width: 260px;
+		font-size: $font-size-m;
+	}
 
 	.kanban__sidebar-boards_container {
-		margin-top: 110px;
+		margin-top: 40px;
+
+		.kanban__sidebar-logo {
+			width: fit-content;
+			height: auto;
+			margin-bottom: 56px;
+			padding-left: 40px;
+
+			@include lg {
+				padding-left: 20px;
+			}
+		}
 
 		h1 {
 			@include headingSm;
@@ -25,6 +42,10 @@
 			margin-bottom: 20px;
 			padding-left: 40px;
 			text-transform: uppercase;
+
+			@include lg {
+				padding-left: 20px;
+			}
 		}
 	}
 
@@ -37,11 +58,15 @@
 		.kanban__sidebar-toggle {
 			background-color: $secondary-gray;
 			margin: 0 1rem 1rem 1rem;
-			padding: 1rem;
+			padding: 1rem 4rem;
 			display: flex;
 			justify-content: space-around;
 			align-items: center;
 			border-radius: 6px;
+
+			@include lg {
+				padding: 1rem 3rem;
+			}
 		}
 
 		.kanban__sidebar-hide-container {
@@ -51,6 +76,11 @@
 			border-radius: 0px 100px 100px 0px;
 			@include headingMd;
 			transition: $ease-1;
+
+			@include lg {
+				font-size: $font-size-m;
+				margin-right: 3rem;
+			}
 
 			&:hover {
 				background-color: rgba($secondary-purple, 0.1);

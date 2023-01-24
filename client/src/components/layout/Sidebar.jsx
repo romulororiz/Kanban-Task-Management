@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBoards } from '@features/boards/boardSlice';
 import BoardItem from '@components/board/BoardItem';
 import HideSidebar from '@assets/dashboard/icon-hide-sidebar.svg';
-import BoardSvg from '@assets/dashboard/icon-board.svg';
+import LogoDark from '@assets/dashboard/logo-dark.svg';
+import ToggleSwitch from './ToggleSwitch';
 import '@styles/scss/layout/Sidebar.scss';
 
 const Sidebar = ({ showSidebar, setShowSidebar }) => {
@@ -37,6 +38,9 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 			}`}
 		>
 			<div className='kanban__sidebar-boards_container'>
+				<div className='kanban__sidebar-logo'>
+					<img src={LogoDark} alt='logo dark' />
+				</div>
 				<h1>All Boards ({boards.length})</h1>
 				{isLoading ? (
 					// TODO ADD SPINNER
@@ -54,9 +58,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 			</div>
 			<div className='kanban__sidebar-bottom_container'>
 				<div className='kanban__sidebar-toggle'>
-					<p>icon</p>
-					<p>toogle</p>
-					<p>icon</p>
+					<ToggleSwitch />
 				</div>
 				<div className='kanban__sidebar-hide-container'>
 					<img src={HideSidebar} alt='hide sidebar' />

@@ -32,11 +32,8 @@ const Layout = () => {
 				}`}
 			>
 				<Outlet />
-				<ShowSidebar
-					setShowSidebar={setShowSidebar}
-					showSidebar={showSidebar}
-				/>
 			</main>
+			<ShowSidebar setShowSidebar={setShowSidebar} showSidebar={showSidebar} />
 		</div>
 	);
 };
