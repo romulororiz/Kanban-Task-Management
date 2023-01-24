@@ -8,7 +8,7 @@ import { PrivateRoute } from '@components/PrivateRoute';
 import useAuthStatus from '@hooks/useAuthStatus';
 import Auth from '@pages/Auth';
 import Layout from '@components/layout/Layout';
-import Dashboard from './pages/Dashboard';
+import Dashboard from '@pages/Dashboard';
 
 function App() {
 	// check if user is logged in
@@ -28,6 +28,9 @@ function App() {
 						</Route>
 						<Route path='/dashboard/boards' element={<PrivateRoute />}>
 							<Route path='/dashboard/boards' element={<Dashboard />} />
+						</Route>
+						<Route path='/dashboard/boards/:id' element={<PrivateRoute />}>
+							<Route path='/dashboard/boards/:id' element={<Dashboard />} />
 						</Route>
 					</Route>
 					<Route
