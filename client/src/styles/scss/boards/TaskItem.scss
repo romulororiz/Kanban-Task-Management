@@ -1,0 +1,21 @@
+@import '../variables', '../mixins', '../breakpoints';
+
+.kanban__dashboard-task_item {
+	background-color: $primary-white;
+	@include headingSm;
+	display: flex;
+	flex-direction: column;
+	padding: 1.5rem;
+	box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
+	border-radius: 8px;
+	margin-bottom: 1rem;
+
+	h3 {
+		margin-bottom: 0.5rem;
+	}
+
+	p {
+		font-size: $font-size-m;
+		color: $primary-gray;
+	}
+}
