@@ -1,0 +1,24 @@
+@import 'variables';
+
+.loader {
+	.spinner {
+		height: 5vh;
+		width: 5vh;
+		border: 6px solid $secondary-purple;
+		border-top-color: $primary-purple;
+		border-radius: 100%;
+		animation: rotation 0.8s infinite linear 0.25s;
+		opacity: 1;
+	}
+}
+
+@keyframes rotation {
+	from {
+		opacity: 1;
+		transform: rotate(0deg);
+	}
+	to {
+		opacity: 1;
+		transform: rotate(359deg);
+	}
+}
