@@ -15,6 +15,10 @@
 		left: 40px;
 		padding: 0rem 2rem 0rem 0;
 
+		img {
+			pointer-events: none;
+		}
+
 		@include lg {
 			left: 20px;
 		}
@@ -22,6 +26,10 @@
 
 	.kanban__header-logo_no-sidebar {
 		border-right: 1px solid darken($color: $secondary-gray, $amount: 5%);
+
+		img {
+			pointer-events: none;
+		}
 	}
 
 	.kanban__header-container {

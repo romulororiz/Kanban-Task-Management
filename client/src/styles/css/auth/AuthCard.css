@@ -67,6 +67,9 @@
   -ms-flex-pack: center;
   justify-content: center;
 }
+.kanban__auth-card .kanban__auth-card__left-side .kanban__auth-card__left-side_container .kanban__auth-card__left-side_container-logo img {
+  pointer-events: none;
+}
 .kanban__auth-card .kanban__auth-card__left-side .kanban__auth-card__left-side_container .kanban__auth-card__left-side_container-text {
   font-size: 12px;
 }

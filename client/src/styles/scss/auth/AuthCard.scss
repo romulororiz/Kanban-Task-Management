@@ -43,6 +43,10 @@
 				margin-bottom: 2rem;
 				display: flex;
 				justify-content: center;
+
+				img {
+					pointer-events: none;
+				}
 			}
 
 			.kanban__auth-card__left-side_container-text {
