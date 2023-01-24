@@ -4,15 +4,7 @@ const Board = require('../models/boardModel');
 const Column = require('../models/columnModel');
 const { validationResult } = require('express-validator');
 const Task = require('../models/taskModel');
-
-const generateRandomColor = () => {
-	const letters = '0123456789ABCDEF';
-	let color = '#';
-	for (let i = 0; i < 6; i++) {
-		color += letters[Math.floor(Math.random() * 16)];
-	}
-	return color;
-};
+const generateRandomColor = require('../middleware/board/generateRandomColor');
 
 // @route POST api/columns
 // @desc Create a column
