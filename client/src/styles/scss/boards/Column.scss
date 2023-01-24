@@ -1,0 +1,29 @@
+@import '../variables', '../mixins', '../breakpoints';
+
+.kanban__dashboard-column {
+	flex-grow: 1;
+	min-width: 280px;
+	max-width: min-content;
+
+	.kanban__dashboard-column_heading {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+
+		.kanban__dashboard-column_title {
+			margin-left: 1rem;
+			letter-spacing: 2.4px;
+			text-transform: uppercase;
+			color: $primary-gray;
+			@include headingMd;
+		}
+
+		.kanban__dashboard-column_title-marker {
+			width: 1rem;
+			height: 1rem;
+			border-radius: 50%;
+		}
+	}
+}
