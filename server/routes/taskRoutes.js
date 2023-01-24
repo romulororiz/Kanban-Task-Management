@@ -11,17 +11,17 @@ const { taskValidator } = require('../middleware/board/boardValidators');
 const protectRoute = require('../middleware/auth/authMiddleware');
 
 //TASK ROUTES
-// @route   GET api/tasks
+// @route   GET api/tasks/:boardId
 // @desc    Get all tasks
 // @access  Private
-router.route('/').get(protectRoute, getTasks);
+router.route('/:boardId').get(protectRoute, getTasks);
 
 // @route   GET api/tasks/:id
 // @desc    Get a task by id
 // @access  Private
 router.route('/:id').get(protectRoute, getTaskById);
 
-// @route   POST api/tasks/create
+// @route   POST api/tasks/:columnId/create
 // @desc    Create a task
 // @access  Private
 router.route('/:columnId/create').post(protectRoute, taskValidator, createTask);

@@ -24,6 +24,10 @@ const taskSchema = new mongoose.Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Column',
 		},
+		board: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Board',
+		},
 		subtasks: [
 			{
 				type: mongoose.Schema.Types.ObjectId,

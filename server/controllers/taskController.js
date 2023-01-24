@@ -4,13 +4,21 @@ const Task = require('../models/taskModel');
 const { validationResult } = require('express-validator');
 const Subtask = require('../models/subtaskModel');
 
-// @route   GET api/tasks
+// @route   GET api/tasks/:boardId
 // @desc    Get all tasks
 // @access  Private
 const getTasks = asyncHandler(async (req, res) => {
 	try {
-		// Get all tasks for that column checking the board user id
-		const tasks = await Task.find({ user: req.user.id }).populate('subtasks');
+		const { boardId } = req.params;
+
+		const tasks = await Task.find({ board: boardId }).populate('subtasks');
+
+		// check if tasks exist
+		if (!tasks) {
+			res.status(404);
+			throw new Error('No tasks found');
+		}
+
 		res.status(200).json(tasks);
 	} catch (error) {
 		res.status(500);
@@ -84,6 +92,7 @@ const createTask = asyncHandler(async (req, res) => {
 			description,
 			column: column._id,
 			status: column.name,
+			board: column.board,
 			user: req.user.id,
 		});
 

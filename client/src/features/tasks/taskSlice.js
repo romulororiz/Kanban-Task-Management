@@ -12,7 +12,7 @@ const initialState = {
 
 // create a task
 export const createTask = createAsyncThunk(
-	'client/createTask',
+	'task/createTask',
 	async ({ columnId, taskData }, thunkAPI) => {
 		try {
 			return await taskService.createTask(columnId, taskData);
@@ -25,7 +25,7 @@ export const createTask = createAsyncThunk(
 
 // get all tasks from a board
 export const getBoardTasks = createAsyncThunk(
-	'client/getBoardTasks',
+	'task/getBoardTasks',
 	async (boardId, thunkAPI) => {
 		try {
 			return await taskService.getBoardTasks(boardId);
@@ -38,7 +38,7 @@ export const getBoardTasks = createAsyncThunk(
 
 // get a task by id
 export const getTaskById = createAsyncThunk(
-	'client/getTaskById',
+	'task/getTaskById',
 	async (taskId, thunkAPI) => {
 		try {
 			return await taskService.getTaskById(taskId);
@@ -51,7 +51,7 @@ export const getTaskById = createAsyncThunk(
 
 // update a task
 export const updateTask = createAsyncThunk(
-	'client/updateTask',
+	'task/updateTask',
 	async ({ taskId, taskData }, thunkAPI) => {
 		try {
 			return await taskService.updateTask(taskId, taskData);
@@ -92,6 +92,7 @@ const taskSlice = createSlice({
 				title: action.payload.title,
 				description: action.payload.description,
 				column: action.payload.column,
+				board: action.payload.board,
 			};
 			state.tasks.push(newTask);
 		});
@@ -100,7 +101,7 @@ const taskSlice = createSlice({
 			state.isError = true;
 			state.errors = action.payload;
 		});
-		builder.addCase(getBoardTasks.pending, (state, action) => {
+		builder.addCase(getBoardTasks.pending, state => {
 			state.isLoading = true;
 		});
 		builder.addCase(getBoardTasks.fulfilled, (state, action) => {
@@ -113,7 +114,7 @@ const taskSlice = createSlice({
 			state.isError = true;
 			state.errors = action.payload;
 		});
-		builder.addCase(getTaskById.pending, (state, action) => {
+		builder.addCase(getTaskById.pending, state => {
 			state.isLoading = true;
 		});
 		builder.addCase(getTaskById.fulfilled, (state, action) => {
@@ -126,7 +127,7 @@ const taskSlice = createSlice({
 			state.isError = true;
 			state.errors = action.payload;
 		});
-		builder.addCase(updateTask.pending, (state, action) => {
+		builder.addCase(updateTask.pending, state => {
 			state.isLoading = true;
 		});
 		builder.addCase(updateTask.fulfilled, (state, action) => {
@@ -144,7 +145,7 @@ const taskSlice = createSlice({
 			state.isError = true;
 			state.errors = action.payload;
 		});
-		builder.addCase(deleteTask.pending, (state, action) => {
+		builder.addCase(deleteTask.pending, state => {
 			state.isLoading = true;
 		});
 		builder.addCase(deleteTask.fulfilled, (state, action) => {

@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const API_URL = '/api/tasks';
 
-// Get all tasks
-export const getTasks = async () => {
-	const response = await axios.get(API_URL);
+// Get all tasks from a column
+export const getBoardTasks = async boardId => {
+	const response = await axios.get(`${API_URL}/${boardId}`);
 	return response.data;
 };
 
@@ -33,7 +33,7 @@ export const deleteTask = async taskId => {
 };
 
 const taskService = {
-	getTasks,
+	getBoardTasks,
 	getTaskById,
 	createTask,
 	updateTask,
