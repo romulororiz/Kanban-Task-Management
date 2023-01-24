@@ -11,7 +11,7 @@ const initialState = {
 
 // create a subtask
 export const createSubtask = createAsyncThunk(
-	'client/createSubtask',
+	'subtask/createSubtask',
 	async ({ taskId, subtaskData }, thunkAPI) => {
 		try {
 			return await subtaskService.createSubtask(taskId, subtaskData);
@@ -24,7 +24,7 @@ export const createSubtask = createAsyncThunk(
 
 // get all subtasks from a task
 export const getSubtasks = createAsyncThunk(
-	'client/getSubtasks',
+	'subtask/getSubtasks',
 	async (taskId, thunkAPI) => {
 		try {
 			return await subtaskService.getSubtasks(taskId);
@@ -37,7 +37,7 @@ export const getSubtasks = createAsyncThunk(
 
 // update a subtask
 export const updateSubtask = createAsyncThunk(
-	'client/updateSubtask',
+	'subtask/updateSubtask',
 	async ({ subtaskId, subtaskData }, thunkAPI) => {
 		try {
 			return await subtaskService.updateSubtask(subtaskId, subtaskData);
@@ -50,7 +50,7 @@ export const updateSubtask = createAsyncThunk(
 
 // delete a subtask
 export const deleteSubtask = createAsyncThunk(
-	'client/deleteSubtask',
+	'subtask/deleteSubtask',
 	async (subtaskId, thunkAPI) => {
 		try {
 			return await subtaskService.deleteSubtask(subtaskId);
