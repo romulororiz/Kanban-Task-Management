@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getBoards } from '@features/boards/boardSlice';
 import BoardListItem from '@components/board/BoardListItem';
 import HideSidebar from '@assets/dashboard/icon-hide-sidebar.svg';
@@ -12,6 +12,9 @@ import Spinner from '../Spinner';
 const Sidebar = ({ showSidebar, setShowSidebar }) => {
 	const [errors, setErrors] = useState([]);
 	const [activeBoard, setActiveBoard] = useState(null);
+	// todo - get last active board from local storage
+
+	// get boards from store
 
 	// initialize dispatch and navigate
 	const dispatch = useDispatch();
@@ -27,12 +30,22 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 		isLoading,
 	} = useSelector(state => state.board);
 
+	console.log(boards);
+
 	// check for active board
 	useEffect(() => {
 		if (boardId) {
 			setActiveBoard(boardId);
+		} else {
+			if (boards.length > 0) {
+				setActiveBoard(boards[0]._id);
+				navigate(`/dashboard/boards/${boards[0]._id}`);
+			} else {
+				setActiveBoard(null);
+				navigate('/dashboard/boards');
+			}
 		}
-	}, [boardId]);
+	}, [boardId, boards]);
 
 	// get all boards
 	useEffect(() => {
@@ -41,7 +54,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 		}
 
 		dispatch(getBoards());
-	}, []);
+	}, [boardId]);
 
 	// handle on click
 	const handleOnClick = booardId => {

@@ -5,9 +5,10 @@ import { useParams } from 'react-router-dom';
 import { getBoardColumns } from '@features/columns/columnSlice';
 import Add from '@assets/dashboard/icon-add-task-mobile.svg';
 import '@styles/scss/boards/Dashboard.scss';
+import Spinner from '../components/Spinner';
 
 const Dashboard = () => {
-	const { columns } = useSelector(state => state.column);
+	const { columns, isLoading, isError } = useSelector(state => state.column);
 
 	// initialize dispatch
 	const dispatch = useDispatch();
@@ -20,10 +21,19 @@ const Dashboard = () => {
 		dispatch(getBoardColumns(boardId));
 	}, [dispatch, boardId]);
 
+	// handle loading
+	if (isLoading)
+		return (
+			<div className='kanban__dashboard-loading'>
+				<Spinner />
+			</div>
+		);
+
 	return columns.length > 0 ? (
 		<div className='kanban__dashboard-board'>
-			{columns.length &&
-				columns.map(column => <Column key={column._id} column={column} />)}
+			{columns.map(column => (
+				<Column key={column._id} column={column} />
+			))}
 			<div className='kanban__dashboard-add_column'>
 				<div className='kanban__dashboard-add_column-content'>
 					<img src={Add} alt='add column' />

@@ -64,9 +64,16 @@
 		margin-top: 2rem;
 		@include buttonPrimary;
 		font-weight: 400;
-		
+
 		img {
 			margin-right: 0.5rem;
 		}
 	}
+}
+
+.kanban__dashboard-loading {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

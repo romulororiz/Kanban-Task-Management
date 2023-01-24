@@ -5,6 +5,7 @@ import boardService from './boardService';
 const initialState = {
 	boards: [],
 	board: {},
+	lastVisitedBoard: null,
 	isLoading: false,
 	isError: false,
 	isSuccess: false,
