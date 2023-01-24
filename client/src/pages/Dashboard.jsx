@@ -1,26 +1,28 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Column from '@components/board/Column';
-import '@styles/scss/boards/Dashboard.scss';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getBoardColumns } from '@features/columns/columnSlice';
+import '@styles/scss/boards/Dashboard.scss';
 
 const Dashboard = () => {
-	// const { columns } = useSelector(state => state.column);
+	const { columns } = useSelector(state => state.column);
 
-	// get columns for this board
-	// useEffect(() => {
-	// 	dispatch(getColumns(boardId));
-	// }, [dispatch, boardId]);
+	// initialize dispatch
+	const dispatch = useDispatch();
+
+	// get id from params
+	const { id: boardId } = useParams();
+
+	// get columns for the board that's being viewed
+	useEffect(() => {
+		dispatch(getBoardColumns(boardId));
+	}, [dispatch, boardId]);
 
 	return (
 		<div className='kanban__dashboard-board'>
-			<Column name='Todo' />
-			<Column name='Todo' />
-			<Column name='Todo' />
-			<Column name='Todo' />
-			<Column name='Todo' />
-			<Column name='Todo' />
-			<Column name='Todo' />
-			<Column name='Todo' />
+			{columns.length &&
+				columns.map(column => <Column key={column._id} column={column} />)}
 		</div>
 	);
 };
