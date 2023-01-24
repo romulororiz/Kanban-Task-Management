@@ -3,6 +3,7 @@ import Column from '@components/board/Column';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getBoardColumns } from '@features/columns/columnSlice';
+import Add from '@assets/dashboard/icon-add-task-mobile.svg';
 import '@styles/scss/boards/Dashboard.scss';
 
 const Dashboard = () => {
@@ -23,6 +24,12 @@ const Dashboard = () => {
 		<div className='kanban__dashboard-board'>
 			{columns.length &&
 				columns.map(column => <Column key={column._id} column={column} />)}
+			<div className='kanban__dashboard-add_column'>
+				<div className='kanban__dashboard-add_column-content'>
+					<img src={Add} alt='add column' />
+					<p>New Column</p>
+				</div>
+			</div>
 		</div>
 	);
 };

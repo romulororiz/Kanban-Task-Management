@@ -6,4 +6,44 @@
 	gap: 1rem;
 	height: 100%;
 	overflow-y: auto;
+	overflow-x: auto;
+
+	.kanban__dashboard-add_column-content {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: calc(100vh - 250px);
+		margin-top: 4rem;
+		width: 280px;
+		color: $primary-gray;
+		border-radius: 6px;
+		background: $tertiary-purple;
+		cursor: pointer;
+		box-shadow: 0px 4px 6px 1px rgba(54, 78, 126, 0.101545);
+
+		p {
+			@include headingLg;
+			transition: $ease-2;
+		}
+
+		img {
+			width: 12px;
+			height: 12px;
+			margin-right: 0.5rem;
+			filter: brightness(0) saturate(100%) invert(58%) sepia(12%) saturate(522%)
+				hue-rotate(177deg) brightness(94%) contrast(90%);
+			transition: $ease-2;
+		}
+
+		&:hover {
+			p {
+				color: $primary-purple;
+			}
+
+			img {
+				filter: brightness(0) saturate(100%) invert(36%) sepia(13%)
+					saturate(2726%) hue-rotate(204deg) brightness(106%) contrast(89%);
+			}
+		}
+	}
 }
