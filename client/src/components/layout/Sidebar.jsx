@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBoards } from '@features/boards/boardSlice';
-import BoardItem from '@components/board/BoardItem';
+import BoardListItem from '@components/board/BoardListItem';
 import HideSidebar from '@assets/dashboard/icon-hide-sidebar.svg';
 import LogoDark from '@assets/dashboard/logo-dark.svg';
 import ToggleSwitch from './ToggleSwitch';
@@ -48,12 +48,12 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 				) : (
 					<div className='kanban__sidebar-boards'>
 						{boards.map(board => (
-							<BoardItem key={board._id} board={board} />
+							<BoardListItem key={board._id} board={board} />
 						))}
 					</div>
 				)}
 				<div className='kanban__sidebar-create_board'>
-					<BoardItem text='Create New Board' />
+					<BoardListItem text='Create New Board' />
 				</div>
 			</div>
 			<div className='kanban__sidebar-bottom_container'>

@@ -1,8 +1,8 @@
 import BoardSvg from '@assets/dashboard/icon-board.svg';
 import Add from '@assets/dashboard/icon-add-task-mobile.svg';
-import '@styles/scss/boards/BoardItem.scss';
+import '@styles/scss/boards/BoardListItem.scss';
 
-const BoardItem = ({ board, isActive, text }) => {
+const BoardListItem = ({ board, isActive, text }) => {
 	return (
 		<div
 			className={`kanban__board-item ${!board && 'kanban__board-item_create'}`}
@@ -21,4 +21,4 @@ const BoardItem = ({ board, isActive, text }) => {
 		</div>
 	);
 };
-export default BoardItem;
+export default BoardListItem;
