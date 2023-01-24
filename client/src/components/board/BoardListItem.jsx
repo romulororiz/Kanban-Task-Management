@@ -6,9 +6,8 @@ import { useEffect, useState } from 'react';
 const BoardListItem = ({ board, isActive, text, onClick }) => {
 	return (
 		<div
-			onClick={board ? () => onClick(board._id) : null}
 			className={`kanban__board-item ${!board && 'kanban__board-item_create'} ${
-				isActive && 'kanban__board-item--active no-hover'
+				isActive && 'kanban__board-item-active no-hover'
 			}`}
 		>
 			<div className='kanban__board-item_icon'>
@@ -20,7 +19,9 @@ const BoardListItem = ({ board, isActive, text, onClick }) => {
 				}`}
 			>
 				{!board && <img src={Add} alt='add board' />}
-				<span>{board ? board.name : text}</span>
+				<span onClick={board ? () => onClick(board._id) : null}>
+					{board ? board.name : text}
+				</span>
 			</span>
 		</div>
 	);

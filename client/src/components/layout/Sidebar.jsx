@@ -55,9 +55,9 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 	}, [boardId]);
 
 	// handle on click
-	const handleOnClick = booardId => {
-		setActiveBoard(booardId);
-		navigate(`/dashboard/boards/${booardId}`);
+	const handleOnClick = boardId => {
+		setActiveBoard(boardId);
+		navigate(`/dashboard/boards/${boardId}`);
 	};
 
 	return (

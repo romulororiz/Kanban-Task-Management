@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import '@styles/scss/boards/TaskItem.scss';
 
-
 const TaskItem = ({ task }) => {
 	// get number of subtasks
 	const { title, subtasks } = task;

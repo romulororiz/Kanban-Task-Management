@@ -30,7 +30,6 @@
 	}
 
 	.kanban__board-item_text {
-		width: 100%;
 		cursor: pointer;
 	}
 }
@@ -58,7 +57,7 @@
 	}
 }
 
-.kanban__board-item--active {
+.kanban__board-item-active {
 	background-color: $primary-purple;
 	color: $primary-white;
 
