@@ -20,7 +20,7 @@ const Dashboard = () => {
 		dispatch(getBoardColumns(boardId));
 	}, [dispatch, boardId]);
 
-	return (
+	return columns.length > 0 ? (
 		<div className='kanban__dashboard-board'>
 			{columns.length &&
 				columns.map(column => <Column key={column._id} column={column} />)}
@@ -29,6 +29,14 @@ const Dashboard = () => {
 					<img src={Add} alt='add column' />
 					<p>New Column</p>
 				</div>
+			</div>
+		</div>
+	) : (
+		<div className='kanban__dashboard-empty'>
+			This board is empty. Add a column to get started.
+			<div className='kanban__dashboard-empty-button'>
+				<img src={Add} alt='add column' />
+				<p>New Column</p>
 			</div>
 		</div>
 	);
