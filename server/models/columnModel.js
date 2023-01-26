@@ -31,6 +31,8 @@ const columnSchema = new mongoose.Schema(
 columnSchema.pre('remove', async function (next) {
 	try {
 		await this.model('Task').deleteMany({ column: this._id });
+		await this.model('Subtask').deleteMany({ task: { $in: this.tasks } });
+
 		next();
 	} catch (err) {
 		next(err);

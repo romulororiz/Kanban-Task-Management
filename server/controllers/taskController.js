@@ -63,7 +63,7 @@ const createTask = asyncHandler(async (req, res) => {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	const { title, description } = req.body;
+	const { title, description, columnName } = req.body;
 
 	const { columnId } = req.params;
 
@@ -77,7 +77,7 @@ const createTask = asyncHandler(async (req, res) => {
 	}
 
 	// Retrieve column from column id
-	const column = await Column.findById(columnId);
+	const column = await Column.findOne({ _id: columnId, name: columnName });
 
 	// check if column exists
 	if (!column) {

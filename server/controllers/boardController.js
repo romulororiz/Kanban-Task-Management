@@ -98,10 +98,16 @@ const updateBoard = asyncHandler(async (req, res) => {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	const { name } = req.body;
-
 	// check if user owns board
 	const board = await Board.findById(req.params.id);
+
+	const { name } = req.body;
+
+	// check if board exists
+	if (!board) {
+		res.status(404);
+		throw new Error('Board not found');
+	}
 
 	if (board.user.toString() !== req.user.id) {
 		res.status(401);
@@ -109,19 +115,11 @@ const updateBoard = asyncHandler(async (req, res) => {
 	}
 
 	try {
-		const board = await Board.findById(req.params.id);
+		board.name = name;
+		board.user = req.user.id;
 
-		if (board) {
-			board.name = name;
-			board.user = req.user.id;
-
-			const updatedBoard = await board.save();
-
-			res.status(201).json(updatedBoard);
-		} else {
-			res.status(404);
-			throw new Error('Board not found');
-		}
+		const updatedBoard = await board.save();
+		res.status(201).json(updatedBoard);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
@@ -147,10 +145,8 @@ const deleteBoard = asyncHandler(async (req, res) => {
 	}
 
 	try {
-		if (board) {
-			await board.remove();
-			res.status(200).json({ message: 'Board removed' });
-		}
+		await board.remove();
+		res.status(200).json({ message: 'Board removed' });
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);
