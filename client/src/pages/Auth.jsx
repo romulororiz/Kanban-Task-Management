@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import '@styles/scss/auth/Auth.scss';
 import { useLocation } from 'react-router-dom';
 import AuthCard from '../components/auth/AuthCard';
+import '@styles/scss/auth/Auth.scss';
 
 const Auth = () => {
 	const [form, setForm] = useState('login');

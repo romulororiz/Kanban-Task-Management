@@ -1,7 +1,6 @@
 import BoardSvg from '@assets/dashboard/icon-board.svg';
 import Add from '@assets/dashboard/icon-add-task-mobile.svg';
 import '@styles/scss/boards/BoardListItem.scss';
-import { useEffect, useState } from 'react';
 
 const BoardListItem = ({ board, isActive, text, onClick }) => {
 	return (

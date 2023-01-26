@@ -134,6 +134,12 @@ const updateBoard = asyncHandler(async (req, res) => {
 const deleteBoard = asyncHandler(async (req, res) => {
 	const board = await Board.findById(req.params.id);
 
+	// check if board exists
+	if (!board) {
+		res.status(404);
+		throw new Error('Board not found');
+	}
+
 	// check if user owns board
 	if (board.user.toString() !== req.user.id) {
 		res.status(401);
@@ -144,9 +150,6 @@ const deleteBoard = asyncHandler(async (req, res) => {
 		if (board) {
 			await board.remove();
 			res.status(200).json({ message: 'Board removed' });
-		} else {
-			res.status(404);
-			throw new Error('Board not found');
 		}
 	} catch (error) {
 		res.status(400);

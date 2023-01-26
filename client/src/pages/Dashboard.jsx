@@ -15,8 +15,6 @@ const Dashboard = () => {
 	// get boards from store
 	const { boards } = useSelector(state => state.board);
 
-	console.log(boards);
-
 	// initialize dispatch
 	const dispatch = useDispatch();
 

@@ -38,9 +38,6 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 			if (boards.length > 0) {
 				setActiveBoard(boards[0]._id);
 				navigate(`/dashboard/boards/${boards[0]._id}`);
-			} else {
-				setActiveBoard(null);
-				navigate('/dashboard/boards');
 			}
 		}
 	}, [boardId, boards]);
@@ -71,22 +68,16 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 					<img src={LogoDark} alt='logo dark' />
 				</div>
 				<h1>All Boards ({boards.length})</h1>
-				{isLoading ? (
-					<div className='kanban__sidebar-spinner'>
-						<Spinner />
-					</div>
-				) : (
-					<div className='kanban__sidebar-boards'>
-						{boards.map(board => (
-							<BoardListItem
-								key={board._id}
-								board={board}
-								isActive={board._id === activeBoard}
-								onClick={handleOnClick}
-							/>
-						))}
-					</div>
-				)}
+				<div className='kanban__sidebar-boards'>
+					{boards.map(board => (
+						<BoardListItem
+							key={board._id}
+							board={board}
+							isActive={board._id === activeBoard}
+							onClick={handleOnClick}
+						/>
+					))}
+				</div>
 				<div className='kanban__sidebar-create_board'>
 					<BoardListItem text='Create New Board' />
 				</div>
