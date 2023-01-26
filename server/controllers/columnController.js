@@ -164,7 +164,7 @@ const updateColumn = asyncHandler(async (req, res) => {
 	}
 });
 
-// @Route DELETE api/columns/:id/deleteAll
+// @Route DELETE api/columns/:boardId/deleteAll
 // @Desc Delete all columns for a board
 // @Access Private
 const deleteAllColumns = asyncHandler(async (req, res) => {
@@ -201,4 +201,10 @@ const deleteAllColumns = asyncHandler(async (req, res) => {
 	}
 });
 
-module.exports = { createColumn, deleteColumn, updateColumn, getBoardColumns };
+module.exports = {
+	createColumn,
+	deleteColumn,
+	updateColumn,
+	getBoardColumns,
+	deleteAllColumns,
+};

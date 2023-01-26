@@ -10,6 +10,11 @@ const { columnValidator } = require('../middleware/board/boardValidators');
 const protectRoute = require('../middleware/auth/authMiddleware');
 
 // COLUMN ROUTES
+// @route DELETE api/columns/:boardId/deleteAll
+// @desc Delete all columns and tasks for a board
+// @access Private
+router.route('/:id/deleteAll').delete(protectRoute, deleteColumn);
+
 // @route   POST api/columns/:id/create
 // @desc    Create a column
 // @access  Private
