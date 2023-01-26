@@ -164,4 +164,41 @@ const updateColumn = asyncHandler(async (req, res) => {
 	}
 });
 
+// @Route DELETE api/columns/:id/deleteAll
+// @Desc Delete all columns for a board
+// @Access Private
+const deleteAllColumns = asyncHandler(async (req, res) => {
+	const { columnsIds } = req.body;
+
+	try {
+		// Find board by id
+		const board = await Board.findById(req.params.id);
+
+		// Check if board exists
+		if (!board) {
+			res.status(404);
+			throw new Error('Board not found');
+		}
+
+		// Check if user owns the board
+		const user = await User.findById(req.user.id);
+
+		if (board.user.toString() !== user._id.toString()) {
+			res.status(401);
+			throw new Error('Not authorized');
+		}
+
+		// Delete all columns for board
+		await Column.deleteMany({ board: req.params.id, _id: { $in: columnsIds } });
+		res.status(200).json({ message: 'Columns removed' });
+
+		// Remove all columns from board
+		board.columns = [];
+		await board.save();
+	} catch (error) {
+		res.status(500);
+		throw new Error(error);
+	}
+});
+
 module.exports = { createColumn, deleteColumn, updateColumn, getBoardColumns };
