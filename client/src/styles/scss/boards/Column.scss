@@ -27,4 +27,12 @@
 			border-radius: 50%;
 		}
 	}
+
+	.kanban__dashboard-column_tasks-container {
+		height: calc(100vh - 250px);
+	}
+
+	.kanban__dashboard-column_tasks-container_empty {
+		border: 3px dashed lighten($color: $primary-gray, $amount: 20%);
+	}
 }

@@ -23,6 +23,11 @@ const Column = ({ column }) => {
 		dispatch(getBoardTasks(boardId));
 	}, [boardId]);
 
+	// Check if column has tasks
+	const hasTasks = useMemo(() => {
+		return tasks.filter(task => task.column === _id).length > 0;
+	}, [tasks, _id]);
+
 	return (
 		<div className='kanban__dashboard-column'>
 			<div className='kanban__dashboard-column_heading'>
@@ -34,10 +39,12 @@ const Column = ({ column }) => {
 					tasks.filter(task => task.column === _id).length
 				})`}</h3>
 			</div>
-			{tasks &&
-				tasks
-					.filter(task => task.column === _id)
-					.map(task => <TaskItem key={task._id} task={task} />)}
+			<div className={hasTasks ? 'kanban__dashboard-column_tasks-container' : 'kanban__dashboard-column_tasks-container kanban__dashboard-column_tasks-container_empty'}>
+				{tasks &&
+					tasks
+						.filter(task => task.column === _id)
+						.map(task => <TaskItem key={task._id} task={task} />)}
+			</div>
 		</div>
 	);
 };
