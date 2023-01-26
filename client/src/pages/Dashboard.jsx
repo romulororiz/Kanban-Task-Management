@@ -7,6 +7,7 @@ import { getBoards } from '@features/boards/boardSlice';
 import Add from '@assets/dashboard/icon-add-task-mobile.svg';
 import '@styles/scss/boards/Dashboard.scss';
 import Spinner from '@components/Spinner';
+import Modal from '@components/board/Modal';
 
 const Dashboard = () => {
 	// get columns from store
@@ -40,17 +41,21 @@ const Dashboard = () => {
 			You have no boards. Create a board to get started.
 		</div>
 	) : columns.length > 0 ? (
-		<div className='kanban__dashboard-board'>
-			{columns.map(column => (
-				<Column key={column._id} column={column} />
-			))}
-			<div className='kanban__dashboard-add_column'>
-				<div className='kanban__dashboard-add_column-content'>
-					<img src={Add} alt='add column' />
-					<p>New Column</p>
+		<>
+			<Modal />
+
+			<div className='kanban__dashboard-board'>
+				{columns.map(column => (
+					<Column key={column._id} column={column} />
+				))}
+				<div className='kanban__dashboard-add_column'>
+					<div className='kanban__dashboard-add_column-content'>
+						<img src={Add} alt='add column' />
+						<p>New Column</p>
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	) : (
 		<div className='kanban__dashboard-empty'>
 			This board is empty. Add a column to get started.

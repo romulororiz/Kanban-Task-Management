@@ -1,0 +1,26 @@
+@import '../variables', '../mixins', '../breakpoints';
+
+.kanban__modal-overlay {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 101;
+	overflow-x: hidden;
+	overflow-y: hidden;
+
+	.kanban__modal-container {
+		padding: 30px;
+		background-color: $primary-white;
+		border-radius: 5px;
+		min-width: 480px;
+        max-width: 100%;
+        height: auto;
+	}
+}
