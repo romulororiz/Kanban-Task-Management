@@ -37,12 +37,12 @@ const createBoard = asyncHandler(async (req, res) => {
 	const { name } = req.body;
 
 	try {
-		// Create a new board with a columns array
+		// create new board and save columnsIds to columns Array
 		const board = new Board({
-			name,
 			user: req.user.id,
+			name,
 		});
-
+		// Save board to database
 		const createdBoard = await board.save();
 		res.status(201).json(createdBoard);
 	} catch (error) {

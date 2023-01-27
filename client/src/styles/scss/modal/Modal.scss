@@ -20,7 +20,24 @@
 		background-color: $primary-white;
 		border-radius: 5px;
 		min-width: 480px;
-        max-width: 100%;
-        height: auto;
+		max-width: 100%;
+		height: auto;
+
+		.kanban__modal-title {
+			@include headingLg;
+			margin-bottom: 1rem;
+		}
+
+		.kanban__modal-footer {
+			margin-top: 1rem;
+
+			.kanban__modal-button {
+				@include buttonPrimary;
+				@include headingMd;
+				width: 100%;
+				display: block;
+				padding: 0.65rem 3rem;
+			}
+		}
 	}
 }

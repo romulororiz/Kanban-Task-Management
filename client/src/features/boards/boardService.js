@@ -10,7 +10,7 @@ const getBoards = async () => {
 
 // Create new board
 const createBoard = async boardData => {
-	const response = await axios.post(API_URL, boardData);
+	const response = await axios.post(`${API_URL}/create`, boardData);
 	return response.data;
 };
 
@@ -21,8 +21,8 @@ const getBoardById = async boardId => {
 };
 
 // Update board
-const updateBoard = async boardData => {
-	const response = await axios.put(`${API_URL}/${boardData._id}`, boardData);
+const updateBoard = async (boardId, boardData) => {
+	const response = await axios.put(`${API_URL}/${boardId}`, boardData);
 	return response.data;
 };
 

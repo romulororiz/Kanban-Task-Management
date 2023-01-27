@@ -1,18 +1,20 @@
-import '@styles/scss/boards/Modal.scss';
+import { useRef } from 'react';
+import useOnClickOutside from '@hooks/useOnClickOutside';
+import '@styles/scss/modal/Modal.scss';
 
-const Modal = ({ title, content, onSubmit, mode, onSubmitText }) => {
+const Modal = ({ title, content, setShowModal }) => {
+	// reference to the dropdown menu
+	const modalRef = useRef();
+	// initialize useOnClickOutside hook
+	useOnClickOutside(modalRef, () => setShowModal(false));
+
 	return (
 		<div className='kanban__modal-overlay'>
-			<div className='kanban__modal-container'>
+			<div className='kanban__modal-container' ref={modalRef}>
 				<div className='kanban__modal-title'>
 					<h3>{title}</h3>
 				</div>
 				<div className='kanban__modal-content'>{content}</div>
-				<div className='kanban__modal-footer'>
-					<button className='kanban__modal-button' onClick={onSubmit}>
-						{onSubmitText}
-					</button>
-				</div>
 			</div>
 		</div>
 	);

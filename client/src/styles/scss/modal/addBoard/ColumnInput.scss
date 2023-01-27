@@ -1,0 +1,18 @@
+@import '../../variables.scss', '../../mixins.scss', '../../breakpoints.scss';
+
+.kanban__add-board_column-input {
+	display: flex;
+	margin-bottom: 1rem;
+
+	input {
+		width: 100%;
+	}
+}
+
+.kanban__add-board_remove-icon {
+	position: relative;
+	top: 12px;
+	margin-left: 0.5rem;
+	color: $primary-gray;
+	cursor: pointer;
+}

@@ -1,5 +1,4 @@
 const { check } = require('express-validator');
-const Board = require('../../models/boardModel');
 
 // Validation for title and columns
 const boardValidator = [

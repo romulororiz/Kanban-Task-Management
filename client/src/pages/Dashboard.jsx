@@ -5,13 +5,12 @@ import { useParams } from 'react-router-dom';
 import { getBoardColumns } from '@features/columns/columnSlice';
 import { getBoards } from '@features/boards/boardSlice';
 import Add from '@assets/dashboard/icon-add-task-mobile.svg';
-import '@styles/scss/boards/Dashboard.scss';
 import Spinner from '@components/Spinner';
-import Modal from '@components/board/Modal';
+import '@styles/scss/boards/Dashboard.scss';
 
 const Dashboard = () => {
 	// get columns from store
-	const { columns, isLoading, isError } = useSelector(state => state.column);
+	const { columns, isLoading } = useSelector(state => state.column);
 
 	// get boards from store
 	const { boards } = useSelector(state => state.board);
@@ -41,21 +40,17 @@ const Dashboard = () => {
 			You have no boards. Create a board to get started.
 		</div>
 	) : columns.length > 0 ? (
-		<>
-			<Modal />
-
-			<div className='kanban__dashboard-board'>
-				{columns.map(column => (
-					<Column key={column._id} column={column} />
-				))}
-				<div className='kanban__dashboard-add_column'>
-					<div className='kanban__dashboard-add_column-content'>
-						<img src={Add} alt='add column' />
-						<p>New Column</p>
-					</div>
+		<div className='kanban__dashboard-board'>
+			{columns.map(column => (
+				<Column key={column._id} column={column} />
+			))}
+			<div className='kanban__dashboard-add_column'>
+				<div className='kanban__dashboard-add_column-content'>
+					<img src={Add} alt='add column' />
+					<p>New Column</p>
 				</div>
 			</div>
-		</>
+		</div>
 	) : (
 		<div className='kanban__dashboard-empty'>
 			This board is empty. Add a column to get started.
