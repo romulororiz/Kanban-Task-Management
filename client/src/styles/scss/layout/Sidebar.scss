@@ -86,14 +86,10 @@
 			&:hover {
 				background-color: rgba($secondary-purple, 0.1);
 				color: $primary-purple;
-
-				img {
-					filter: brightness(0) saturate(100%) invert(31%) sepia(97%)
-						saturate(771%) hue-rotate(215deg) brightness(94%) contrast(82%);
-				}
 			}
 
-			img {
+			svg {
+				font-size: 16px;
 				margin-right: 1rem;
 			}
 

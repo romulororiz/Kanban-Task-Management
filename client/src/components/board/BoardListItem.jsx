@@ -1,9 +1,10 @@
-import BoardSvg from '@assets/dashboard/icon-board.svg';
 import Add from '@assets/dashboard/icon-add-task-mobile.svg';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { deleteBoard } from '@features/boards/boardSlice';
+import { TbLayoutBoardSplit } from 'react-icons/tb';
 import '@styles/scss/boards/BoardListItem.scss';
+import { TiPlus } from 'react-icons/ti';
 
 const BoardListItem = ({
 	board,
@@ -36,7 +37,7 @@ const BoardListItem = ({
 			}`}
 		>
 			<div className='kanban__board-item_icon'>
-				<img src={BoardSvg} alt='board icon' />
+				<TbLayoutBoardSplit />
 			</div>
 			<div className='kanban__board-item-text_actions'>
 				<span
@@ -44,7 +45,7 @@ const BoardListItem = ({
 						!board && 'kanban__board-item_text_create'
 					}`}
 				>
-					{!board && <img src={Add} alt='add board' />}
+					{!board && <TiPlus />}
 					<span onClick={board ? () => onClick(board._id) : null}>
 						{!board ? text : board.name}
 					</span>

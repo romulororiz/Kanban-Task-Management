@@ -23,16 +23,13 @@
 
 		p {
 			@include headingLg;
-			transition: $ease-2;
+			transition: $ease-1;
 		}
 
-		img {
-			width: 12px;
-			height: 12px;
-			margin-right: 0.5rem;
-			filter: brightness(0) saturate(100%) invert(58%) sepia(12%) saturate(522%)
-				hue-rotate(177deg) brightness(94%) contrast(90%);
-			transition: $ease-2;
+		svg {
+			font-size: 16px;
+			margin-right: 0.2rem;
+			transition: $ease-1;
 		}
 
 		&:hover {
@@ -40,9 +37,8 @@
 				color: $primary-purple;
 			}
 
-			img {
-				filter: brightness(0) saturate(100%) invert(36%) sepia(13%)
-					saturate(2726%) hue-rotate(204deg) brightness(106%) contrast(89%);
+			svg {
+				color: $primary-purple;
 			}
 		}
 	}
@@ -65,8 +61,10 @@
 		@include buttonPrimary;
 		font-weight: 400;
 
-		img {
-			margin-right: 0.5rem;
+		svg {
+			position: relative;
+			top: 1px;
+			margin-right: 0.2rem;
 		}
 	}
 }

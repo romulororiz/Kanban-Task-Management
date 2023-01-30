@@ -5,11 +5,12 @@
 	position: fixed;
 	left: 0;
 	bottom: 3rem;
-	padding: 22px;
+	padding: 20px;
 	border-radius: 0px 100px 100px 0px;
 	cursor: pointer;
+	color: $primary-white;
 
-	img {
-		width: 20px;
+	svg {
+		font-size: 20px;
 	}
 }

@@ -1,4 +1,5 @@
 import ShowSidebarSvg from '@assets/dashboard/icon-show-sidebar.svg';
+import { FaEye } from 'react-icons/fa';
 import '@styles/scss/layout/ShowSidebar.scss';
 
 const ShowSidebar = ({ showSidebar, setShowSidebar }) => {
@@ -8,7 +9,7 @@ const ShowSidebar = ({ showSidebar, setShowSidebar }) => {
 				className='kanban__show-sidebar'
 				onClick={() => setShowSidebar(true)}
 			>
-				<img src={ShowSidebarSvg} alt='show-sidebar' />
+				<FaEye />
 			</div>
 		)
 	);

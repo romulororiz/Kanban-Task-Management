@@ -57,12 +57,12 @@ const Header = ({ setShowSidebar, showSidebar, user, board }) => {
 					}`}
 				>
 					{isTablet ? (
-						<button className='kanban__header-board_actions-add'>
+						<button className='kanban__header-board_actions-add_small'>
 							<TiPlus />
 						</button>
 					) : (
 						<button>
-							<img src={Add} alt='add task' />
+							<TiPlus />
 							Add New Task
 						</button>
 					)}

@@ -9,6 +9,7 @@ import LogoDark from '@assets/dashboard/logo-dark.svg';
 import ToggleSwitch from './ToggleSwitch';
 import Modal from '../modal/Modal';
 import AddBoard from '../modal/content/addBoard/AddBoard';
+import { FaEyeSlash } from 'react-icons/fa';
 import '@styles/scss/layout/Sidebar.scss';
 
 const Sidebar = ({
@@ -131,7 +132,7 @@ const Sidebar = ({
 						<ToggleSwitch />
 					</div>
 					<div className='kanban__sidebar-hide-container'>
-						<img src={HideSidebar} alt='hide sidebar' />
+						<FaEyeSlash />
 						<p onClick={() => setShowSidebar(false)}>Hide Sidebar</p>
 					</div>
 				</div>

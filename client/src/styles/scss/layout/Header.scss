@@ -71,12 +71,20 @@
 			position: relative;
 			align-items: center;
 
-			.kanban__header-board_actions-add {
+			svg {
+				margin-right: 0.2rem;
+			}
+
+			.kanban__header-board_actions-add_small {
 				background-color: $primary-purple;
 				margin-right: 1rem;
 				border-radius: 50%;
 				color: $primary-white;
 				cursor: pointer;
+
+				svg {
+					margin: 0;
+				}
 
 				@include lg {
 					padding: 12px;

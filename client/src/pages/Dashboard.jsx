@@ -8,6 +8,7 @@ import { getBoardColumns } from '@features/columns/columnSlice';
 import Add from '@assets/dashboard/icon-add-task-mobile.svg';
 import Spinner from '@components/Spinner';
 import '@styles/scss/boards/Dashboard.scss';
+import { TiPlus } from 'react-icons/ti';
 
 const Dashboard = () => {
 	const [showModal, setShowModal] = useState(false);
@@ -74,7 +75,7 @@ const Dashboard = () => {
 							className='kanban__dashboard-add_column-content'
 							onClick={() => setShowModal(true)}
 						>
-							<img src={Add} alt='add column' />
+							<TiPlus />
 							<p>New Column</p>
 						</div>
 					</div>
@@ -86,7 +87,7 @@ const Dashboard = () => {
 						className='kanban__dashboard-empty-button'
 						onClick={handleAddColumn}
 					>
-						<img src={Add} alt='add column' />
+						<TiPlus />
 						<p>New Column</p>
 					</div>
 				</div>
