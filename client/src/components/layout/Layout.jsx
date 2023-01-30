@@ -46,7 +46,12 @@ const Layout = () => {
 				setShowModal={setShowModal}
 				board={board}
 			/>
-			<Header user={user} showSidebar={showSidebar} board={board} />
+			<Header
+				user={user}
+				showSidebar={showSidebar}
+				setShowSidebar={setShowSidebar}
+				board={board}
+			/>
 			<main
 				className={`kanban__main-content ${
 					showSidebar && 'kanban__main-content_sidebar'

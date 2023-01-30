@@ -14,10 +14,6 @@
   margin: 0;
 }
 
-html {
-  font-size: 16px;
-}
-
 a {
   text-decoration: none;
 }
@@ -26,7 +22,7 @@ li {
   list-style-type: none;
 }
 
-html,
+
 body {
   height: 100%;
   background-color: #f4f7fd;
@@ -38,32 +34,22 @@ body {
 }
 
 img,
-picture,
-video,
-canvas,
 svg {
   display: block;
   max-width: 100%;
 }
 
 input,
-button,
-textarea,
-select {
+button {
   font: inherit;
 }
 
 p,
 h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h3 {
   overflow-wrap: break-word;
 }
 
-#root,
-#__next {
+#root {
   isolation: isolate;
 }

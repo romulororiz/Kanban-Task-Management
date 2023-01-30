@@ -13,8 +13,9 @@ const columnValidator = [
 	check('name').not().isEmpty().withMessage('Name cannot be empty'),
 	// length of name should be less than 10
 	check('name')
-		.isLength({ max: 10 })
-		.withMessage('Name should be less than 10 characters'),
+		.isLength({ max: 15 })
+		.withMessage('Name should be less than 15 characters'),
+	check('color').not().isEmpty().withMessage('Color cannot be empty'),
 ];
 
 // add a task validation

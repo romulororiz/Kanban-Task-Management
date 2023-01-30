@@ -5,6 +5,7 @@
 	background-color: $primary-white;
 	position: fixed;
 	width: 100%;
+	z-index: 100;
 	border-bottom: 1px solid darken($color: $secondary-gray, $amount: 5%);
 
 	.kanban__header-logo {
@@ -13,14 +14,22 @@
 		align-items: center;
 		position: absolute;
 		left: 40px;
-		padding: 0rem 2rem 0rem 0;
+		padding-right: 2rem;
 
 		img {
 			pointer-events: none;
+
+			@include md {
+				width: 100px;
+			}
 		}
 
 		@include lg {
 			left: 20px;
+		}
+
+		@include md {
+			display: none;
 		}
 	}
 
@@ -44,13 +53,38 @@
 			margin-left: 260px;
 		}
 
+		@include md {
+			padding: 0 1.5rem;
+		}
+
 		.kanban__header-board_name {
 			@include headingXl;
+			width: 50%;
+		}
+
+		.kanban__header-board_name-hide {
+			display: none;
 		}
 
 		.kanban__header-board_actions {
 			display: flex;
 			position: relative;
+			align-items: center;
+
+			.kanban__header-board_actions-add {
+				background-color: $primary-purple;
+				margin-right: 1rem;
+				border-radius: 50%;
+				color: $primary-white;
+				cursor: pointer;
+
+				@include lg {
+					padding: 12px;
+					border-radius: 50%;
+					width: 40px;
+					height: 40px;
+				}
+			}
 
 			button {
 				@include buttonPrimary;
@@ -127,9 +161,22 @@
 				display: none;
 			}
 		}
+
+		.kanban__header-board_actions-sidebar {
+			justify-content: flex-end;
+			width: 100%;
+		}
 	}
 
 	.kanban__header-container_no-sidebar {
 		margin-left: 230px;
+
+		@include lg {
+			margin-left: 200px;
+		}
+
+		@include md {
+			margin-left: 0;
+		}
 	}
 }

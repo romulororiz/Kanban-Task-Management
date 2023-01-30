@@ -23,8 +23,8 @@ const deleteColumn = async columnId => {
 };
 
 // Update a column
-const updateColumn = (columnData, columnId) => {
-	const response = axios.put(`${API_URL}/${columnId}`, columnData);
+const updateColumn = async (columnData, columnId) => {
+	const response = await axios.put(`${API_URL}/${columnId}`, columnData);
 
 	return response.data;
 };

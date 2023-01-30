@@ -2,13 +2,24 @@ import { useRef } from 'react';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import '@styles/scss/modal/Modal.scss';
 
-const Modal = ({ title, content, setShowModal, setModalMode }) => {
+const Modal = ({ title, content, setShowModal, setModalMode, modalMode }) => {
 	// reference to the dropdown menu
 	const modalRef = useRef();
+
 	// initialize useOnClickOutside hook
 	useOnClickOutside(modalRef, () => {
 		setShowModal(false);
-		setModalMode('addBoard');
+
+		switch (modalMode) {
+			case 'updateColumn':
+				setModalMode('addColumn');
+				break;
+			case 'updateBoard':
+				setModalMode('addBoard');
+				break;
+			default:
+				break;
+		}
 	});
 
 	return (

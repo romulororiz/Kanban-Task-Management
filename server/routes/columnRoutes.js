@@ -29,9 +29,10 @@ router.route('/:id').get(protectRoute, getBoardColumns);
 // @desc    Delete a column
 // @access  Private
 router.route('/:id').delete(protectRoute, deleteColumn);
-module.exports = router;
 
 // @route PUT api/columns/:id
 // @desc Update a column
 // @access Private
 router.route('/:id').put(protectRoute, columnValidator, updateColumn);
+
+module.exports = router;

@@ -7,16 +7,22 @@ import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import { deleteColumn } from '@features/columns/columnSlice';
 import { useParams } from 'react-router-dom';
+import Modal from '@components/modal/Modal';
+import AddColumn from '@components/modal/content/AddColumn/AddColumn';
 import '@styles/scss/boards/Column.scss';
 
 const Column = ({ column }) => {
 	const [showDropdown, setShowDropdown] = useState(false);
+	const [showModal, setShowModal] = useState(false);
+	const [modalMode, setModalMode] = useState('addColumn');
 
-	// create ref for dropdown
-	const dropdownRef = useRef();
+	// create ref for dropdown and modal
+	const DropdownRef = useRef();
 
 	// initialize useOnClickOutside hook
-	useOnClickOutside(dropdownRef, () => setShowDropdown(false));
+	useOnClickOutside(DropdownRef, () => {
+		setShowDropdown(false);
+	});
 
 	// get name from column
 	const { name, _id: id } = column;
@@ -31,11 +37,11 @@ const Column = ({ column }) => {
 	const { id: boardId } = useParams();
 
 	// get tasks from board
-	useEffect(() => {
-		if (boardId) {
-			dispatch(getBoardTasks(boardId));
-		}
-	}, [boardId]);
+	// useEffect(() => {
+	// 	if (boardId) {
+	// 		dispatch(getBoardTasks(boardId));
+	// 	}
+	// }, [boardId]);
 
 	// Check if column has tasks
 	const hasTasks = useMemo(() => {
@@ -47,56 +53,82 @@ const Column = ({ column }) => {
 		dispatch(deleteColumn(id));
 	};
 
+	// handle update column
+	const handleUpdateColumn = () => {
+		setModalMode('updateColumn');
+		setShowModal(true);
+		setShowDropdown(false);
+	};
+
 	return (
-		<div className='kanban__dashboard-column'>
-			<div className='kanban__dashboard-column_heading'>
-				<div className='kanban__dashboard-column_heading-title_container'>
-					<div
-						className='kanban__dashboard-column_title-marker'
-						style={{ backgroundColor: column.color }}
-					></div>
-					<h3 className='kanban__dashboard-column_title'>{`${name} (${
-						tasks.filter(task => task.column === id).length
-					})`}</h3>
-				</div>
-				<GoKebabVertical
-					className='kanban__dashboard-column_heading-icon'
-					onClick={() => setShowDropdown(true)}
+		<>
+			{showModal && (
+				<Modal
+					title={modalMode === 'addColumn' ? 'Add Column' : 'Update Column'}
+					setModalMode={setModalMode}
+					modalMode={modalMode}
+					setShowModal={setShowModal}
+					showModal={showModal}
+					content={
+						<AddColumn
+							setShowModal={setShowModal}
+							column={column}
+							modalMode={modalMode}
+							setModalMode={setModalMode}
+						/>
+					}
 				/>
-				{/* create dropdown for column */}
+			)}
+			<div className='kanban__dashboard-column'>
+				<div className='kanban__dashboard-column_heading'>
+					<div className='kanban__dashboard-column_heading-title_container'>
+						<div
+							className='kanban__dashboard-column_title-marker'
+							style={{ backgroundColor: column.color }}
+						></div>
+						<h3 className='kanban__dashboard-column_title'>{`${name} (${
+							tasks.filter(task => task.column === id).length
+						})`}</h3>
+					</div>
+					<GoKebabVertical
+						className='kanban__dashboard-column_heading-icon'
+						onClick={() => setShowDropdown(true)}
+					/>
+					{/* create dropdown for column */}
+					<div
+						ref={DropdownRef}
+						className={`${
+							showDropdown
+								? 'kanban__dashboard-column_dropdown'
+								: 'kanban__dashboard-column_dropdown-hide'
+						}`}
+					>
+						<ul>
+							<li onClick={handleUpdateColumn}>
+								<FaRegEdit />
+								Edit Column
+							</li>
+							<li onClick={() => handleDeleteColumn(id)}>
+								<FaRegTrashAlt />
+								Delete Column
+							</li>
+						</ul>
+					</div>
+				</div>
 				<div
-					ref={dropdownRef}
-					className={`${
-						showDropdown
-							? 'kanban__dashboard-column_dropdown'
-							: 'kanban__dashboard-column_dropdown-hide'
-					}`}
+					className={
+						hasTasks
+							? 'kanban__dashboard-column_tasks-container'
+							: 'kanban__dashboard-column_tasks-container kanban__dashboard-column_tasks-container_empty'
+					}
 				>
-					<ul>
-						<li>
-							<FaRegEdit />
-							Edit Column
-						</li>
-						<li onClick={() => handleDeleteColumn(id)}>
-							<FaRegTrashAlt />
-							Delete Column
-						</li>
-					</ul>
+					{tasks &&
+						tasks
+							.filter(task => task.column === id)
+							.map(task => <TaskItem key={task._id} task={task} />)}
 				</div>
 			</div>
-			<div
-				className={
-					hasTasks
-						? 'kanban__dashboard-column_tasks-container'
-						: 'kanban__dashboard-column_tasks-container kanban__dashboard-column_tasks-container_empty'
-				}
-			>
-				{tasks &&
-					tasks
-						.filter(task => task.column === id)
-						.map(task => <TaskItem key={task._id} task={task} />)}
-			</div>
-		</div>
+		</>
 	);
 };
 export default Column;

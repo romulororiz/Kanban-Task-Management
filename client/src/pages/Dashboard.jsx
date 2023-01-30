@@ -1,14 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Column from '@components/board/Column';
-import { useEffect } from 'react';
+import Modal from '@components/modal/Modal';
+import AddColumn from '@components/modal/content/AddColumn/AddColumn';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { getBoardColumns } from '@features/columns/columnSlice';
-import { getBoards } from '@features/boards/boardSlice';
 import Add from '@assets/dashboard/icon-add-task-mobile.svg';
 import Spinner from '@components/Spinner';
 import '@styles/scss/boards/Dashboard.scss';
 
 const Dashboard = () => {
+	const [showModal, setShowModal] = useState(false);
+	const [modalMode, setModalMode] = useState('addColumn');
+
 	// get columns from store
 	const { columns, isLoading } = useSelector(state => state.column);
 
@@ -23,9 +27,14 @@ const Dashboard = () => {
 
 	// get columns for the board that's being viewed
 	useEffect(() => {
-		dispatch(getBoards());
 		dispatch(getBoardColumns(boardId));
 	}, [dispatch, boardId]);
+
+	// Handle open modal on empty board
+	const handleAddColumn = () => {
+		setShowModal(true);
+		setModalMode('addColumn');
+	};
 
 	// handle loading
 	if (isLoading)
@@ -35,30 +44,54 @@ const Dashboard = () => {
 			</div>
 		);
 
-	return boards.length <= 0 ? (
-		<div className='kanban__dashboard-empty_boards'>
-			You have no boards. Create a board to get started.
-		</div>
-	) : columns.length > 0 ? (
-		<div className='kanban__dashboard-board'>
-			{columns.map(column => (
-				<Column key={column._id} column={column} />
-			))}
-			<div className='kanban__dashboard-add_column'>
-				<div className='kanban__dashboard-add_column-content'>
-					<img src={Add} alt='add column' />
-					<p>New Column</p>
+	return (
+		<>
+			{showModal && (
+				<Modal
+					title={modalMode === 'addColumn' ? 'Add Column' : 'Update Column'}
+					setShowModal={setShowModal}
+					setModalMode={setModalMode}
+					content={
+						<AddColumn
+							showModal={showModal}
+							setShowModal={setShowModal}
+							setModalMode={setModalMode}
+						/>
+					}
+				/>
+			)}
+			{boards.length <= 0 ? (
+				<div className='kanban__dashboard-empty_boards'>
+					You have no boards. Create a board to get started.
 				</div>
-			</div>
-		</div>
-	) : (
-		<div className='kanban__dashboard-empty'>
-			This board is empty. Add a column to get started.
-			<div className='kanban__dashboard-empty-button'>
-				<img src={Add} alt='add column' />
-				<p>New Column</p>
-			</div>
-		</div>
+			) : columns.length > 0 ? (
+				<div className='kanban__dashboard-board'>
+					{columns.map(column => (
+						<Column key={column._id} column={column} />
+					))}
+					<div className='kanban__dashboard-add_column'>
+						<div
+							className='kanban__dashboard-add_column-content'
+							onClick={() => setShowModal(true)}
+						>
+							<img src={Add} alt='add column' />
+							<p>New Column</p>
+						</div>
+					</div>
+				</div>
+			) : (
+				<div className='kanban__dashboard-empty'>
+					This board is empty. Add a column to get started.
+					<div
+						className='kanban__dashboard-empty-button'
+						onClick={handleAddColumn}
+					>
+						<img src={Add} alt='add column' />
+						<p>New Column</p>
+					</div>
+				</div>
+			)}
+		</>
 	);
 };
 

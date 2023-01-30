@@ -1,0 +1,21 @@
+@import '../../variables', '../../mixins', '../../breakpoints';
+
+.kanban__add-column_heading {
+	display: flex;
+	flex-direction: column;
+}
+
+.kanban__add-column_color {
+	margin-top: 1rem;
+
+	.kanban__add-column_color-picker {
+		margin-top: 1rem;
+		margin-bottom: 1rem !important;
+		display: flex;
+		width: 100% !important;
+
+		@include lg {
+			margin-left: 1rem;
+		}
+	}
+}

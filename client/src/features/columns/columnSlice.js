@@ -74,6 +74,7 @@ const columnSlice = createSlice({
 				const newColumn = {
 					_id: action.payload._id,
 					name: action.payload.name,
+					color: action.payload.color,
 					board: action.payload.board,
 				};
 				state.columns.push(newColumn);
@@ -118,12 +119,11 @@ const columnSlice = createSlice({
 				state.isLoading = false;
 				state.isSuccess = true;
 				const updatedColumn = action.payload;
-				// check if column id matches action payload id
+				// find the column in the columns array and update it
 				const index = state.columns.findIndex(
 					column => column._id === updatedColumn._id
 				);
-				// if it does, update the column
-				state.columns.splice(index, 1, updatedColumn);
+				state.columns[index] = updatedColumn;
 			})
 			.addCase(updateColumn.rejected, (state, action) => {
 				state.isLoading = false;

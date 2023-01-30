@@ -11,7 +11,7 @@
 	bottom: 0;
 	padding: 1rem;
 	background-color: rgba(0, 0, 0, 0.8);
-	z-index: 101;
+	z-index: 102;
 	overflow-x: hidden;
 	overflow-y: hidden;
 
@@ -19,13 +19,24 @@
 		padding: 30px;
 		background-color: $primary-white;
 		border-radius: 5px;
-		min-width: 480px;
-		max-width: 100%;
+		width: 480px;
 		height: auto;
 
 		.kanban__modal-title {
 			@include headingLg;
 			margin-bottom: 1rem;
+			position: relative;
+			padding-left: 12px;
+
+			&::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 3px;
+				height: 100%;
+				background-color: $primary-purple;
+			}
 		}
 
 		.kanban__modal-footer {

@@ -21,6 +21,16 @@ const Sidebar = ({
 	const [activeBoard, setActiveBoard] = useState(null);
 	const [modalMode, setModalMode] = useState('addBoard');
 
+	// create ref for sidebar
+	const sidebarRef = useRef();
+
+	// close sidebar when clicking outside
+	useOnClickOutside(sidebarRef, () => {
+		if (showSidebar && !showModal) {
+			setShowSidebar(false);
+		}
+	});
+
 	// initialize dispatch and navigate
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -74,6 +84,8 @@ const Sidebar = ({
 				<Modal
 					setShowModal={setShowModal}
 					title={modalMode === 'addBoard' ? 'Create New Board' : 'Edit Board'}
+					setModalMode={setModalMode}
+					modalMode={modalMode}
 					content={
 						<AddBoard
 							setShowModal={setShowModal}
@@ -82,10 +94,10 @@ const Sidebar = ({
 							board={board}
 						/>
 					}
-					setModalMode={setModalMode}
 				/>
 			)}
 			<div
+				ref={sidebarRef}
 				className={`kanban__sidebar ${
 					showSidebar ? 'kanban__sidebar-show' : 'kanban__sidebar-hide'
 				}`}

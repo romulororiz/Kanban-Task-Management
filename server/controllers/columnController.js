@@ -23,14 +23,14 @@ const createColumn = asyncHandler(async (req, res) => {
 		throw new Error('Board not found');
 	}
 
-	const { name } = req.body;
+	const { name, color } = req.body;
 
 	try {
 		// Create a new column
 		const column = new Column({
 			name,
+			color,
 			board: req.params.id,
-			color: generateRandomColor(),
 		});
 
 		// Save column to database
@@ -124,30 +124,30 @@ const updateColumn = asyncHandler(async (req, res) => {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	const { name } = req.body;
+	const { name, color } = req.body;
+
+	// Find column by id
+	const column = await Column.findById(req.params.id);
+
+	// Check if column exists
+	if (!column) {
+		res.status(404);
+		throw new Error('Column not found');
+	}
+
+	// Check if user owns the board that the column is on
+	const board = await Board.findById(column.board);
+	const user = await User.findById(req.user.id);
+
+	if (board.user.toString() !== user._id.toString()) {
+		res.status(401);
+		throw new Error('Not authorized');
+	}
 
 	try {
-		// Find column by id
-		const column = await Column.findById(req.params.id);
-
-		// Check if column exists
-		if (!column) {
-			res.status(404);
-			throw new Error('Column not found');
-		}
-
-		// Check if user owns the board that the column is on
-		const board = await Board.findById(column.board);
-		const user = await User.findById(req.user.id);
-
-		if (board.user.toString() !== user._id.toString()) {
-			res.status(401);
-			throw new Error('Not authorized');
-		}
-
 		const updatedColumn = await Column.findByIdAndUpdate(
 			req.params.id,
-			{ name },
+			{ name, color },
 			{ new: true }
 		);
 

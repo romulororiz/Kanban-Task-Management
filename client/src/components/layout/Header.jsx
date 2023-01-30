@@ -5,11 +5,24 @@ import useOnClickOutside from '@hooks/useOnClickOutside';
 import { logout } from '@features/auth/authSlice';
 import { useRef, useState } from 'react';
 import { FaAt } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { CgLogOut } from 'react-icons/cg';
+import useWindowSize from '@hooks/useWindowSize';
+import { TiPlus } from 'react-icons/ti';
 import '@styles/scss/layout/Header.scss';
 
-const Header = ({ showSidebar, user, board }) => {
+const Header = ({ setShowSidebar, showSidebar, user, board }) => {
 	const [showDropdown, setShowDropdown] = useState(false);
+
+	// get window width with useWindowSize hook
+	const windowSize = useWindowSize();
+
+	// define isMobile variable
+	const isTablet = windowSize.width < 768;
+	const isMobile = windowSize.width < 550;
+
+	// initialize dispatch
+	const dispatch = useDispatch();
 
 	// reference to the dropdown menu
 	const dropdownRef = useRef();
@@ -31,17 +44,36 @@ const Header = ({ showSidebar, user, board }) => {
 				>
 					<img src={LogoDark} alt='logo dark' />
 				</div>
-				<div className='kanban__header-board_name'>{board.name}</div>
-				<div className='kanban__header-board_actions'>
-					<button>
-						<img src={Add} alt='add task' />
-						Add New Task
-					</button>
+				<div
+					className={`kanban__header-board_name ${
+						showSidebar && isMobile && 'kanban__header-board_name-hide'
+					}`}
+				>
+					{board.name}
+				</div>
+				<div
+					className={`kanban__header-board_actions ${
+						showSidebar && 'kanban__header-board_actions-sidebar'
+					}`}
+				>
+					{isTablet ? (
+						<button className='kanban__header-board_actions-add'>
+							<TiPlus />
+						</button>
+					) : (
+						<button>
+							<img src={Add} alt='add task' />
+							Add New Task
+						</button>
+					)}
 					<div className='kanban__header-board_actions-menu'>
 						<img
 							src={Ellipsis}
 							alt='menu icon'
-							onClick={() => setShowDropdown(!showDropdown)}
+							onClick={() => {
+								setShowDropdown(true);
+								isMobile && setShowSidebar(false);
+							}}
 						/>
 						<div
 							ref={dropdownRef}
