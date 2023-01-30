@@ -77,7 +77,7 @@ const createTask = asyncHandler(async (req, res) => {
 	}
 
 	// Retrieve column from column id
-	const column = await Column.findOne({ _id: columnId, name: columnName });
+	const column = await Column.findById(columnId);
 
 	// check if column exists
 	if (!column) {

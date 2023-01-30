@@ -5,7 +5,6 @@ import boardService from './boardService';
 const initialState = {
 	boards: [],
 	board: {},
-	lastVisitedBoard: null,
 	isLoading: false,
 	isError: false,
 	isSuccess: false,
@@ -83,6 +82,7 @@ const boardSlice = createSlice({
 	initialState,
 	reducers: {
 		clearErrors: state => {
+			state.isError = false;
 			state.errors = [];
 		},
 	},
@@ -112,7 +112,7 @@ const boardSlice = createSlice({
 					_id: payload._id,
 					name: payload.name,
 				};
-				state.boards.push(newBoard);
+				state.boards = [...state.boards, newBoard];
 			})
 			.addCase(createBoard.rejected, (state, { payload }) => {
 				state.isLoading = false;
@@ -138,11 +138,13 @@ const boardSlice = createSlice({
 			.addCase(updateBoard.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
 				state.isSuccess = true;
+				const updatedBoard = payload;
 				// find the board in the boards array and update it
 				const index = state.boards.findIndex(
-					board => board._id === payload._id
+					board => board._id === updatedBoard._id
 				);
-				state.boards[index].name = payload.name;
+				state.boards[index] = updatedBoard;
+				
 			})
 			.addCase(updateBoard.rejected, (state, { payload }) => {
 				state.isLoading = false;
@@ -155,10 +157,9 @@ const boardSlice = createSlice({
 			.addCase(deleteBoard.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				// find the board in the boards array and remove it
-				const index = state.boards.findIndex(
-					board => board._id === payload._id
-				);
+				const { boardId } = payload;
+				// find the board in the boards array and remove
+				const index = state.boards.findIndex(board => board._id === boardId);
 				state.boards.splice(index, 1);
 			})
 			.addCase(deleteBoard.rejected, (state, { payload }) => {

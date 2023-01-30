@@ -14,7 +14,7 @@ const protectRoute = require('../middleware/auth/authMiddleware');
 // @route   GET api/tasks/:boardId
 // @desc    Get all tasks
 // @access  Private
-router.route('/:boardId').get(protectRoute, getTasks);
+router.route('/board/:boardId').get(protectRoute, getTasks);
 
 // @route   GET api/tasks/:id
 // @desc    Get a task by id

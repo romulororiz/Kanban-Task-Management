@@ -2,37 +2,20 @@ import Ellipsis from '@assets/dashboard/icon-vertical-ellipsis.svg';
 import Add from '@assets/dashboard/icon-add-task-mobile.svg';
 import LogoDark from '@assets/dashboard/logo-dark.svg';
 import useOnClickOutside from '@hooks/useOnClickOutside';
-import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@features/auth/authSlice';
-import { useEffect, useRef, useState } from 'react';
-import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
+import { useRef, useState } from 'react';
+import { FaAt } from 'react-icons/fa';
 import { CgLogOut } from 'react-icons/cg';
-import { getBoardById } from '@features/boards/boardSlice';
-import { useParams } from 'react-router-dom';
 import '@styles/scss/layout/Header.scss';
 
-const Header = ({ showSidebar }) => {
+const Header = ({ showSidebar, user, board }) => {
 	const [showDropdown, setShowDropdown] = useState(false);
-
-	// get board from store
-	const { board } = useSelector(state => state.board);
-
-	// get board id from params
-	const { id: boardId } = useParams();
 
 	// reference to the dropdown menu
 	const dropdownRef = useRef();
 
 	// initialize useOnClickOutside hook
 	useOnClickOutside(dropdownRef, () => setShowDropdown(false));
-
-	// initialize dispatch
-	const dispatch = useDispatch();
-
-	// get board by id
-	useEffect(() => {
-		dispatch(getBoardById(boardId));
-	}, [dispatch, boardId]);
 
 	return (
 		<div className='kanban__header'>
@@ -48,7 +31,7 @@ const Header = ({ showSidebar }) => {
 				>
 					<img src={LogoDark} alt='logo dark' />
 				</div>
-				<div className='kanban__header-board_name'>{board && board.name}</div>
+				<div className='kanban__header-board_name'>{board.name}</div>
 				<div className='kanban__header-board_actions'>
 					<button>
 						<img src={Add} alt='add task' />
@@ -70,12 +53,8 @@ const Header = ({ showSidebar }) => {
 						>
 							<ul>
 								<li>
-									<FaRegEdit />
-									Edit Board
-								</li>
-								<li>
-									<FaRegTrashAlt />
-									Remove Board
+									<FaAt />
+									{user && user.email}
 								</li>
 								<li onClick={() => dispatch(logout())}>
 									<CgLogOut />

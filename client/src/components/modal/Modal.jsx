@@ -2,11 +2,14 @@ import { useRef } from 'react';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import '@styles/scss/modal/Modal.scss';
 
-const Modal = ({ title, content, setShowModal }) => {
+const Modal = ({ title, content, setShowModal, setModalMode }) => {
 	// reference to the dropdown menu
 	const modalRef = useRef();
 	// initialize useOnClickOutside hook
-	useOnClickOutside(modalRef, () => setShowModal(false));
+	useOnClickOutside(modalRef, () => {
+		setShowModal(false);
+		setModalMode('addBoard');
+	});
 
 	return (
 		<div className='kanban__modal-overlay'>

@@ -17,9 +17,8 @@ const getBoardColumns = async boardId => {
 };
 
 // Delete a column
-const deleteColumn = columnId => {
-	const response = axios.delete(`${API_URL}/${columnId}`);
-
+const deleteColumn = async columnId => {
+	const response = await axios.delete(`${API_URL}/${columnId}`);
 	return response.data;
 };
 

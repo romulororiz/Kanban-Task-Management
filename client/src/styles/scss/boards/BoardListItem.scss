@@ -2,11 +2,10 @@
 
 .kanban__board-item {
 	display: flex;
-	padding: 12px 50px 12px 40px;
+	padding: 12px 20px 12px 40px;
 	margin: 0 30px 0 0;
 	border-radius: 0px 100px 100px 0px;
 	align-items: center;
-	justify-content: flex-start;
 	transition: $ease-1;
 	@include headingMd;
 
@@ -16,21 +15,43 @@
 	}
 
 	&:hover {
-		background-color: rgba($primary-purple, 0.1);
-		color: $primary-purple;
+		background-color: $primary-purple;
+		color: $primary-white;
 
 		img {
-			filter: brightness(0) saturate(100%) invert(33%) sepia(97%) saturate(565%)
-				hue-rotate(206deg) brightness(96%) contrast(80%);
+			filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
+				saturate(7474%) hue-rotate(43deg) brightness(111%) contrast(98%);
 		}
 	}
 
 	.kanban__board-item_icon {
 		margin-right: 12px;
+		width: 20px;
 	}
 
-	.kanban__board-item_text {
-		cursor: pointer;
+	.kanban__board-item-text_actions {
+		display: flex;
+		width: 180px;
+		justify-content: space-between;
+
+		@include lg {
+			width: 150px;
+		}
+
+		.kanban__board-item_text {
+			cursor: pointer;
+		}
+
+		.kanban__board-item_actions {
+			display: flex;
+			min-width: 50px;
+			align-items: center;
+
+			span {
+				margin-left: 0.65rem;
+				cursor: pointer;
+			}
+		}
 	}
 }
 
@@ -65,8 +86,4 @@
 		filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7474%)
 			hue-rotate(43deg) brightness(111%) contrast(98%);
 	}
-}
-
-.no-hover {
-	pointer-events: none;
 }

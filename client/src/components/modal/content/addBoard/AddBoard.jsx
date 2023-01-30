@@ -1,21 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createBoard } from '@features/boards/boardSlice';
-import { createColumn } from '@features/columns/columnSlice';
-import ColumnInput from './ColumnInput';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getBoardById, updateBoard } from '@features/boards/boardSlice';
 import '@styles/scss/modal/addBoard/AddBoard.scss';
 
-const AddBoard = ({ setShowModal }) => {
+const AddBoard = ({ setShowModal, modalMode, setModalMode, board }) => {
 	const [boardName, setBoardName] = useState('');
+	const [isUpdate, setIsUpdate] = useState(false);
+
+	// get board from store
+	const { isLoading } = useSelector(state => state.board);
 
 	// initialize dispatch
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	// check modal mode
+	useEffect(() => {
+		if (modalMode === 'updateBoard') {
+			setIsUpdate(true);
+			// set board name to current board name
+			setBoardName(board.name);
+		}
+	}, [modalMode, dispatch, board.name]);
+
+	useEffect(() => {
+		// get board data
+		dispatch(getBoardById(board._id));
+	}, [board._id]);
+
 	// Handle input changes
 	const onChangeHandler = e => {
-		// update state
 		setBoardName(e.target.value);
 	};
 
@@ -23,19 +39,26 @@ const AddBoard = ({ setShowModal }) => {
 	const onSubmitHandler = e => {
 		e.preventDefault();
 
-		// prevent submitting empty board
-		// todo handle error
-		if (boardName === '') return;
-
 		const boardData = {
 			name: boardName,
 		};
 
-		// Dispatch action to create new board
-		dispatch(createBoard(boardData)).then(res => {
-			// Navigate to new board
-			navigate(`/dashboard/boards/${res.payload._id}`);
-		});
+		if (boardName === '') return;
+
+		if (isUpdate) {
+			dispatch(updateBoard({ boardId: board._id, boardData }));
+		} else {
+			// create board
+			dispatch(createBoard(boardData)).then(res => {
+				// Navigate to new board
+				navigate(`/dashboard/boards/${res.payload._id}`);
+			});
+		}
+
+		if (isUpdate) {
+			setIsUpdate(false);
+			setModalMode('addBoard');
+		}
 
 		// Close modal
 		setShowModal(false);
@@ -48,37 +71,16 @@ const AddBoard = ({ setShowModal }) => {
 					<label htmlFor='board-name'>Board Name</label>
 					<input
 						type='text'
-						placeholder='Board Name'
+						placeholder='e.g marketing plan'
 						name='name'
-						value={boardName}
+						// todo - add loading state
+						value={isUpdate && isLoading ? 'Loading...' : boardName}
 						onChange={onChangeHandler}
 					/>
 				</div>
-				{/* <div className='kanban__add-board_columns'>
-					<div className='kanban__add-board_columns-input'>
-						<label htmlFor='columnName'>Columns</label>
-						{columns.map(({ name }, idx) => (
-							<ColumnInput
-								key={idx}
-								index={idx}
-								column={name}
-								onChange={onChangeHandler}
-								onRemove={onRemoveColumnHandler}
-							/>
-						))}
-						<ColumnInput onChange={onChangeHandler} />
-					</div>
-				</div> */}
-				{/* <button
-					type='button'
-					className='kanban__add-board_add-column_button'
-					onClick={onAddColumnHandler}
-				>
-					+ Add Column
-				</button> */}
 				<div className='kanban__modal-footer'>
 					<button type='submit' className='kanban__modal-button'>
-						Create New Board
+						{isUpdate ? 'Update Board' : 'Create Board'}
 					</button>
 				</div>
 			</form>

@@ -107,7 +107,7 @@ const deleteColumn = asyncHandler(async (req, res) => {
 		}
 
 		await column.remove();
-		res.status(200).json({ message: 'Column removed' });
+		res.status(200).json(column);
 	} catch (error) {
 		res.status(500);
 		throw new Error(error);

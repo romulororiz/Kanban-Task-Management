@@ -3,6 +3,9 @@ const { check } = require('express-validator');
 // Validation for title and columns
 const boardValidator = [
 	check('name').not().isEmpty().withMessage('Name cannot be empty'),
+	check('name')
+		.isLength({ max: 15 })
+		.withMessage('Name should be less than 15 characters'),
 ];
 
 // Add Column validation

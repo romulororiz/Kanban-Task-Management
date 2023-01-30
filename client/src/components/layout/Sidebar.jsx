@@ -11,9 +11,15 @@ import Modal from '../modal/Modal';
 import AddBoard from '../modal/content/addBoard/AddBoard';
 import '@styles/scss/layout/Sidebar.scss';
 
-const Sidebar = ({ showSidebar, setShowSidebar, showModal, setShowModal }) => {
+const Sidebar = ({
+	showSidebar,
+	setShowSidebar,
+	showModal,
+	setShowModal,
+	board,
+}) => {
 	const [activeBoard, setActiveBoard] = useState(null);
-	// todo - get last active board from local storage
+	const [modalMode, setModalMode] = useState('addBoard');
 
 	// initialize dispatch and navigate
 	const dispatch = useDispatch();
@@ -22,27 +28,42 @@ const Sidebar = ({ showSidebar, setShowSidebar, showModal, setShowModal }) => {
 	// get id from params
 	const { id: boardId } = useParams();
 
+	// get boards from store
 	const { boards } = useSelector(state => state.board);
 
-	// check for active board
+	// check if board  exists and if it doesn't set active board to previous board or null
 	useEffect(() => {
-		if (boardId) {
-			setActiveBoard(boardId);
-		} else {
+		const boardExists = boards.find(board => board._id === boardId);
+		const prevBoard = boards[boards.length - 1];
+		if (!boardExists) {
+			// Case 1: If there are still boards in the store, set the active board to the previous one
 			if (boards.length > 0) {
-				setActiveBoard(boards[0]._id);
-				navigate(`/dashboard/boards/${boards[0]._id}`);
+				setActiveBoard(prevBoard._id);
+				navigate(`/dashboard/boards/${prevBoard._id}`);
+			} // Case 2: If there are no prev boards and there are still boards in the store, set active board to current board
+			else if (!prevBoard && boards.length > 0) {
+				setActiveBoard(boardId);
 			}
+			// Case 3: if theres no prev board and no boards in the store, set active board to null and navigate to boards
+			else if (!prevBoard && boards.length === 0) {
+				setActiveBoard(null);
+				navigate(`/dashboard/boards`);
+			}
+			// Case 4: if there is no board id in the params, set active board to null
+		} else if (!boardId) {
+			setActiveBoard(null);
+		} else {
+			setActiveBoard(boardId);
 		}
 	}, [boardId, boards]);
 
 	// get all boards
 	useEffect(() => {
 		dispatch(getBoards());
-	}, [boardId]);
+	}, []);
 
 	// handle on click
-	const handleOnClick = boardId => {
+	const handleOnClickBoard = boardId => {
 		setActiveBoard(boardId);
 		navigate(`/dashboard/boards/${boardId}`);
 	};
@@ -52,8 +73,16 @@ const Sidebar = ({ showSidebar, setShowSidebar, showModal, setShowModal }) => {
 			{showModal && (
 				<Modal
 					setShowModal={setShowModal}
-					title='Add New Board'
-					content={<AddBoard setShowModal={setShowModal} />}
+					title={modalMode === 'addBoard' ? 'Create New Board' : 'Edit Board'}
+					content={
+						<AddBoard
+							setShowModal={setShowModal}
+							modalMode={modalMode}
+							setModalMode={setModalMode}
+							board={board}
+						/>
+					}
+					setModalMode={setModalMode}
 				/>
 			)}
 			<div
@@ -72,7 +101,9 @@ const Sidebar = ({ showSidebar, setShowSidebar, showModal, setShowModal }) => {
 								key={board._id}
 								board={board}
 								isActive={board._id === activeBoard}
-								onClick={handleOnClick}
+								onClick={handleOnClickBoard}
+								setModalMode={setModalMode}
+								setShowModal={setShowModal}
 							/>
 						))}
 					</div>

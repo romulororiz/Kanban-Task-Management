@@ -8,24 +8,82 @@
 	.kanban__dashboard-column_heading {
 		display: flex;
 		align-items: center;
-		justify-content: flex-start;
+		justify-content: space-between;
 		margin-bottom: 2rem;
 		margin-top: 1rem;
+		color: $primary-gray;
+		position: relative;
 
-		.kanban__dashboard-column_title {
-			margin-left: 1rem;
-			letter-spacing: 2.4px;
-			text-transform: uppercase;
+		.kanban__dashboard-column_heading-icon {
+			cursor: pointer;
+		}
+
+		.kanban__dashboard-column_dropdown {
+			background-color: red;
+			position: absolute;
+			top: 150%;
+			right: 0;
+			min-width: 150px;
+			padding: 20px 15px;
+			background-color: $primary-white;
+			box-shadow: 0px 0 10px -2px rgba(0, 0, 0, 0.2);
+			border-radius: 8px;
 			color: $primary-gray;
-			@include headingMd;
+			@include headingSm;
 			font-weight: 500;
+
+			ul {
+				padding: 0;
+
+				li {
+					width: fit-content;
+					display: flex;
+					align-items: center;
+					margin-bottom: 1rem;
+					cursor: pointer;
+
+					svg {
+						margin-right: 0.5rem;
+					}
+				}
+
+				li:last-child {
+					margin-bottom: 0;
+					&:hover {
+						color: $primary-red;
+					}
+				}
+
+				li:hover {
+					color: $primary-purple;
+				}
+			}
 		}
 
-		.kanban__dashboard-column_title-marker {
-			width: 1rem;
-			height: 1rem;
-			border-radius: 50%;
+		.kanban__dashboard-column_heading-title_container {
+			width: 100%;
+			display: flex;
+			align-items: center;
+
+			.kanban__dashboard-column_title {
+				margin-left: 1rem;
+				letter-spacing: 2.4px;
+				text-transform: uppercase;
+				color: $primary-gray;
+				@include headingMd;
+				font-weight: 500;
+			}
+
+			.kanban__dashboard-column_title-marker {
+				width: 1rem;
+				height: 1rem;
+				border-radius: 50%;
+			}
 		}
+	}
+
+	.kanban__dashboard-column_dropdown-hide {
+		display: none;
 	}
 
 	.kanban__dashboard-column_tasks-container {

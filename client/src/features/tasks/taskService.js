@@ -4,7 +4,7 @@ const API_URL = '/api/tasks';
 
 // Get all tasks from a column
 export const getBoardTasks = async boardId => {
-	const response = await axios.get(`${API_URL}/${boardId}`);
+	const response = await axios.get(`${API_URL}/board/${boardId}`);
 	return response.data;
 };
 
