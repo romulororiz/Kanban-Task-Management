@@ -32,7 +32,8 @@ const Dashboard = () => {
 	}, [dispatch, boardId]);
 
 	// Handle open modal on empty board
-	const handleAddColumn = () => {
+	const handleAddColumn = e => {
+		e.stopPropagation();
 		setShowModal(true);
 		setModalMode('addColumn');
 	};

@@ -1,17 +1,17 @@
-import DarkTheme from '@assets/dashboard/icon-dark-theme.svg';
-import LightTheme from '@assets/dashboard/icon-light-theme.svg';
+import { MdOutlineLightMode } from 'react-icons/md';
+import { BsFillMoonStarsFill } from 'react-icons/bs';
 import '@styles/scss/layout/ToggleSwitch.scss';
 
 const ToggleSwitch = () => {
 	return (
-		<>
-			<img src={LightTheme} alt='light theme' />
+		<div className='kanban__sidebar-switch_container'>
+			<MdOutlineLightMode />
 			<label className='kanban__sidebar-switch'>
 				<input type='checkbox' />
 				<span className='slider round'></span>
 			</label>
-			<img src={DarkTheme} alt='dark theme' />
-		</>
+			<BsFillMoonStarsFill />
+		</div>
 	);
 };
 export default ToggleSwitch;

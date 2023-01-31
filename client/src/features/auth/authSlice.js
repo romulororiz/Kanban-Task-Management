@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './authService';
 import Cookies from 'js-cookie';
 
-// get user from cookie
-const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
+// get user from local storage
+const user = JSON.parse(localStorage.getItem('user'));
 
 const initialState = {
 	user: user ? user : null,
@@ -61,12 +61,10 @@ const authSlice = createSlice({
 			.addCase(register.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(register.fulfilled, state => {
+			.addCase(register.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				// get user data from cookie
-				const user = JSON.parse(Cookies.get('user'));
-				state.user = user;
+				state.user = payload;
 			})
 			.addCase(register.rejected, (state, { payload }) => {
 				state.isLoading = false;
@@ -78,12 +76,10 @@ const authSlice = createSlice({
 			.addCase(login.pending, state => {
 				state.isLoading = true;
 			})
-			.addCase(login.fulfilled, state => {
+			.addCase(login.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				// get user data from cookie
-				const user = JSON.parse(Cookies.get('user'));
-				state.user = user;
+				state.user = payload;
 			})
 			.addCase(login.rejected, (state, { payload }) => {
 				state.isLoading = false;

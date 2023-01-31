@@ -54,7 +54,7 @@ const Column = ({ column }) => {
 	};
 
 	// handle update column
-	const handleUpdateColumn = () => {
+	const handleUpdateColumn = e => {
 		setModalMode('updateColumn');
 		setShowModal(true);
 		setShowDropdown(false);

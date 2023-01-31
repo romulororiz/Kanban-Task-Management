@@ -7,11 +7,8 @@ const API_URL = '/api/users';
 const registerUser = async userData => {
 	const response = await axios.post(`${API_URL}/register`, userData);
 
-	// Cookie options for 30  days
-	const options = { expires: 30 };
-
 	if (response.data) {
-		Cookies.set('user', JSON.stringify(response.data), options);
+		localStorage.setItem('user', JSON.stringify(response.data));
 	}
 
 	return response.data;
@@ -21,10 +18,8 @@ const registerUser = async userData => {
 const loginUser = async userData => {
 	const response = await axios.post(`${API_URL}/login`, userData);
 
-	const options = { expires: 30 };
-
 	if (response.data) {
-		Cookies.set('user', JSON.stringify(response.data), options);
+		localStorage.setItem('user', JSON.stringify(response.data));
 	}
 
 	return response.data;
@@ -32,7 +27,7 @@ const loginUser = async userData => {
 
 // Logout user
 const logout = async () => {
-	Cookies.remove('user');
+	localStorage.removeItem('user');
 };
 
 const authService = {
