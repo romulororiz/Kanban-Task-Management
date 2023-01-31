@@ -3,8 +3,9 @@ import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { deleteBoard } from '@features/boards/boardSlice';
 import { TbLayoutBoardSplit } from 'react-icons/tb';
-import '@styles/scss/boards/BoardListItem.scss';
 import { TiPlus } from 'react-icons/ti';
+import useConfirmAlert from '@hooks/useConfirmAlert';
+import '@styles/scss/boards/BoardListItem.scss';
 
 const BoardListItem = ({
 	board,
@@ -17,10 +18,29 @@ const BoardListItem = ({
 	// initialize dispatch and navigate
 	const dispatch = useDispatch();
 
+	// use confirm alert
+	const [setTitle, setMessage, setButtons] = useConfirmAlert();
+
 	// handle remove board based on id
 	const handleRemoveBoard = id => {
 		// remove board from store
-		dispatch(deleteBoard(id));
+		// confirm alert
+		setTitle('Delete this board?');
+		setMessage(
+			`Are you sure you want to delete the ‘${board.name}’ board? This action will remove all columns and tasks and cannot be reversed.`
+		);
+		setButtons([
+			{
+				label: 'Delete',
+				onClick: () => {
+					dispatch(deleteBoard(id));
+				},
+			},
+			{
+				label: 'Cancel',
+				onClick: () => {},
+			},
+		]);
 	};
 
 	// handle onClickUpdate

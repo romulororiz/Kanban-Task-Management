@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 
 const protectRoute = asyncHandler(async (req, res, next) => {
 	// Get user token from cookie
-	const token = req.cookies.token;
+	const token = req.cookies.access_token;
 
 	// Check if token exists
 	if (!token) {

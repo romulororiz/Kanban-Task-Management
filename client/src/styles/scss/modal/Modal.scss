@@ -1,26 +1,11 @@
 @import '../variables', '../mixins', '../breakpoints';
 
 .kanban__modal-overlay {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
-	padding: 1rem;
-	background-color: rgba(0, 0, 0, 0.8);
-	z-index: 102;
-	overflow-x: hidden;
-	overflow-y: hidden;
+	@include overlay;
 
 	.kanban__modal-container {
-		padding: 30px;
-		background-color: $primary-white;
-		border-radius: 5px;
-		width: 480px;
-		height: auto;
+		@include modal;
+		animation: modal-fadeIn 0.4s forwards;
 
 		.kanban__modal-title {
 			@include headingLg;
@@ -50,5 +35,16 @@
 				padding: 0.65rem 3rem;
 			}
 		}
+	}
+}
+
+@keyframes modal-fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20%);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }

@@ -1,8 +1,22 @@
 import { useRef } from 'react';
+import { useSpring, animated, useTransition } from 'react-spring';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import '@styles/scss/modal/Modal.scss';
 
-const Modal = ({ title, content, setShowModal, setModalMode, modalMode }) => {
+const Modal = ({
+	title,
+	content,
+	showModal,
+	setShowModal,
+	setModalMode,
+	modalMode,
+}) => {
+	const springs = useSpring({
+		from: { opacity: 0 },
+		to: { opacity: 1 },
+		config: { duration: 300 },
+	});
+
 	// reference to the dropdown menu
 	const modalRef = useRef();
 
@@ -24,12 +38,12 @@ const Modal = ({ title, content, setShowModal, setModalMode, modalMode }) => {
 
 	return (
 		<div className='kanban__modal-overlay'>
-			<div className='kanban__modal-container' ref={modalRef}>
-				<div className='kanban__modal-title'>
-					<h3>{title}</h3>
+			<animated.div ref={modalRef} className='kanban__modal-container'>
+				<div className='kanban__modal-header'>
+					<h3 className='kanban__modal-title'>{title}</h3>
 				</div>
 				<div className='kanban__modal-content'>{content}</div>
-			</div>
+			</animated.div>
 		</div>
 	);
 };

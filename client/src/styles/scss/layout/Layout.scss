@@ -2,19 +2,15 @@
 
 .kanban__main-content {
 	height: 100vh;
-	padding-left: 40px;
-	padding-top: 116px;
+	padding-left: 10px;
+	padding-top: 106px;
 	z-index: -1;
-
-	@include lg {
-		padding-left: 20px;
-	}
 }
 
 .kanban__main-content_sidebar {
-	padding-left: 330px;
+	padding-left: 305px;
 
 	@include lg {
-		padding-left: 290px;
+		padding-left: 265px;
 	}
 }

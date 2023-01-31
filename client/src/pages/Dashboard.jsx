@@ -52,6 +52,7 @@ const Dashboard = () => {
 				<Modal
 					title={modalMode === 'addColumn' ? 'Add Column' : 'Update Column'}
 					setShowModal={setShowModal}
+					showModal={showModal}
 					setModalMode={setModalMode}
 					content={
 						<AddColumn

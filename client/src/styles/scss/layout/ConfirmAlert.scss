@@ -1,0 +1,83 @@
+@import '../variables', '../mixins', '../breakpoints';
+
+body.react-confirm-alert-body-element {
+	overflow: hidden;
+}
+
+.react-confirm-alert-overlay {
+	@include overlay;
+}
+
+.react-confirm-alert-body {
+	@include textL;
+	@include modal;
+	color: $primary-gray;
+}
+
+.react-confirm-alert-svg {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.react-confirm-alert-body > h1 {
+	@include headingXl;
+	color: $primary-red;
+	margin-bottom: 1rem;
+}
+
+.react-confirm-alert-body > h3 {
+	margin: 0;
+	font-size: 16px;
+}
+
+.react-confirm-alert-button-group {
+	display: flex;
+	gap: 1rem;
+	justify-content: space-between;
+	margin-top: 1.5rem;
+}
+
+.react-confirm-alert-button-group > button {
+	@include textL;
+	outline: none;
+	border: none;
+	display: inline-block;
+	padding: 10px;
+	border-radius: 30px;
+	width: 100%;
+	font-weight: 700;
+	cursor: pointer;
+	transition: $ease-1;
+
+	@include md {
+		font-size: $font-size-m;
+	}
+
+	&:first-child {
+		background: $primary-red;
+		color: $primary-white;
+
+		&:hover {
+			background: $secondary-red;
+		}
+	}
+
+	&:last-child {
+		background: rgba($primary-purple, 0.1);
+		color: $primary-purple;
+
+		&:hover {
+			background: rgba($primary-purple, 0.25);
+		}
+	}
+}
+
+@keyframes react-confirm-alert-fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

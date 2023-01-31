@@ -46,7 +46,7 @@ const registerUser = asyncHandler(async (req, res) => {
 		};
 
 		// Set cookie
-		res.cookie('token', token, options);
+		res.cookie('access_token', token, options);
 
 		// Return user
 
@@ -91,7 +91,7 @@ const loginUser = asyncHandler(async (req, res) => {
 		};
 
 		// Set cookie
-		res.cookie('token', token, options);
+		res.cookie('access_token', token, options);
 
 		// Return user
 		res.status(200).json({

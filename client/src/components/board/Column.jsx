@@ -9,6 +9,7 @@ import { deleteColumn } from '@features/columns/columnSlice';
 import { useParams } from 'react-router-dom';
 import Modal from '@components/modal/Modal';
 import AddColumn from '@components/modal/content/AddColumn/AddColumn';
+import useConfirmAlert from '@hooks/useConfirmAlert';
 import '@styles/scss/boards/Column.scss';
 
 const Column = ({ column }) => {
@@ -24,6 +25,9 @@ const Column = ({ column }) => {
 		setShowDropdown(false);
 	});
 
+	// get useConfirm hook
+	const [setTitle, setMessage, setButtons] = useConfirmAlert();
+
 	// get name from column
 	const { name, _id: id } = column;
 
@@ -32,9 +36,6 @@ const Column = ({ column }) => {
 
 	// initialize dispatch
 	const dispatch = useDispatch();
-
-	// get boardId from url
-	const { id: boardId } = useParams();
 
 	// get tasks from board
 	// useEffect(() => {
@@ -50,7 +51,23 @@ const Column = ({ column }) => {
 
 	// Handle delete column
 	const handleDeleteColumn = id => {
-		dispatch(deleteColumn(id));
+		// confirm alert
+		setTitle('Delete this column?');
+		setMessage(
+			`Are you sure you want to delete the ‘${column.name}’ column? This action will remove all tasks and cannot be reversed.`
+		);
+		setButtons([
+			{
+				label: 'Delete',
+				onClick: () => {
+					dispatch(deleteColumn(id));
+				},
+			},
+			{
+				label: 'Cancel',
+				onClick: () => {},
+			},
+		]);
 	};
 
 	// handle update column
