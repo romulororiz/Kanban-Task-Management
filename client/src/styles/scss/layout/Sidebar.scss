@@ -102,8 +102,10 @@
 
 .kanban__sidebar-hide {
 	transform: translateX(-100%);
+	transition: 0.3s ease-out;
 }
 
 .kanban__sidebar-show {
 	transform: translateX(0);
+	transition: $ease-3;
 }

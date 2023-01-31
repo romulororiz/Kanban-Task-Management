@@ -16,10 +16,12 @@
 
 		.kanban__dashboard-column_heading-icon {
 			cursor: pointer;
+			left: 5px;
+			position: relative;
 		}
 
 		.kanban__dashboard-column_dropdown {
-			background-color: red;
+			@include headingSm;
 			position: absolute;
 			top: 150%;
 			right: 0;
@@ -29,8 +31,9 @@
 			box-shadow: 0px 0 10px -2px rgba(0, 0, 0, 0.2);
 			border-radius: 8px;
 			color: $primary-gray;
-			@include headingSm;
 			font-weight: 500;
+			transform: translateY(-10px);
+			transition: $ease-3;
 
 			ul {
 				padding: 0;
