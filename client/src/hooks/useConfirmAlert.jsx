@@ -26,7 +26,7 @@ const useConfirmAlert = () => {
 		if (title && message && buttons) {
 			confirmAlert();
 		}
-	}, [title, message, buttons, confirmAlert]);
+	}, [title, message, buttons]);
 
 	return [setTitle, setMessage, setButtons];
 };
