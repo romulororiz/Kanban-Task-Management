@@ -12,12 +12,12 @@ const initialState = {
 // create a column
 export const createColumn = createAsyncThunk(
 	'column/createColumn',
-	async ({ boardId, columnData }, thunkAPI) => {
+	async ({ boardId, columnData }, { rejectWithValue }) => {
 		try {
 			return await columnService.createColumn(boardId, columnData);
 		} catch (error) {
 			const errors = error.response.data.errors;
-			return thunkAPI.rejectWithValue(errors);
+			return rejectWithValue(errors);
 		}
 	}
 );

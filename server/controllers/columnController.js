@@ -2,8 +2,8 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const Board = require('../models/boardModel');
 const Column = require('../models/columnModel');
-const { validationResult } = require('express-validator');
 const Task = require('../models/taskModel');
+const { validationResult } = require('express-validator');
 const generateRandomColor = require('../middleware/board/generateRandomColor');
 
 // @route POST api/columns
@@ -29,7 +29,7 @@ const createColumn = asyncHandler(async (req, res) => {
 		// Create a new column
 		const column = new Column({
 			name,
-			color,
+			color: color ? color : generateRandomColor(),
 			board: req.params.id,
 		});
 

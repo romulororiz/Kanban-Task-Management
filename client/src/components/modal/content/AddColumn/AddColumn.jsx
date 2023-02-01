@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateColumn, createColumn } from '@features/columns/columnSlice';
-import { CirclePicker } from 'react-color';
+import { GithubPicker } from 'react-color';
 import { useParams } from 'react-router-dom';
 import '@styles/scss/modal/addColumn/AddColumn.scss';
 
@@ -9,9 +9,12 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 	const [columnName, setColumnName] = useState('');
 	const [columnColor, setColumnColor] = useState('');
 	const [isUpdate, setIsUpdate] = useState(false);
+	const [errors, setErrors] = useState([]);
 
-	// get board from store
-	const { isLoading } = useSelector(state => state.board);
+	// get data from store
+	const { isLoading, errors: addColumnErrors } = useSelector(
+		state => state.column
+	);
 
 	// get boardId from url
 	const { id: boardId } = useParams();
@@ -23,16 +26,23 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 	useEffect(() => {
 		if (modalMode === 'updateColumn') {
 			setIsUpdate(true);
-			// set board name to current board name
 			setColumnName(column.name);
 			setColumnColor(column.color);
 		}
 	}, [modalMode, dispatch]);
 
-	// Handle input changes
-	const onChangeHandler = e => {
-		setColumnName(e.target.value);
-	};
+	// set errors to loginErrors if there are any
+	useEffect(() => {
+		if (addColumnErrors) {
+			setErrors(addColumnErrors);
+		}
+
+		if (errors) {
+			setTimeout(() => {
+				setErrors([]);
+			}, 5000);
+		}
+	}, [addColumnErrors]);
 
 	// Submit new column to database
 	const onSubmitHandler = e => {
@@ -43,18 +53,12 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 			color: columnColor,
 		};
 
-		if (columnName === '') return;
-
 		if (isUpdate) {
 			dispatch(updateColumn({ columnData, columnId: column._id }));
-		} else {
-			// create column
-			dispatch(createColumn({ boardId: boardId, columnData }));
-		}
-
-		if (isUpdate) {
 			setIsUpdate(false);
 			setModalMode('addColumn');
+		} else {
+			dispatch(createColumn({ boardId: boardId, columnData }));
 		}
 
 		// Close modal
@@ -72,12 +76,12 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 						name='columnName'
 						// todo - add loading state
 						value={isUpdate && isLoading ? 'Loading...' : columnName}
-						onChange={onChangeHandler}
+						onChange={e => setColumnName(e.target.value)}
 					/>
 				</div>
 				<div className='kanban__add-column_color'>
 					<label htmlFor='column-color'>Column Color</label>
-					<CirclePicker
+					<GithubPicker
 						className='kanban__add-column_color-picker'
 						color={columnColor}
 						onChangeComplete={color => setColumnColor(color.hex)}

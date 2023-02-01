@@ -5,14 +5,12 @@ const API_URL = '/api/columns';
 // create a column
 const createColumn = async (boardId, columnData) => {
 	const response = await axios.post(`${API_URL}/${boardId}/create`, columnData);
-
 	return response.data;
 };
 
 // get all columns for a board
 const getBoardColumns = async boardId => {
 	const response = await axios.get(`${API_URL}/${boardId}`);
-
 	return response.data;
 };
 
@@ -25,7 +23,6 @@ const deleteColumn = async columnId => {
 // Update a column
 const updateColumn = async (columnData, columnId) => {
 	const response = await axios.put(`${API_URL}/${columnId}`, columnData);
-
 	return response.data;
 };
 

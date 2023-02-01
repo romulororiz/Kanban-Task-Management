@@ -10,12 +10,8 @@
 
 	.kanban__add-column_color-picker {
 		margin-top: 1rem;
-		margin-bottom: 1rem !important;
+		margin-bottom: 1.5rem;
 		display: flex;
 		width: 100% !important;
-
-		@include lg {
-			margin-left: 1rem;
-		}
 	}
 }

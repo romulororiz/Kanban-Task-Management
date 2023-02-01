@@ -2,38 +2,25 @@ const { check } = require('express-validator');
 
 // Validation for title and columns
 const boardValidator = [
-	check('name').not().isEmpty().withMessage('Name cannot be empty'),
+	check('name').not().isEmpty().withMessage('cannot be empty'),
 	check('name')
 		.isLength({ max: 15 })
 		.withMessage('Name should be less than 15 characters'),
 ];
 
 // Add Column validation
-const columnValidator = [
-	check('name').not().isEmpty().withMessage('Name cannot be empty'),
-	// length of name should be less than 10
-	check('name')
-		.isLength({ max: 15 })
-		.withMessage('Name should be less than 15 characters'),
-	check('color').not().isEmpty().withMessage('Color cannot be empty'),
-];
+const columnValidator = [boardValidator];
 
 // add a task validation
 const taskValidator = [
-	check('title').not().isEmpty().withMessage('Title cannot be empty'),
-	check('description')
-		.not()
-		.isEmpty()
-		.withMessage('Description cannot be empty'),
+	check('title').not().isEmpty().withMessage('cannot be empty'),
+	check('description').not().isEmpty().withMessage('cannot be empty'),
 ];
 
 // add a subtask validation
 const subtaskValidator = [
-	check('title').not().isEmpty().withMessage('Title cannot be empty'),
-	check('isCompleted')
-		.not()
-		.isEmpty()
-		.withMessage('isCompleted cannot be empty'),
+	check('title').not().isEmpty().withMessage('cannot be empty'),
+	check('isCompleted').not().isEmpty().withMessage('cannot be empty'),
 ];
 
 module.exports = {

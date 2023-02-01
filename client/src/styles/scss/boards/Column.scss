@@ -32,8 +32,7 @@
 			border-radius: 8px;
 			color: $primary-gray;
 			font-weight: 500;
-			transform: translateY(-10px);
-			transition: $ease-3;
+			transition: all 2s ease-in-out;
 
 			ul {
 				padding: 0;
@@ -63,6 +62,10 @@
 			}
 		}
 
+		.kanban__dashboard-column_dropdown-hide {
+			display: none;
+		}
+
 		.kanban__dashboard-column_heading-title_container {
 			width: 100%;
 			display: flex;
@@ -83,10 +86,6 @@
 				border-radius: 50%;
 			}
 		}
-	}
-
-	.kanban__dashboard-column_dropdown-hide {
-		display: none;
 	}
 
 	.kanban__dashboard-column_tasks-container {
