@@ -1,12 +1,10 @@
 import TaskItem from './TaskItem';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBoardTasks } from '@features/tasks/taskSlice';
 import { GoKebabVertical } from 'react-icons/go';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import { deleteColumn } from '@features/columns/columnSlice';
-import { useParams } from 'react-router-dom';
 import Modal from '@components/modal/Modal';
 import AddColumn from '@components/modal/content/AddColumn/AddColumn';
 import useConfirmAlert from '@hooks/useConfirmAlert';

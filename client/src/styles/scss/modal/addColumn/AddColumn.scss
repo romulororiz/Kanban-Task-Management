@@ -1,4 +1,4 @@
-@import '../../variables', '../../mixins', '../../breakpoints';
+@import '@styles/scss/variables', '../../mixins', '../../breakpoints';
 
 .kanban__add-column_heading {
 	display: flex;
@@ -6,8 +6,9 @@
 
 	.kanban__add-column_input-error {
 		@include inputTextError;
+		@include inputError(shake);
 		border: 1px solid $primary-red;
-		animation: bounceHorizontal $ease-2;
+		animation: shake $ease-2;
 	}
 }
 
@@ -19,23 +20,5 @@
 		margin-bottom: 1.5rem;
 		display: flex;
 		width: 100% !important;
-	}
-}
-
-@keyframes bounceHorizontal {
-	0% {
-		transform: translateX(0);
-	}
-	25% {
-		transform: translateX(10px);
-	}
-	50% {
-		transform: translateX(-10px);
-	}
-	75% {
-		transform: translateX(10px);
-	}
-	100% {
-		transform: translateX(0);
 	}
 }

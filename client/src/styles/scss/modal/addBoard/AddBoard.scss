@@ -1,4 +1,4 @@
-@import '../../variables', '../../mixins', '../../breakpoints';
+@import '@styles/scss/variables', '../../mixins', '../../breakpoints';
 
 .kanban__add-board_heading {
 	display: flex;
@@ -7,8 +7,9 @@
 
 	.kanban__add-board_input-error {
 		@include inputTextError;
+		@include inputError(shake);
 		border: 1px solid $primary-red;
-		animation: bounceHorizontal $ease-2;
+		animation: shake $ease-2;
 	}
 }
 

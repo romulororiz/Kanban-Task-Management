@@ -1,4 +1,4 @@
-@import '../variables', '../mixins', '../breakpoints';
+@import '@styles/scss/variables', '../mixins', '../breakpoints';
 
 .kanban__dashboard-task_item {
 	background-color: $primary-white;

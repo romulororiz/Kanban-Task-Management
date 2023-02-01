@@ -11,12 +11,6 @@ const Modal = ({
 	setModalMode,
 	modalMode,
 }) => {
-	const springs = useSpring({
-		from: { opacity: 0 },
-		to: { opacity: 1 },
-		config: { duration: 300 },
-	});
-
 	// reference to the dropdown menu
 	const modalRef = useRef();
 
@@ -38,12 +32,12 @@ const Modal = ({
 
 	return (
 		<div className='kanban__modal-overlay'>
-			<animated.div ref={modalRef} className='kanban__modal-container'>
+			<div ref={modalRef} className='kanban__modal-container'>
 				<div className='kanban__modal-header'>
 					<h3 className='kanban__modal-title'>{title}</h3>
 				</div>
 				<div className='kanban__modal-content'>{content}</div>
-			</animated.div>
+			</div>
 		</div>
 	);
 };

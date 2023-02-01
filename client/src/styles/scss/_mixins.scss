@@ -157,3 +157,40 @@
 		color: $primary-white;
 	}
 }
+
+// ------------------------------
+// animations
+// ------------------------------
+
+@mixin modalFadeIn($animation-name) {
+	@keyframes #{$animation-name} {
+		from {
+			opacity: 0;
+			transform: translateY(20%);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+}
+
+@mixin inputError($animation-name) {
+	@keyframes #{$animation-name} {
+		0% {
+			transform: translateX(0);
+		}
+		25% {
+			transform: translateX(10px);
+		}
+		50% {
+			transform: translateX(-10px);
+		}
+		75% {
+			transform: translateX(10px);
+		}
+		100% {
+			transform: translateX(0);
+		}
+	}
+}

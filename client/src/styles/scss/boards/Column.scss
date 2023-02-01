@@ -1,4 +1,4 @@
-@import '../variables', '../mixins', '../breakpoints';
+@import '@styles/scss/variables', '../mixins', '../breakpoints';
 
 .kanban__dashboard-column {
 	flex-grow: 1;
