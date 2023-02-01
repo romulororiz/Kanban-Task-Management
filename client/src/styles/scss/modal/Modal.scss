@@ -1,4 +1,5 @@
-@import '@styles/scss/variables', '../mixins', '../breakpoints';
+@import '@styles/scss/variables', '@styles/scss/mixins',
+	'@styles/scss/breakpoints';
 
 .kanban__modal-overlay {
 	@include overlay;

@@ -1,4 +1,5 @@
-@import '@styles/scss/variables', '../breakpoints', '../mixins';
+@import '@styles/scss/variables', '@styles/scss/breakpoints',
+	'@styles/scss/mixins';
 
 .kanban__auth {
 	min-height: 100vh;
