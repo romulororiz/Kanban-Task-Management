@@ -3,8 +3,6 @@ import subtaskService from './subtaskService';
 
 const initialState = {
 	subtasks: [],
-	isSuccess: false,
-	isError: false,
 	isLoading: false,
 	errors: [],
 };
@@ -71,7 +69,6 @@ const subtaskSlice = createSlice({
 		});
 		builder.addCase(createSubtask.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.isSuccess = true;
 			// create new task and add to tasks array
 			const newSubtask = {
 				_id: action.payload._id,
@@ -83,7 +80,6 @@ const subtaskSlice = createSlice({
 		});
 		builder.addCase(createSubtask.rejected, (state, action) => {
 			state.isLoading = false;
-			state.isError = true;
 			state.errors = action.payload;
 		});
 		builder.addCase(getSubtasks.pending, state => {
@@ -91,12 +87,10 @@ const subtaskSlice = createSlice({
 		});
 		builder.addCase(getSubtasks.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.isSuccess = true;
 			state.subtasks = action.payload;
 		});
 		builder.addCase(getSubtasks.rejected, (state, action) => {
 			state.isLoading = false;
-			state.isError = true;
 			state.errors = action.payload;
 		});
 		builder.addCase(updateSubtask.pending, state => {
@@ -104,9 +98,7 @@ const subtaskSlice = createSlice({
 		});
 		builder.addCase(updateSubtask.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.isSuccess = true;
 			const updatedSubtask = action.payload;
-			// find the task in the tasks array and update it
 			const subtaskIndex = state.subtasks.findIndex(
 				subtask => subtask._id === updatedSubtask._id
 			);
@@ -114,7 +106,6 @@ const subtaskSlice = createSlice({
 		});
 		builder.addCase(updateSubtask.rejected, (state, action) => {
 			state.isLoading = false;
-			state.isError = true;
 			state.errors = action.payload;
 		});
 		builder.addCase(deleteSubtask.pending, state => {
@@ -128,7 +119,6 @@ const subtaskSlice = createSlice({
 		});
 		builder.addCase(deleteSubtask.rejected, (state, action) => {
 			state.isLoading = false;
-			state.isError = true;
 			state.errors = action.payload;
 		});
 	},

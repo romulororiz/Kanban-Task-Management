@@ -3,8 +3,6 @@ import columnService from './columnService';
 
 const initialState = {
 	columns: [],
-	isSuccess: false,
-	isError: false,
 	isLoading: false,
 	errors: [],
 };
@@ -69,7 +67,6 @@ const columnSlice = createSlice({
 			})
 			.addCase(createColumn.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.isSuccess = true;
 				// create a new column
 				const newColumn = {
 					_id: action.payload._id,
@@ -77,11 +74,10 @@ const columnSlice = createSlice({
 					color: action.payload.color,
 					board: action.payload.board,
 				};
-				state.columns.push(newColumn);
+				state.columns = [...state.columns, newColumn];
 			})
 			.addCase(createColumn.rejected, (state, action) => {
 				state.isLoading = false;
-				state.isError = true;
 				state.errors = action.payload;
 			})
 			.addCase(getBoardColumns.pending, state => {
@@ -89,12 +85,10 @@ const columnSlice = createSlice({
 			})
 			.addCase(getBoardColumns.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.isSuccess = true;
 				state.columns = action.payload;
 			})
 			.addCase(getBoardColumns.rejected, (state, action) => {
 				state.isLoading = false;
-				state.isError = true;
 				state.errors = action.payload;
 			})
 			.addCase(deleteColumn.pending, state => {
@@ -102,14 +96,12 @@ const columnSlice = createSlice({
 			})
 			.addCase(deleteColumn.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.isSuccess = true;
 				state.columns = state.columns.filter(
 					column => column._id !== action.payload._id
 				);
 			})
 			.addCase(deleteColumn.rejected, (state, action) => {
 				state.isLoading = false;
-				state.isError = true;
 				state.errors = action.payload;
 			})
 			.addCase(updateColumn.pending, state => {
@@ -117,17 +109,14 @@ const columnSlice = createSlice({
 			})
 			.addCase(updateColumn.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.isSuccess = true;
 				const updatedColumn = action.payload;
-				// find the column in the columns array and update it
 				const index = state.columns.findIndex(
 					column => column._id === updatedColumn._id
 				);
-				state.columns[index] = updatedColumn;
+				state.columns.splice(index, 1, updatedColumn);
 			})
 			.addCase(updateColumn.rejected, (state, action) => {
 				state.isLoading = false;
-				state.isError = true;
 				state.errors = action.payload;
 			});
 	},

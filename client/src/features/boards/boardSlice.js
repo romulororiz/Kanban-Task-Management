@@ -6,8 +6,6 @@ const initialState = {
 	boards: [],
 	board: {},
 	isLoading: false,
-	isError: false,
-	isSuccess: false,
 	errors: [],
 };
 
@@ -82,7 +80,6 @@ const boardSlice = createSlice({
 	initialState,
 	reducers: {
 		clearErrors: state => {
-			state.isError = false;
 			state.errors = [];
 		},
 	},
@@ -93,12 +90,10 @@ const boardSlice = createSlice({
 			})
 			.addCase(getBoards.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
-				state.isSuccess = true;
 				state.boards = payload;
 			})
 			.addCase(getBoards.rejected, (state, { payload }) => {
 				state.isLoading = false;
-				state.isError = true;
 				state.errors = payload;
 			})
 			.addCase(createBoard.pending, state => {
@@ -106,17 +101,14 @@ const boardSlice = createSlice({
 			})
 			.addCase(createBoard.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
-				state.isSuccess = true;
-				// create new board and push it to the boards array
 				const newBoard = {
 					_id: payload._id,
 					name: payload.name,
 				};
-				state.boards = [...state.boards, newBoard];
+				state.boards = [newBoard, ...state.boards];
 			})
 			.addCase(createBoard.rejected, (state, { payload }) => {
 				state.isLoading = false;
-				state.isError = true;
 				state.errors = payload;
 			})
 			.addCase(getBoardById.pending, state => {
@@ -124,12 +116,10 @@ const boardSlice = createSlice({
 			})
 			.addCase(getBoardById.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
-				state.isSuccess = true;
 				state.board = payload;
 			})
 			.addCase(getBoardById.rejected, (state, { payload }) => {
 				state.isLoading = false;
-				state.isError = true;
 				state.errors = payload;
 			})
 			.addCase(updateBoard.pending, state => {
@@ -137,18 +127,14 @@ const boardSlice = createSlice({
 			})
 			.addCase(updateBoard.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
-				state.isSuccess = true;
 				const updatedBoard = payload;
-				// find the board in the boards array and update it
 				const index = state.boards.findIndex(
 					board => board._id === updatedBoard._id
 				);
-				state.boards[index] = updatedBoard;
-				
+				state.boards.splice(index, 1, updatedBoard);
 			})
 			.addCase(updateBoard.rejected, (state, { payload }) => {
 				state.isLoading = false;
-				state.isError = true;
 				state.errors = payload;
 			})
 			.addCase(deleteBoard.pending, state => {
@@ -156,15 +142,11 @@ const boardSlice = createSlice({
 			})
 			.addCase(deleteBoard.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
-				state.isSuccess = true;
 				const { boardId } = payload;
-				// find the board in the boards array and remove
-				const index = state.boards.findIndex(board => board._id === boardId);
-				state.boards.splice(index, 1);
+				state.boards = state.boards.filter(board => board._id !== boardId);
 			})
 			.addCase(deleteBoard.rejected, (state, { payload }) => {
 				state.isLoading = false;
-				state.isError = true;
 				state.errors = payload;
 			});
 	},

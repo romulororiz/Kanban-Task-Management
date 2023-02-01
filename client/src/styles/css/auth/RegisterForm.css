@@ -266,8 +266,8 @@
   outline: none;
   cursor: pointer;
   border-radius: 24px;
-  -webkit-transition: 0.1s ease-in-out;
-  transition: 0.1s ease-in-out;
+  -webkit-transition: 0.1s ease-out;
+  transition: 0.1s ease-out;
   background-color: #635fc7;
   color: #ffffff;
   padding: 0.5rem 3rem;

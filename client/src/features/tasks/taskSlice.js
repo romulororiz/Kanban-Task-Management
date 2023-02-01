@@ -4,8 +4,6 @@ import taskService from './taskService';
 const initialState = {
 	tasks: [],
 	task: {},
-	isSuccess: false,
-	isError: false,
 	isLoading: false,
 	errors: [],
 };
@@ -85,7 +83,6 @@ const taskSlice = createSlice({
 		});
 		builder.addCase(createTask.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.isSuccess = true;
 			// create new task and add to tasks array
 			const newTask = {
 				_id: action.payload._id,
@@ -98,7 +95,6 @@ const taskSlice = createSlice({
 		});
 		builder.addCase(createTask.rejected, (state, action) => {
 			state.isLoading = false;
-			state.isError = true;
 			state.errors = action.payload;
 		});
 		builder.addCase(getBoardTasks.pending, state => {
@@ -106,12 +102,10 @@ const taskSlice = createSlice({
 		});
 		builder.addCase(getBoardTasks.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.isSuccess = true;
 			state.tasks = action.payload;
 		});
 		builder.addCase(getBoardTasks.rejected, (state, action) => {
 			state.isLoading = false;
-			state.isError = true;
 			state.errors = action.payload;
 		});
 		builder.addCase(getTaskById.pending, state => {
@@ -119,12 +113,10 @@ const taskSlice = createSlice({
 		});
 		builder.addCase(getTaskById.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.isSuccess = true;
 			state.task = action.payload;
 		});
 		builder.addCase(getTaskById.rejected, (state, action) => {
 			state.isLoading = false;
-			state.isError = true;
 			state.errors = action.payload;
 		});
 		builder.addCase(updateTask.pending, state => {
@@ -132,7 +124,6 @@ const taskSlice = createSlice({
 		});
 		builder.addCase(updateTask.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.isSuccess = true;
 			const updatedTask = action.payload;
 			// find the task in the tasks array and update it
 			const taskIndex = state.tasks.findIndex(
@@ -142,7 +133,6 @@ const taskSlice = createSlice({
 		});
 		builder.addCase(updateTask.rejected, (state, action) => {
 			state.isLoading = false;
-			state.isError = true;
 			state.errors = action.payload;
 		});
 		builder.addCase(deleteTask.pending, state => {
@@ -150,13 +140,10 @@ const taskSlice = createSlice({
 		});
 		builder.addCase(deleteTask.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.isSuccess = true;
-			// remove the task from the tasks array
 			state.tasks.filter(task => task._id !== action.payload);
 		});
 		builder.addCase(deleteTask.rejected, (state, action) => {
 			state.isLoading = false;
-			state.isError = true;
 			state.errors = action.payload;
 		});
 	},
