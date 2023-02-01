@@ -81,7 +81,7 @@ const Column = ({ column }) => {
 		<>
 			{showModal && (
 				<Modal
-					title={modalMode === 'addColumn' ? 'Add Column' : 'Update Column'}
+					title={modalMode === 'addColumn' ? 'Add Column' : 'Edit Column'}
 					setModalMode={setModalMode}
 					modalMode={modalMode}
 					setShowModal={setShowModal}

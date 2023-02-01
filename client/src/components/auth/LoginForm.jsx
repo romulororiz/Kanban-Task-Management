@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useCallback } from 'react';
-import Error from './Error';
+import Error from '@components/Error';
 import '@styles/scss/auth/LoginForm.scss';
 
 const LoginForm = () => {
@@ -27,15 +27,15 @@ const LoginForm = () => {
 
 	// set errors to loginErrors if there are any
 	useEffect(() => {
-		if (loginErrors) {
+		if (loginErrors.length > 0) {
 			setErrors(loginErrors);
 		}
 
-		if (errors) {
+		return () => {
 			setTimeout(() => {
 				setErrors([]);
 			}, 5000);
-		}
+		};
 	}, [loginErrors]);
 
 	// check if password is shown

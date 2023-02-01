@@ -3,6 +3,12 @@
 .kanban__add-column_heading {
 	display: flex;
 	flex-direction: column;
+
+	.kanban__add-column_input-error {
+		@include inputTextError;
+		border: 1px solid $primary-red;
+		animation: bounceHorizontal $ease-2;
+	}
 }
 
 .kanban__add-column_color {
@@ -15,3 +21,23 @@
 		width: 100% !important;
 	}
 }
+
+// bounce horizontal bezier error animation 4 steps
+@keyframes bounceHorizontal {
+	0% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(10px);
+	}
+	50% {
+		transform: translateX(-10px);
+	}
+	75% {
+		transform: translateX(10px);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+

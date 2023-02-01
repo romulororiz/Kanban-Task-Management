@@ -5,10 +5,9 @@ import AddColumn from '@components/modal/content/AddColumn/AddColumn';
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { getBoardColumns } from '@features/columns/columnSlice';
-import Add from '@assets/dashboard/icon-add-task-mobile.svg';
 import Spinner from '@components/Spinner';
-import '@styles/scss/boards/Dashboard.scss';
 import { TiPlus } from 'react-icons/ti';
+import '@styles/scss/boards/Dashboard.scss';
 
 const Dashboard = () => {
 	const [showModal, setShowModal] = useState(false);
@@ -32,8 +31,7 @@ const Dashboard = () => {
 	}, [dispatch, boardId]);
 
 	// Handle open modal on empty board
-	const handleAddColumn = e => {
-		e.stopPropagation();
+	const handleAddColumn = () => {
 		setShowModal(true);
 		setModalMode('addColumn');
 	};

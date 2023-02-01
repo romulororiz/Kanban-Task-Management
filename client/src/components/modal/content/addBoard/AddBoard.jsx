@@ -80,7 +80,7 @@ const AddBoard = ({ setShowModal, modalMode, setModalMode, board }) => {
 				</div>
 				<div className='kanban__modal-footer'>
 					<button type='submit' className='kanban__modal-button'>
-						{isUpdate ? 'Update Board' : 'Create Board'}
+						{isUpdate ? 'Update' : 'Create'}
 					</button>
 				</div>
 			</form>

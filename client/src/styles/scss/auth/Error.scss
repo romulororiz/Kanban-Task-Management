@@ -1,8 +1,0 @@
-@import '../variables.scss', '../breakpoints.scss', '../mixins.scss';
-
-.kanban__auth-login-error {
-	@include headingSm;
-	padding: 0.2rem 0;
-	font-weight: 500;
-	color: $primary-red;
-}

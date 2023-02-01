@@ -91,6 +91,7 @@
 // ------------------------------
 // Modal
 // ------------------------------
+
 @mixin overlay {
 	display: flex;
 	align-items: center;
@@ -114,7 +115,6 @@
 	width: 100%;
 	margin: 0 2rem;
 	height: auto;
-	animation: modal-fadeIn 0.4s forwards;
 }
 
 // ------------------------------

@@ -1,11 +1,11 @@
-import Error from './Error';
+import Error from '@components/Error';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { register, clearErrors } from '@features/auth/authSlice';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import '@styles/scss/auth/RegisterForm.scss';
 import { useCallback } from 'react';
+import '@styles/scss/auth/RegisterForm.scss';
 
 const RegisterForm = () => {
 	const [formData, setFormData] = useState({
@@ -84,7 +84,6 @@ const RegisterForm = () => {
 	const togglePasswordVisibility = () => {
 		setPasswordShown(passwordShown ? false : true);
 	};
-
 
 	return (
 		<div className='kanban__auth-register'>
