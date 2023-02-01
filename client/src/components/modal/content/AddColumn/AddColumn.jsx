@@ -33,7 +33,7 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 		}
 	}, [modalMode, dispatch]);
 
-	// set errors to loginErrors if there are any
+	// clear errors on empty input
 	useEffect(() => {
 		if (errors.length) {
 			setTimeout(() => {
@@ -50,7 +50,7 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 			if (!columnName) {
 				setErrors([
 					{
-						msg: 'Name annot be empty',
+						msg: 'Name cannot be empty',
 					},
 				]);
 				return;

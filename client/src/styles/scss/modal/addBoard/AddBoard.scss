@@ -4,25 +4,11 @@
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 1rem;
-}
 
-.kanban__add-board_columns {
-	display: flex;
-	align-items: center;
-
-	.kanban__add-board_columns-input {
-		display: flex;
-		flex-direction: column;
-		margin-bottom: 1rem;
-		width: 100%;
-	}
-
-	.kanban_add-board_remove-icon {
-		position: relative;
-		top: 4px;
-		margin-left: 0.5rem;
-		color: $primary-gray;
-		cursor: pointer;
+	.kanban__add-board_input-error {
+		@include inputTextError;
+		border: 1px solid $primary-red;
+		animation: bounceHorizontal $ease-2;
 	}
 }
 

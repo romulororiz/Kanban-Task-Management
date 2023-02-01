@@ -130,6 +130,7 @@
 
 			.kanban__auth-register_form-input_error {
 				@include inputTextError;
+				animation: bounceHorizontal $ease-2;
 			}
 		}
 
@@ -186,5 +187,23 @@
 				text-decoration: none;
 			}
 		}
+	}
+}
+
+@keyframes bounceHorizontal {
+	0% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(10px);
+	}
+	50% {
+		transform: translateX(-10px);
+	}
+	75% {
+		transform: translateX(10px);
+	}
+	100% {
+		transform: translateX(0);
 	}
 }

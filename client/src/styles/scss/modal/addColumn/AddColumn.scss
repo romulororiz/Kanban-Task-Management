@@ -22,7 +22,6 @@
 	}
 }
 
-// bounce horizontal bezier error animation 4 steps
 @keyframes bounceHorizontal {
 	0% {
 		transform: translateX(0);
@@ -40,4 +39,3 @@
 		transform: translateX(0);
 	}
 }
-
