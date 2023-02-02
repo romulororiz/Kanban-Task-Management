@@ -22,8 +22,6 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 	// initialize dispatch
 	const dispatch = useDispatch();
 
-	console.log(errors);
-
 	// check modal mode
 	useEffect(() => {
 		if (modalMode === 'updateColumn') {

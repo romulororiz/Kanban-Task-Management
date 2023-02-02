@@ -2,18 +2,9 @@
 
 .kanban__input-error {
 	@include headingSm;
+	@include inputErrorMessage(fadeIn);
 	padding: 0.2rem 0;
 	font-weight: 500;
 	color: $primary-red;
 	animation: fadeIn $ease-1;
-}
-
-// fade in animation
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
 }

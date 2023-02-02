@@ -1,5 +1,4 @@
-@import '@styles/scss/variables', '@styles/scss/breakpoints',
-	'@styles/scss/mixins';
+@import '../variables', '../breakpoints', '../mixins';
 
 .kanban__auth-card {
 	width: 100%;

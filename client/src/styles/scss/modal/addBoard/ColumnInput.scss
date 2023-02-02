@@ -1,5 +1,4 @@
-@import '@styles/scss/variables.scss', '@styles/scss/mixins.scss',
-	'@styles/scss/breakpoints.scss';
+@import '../../variables.scss', '../../mixins.scss', '../../breakpoints.scss';
 
 .kanban__add-board_column-input {
 	display: flex;

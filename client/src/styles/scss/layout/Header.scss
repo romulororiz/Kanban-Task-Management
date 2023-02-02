@@ -1,5 +1,4 @@
-@import '@styles/scss/variables', '@styles/scss/mixins',
-	'@styles/scss/breakpoints';
+@import '../variables', '../mixins', '../breakpoints';
 
 .kanban__header {
 	height: 96px;

@@ -198,6 +198,8 @@
   border: 1px solid #828fa3;
   color: #000112;
   border: 1px solid #ea5555;
+  -webkit-animation: shake 0.2s ease-out;
+  animation: shake 0.2s ease-out;
 }
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-webkit-input-placeholder {
   color: #000112;
@@ -218,6 +220,50 @@
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::placeholder {
   color: #000112;
   opacity: 0.25;
+}
+@-webkit-keyframes shake {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  25% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+  50% {
+    -webkit-transform: translateX(-10px);
+    transform: translateX(-10px);
+  }
+  75% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+@keyframes shake {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  25% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+  50% {
+    -webkit-transform: translateX(-10px);
+    transform: translateX(-10px);
+  }
+  75% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
 }
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn {
   width: 100%;

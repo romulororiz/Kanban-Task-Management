@@ -1,5 +1,4 @@
-@import '@styles/scss/variables', '@styles/scss/mixins',
-	'@styles/scss/breakpoints';
+@import '../variables', '../mixins', '../breakpoints';
 
 body.react-confirm-alert-body-element {
 	overflow: hidden;
@@ -12,7 +11,8 @@ body.react-confirm-alert-body-element {
 .react-confirm-alert-body {
 	@include textL;
 	@include modal;
-	animation: react-confirm-alert-fadeIn 0.4s forwards;
+	@include modalFadeIn(fadeIn);
+	animation: fadeIn 0.4s forwards;
 	color: $primary-gray;
 }
 
@@ -72,16 +72,5 @@ body.react-confirm-alert-body-element {
 		&:hover {
 			background: rgba($primary-purple, 0.25);
 		}
-	}
-}
-
-@keyframes react-confirm-alert-fadeIn {
-	from {
-		opacity: 0;
-		transform: translateY(20%);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
 	}
 }

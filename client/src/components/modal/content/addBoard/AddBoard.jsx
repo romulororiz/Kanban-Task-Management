@@ -11,6 +11,8 @@ const AddBoard = ({ setShowModal, modalMode, setModalMode, board }) => {
 	const [isUpdate, setIsUpdate] = useState(false);
 	const [errors, setErrors] = useState([]);
 
+	console.log(errors);
+
 	// get board from store
 	const { isLoading } = useSelector(state => state.board);
 
@@ -71,6 +73,7 @@ const AddBoard = ({ setShowModal, modalMode, setModalMode, board }) => {
 	return (
 		<div className='kanban__add-board'>
 			<form onSubmit={onSubmitHandler}>
+				<input type='checkbox' />
 				<div className='kanban__add-board_heading'>
 					<label htmlFor='board-name'>Board Name</label>
 					<input

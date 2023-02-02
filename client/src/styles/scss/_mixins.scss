@@ -114,7 +114,6 @@
 	max-width: 480px;
 	width: 100%;
 	margin: 0 2rem;
-	height: auto;
 }
 
 // ------------------------------
@@ -175,6 +174,19 @@
 	}
 }
 
+@mixin modalFadeOut($animation-name) {
+	@keyframes #{$animation-name} {
+		from {
+			opacity: 1;
+			transform: translateY(0);
+		}
+		to {
+			opacity: 0;
+			transform: translateY(20%);
+		}
+	}
+}
+
 @mixin inputError($animation-name) {
 	@keyframes #{$animation-name} {
 		0% {
@@ -191,6 +203,17 @@
 		}
 		100% {
 			transform: translateX(0);
+		}
+	}
+}
+
+@mixin inputErrorMessage($animation-name) {
+	@keyframes #{$animation-name} {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
 		}
 	}
 }
