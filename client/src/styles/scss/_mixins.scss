@@ -144,6 +144,19 @@
 	border: 1px solid $primary-red;
 }
 
+@mixin inputTextArea {
+	@include input;
+	border: 1px solid $primary-gray;
+	color: $primary-black;
+	resize: none;
+}
+
+@mixin inputSelect {
+	@include input;
+	border: 1px solid $primary-gray;
+	color: $primary-black;
+}
+
 @mixin inputDropdown {
 	@include input;
 	border: 1px solid $primary-purple;

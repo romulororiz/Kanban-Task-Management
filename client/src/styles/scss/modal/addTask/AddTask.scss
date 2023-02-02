@@ -1,0 +1,51 @@
+@import '../../variables', '../../mixins', '../../breakpoints';
+
+.kanban__add-task_heading {
+	display: flex;
+	flex-direction: column;
+
+    .kanban__task-title_container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        svg {
+            @include headingLg;
+            color: $primary-gray;
+            cursor: pointer;
+        }
+    }
+
+    input[type="text"], textarea, select {
+        margin-bottom: 1rem;
+    }
+
+	.kanban__add-task_input-error {
+		@include inputTextError;
+		@include inputError(shake);
+		border: 1px solid $primary-red;
+		animation: shake $ease-2;
+	}
+
+    textarea {
+        @include inputTextArea;
+        border: 1px solid rgba($primary-gray, .25);
+        height: 100px;
+    }
+
+    select {
+        @include inputSelect;
+        border: 1px solid rgba($primary-gray, .25);
+    }
+}
+
+.kanban__add-task_color {
+	margin-top: 1rem;
+
+	.kanban__add-task_color-picker {
+		margin-top: 1rem;
+		margin-bottom: 1.5rem;
+		display: flex;
+		width: 100% !important;
+	}
+}

@@ -1,7 +1,7 @@
 import { FaTimes } from 'react-icons/fa';
-import '@styles/scss/modal/addBoard/ColumnInput.scss';
+import '@styles/scss/modal/addBoard/SubtaskInput.scss';
 
-const ColumnInput = ({ column, onChange, onRemove, index }) => {
+const SubtaskInput = ({ column, onChange, onRemove, index }) => {
 	return (
 		<div className='kanban__add-board_column-input'>
 			<input
@@ -21,4 +21,4 @@ const ColumnInput = ({ column, onChange, onRemove, index }) => {
 	);
 };
 
-export default ColumnInput;
+export default SubtaskInput;

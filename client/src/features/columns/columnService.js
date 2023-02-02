@@ -14,6 +14,12 @@ const getBoardColumns = async boardId => {
 	return response.data;
 };
 
+// get a column
+const getColumnById = async columnId => {
+	const response = await axios.get(`${API_URL}/${columnId}`);
+	return response.data;
+};
+
 // Delete a column
 const deleteColumn = async columnId => {
 	const response = await axios.delete(`${API_URL}/${columnId}`);
@@ -28,6 +34,7 @@ const updateColumn = async (columnData, columnId) => {
 
 const columnService = {
 	createColumn,
+	getColumnById,
 	getBoardColumns,
 	deleteColumn,
 	updateColumn,

@@ -1,19 +1,28 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import '@styles/scss/boards/TaskItem.scss';
 
-const TaskItem = ({ task }) => {
+const TaskItem = ({
+	task,
+	showModal,
+	setShowModal,
+	setModalMode,
+	modalMode,
+}) => {
 	// get number of subtasks
 	const { title, subtasks } = task;
 
+	// handle update task
+	const handleUpdateTask = () => {
+		setModalMode('viewTask');
+		setShowModal(true);
+	};
+
 	return (
-		<div className='kanban__dashboard-task_item'>
+		<div className='kanban__dashboard-task_item' onClick={handleUpdateTask}>
 			<div className='kanban__dashboard-task_item-title'>
 				<h3>{title}</h3>
 			</div>
 			<div className='kanban__dashboard-task_item-subtasks'>
-				<p>{`0 of ${subtasks.length} subtasks completed`}</p>
+				<p>{`0 of ${subtasks && subtasks.length} subtasks completed`}</p>
 			</div>
 		</div>
 	);

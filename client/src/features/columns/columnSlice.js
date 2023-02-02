@@ -3,6 +3,7 @@ import columnService from './columnService';
 
 const initialState = {
 	columns: [],
+	column: {},
 	isLoading: false,
 	errors: [],
 };
@@ -26,6 +27,18 @@ export const getBoardColumns = createAsyncThunk(
 	async (boardId, { rejectWithValue }) => {
 		try {
 			return await columnService.getBoardColumns(boardId);
+		} catch (error) {
+			return rejectWithValue(error.response.data);
+		}
+	}
+);
+
+// get a column
+export const getColumnById = createAsyncThunk(
+	'column/getColumnById',
+	async (columnId, { rejectWithValue }) => {
+		try {
+			return await columnService.getColumnById(columnId);
 		} catch (error) {
 			return rejectWithValue(error.response.data);
 		}
@@ -88,6 +101,17 @@ const columnSlice = createSlice({
 				state.columns = action.payload;
 			})
 			.addCase(getBoardColumns.rejected, (state, action) => {
+				state.isLoading = false;
+				state.errors = action.payload;
+			})
+			.addCase(getColumnById.pending, state => {
+				state.isLoading = true;
+			})
+			.addCase(getColumnById.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.column = action.payload;
+			})
+			.addCase(getColumnById.rejected, (state, action) => {
 				state.isLoading = false;
 				state.errors = action.payload;
 			})

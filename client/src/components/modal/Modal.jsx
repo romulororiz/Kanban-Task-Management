@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { useSpring, animated, useTransition } from 'react-spring';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import '@styles/scss/modal/Modal.scss';
 
@@ -25,6 +24,11 @@ const Modal = ({
 			case 'updateBoard':
 				setModalMode('addBoard');
 				break;
+			case 'updateTask':
+				setModalMode('addTask');
+				break;
+			case 'viewTask':
+				setModalMode('addTask');
 			default:
 				break;
 		}

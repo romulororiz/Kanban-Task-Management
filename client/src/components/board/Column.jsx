@@ -1,14 +1,17 @@
-import TaskItem from './TaskItem';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoKebabVertical } from 'react-icons/go';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
-import useOnClickOutside from '@hooks/useOnClickOutside';
+import { getBoardTasks } from '@features/tasks/taskSlice';
 import { deleteColumn } from '@features/columns/columnSlice';
+import { useParams } from 'react-router-dom';
+import TaskItem from './TaskItem';
 import Modal from '@components/modal/Modal';
 import AddColumn from '@components/modal/content/AddColumn/AddColumn';
 import useConfirmAlert from '@hooks/useConfirmAlert';
+import useOnClickOutside from '@hooks/useOnClickOutside';
 import '@styles/scss/boards/Column.scss';
+import AddTask from '../modal/content/addTask/AddTask';
 
 const Column = ({ column }) => {
 	const [showDropdown, setShowDropdown] = useState(false);
@@ -23,10 +26,13 @@ const Column = ({ column }) => {
 		setShowDropdown(false);
 	});
 
+	// get board id from params
+	const { id: boardId } = useParams();
+
 	// get useConfirm hook
 	const [setTitle, setMessage, setButtons] = useConfirmAlert();
 
-	// get name from column
+	// get name and id from column
 	const { name, _id: id } = column;
 
 	// get tasks from store
@@ -36,11 +42,11 @@ const Column = ({ column }) => {
 	const dispatch = useDispatch();
 
 	// get tasks from board
-	// useEffect(() => {
-	// 	if (boardId) {
-	// 		dispatch(getBoardTasks(boardId));
-	// 	}
-	// }, [boardId]);
+	useEffect(() => {
+		if (boardId) {
+			dispatch(getBoardTasks(boardId));
+		}
+	}, [boardId]);
 
 	// Check if column has tasks
 	const hasTasks = useMemo(() => {
@@ -75,23 +81,67 @@ const Column = ({ column }) => {
 		setShowDropdown(false);
 	};
 
+	// handle modal title
+	const modalTitle = useMemo(() => {
+		switch (modalMode) {
+			case 'addColumn':
+				return 'Add a column';
+			case 'updateColumn':
+				return 'Update column';
+			case 'addTask':
+				return 'Add a task';
+			case 'updateTask':
+				return 'Update task';
+			case 'viewTask':
+				return '';
+			default:
+				break;
+		}
+	}, [modalMode]);
+
+	// handle content
+	const content = useMemo(() => {
+		switch (modalMode) {
+			case 'updateColumn':
+				return (
+					<AddColumn
+						setShowModal={setShowModal}
+						column={column}
+						modalMode={modalMode}
+						setModalMode={setModalMode}
+					/>
+				);
+			case 'viewTask':
+				return (
+					<AddTask
+						setShowModal={setShowModal}
+						modalMode={modalMode}
+						setModalMode={setModalMode}
+					/>
+				);
+			case 'updateTask':
+				return (
+					<AddTask
+						setShowModal={setShowModal}
+						modalMode={modalMode}
+						setModalMode={setModalMode}
+					/>
+				);
+			default:
+				break;
+		}
+	}, [modalMode]);
+
 	return (
 		<>
 			{showModal && (
 				<Modal
-					title={modalMode === 'addColumn' ? 'Add Column' : 'Edit Column'}
+					title={modalTitle}
 					setModalMode={setModalMode}
 					modalMode={modalMode}
 					setShowModal={setShowModal}
 					showModal={showModal}
-					content={
-						<AddColumn
-							setShowModal={setShowModal}
-							column={column}
-							modalMode={modalMode}
-							setModalMode={setModalMode}
-						/>
-					}
+					content={content}
 				/>
 			)}
 			<div className='kanban__dashboard-column'>
@@ -137,10 +187,18 @@ const Column = ({ column }) => {
 							: 'kanban__dashboard-column_tasks-container kanban__dashboard-column_tasks-container_empty'
 					}
 				>
-					{tasks &&
-						tasks
-							.filter(task => task.column === id)
-							.map(task => <TaskItem key={task._id} task={task} />)}
+					{tasks
+						.filter(task => task.column === id)
+						.map(task => (
+							<TaskItem
+								key={task._id}
+								task={task}
+								showModal={showModal}
+								modalMode={modalMode}
+								setShowModal={setShowModal}
+								setModalMode={setModalMode}
+							/>
+						))}
 				</div>
 			</div>
 		</>

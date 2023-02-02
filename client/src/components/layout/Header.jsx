@@ -9,10 +9,14 @@ import { useDispatch } from 'react-redux';
 import { CgLogOut } from 'react-icons/cg';
 import useWindowSize from '@hooks/useWindowSize';
 import { TiPlus } from 'react-icons/ti';
+import Modal from '@components/modal/Modal';
+import AddTask from '@components/modal/content/addTask/AddTask';
 import '@styles/scss/layout/Header.scss';
 
 const Header = ({ setShowSidebar, showSidebar, user, board }) => {
 	const [showDropdown, setShowDropdown] = useState(false);
+	const [showModal, setShowModal] = useState(false);
+	const [modalMode, setModalMode] = useState('addTask');
 
 	// get window width with useWindowSize hook
 	const windowSize = useWindowSize();
@@ -31,73 +35,93 @@ const Header = ({ setShowSidebar, showSidebar, user, board }) => {
 	useOnClickOutside(dropdownRef, () => setShowDropdown(false));
 
 	return (
-		<div className='kanban__header'>
-			<div
-				className={`kanban__header-container ${
-					!showSidebar && 'kanban__header-container_no-sidebar'
-				}`}
-			>
-				<div
-					className={`kanban__header-logo ${
-						!showSidebar && 'kanban__header-logo_no-sidebar'
-					}`}
-				>
-					<img src={LogoDark} alt='logo dark' />
-				</div>
-				<div
-					className={`kanban__header-board_name ${
-						showSidebar && isMobile && 'kanban__header-board_name-hide'
-					}`}
-				>
-					{board.name}
-				</div>
-				<div
-					className={`kanban__header-board_actions ${
-						showSidebar && 'kanban__header-board_actions-sidebar'
-					}`}
-				>
-					{isTablet ? (
-						<button className='kanban__header-board_actions-add_small'>
-							<TiPlus />
-						</button>
-					) : (
-						<button>
-							<TiPlus />
-							Add New Task
-						</button>
-					)}
-					<div className='kanban__header-board_actions-menu'>
-						<img
-							src={Ellipsis}
-							alt='menu icon'
-							onClick={() => {
-								setShowDropdown(true);
-								isMobile && setShowSidebar(false);
-							}}
+		<>
+			{showModal && (
+				<Modal
+					title={modalMode === 'addTask' ? 'Add Task' : 'Edit Task'}
+					showModal={showModal}
+					setShowModal={setShowModal}
+					modalMode={modalMode}
+					setModalMode={setModalMode}
+					content={
+						<AddTask
+							setShowModal={setShowModal}
+							setModalMode={setModalMode}
+							modalMode={modalMode}
 						/>
-						<div
-							ref={dropdownRef}
+					}
+				/>
+			)}
+			<div className='kanban__header'>
+				<div
+					className={`kanban__header-container ${
+						!showSidebar && 'kanban__header-container_no-sidebar'
+					}`}
+				>
+					<div
+						className={`kanban__header-logo ${
+							!showSidebar && 'kanban__header-logo_no-sidebar'
+						}`}
+					>
+						<img src={LogoDark} alt='logo dark' />
+					</div>
+					<div
+						className={`kanban__header-board_name ${
+							showSidebar && isMobile && 'kanban__header-board_name-hide'
+						}`}
+					>
+						{board.name}
+					</div>
+					<div
+						className={`kanban__header-board_actions ${
+							showSidebar && 'kanban__header-board_actions-sidebar'
+						}`}
+					>
+						<button
+							type='button'
 							className={`${
-								showDropdown
-									? 'kanban__header-board_dropdown'
-									: 'kanban__header-board_dropdown-hide'
+								isTablet ? 'kanban__header-board_actions-add_small ' : ''
 							}`}
+							onClick={() => {
+								setShowModal(true);
+							}}
 						>
-							<ul>
-								<li>
-									<FaAt />
-									{user && user.email}
-								</li>
-								<li onClick={() => dispatch(logout())}>
-									<CgLogOut />
-									Logout
-								</li>
-							</ul>
+							<TiPlus />
+							{!isTablet ? 'Add New Task' : ''}
+						</button>
+						<div className='kanban__header-board_actions-menu'>
+							<img
+								src={Ellipsis}
+								alt='menu icon'
+								onClick={() => {
+									setShowDropdown(true);
+									isMobile && setShowSidebar(false);
+								}}
+							/>
+							<div
+								ref={dropdownRef}
+								className={`${
+									showDropdown
+										? 'kanban__header-board_dropdown'
+										: 'kanban__header-board_dropdown-hide'
+								}`}
+							>
+								<ul>
+									<li>
+										<FaAt />
+										{user && user.email}
+									</li>
+									<li onClick={() => dispatch(logout())}>
+										<CgLogOut />
+										Logout
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 export default Header;

@@ -82,6 +82,37 @@ const getBoardColumns = asyncHandler(async (req, res) => {
 	}
 });
 
+// get column by id
+// @route GET api/columns/:id
+// @desc Get a column by id
+// @access Private
+const getColumnById = asyncHandler(async (req, res) => {
+	try {
+		// Find column by id
+		const column = await Column.findById(req.params.id);
+
+		// Check if column exists
+		if (!column) {
+			res.status(404);
+			throw new Error('Column not found');
+		}
+
+		// Check if user owns the board that the column is on
+		const board = await Board.findById(column.board);
+		const user = await User.findById(req.user.id);
+
+		if (board.user.toString() !== user._id.toString()) {
+			res.status(401);
+			throw new Error('Not authorized');
+		}
+
+		res.status(200).json(column);
+	} catch (error) {
+		res.status(500);
+		throw new Error(error);
+	}
+});
+
 // Delete a column
 // @route DELETE api/columns/:id
 // @desc Delete a column
@@ -206,5 +237,6 @@ module.exports = {
 	deleteColumn,
 	updateColumn,
 	getBoardColumns,
+	getColumnById,
 	deleteAllColumns,
 };
