@@ -24,12 +24,12 @@ router.route('/:id/create').post(protectRoute, columnValidator, createColumn);
 // @route   GET api/columns/:boardId
 // @desc    Get all columns for a board
 // @access  Private
-router.route('/:id').get(protectRoute, getBoardColumns);
+router.route('/board/:id').get(protectRoute, getBoardColumns);
 
 // @route   GET api/columns/:columnId
 // @desc    Get a column
 // @access  Private
-router.route('/:id').get(protectRoute, getColumnById);
+router.route('/:columnId').get(protectRoute, getColumnById);
 
 // @route   DELETE api/columns/:id
 // @desc    Delete a column
