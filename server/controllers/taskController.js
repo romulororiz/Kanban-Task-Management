@@ -62,12 +62,9 @@ const createTask = asyncHandler(async (req, res) => {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	const { title, description } = req.body;
+	const { title, description, subtasks } = req.body;
 
 	const { columnId } = req.params;
-
-	// check if theres at least one column in the board before creating a task
-	const columns = await Column.find({ board: req.params.id });
 
 	// Retrieve column from column id
 	const column = await Column.findById(columnId);
@@ -86,6 +83,7 @@ const createTask = asyncHandler(async (req, res) => {
 			column: column._id,
 			status: column.name,
 			board: column.board,
+			subtasks,
 			user: req.user.id,
 		});
 

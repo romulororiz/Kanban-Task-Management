@@ -30,8 +30,14 @@ const taskSchema = new mongoose.Schema(
 		},
 		subtasks: [
 			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'Subtask',
+				title: {
+					type: String,
+					required: true,
+				},
+				isCompleted: {
+					type: Boolean,
+					default: false,
+				},
 			},
 		],
 	},
