@@ -8,7 +8,6 @@ const TaskItem = ({
 	setModalMode,
 	modalMode,
 }) => {
-	console.log(task);
 	// initialize navigate
 	const navigate = useNavigate();
 
@@ -19,7 +18,9 @@ const TaskItem = ({
 	const handleUpdateTask = () => {
 		setModalMode('viewTask');
 		setShowModal(true);
-		navigate(`/dashboard/boards/${task.board}/tasks/${task._id}`);
+		navigate(
+			`/dashboard/boards/${task.board}/column/${task.column}/task/${task._id}`
+		);
 	};
 
 	return (
@@ -27,13 +28,9 @@ const TaskItem = ({
 			<div className='kanban__dashboard-task_item-title'>
 				<h3>{title}</h3>
 			</div>
-			{subtasks ? (
-				<div className='kanban__dashboard-task_item-subtasks'>
-					<p>{`0 of ${subtasks && subtasks.length} completed`}</p>
-				</div>
-			) : (
-				''
-			)}
+			<div className='kanban__dashboard-task_item-subtasks'>
+				<p>{`0 of ${subtasks && subtasks.length} completed`}</p>
+			</div>
 		</div>
 	);
 };
