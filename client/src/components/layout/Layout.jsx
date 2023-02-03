@@ -30,12 +30,11 @@ const Layout = () => {
 		if (windowSize.width < 550) {
 			setShowSidebar(false);
 		}
-	}, [windowSize]);
 
-	// get board by id
-	useEffect(() => {
-		dispatch(getBoardById(boardId));
-	}, [boardId, dispatch]);
+		if (boardId) {
+			dispatch(getBoardById(boardId));
+		}
+	}, [windowSize, boardId, dispatch]);
 
 	return (
 		<div>
@@ -44,13 +43,13 @@ const Layout = () => {
 				setShowSidebar={setShowSidebar}
 				showModal={showModal}
 				setShowModal={setShowModal}
-				board={board}
+				board={board && board}
 			/>
 			<Header
 				user={user}
 				showSidebar={showSidebar}
 				setShowSidebar={setShowSidebar}
-				board={board}
+				board={board && board}
 			/>
 			<main
 				className={`kanban__main-content ${
