@@ -125,7 +125,6 @@ const taskSlice = createSlice({
 		builder.addCase(updateTask.fulfilled, (state, action) => {
 			state.isLoading = false;
 			const updatedTask = action.payload;
-			// find the task in the tasks array and update it
 			const taskIndex = state.tasks.findIndex(
 				task => task._id === updatedTask._id
 			);

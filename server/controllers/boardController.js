@@ -58,6 +58,12 @@ const getBoard = asyncHandler(async (req, res) => {
 	// check if user owns board
 	const board = await Board.findById(req.params.id);
 
+	// check if board exists
+	if (!board) {
+		res.status(404);
+		throw new Error('Board not found');
+	}
+
 	if (board.user.toString() !== req.user.id) {
 		res.status(401);
 		throw new Error('Not authorized');
@@ -76,12 +82,7 @@ const getBoard = asyncHandler(async (req, res) => {
 			},
 		});
 
-		if (board) {
-			res.status(200).json(board);
-		} else {
-			res.status(404);
-			throw new Error('Board not found');
-		}
+		res.status(200).json(board);
 	} catch (error) {
 		res.status(500);
 		throw new Error(error);

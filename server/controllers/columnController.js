@@ -47,7 +47,7 @@ const createColumn = asyncHandler(async (req, res) => {
 	}
 });
 
-// @route GET api/columns/:boardId
+// @route GET api/columns/board/:boardId
 // @desc Get all columns for a board
 // @access Private
 const getBoardColumns = asyncHandler(async (req, res) => {
@@ -82,30 +82,28 @@ const getBoardColumns = asyncHandler(async (req, res) => {
 	}
 });
 
-// get column by id
 // @route GET api/columns/:id
 // @desc Get a column by id
 // @access Private
 const getColumnById = asyncHandler(async (req, res) => {
+	// Find column by id
+	const column = await Column.findById(req.params.columnId);
+
+	// Check if column exists
+	if (!column) {
+		res.status(404);
+		throw new Error('Column not found');
+	}
+
+	// Check if user owns the board that the column is on
+	const board = await Board.findById(column.board);
+	const user = await User.findById(req.user.id);
+
+	if (board.user.toString() !== user._id.toString()) {
+		res.status(401);
+		throw new Error('Not authorized');
+	}
 	try {
-		// Find column by id
-		const column = await Column.findById(req.params.id);
-
-		// Check if column exists
-		if (!column) {
-			res.status(404);
-			throw new Error('Column not found');
-		}
-
-		// Check if user owns the board that the column is on
-		const board = await Board.findById(column.board);
-		const user = await User.findById(req.user.id);
-
-		if (board.user.toString() !== user._id.toString()) {
-			res.status(401);
-			throw new Error('Not authorized');
-		}
-
 		res.status(200).json(column);
 	} catch (error) {
 		res.status(500);
@@ -118,25 +116,24 @@ const getColumnById = asyncHandler(async (req, res) => {
 // @desc Delete a column
 // @access Private
 const deleteColumn = asyncHandler(async (req, res) => {
+	// Find column by id
+	const column = await Column.findById(req.params.id);
+
+	// Check if column exists
+	if (!column) {
+		res.status(404);
+		throw new Error('Column not found');
+	}
+
+	// Check if user owns the board that the column is on
+	const board = await Board.findById(column.board);
+	const user = await User.findById(req.user.id);
+
+	if (board.user.toString() !== user._id.toString()) {
+		res.status(401);
+		throw new Error('Not authorized');
+	}
 	try {
-		// Find column by id
-		const column = await Column.findById(req.params.id);
-
-		// Check if column exists
-		if (!column) {
-			res.status(404);
-			throw new Error('Column not found');
-		}
-
-		// Check if user owns the board that the column is on
-		const board = await Board.findById(column.board);
-		const user = await User.findById(req.user.id);
-
-		if (board.user.toString() !== user._id.toString()) {
-			res.status(401);
-			throw new Error('Not authorized');
-		}
-
 		await column.remove();
 		res.status(200).json(column);
 	} catch (error) {

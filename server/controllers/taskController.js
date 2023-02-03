@@ -30,22 +30,21 @@ const getTasks = asyncHandler(async (req, res) => {
 // @desc    Get a task by id
 // @access  Private
 const getTaskById = asyncHandler(async (req, res) => {
+	// Get task by id
+	const task = await Task.findById(req.params.id).populate('subtasks');
+
+	// Check if task exists
+	if (!task) {
+		res.status(404);
+		throw new Error('Task not found');
+	}
+
+	// Check if task belongs to user
+	if (task.user.toString() !== req.user.id) {
+		res.status(401);
+		throw new Error('Not authorized');
+	}
 	try {
-		// Get task by id
-		const task = await Task.findById(req.params.id).populate('subtasks');
-
-		// Check if task exists
-		if (!task) {
-			res.status(404);
-			throw new Error('Task not found');
-		}
-
-		// Check if task belongs to user
-		if (task.user.toString() !== req.user.id) {
-			res.status(401);
-			throw new Error('Not authorized');
-		}
-
 		res.status(200).json(task);
 	} catch (error) {
 		res.status(500);
@@ -63,18 +62,12 @@ const createTask = asyncHandler(async (req, res) => {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	const { title, description, columnName } = req.body;
+	const { title, description } = req.body;
 
 	const { columnId } = req.params;
 
 	// check if theres at least one column in the board before creating a task
 	const columns = await Column.find({ board: req.params.id });
-	if (columns.length === 0) {
-		res.status(400);
-		throw new Error(
-			'Board must have at least one column before creating a task'
-		);
-	}
 
 	// Retrieve column from column id
 	const column = await Column.findById(columnId);
@@ -122,10 +115,9 @@ const deleteTask = asyncHandler(async (req, res) => {
 			res.status(404);
 			throw new Error('Task not found');
 		}
-		
+
 		// find column by id
 		const column = await Column.findById(task.column);
-
 
 		// Check if user owns task
 		if (task.user.toString() !== req.user.id) {
@@ -159,7 +151,7 @@ const deleteTask = asyncHandler(async (req, res) => {
 // @desc Update a task
 // @access Private
 const updateTask = asyncHandler(async (req, res) => {
-	const { title, description, column } = req.body;
+	const { title, description, status } = req.body;
 
 	try {
 		// Find task by id
@@ -183,7 +175,8 @@ const updateTask = asyncHandler(async (req, res) => {
 			{
 				title,
 				description,
-				column,
+				status,
+				column: status,
 			},
 			{ new: true }
 		);

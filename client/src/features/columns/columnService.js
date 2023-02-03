@@ -10,13 +10,14 @@ const createColumn = async (boardId, columnData) => {
 
 // get all columns for a board
 const getBoardColumns = async boardId => {
-	const response = await axios.get(`${API_URL}/${boardId}`);
+	const response = await axios.get(`${API_URL}/board/${boardId}`);
 	return response.data;
 };
 
 // get a column
 const getColumnById = async columnId => {
 	const response = await axios.get(`${API_URL}/${columnId}`);
+
 	return response.data;
 };
 
