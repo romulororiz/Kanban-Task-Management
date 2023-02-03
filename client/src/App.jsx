@@ -32,20 +32,20 @@ function App() {
 							<Route path='/dashboard/boards/:id' element={<Dashboard />} />
 						</Route>
 						<Route
-							path='/dashboard/boards/:id/tasks/:taskId'
+							path='/dashboard/boards/:id/column/:columnId/task/:taskId'
 							element={<PrivateRoute />}
 						>
 							<Route
-								path='/dashboard/boards/:id/tasks/:taskId'
+								path='/dashboard/boards/:id/column/:columnId/task/:taskId'
 								element={<Dashboard />}
 							/>
 						</Route>
 						<Route
-							path='/dashboard/boards/:id/columns/:columnId'
+							path='/dashboard/boards/:id/column/:columnId'
 							element={<PrivateRoute />}
 						>
 							<Route
-								path='/dashboard/boards/:id/columns/:columnId'
+								path='/dashboard/boards/:id/column/:columnId'
 								element={<Dashboard />}
 							/>
 						</Route>
