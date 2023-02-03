@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import { createTask, updateTask, getTaskById } from '@features/tasks/taskSlice';
 import { GoKebabVertical } from 'react-icons/go';
+import { useParams, useNavigate } from 'react-router-dom';
 import '@styles/scss/modal/addTask/AddTask.scss';
-import { useParams } from 'react-router-dom';
 
-const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
+const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 	const [formData, setFormData] = useState({
 		title: '',
 		description: '',
@@ -23,15 +23,20 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 	const { isLoading, columns } = useSelector(state => state.column);
 	const { errors: taskErrors, task } = useSelector(state => state.task);
 
+	console.log(column);
+
 	// initialize dispatch
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { taskId } = useParams();
 
-	// on change handler
+	// handle input change
 	const onChangeHandler = e => {
+		const { name, value } = e.target;
+
 		setFormData(prevState => ({
 			...prevState,
-			[e.target.name]: e.target.value,
+			[name]: value,
 		}));
 	};
 
@@ -39,16 +44,11 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 	useEffect(() => {
 		if (modalMode === 'updateTask') {
 			setIsUpdate(true);
-			setFormData({
-				title: task.title,
-				description: task.description,
-				status: task.status,
-				subTasks: task.subTasks,
-			});
+			setFormData(task);
 		}
-	}, [modalMode, dispatch, title, description, status, subTasks, taskErrors]);
+	}, [modalMode, dispatch, task]);
 
-	// clear errors on empty input
+	// clear errors on empty input and get task by id
 	useEffect(() => {
 		if (errors.length) {
 			setTimeout(() => {
@@ -59,7 +59,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 		if (isUpdate || modalMode === 'viewTask') {
 			dispatch(getTaskById(taskId));
 		}
-	}, [errors]);
+	}, [dispatch, errors.length, isUpdate, modalMode, taskId]);
 
 	// Submit new column / edit column and save to the database
 	const onSubmit = useCallback(
@@ -91,6 +91,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 				setIsUpdate(false);
 				setModalMode('addTask');
 				setShowModal(false);
+				navigate(-1)
 			} else {
 				dispatch(createTask({ columnId: status, taskData }));
 				setShowModal(false);
@@ -126,12 +127,11 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 									className={
 										errors.length ? 'kanban__add-task_input-error' : ''
 									}
-									type='text'
 									placeholder='e.g Todo'
-									name={isUpdate ? 'task.title' : 'title'}
-									// todo - add loading state
-									value={isUpdate ? task.title : title}
+									name='title'
+									value={title}
 									onChange={onChangeHandler}
+									type='text'
 								/>
 							</>
 						)}
@@ -146,14 +146,13 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 									}
 									placeholder='e.g Todo'
 									name='description'
-									// todo - add loading state
-									value={isUpdate ? task.description : description}
+									value={description}
 									onChange={onChangeHandler}
 								/>
 							</>
 						)}
 						{modalMode === 'viewTask' ? (
-							<p>{task.status}</p>
+							<p>{column.name}</p>
 						) : (
 							<>
 								<label htmlFor='status'>Status</label>
@@ -164,8 +163,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 									type='text'
 									placeholder='e.g Todo'
 									name='status'
-									// todo - add loading state
-									value={isUpdate ? task.status : status}
+									value={status}
 									onChange={onChangeHandler}
 								>
 									<option value='' disabled>
