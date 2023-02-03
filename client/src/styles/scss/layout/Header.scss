@@ -95,6 +95,15 @@
 				}
 			}
 
+			.kanban__header-board_actions-add_disabled {
+				background-color: $secondary-gray;
+				pointer-events: none;
+
+				&:hover {
+					background-color: $secondary-gray;
+				}
+			}
+
 			button {
 				@include buttonPrimary;
 				display: flex;
