@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Column from '@components/board/Column';
 import Modal from '@components/modal/Modal';
-import AddColumn from '@components/modal/content/AddColumn/AddColumn';
+import AddColumn from '@components/modal/content/addColumn/AddColumn';
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { getBoardColumns } from '@features/columns/columnSlice';

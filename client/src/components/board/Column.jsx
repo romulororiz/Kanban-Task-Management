@@ -7,7 +7,7 @@ import { deleteColumn } from '@features/columns/columnSlice';
 import { useParams } from 'react-router-dom';
 import TaskItem from './TaskItem';
 import Modal from '@components/modal/Modal';
-import AddColumn from '@components/modal/content/AddColumn/AddColumn';
+import AddColumn from '@components/modal/content/addColumn/AddColumn';
 import useConfirmAlert from '@hooks/useConfirmAlert';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import '@styles/scss/boards/Column.scss';

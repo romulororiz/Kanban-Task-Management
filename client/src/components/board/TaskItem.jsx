@@ -22,7 +22,7 @@ const TaskItem = ({
 				<h3>{title}</h3>
 			</div>
 			<div className='kanban__dashboard-task_item-subtasks'>
-				<p>{`0 of ${subtasks && subtasks.length} subtasks completed`}</p>
+				<p>{`0 of ${subtasks && subtasks.length} completed`}</p>
 			</div>
 		</div>
 	);
