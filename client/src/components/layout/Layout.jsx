@@ -36,8 +36,10 @@ const Layout = () => {
 
 	// get board and columns
 	useEffect(() => {
-		dispatch(getBoardById(boardId));
-		dispatch(getBoardColumns(boardId));
+		if (boardId) {
+			dispatch(getBoardById(boardId));
+			dispatch(getBoardColumns(boardId));
+		}
 	}, [boardId, dispatch]);
 
 	return (
