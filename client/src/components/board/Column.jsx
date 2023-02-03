@@ -47,7 +47,7 @@ const Column = ({ column }) => {
 		if (boardId) {
 			dispatch(getBoardTasks(boardId));
 		}
-	}, [boardId]);
+	}, [boardId, dispatch]);
 
 	// Check if column has tasks
 	const hasTasks = useMemo(() => {
@@ -77,7 +77,7 @@ const Column = ({ column }) => {
 
 	// handle update column
 	const handleUpdateColumn = () => {
-		navigate(`/dashboard/boards/${boardId}/columns/${id}`);
+		navigate(`/dashboard/boards/${boardId}/column/${id}`);
 		setModalMode('updateColumn');
 		setShowModal(true);
 		setShowDropdown(false);
@@ -119,6 +119,7 @@ const Column = ({ column }) => {
 						setShowModal={setShowModal}
 						modalMode={modalMode}
 						setModalMode={setModalMode}
+						column={column}
 					/>
 				);
 			case 'updateTask':
@@ -127,6 +128,7 @@ const Column = ({ column }) => {
 						setShowModal={setShowModal}
 						modalMode={modalMode}
 						setModalMode={setModalMode}
+						column={column}
 					/>
 				);
 			default:
