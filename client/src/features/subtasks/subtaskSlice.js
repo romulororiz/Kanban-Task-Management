@@ -74,7 +74,6 @@ const subtaskSlice = createSlice({
 				_id: action.payload._id,
 				title: action.payload.title,
 				isCompleted: action.payload.isCompleted,
-				task: action.payload.task,
 			};
 			state.subtasks.push(newSubtask);
 		});

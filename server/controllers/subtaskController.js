@@ -40,6 +40,7 @@ const createSubtask = asyncHandler(async (req, res) => {
 
 	// check if task exists
 	const task = await Task.findById(req.params.id);
+	
 	if (!task) {
 		res.status(400);
 		throw new Error('Task not found');

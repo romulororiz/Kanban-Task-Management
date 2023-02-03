@@ -7,7 +7,6 @@ const subtaskSchema = new mongoose.Schema({
 	},
 	isCompleted: {
 		type: Boolean,
-		required: true,
 	},
 	task: {
 		type: mongoose.Schema.Types.ObjectId,

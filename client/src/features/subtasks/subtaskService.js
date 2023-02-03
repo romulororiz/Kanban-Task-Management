@@ -4,7 +4,8 @@ const API_URL = '/api/subtasks';
 
 // create a subtask
 const createSubtask = async (taskId, subtaskData) => {
-	const response = await axios.post(`${API_URL}/${taskId}`, subtaskData);
+	const response = await axios.post(`${API_URL}/${taskId}/create`, subtaskData);
+	console.log(response.data)
 	return response.data;
 };
 

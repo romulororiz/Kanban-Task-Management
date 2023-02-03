@@ -20,7 +20,6 @@ const taskValidator = [
 // add a subtask validation
 const subtaskValidator = [
 	check('title').not().isEmpty().withMessage('cannot be empty'),
-	check('isCompleted').not().isEmpty().withMessage('cannot be empty'),
 ];
 
 module.exports = {

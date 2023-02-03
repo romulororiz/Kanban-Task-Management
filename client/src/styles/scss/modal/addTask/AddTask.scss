@@ -4,21 +4,24 @@
 	display: flex;
 	flex-direction: column;
 
-    .kanban__task-title_container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+	.kanban__task-title_container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 
-        svg {
-            @include headingLg;
-            color: $primary-gray;
-            cursor: pointer;
-        }
-    }
+		svg {
+			@include headingLg;
+			color: $primary-gray;
+			cursor: pointer;
+		}
+	}
 
-    input[type="text"], textarea, select {
-        margin-bottom: 1rem;
-    }
+	input[type='text'],
+	textarea,
+	select {
+		margin-bottom: 1rem;
+		font-size: $font-size-l;
+	}
 
 	.kanban__add-task_input-error {
 		@include inputTextError;
@@ -27,25 +30,36 @@
 		animation: shake $ease-2;
 	}
 
-    textarea {
-        @include inputTextArea;
-        border: 1px solid rgba($primary-gray, .25);
-        height: 100px;
-    }
+	textarea {
+		@include inputTextArea;
+		border: 1px solid rgba($primary-gray, 0.25);
+		height: 100px;
+	}
 
-    select {
-        @include inputSelect;
-        border: 1px solid rgba($primary-gray, .25);
-    }
+	select {
+		@include inputSelect;
+		border: 1px solid rgba($primary-gray, 0.25);
+	}
 }
 
-.kanban__add-task_color {
-	margin-top: 1rem;
+.kanban__add-task_subtasks-container {
+	p {
+		@include headingSm;
+		color: $primary-gray;
+        margin-bottom: .5rem;
+	}
 
-	.kanban__add-task_color-picker {
-		margin-top: 1rem;
-		margin-bottom: 1.5rem;
-		display: flex;
-		width: 100% !important;
+	.kanban__add-task_subtasks-btn {
+		@include buttonSecondary;
+        @include headingMd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+		width: 100%;
+        margin-bottom: 1rem;
+
+        svg {
+            margin-right: 0.25rem;
+        }
 	}
 }

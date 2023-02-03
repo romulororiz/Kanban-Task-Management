@@ -1,15 +1,20 @@
 @import '../../variables.scss', '../../mixins.scss', '../../breakpoints.scss';
 
-.kanban__add-board_column-input {
+.kanban__add-task_subtask-input {
 	display: flex;
-	margin-bottom: 1rem;
 
 	input {
 		width: 100%;
 	}
 }
 
-.kanban__add-board_remove-icon {
+.kanban__add-task_subtask-input_disabled {
+	background-color: rgba($primary-purple, .15);
+	color: $primary-gray;
+	border: none;
+}
+
+.kanban__add-task_remove-icon {
 	position: relative;
 	top: 12px;
 	margin-left: 0.5rem;

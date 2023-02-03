@@ -1,19 +1,20 @@
 import { FaTimes } from 'react-icons/fa';
-import '@styles/scss/modal/addBoard/SubtaskInput.scss';
+import '@styles/scss/modal/addTask/SubtaskInput.scss';
 
-const SubtaskInput = ({ column, onChange, onRemove, index }) => {
+const SubtaskInput = ({ subtask, onChange, onRemove, index }) => {
 	return (
-		<div className='kanban__add-board_column-input'>
+		<div className='kanban__add-task_subtask-input'>
 			<input
+				className={subtask.title && 'kanban__add-task_subtask-input_disabled'}
+				disabled={subtask.title}
 				type='text'
-				placeholder='Column Name'
-				value={column}
-				name='columnName'
+				placeholder='e.g Make Coffee'
+				value={subtask.title}
 				onChange={onChange}
 			/>
 			{onRemove && (
 				<FaTimes
-					className='kanban__add-board_remove-icon'
+					className='kanban__add-task_remove-icon'
 					onClick={() => onRemove(index)}
 				/>
 			)}

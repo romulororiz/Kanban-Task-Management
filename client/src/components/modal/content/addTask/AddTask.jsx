@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import { createTask, updateTask, getTaskById } from '@features/tasks/taskSlice';
 import { GoKebabVertical } from 'react-icons/go';
+import { TiPlus } from 'react-icons/ti';
 import { useParams, useNavigate } from 'react-router-dom';
+import { createSubtask } from '@features/subtasks/subtaskSlice';
+import SubtaskInput from './SubtaskInput';
 import '@styles/scss/modal/addTask/AddTask.scss';
 
 const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
@@ -11,22 +14,33 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 		title: '',
 		description: '',
 		status: '',
-		subTasks: [],
+		subtasks: [],
 	});
 	const [isUpdate, setIsUpdate] = useState(false);
 	const [errors, setErrors] = useState([]);
+	const [subtaskTitle, setSubtaskTitle] = useState([]);
 
 	// destructure form data
-	const { title, description, status, subTasks } = formData;
+	const { title, description, status, subtasks } = formData;
 
 	// get data from store
 	const { isLoading, columns } = useSelector(state => state.column);
 	const { errors: taskErrors, task } = useSelector(state => state.task);
 
-	// initialize dispatch
+	// initialize dispatch and navigate
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	// get task id from url
 	const { taskId } = useParams();
+
+	// check modal mode
+	useEffect(() => {
+		if (modalMode === 'updateTask') {
+			setIsUpdate(true);
+			setFormData(task);
+		}
+	}, [modalMode, dispatch, task]);
 
 	// handle input change
 	const onChangeHandler = e => {
@@ -37,14 +51,6 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 			[name]: value,
 		}));
 	};
-
-	// check modal mode
-	useEffect(() => {
-		if (modalMode === 'updateTask') {
-			setIsUpdate(true);
-			setFormData(task);
-		}
-	}, [modalMode, dispatch, task]);
 
 	// clear errors on empty input and get task by id
 	useEffect(() => {
@@ -58,6 +64,38 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 			dispatch(getTaskById(taskId));
 		}
 	}, [dispatch, errors.length, isUpdate, modalMode, taskId]);
+
+	console.log(taskId);
+
+	// handle subtask input change
+	const onSubtaskChange = e => {
+		const { value } = e.target;
+		setSubtaskTitle(value);
+	};
+
+	// handle add subtask input to array
+	const onAddSubtask = e => {
+		e.preventDefault();
+
+		const subtaskData = {
+			title: subtaskTitle,
+		};
+
+		setFormData(prevState => ({
+			...prevState,
+			subtasks: [...prevState.subtasks, subtaskData],
+		}));
+
+		setSubtaskTitle('');
+	};
+
+	// handle remove subtask input from array
+	const onRemoveSubtask = index => {
+		setFormData(prevState => ({
+			...prevState,
+			subtasks: prevState.subtasks.filter((_, i) => i !== index),
+		}));
+	};
 
 	// Submit new column / edit column and save to the database
 	const onSubmit = useCallback(
@@ -81,7 +119,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 				title,
 				description,
 				status,
-				subTasks,
+				subtasks,
 			};
 
 			if (isUpdate) {
@@ -100,7 +138,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 			title,
 			description,
 			status,
-			subTasks,
+			subtasks,
 			isUpdate,
 			setModalMode,
 			setShowModal,
@@ -125,7 +163,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 									className={
 										errors.length ? 'kanban__add-task_input-error' : ''
 									}
-									placeholder='e.g Todo'
+									placeholder='e.g. Take coffee break'
 									name='title'
 									value={title}
 									onChange={onChangeHandler}
@@ -142,13 +180,43 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 									className={
 										errors.length ? 'kanban__add-task_input-error' : ''
 									}
-									placeholder='e.g Todo'
+									placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'
 									name='description'
 									value={description}
 									onChange={onChangeHandler}
 								/>
 							</>
 						)}
+
+						{modalMode === 'viewTask' ? (
+							<p>Subtasks</p>
+						) : (
+							<div className='kanban__add-task_subtasks-container'>
+								<p>Subtasks</p>
+								{subtasks &&
+									subtasks.map((subtask, index) => (
+										<SubtaskInput
+											subtask={subtask}
+											key={index}
+											onChange={onSubtaskChange}
+											index={index}
+											onRemove={onRemoveSubtask}
+										/>
+									))}
+								<SubtaskInput
+									subtask={subtaskTitle}
+									onChange={onSubtaskChange}
+								/>
+								<button
+									className='kanban__add-task_subtasks-btn'
+									onClick={onAddSubtask}
+								>
+									<TiPlus />
+									Add New Subtask
+								</button>
+							</div>
+						)}
+
 						{modalMode === 'viewTask' ? (
 							<p>{column.name}</p>
 						) : (
@@ -174,7 +242,6 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 							</>
 						)}
 					</div>
-
 					{modalMode === 'viewTask' ? (
 						''
 					) : (
