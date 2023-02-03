@@ -32,12 +32,13 @@ const Layout = () => {
 		if (windowSize.width < 550) {
 			setShowSidebar(false);
 		}
+	}, [windowSize]);
 
-		if (boardId) {
-			dispatch(getBoardById(boardId));
-			dispatch(getBoardColumns(boardId));
-		}
-	}, [windowSize, boardId, dispatch]);
+	// get board and columns
+	useEffect(() => {
+		dispatch(getBoardById(boardId));
+		dispatch(getBoardColumns(boardId));
+	}, [boardId, dispatch]);
 
 	return (
 		<div>
