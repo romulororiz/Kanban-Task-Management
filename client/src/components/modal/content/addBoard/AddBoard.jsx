@@ -20,9 +20,8 @@ const AddBoard = ({ setShowModal, modalMode, setModalMode, board }) => {
 
 	// check modal mode
 	useEffect(() => {
-		if (modalMode === 'updateBoard') {
+		if (modalMode === 'updateBoard' && board) {
 			setIsUpdate(true);
-			// set board name to current board name
 			setBoardName(board.name);
 		}
 	}, [modalMode, dispatch, board.name]);

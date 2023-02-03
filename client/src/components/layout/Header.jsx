@@ -1,9 +1,8 @@
 import Ellipsis from '@assets/dashboard/icon-vertical-ellipsis.svg';
-import Add from '@assets/dashboard/icon-add-task-mobile.svg';
 import LogoDark from '@assets/dashboard/logo-dark.svg';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import { logout } from '@features/auth/authSlice';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaAt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { CgLogOut } from 'react-icons/cg';
@@ -13,10 +12,18 @@ import Modal from '@components/modal/Modal';
 import AddTask from '@components/modal/content/addTask/AddTask';
 import '@styles/scss/layout/Header.scss';
 
-const Header = ({ setShowSidebar, showSidebar, user, board }) => {
+const Header = ({
+	setShowSidebar,
+	showSidebar,
+	user,
+	boards,
+	board,
+	columns,
+}) => {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [modalMode, setModalMode] = useState('addTask');
+	const [isDisabled, setIsDisabled] = useState(false);
 
 	// get window width with useWindowSize hook
 	const windowSize = useWindowSize();
@@ -33,6 +40,17 @@ const Header = ({ setShowSidebar, showSidebar, user, board }) => {
 
 	// initialize useOnClickOutside hook
 	useOnClickOutside(dropdownRef, () => setShowDropdown(false));
+
+	// check for board and check if board has columns
+	useEffect(() => {
+		if (!boards.length) {
+			setIsDisabled(true);
+		} else if (!columns.length) {
+			setIsDisabled(true);
+		} else {
+			setIsDisabled(false);
+		}
+	}, [boards, columns, board]);
 
 	return (
 		<>
@@ -81,6 +99,8 @@ const Header = ({ setShowSidebar, showSidebar, user, board }) => {
 							type='button'
 							className={`${
 								isTablet ? 'kanban__header-board_actions-add_small ' : ''
+							} ${
+								isDisabled ? 'kanban__header-board_actions-add_disabled' : ''
 							}`}
 							onClick={() => {
 								setShowModal(true);

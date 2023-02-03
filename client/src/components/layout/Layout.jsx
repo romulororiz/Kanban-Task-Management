@@ -5,15 +5,17 @@ import Header from '@components/layout/Header';
 import Sidebar from '@components/layout/Sidebar';
 import { Outlet, useParams } from 'react-router-dom';
 import ShowSidebar from './ShowSidebar';
-import '@styles/scss/layout/Layout.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBoardById } from '@features/boards/boardSlice';
+import { getBoardColumns } from '@features/columns/columnSlice';
+import '@styles/scss/layout/Layout.scss';
 
 const Layout = () => {
 	const [showSidebar, setShowSidebar] = useState(true);
 	const [showModal, setShowModal] = useState(false);
 
-	const { board } = useSelector(state => state.board);
+	const { board, boards } = useSelector(state => state.board);
+	const { columns } = useSelector(state => state.column);
 
 	const dispatch = useDispatch();
 
@@ -33,6 +35,7 @@ const Layout = () => {
 
 		if (boardId) {
 			dispatch(getBoardById(boardId));
+			dispatch(getBoardColumns(boardId));
 		}
 	}, [windowSize, boardId, dispatch]);
 
@@ -43,13 +46,15 @@ const Layout = () => {
 				setShowSidebar={setShowSidebar}
 				showModal={showModal}
 				setShowModal={setShowModal}
-				board={board && board}
+				board={board}
 			/>
 			<Header
 				user={user}
 				showSidebar={showSidebar}
 				setShowSidebar={setShowSidebar}
-				board={board && board}
+				board={board}
+				boards={boards}
+				columns={columns}
 			/>
 			<main
 				className={`kanban__main-content ${

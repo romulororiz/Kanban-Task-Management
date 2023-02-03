@@ -23,8 +23,6 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 	const { isLoading, columns } = useSelector(state => state.column);
 	const { errors: taskErrors, task } = useSelector(state => state.task);
 
-	console.log(column);
-
 	// initialize dispatch
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -91,7 +89,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 				setIsUpdate(false);
 				setModalMode('addTask');
 				setShowModal(false);
-				navigate(-1)
+				navigate(-1);
 			} else {
 				dispatch(createTask({ columnId: status, taskData }));
 				setShowModal(false);
@@ -166,9 +164,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 									value={status}
 									onChange={onChangeHandler}
 								>
-									<option value='' disabled>
-										Select a column
-									</option>
+									<option value=''>Select a column</option>
 									{columns.map(column => (
 										<option key={column._id} value={column._id}>
 											{column.name}

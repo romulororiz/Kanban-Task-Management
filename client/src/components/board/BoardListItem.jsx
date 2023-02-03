@@ -1,4 +1,3 @@
-import Add from '@assets/dashboard/icon-add-task-mobile.svg';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { deleteBoard } from '@features/boards/boardSlice';
