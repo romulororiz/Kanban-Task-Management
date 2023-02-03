@@ -117,14 +117,15 @@ const deleteTask = asyncHandler(async (req, res) => {
 		// Find task by id
 		const task = await Task.findById(req.params.id);
 
-		// find column by id
-		const column = await Column.findById(task.column);
-
 		// Check if task exists
 		if (!task) {
 			res.status(404);
 			throw new Error('Task not found');
 		}
+		
+		// find column by id
+		const column = await Column.findById(task.column);
+
 
 		// Check if user owns task
 		if (task.user.toString() !== req.user.id) {

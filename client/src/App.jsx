@@ -31,6 +31,24 @@ function App() {
 						<Route path='/dashboard/boards/:id' element={<PrivateRoute />}>
 							<Route path='/dashboard/boards/:id' element={<Dashboard />} />
 						</Route>
+						<Route
+							path='/dashboard/boards/:id/tasks/:taskId'
+							element={<PrivateRoute />}
+						>
+							<Route
+								path='/dashboard/boards/:id/tasks/:taskId'
+								element={<Dashboard />}
+							/>
+						</Route>
+						<Route
+							path='/dashboard/boards/:id/columns/:columnId'
+							element={<PrivateRoute />}
+						>
+							<Route
+								path='/dashboard/boards/:id/columns/:columnId'
+								element={<Dashboard />}
+							/>
+						</Route>
 					</Route>
 					<Route
 						path='/auth/login'

@@ -32,7 +32,6 @@ const Sidebar = ({
 	// get boards from store
 	const { boards } = useSelector(state => state.board);
 
-	// check if board  exists and if it doesn't set active board to previous board or null
 	useEffect(() => {
 		const boardExists = boards.find(board => board._id === boardId);
 		const prevBoard = boards[boards.length - 1];

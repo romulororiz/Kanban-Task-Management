@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { createTask, updateTask } from '@features/tasks/taskSlice';
-import '@styles/scss/modal/addTask/AddTask.scss';
+import { createTask, updateTask, getTaskById } from '@features/tasks/taskSlice';
 import { GoKebabVertical } from 'react-icons/go';
+import '@styles/scss/modal/addTask/AddTask.scss';
+import { useParams } from 'react-router-dom';
 
 const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 	const [formData, setFormData] = useState({
@@ -24,6 +25,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 
 	// initialize dispatch
 	const dispatch = useDispatch();
+	const { taskId } = useParams();
 
 	// on change handler
 	const onChangeHandler = e => {
@@ -52,6 +54,10 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 			setTimeout(() => {
 				setErrors([]);
 			}, 3000);
+		}
+
+		if (isUpdate || modalMode === 'viewTask') {
+			dispatch(getTaskById(taskId));
 		}
 	}, [errors]);
 
@@ -110,7 +116,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 					<div className='kanban__add-task_heading'>
 						{modalMode === 'viewTask' ? (
 							<div className='kanban__task-title_container'>
-								<p>title</p>
+								<h3>{task.title}</h3>
 								<GoKebabVertical onClick={() => setModalMode('updateTask')} />
 							</div>
 						) : (
@@ -122,15 +128,15 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 									}
 									type='text'
 									placeholder='e.g Todo'
-									name='title'
+									name={isUpdate ? 'task.title' : 'title'}
 									// todo - add loading state
-									value={isUpdate && isLoading ? 'Loading...' : title}
+									value={isUpdate ? task.title : title}
 									onChange={onChangeHandler}
 								/>
 							</>
 						)}
 						{modalMode === 'viewTask' ? (
-							<p>description</p>
+							<p>{task.description}</p>
 						) : (
 							<>
 								<label htmlFor='description'>Description</label>
@@ -141,13 +147,13 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 									placeholder='e.g Todo'
 									name='description'
 									// todo - add loading state
-									value={isUpdate && isLoading ? 'Loading...' : description}
+									value={isUpdate ? task.description : description}
 									onChange={onChangeHandler}
 								/>
 							</>
 						)}
 						{modalMode === 'viewTask' ? (
-							<p>Current Status</p>
+							<p>{task.status}</p>
 						) : (
 							<>
 								<label htmlFor='status'>Status</label>
@@ -159,7 +165,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 									placeholder='e.g Todo'
 									name='status'
 									// todo - add loading state
-									value={isUpdate && isLoading ? 'Loading...' : status}
+									value={isUpdate ? task.status : status}
 									onChange={onChangeHandler}
 								>
 									<option value='' disabled>

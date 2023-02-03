@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import '@styles/scss/boards/TaskItem.scss';
 
 const TaskItem = ({
@@ -7,6 +8,10 @@ const TaskItem = ({
 	setModalMode,
 	modalMode,
 }) => {
+	console.log(task);
+	// initialize navigate
+	const navigate = useNavigate();
+
 	// get number of subtasks
 	const { title, subtasks } = task;
 
@@ -14,6 +19,7 @@ const TaskItem = ({
 	const handleUpdateTask = () => {
 		setModalMode('viewTask');
 		setShowModal(true);
+		navigate(`/dashboard/boards/${task.board}/tasks/${task._id}`);
 	};
 
 	return (
@@ -21,9 +27,13 @@ const TaskItem = ({
 			<div className='kanban__dashboard-task_item-title'>
 				<h3>{title}</h3>
 			</div>
-			<div className='kanban__dashboard-task_item-subtasks'>
-				<p>{`0 of ${subtasks && subtasks.length} completed`}</p>
-			</div>
+			{subtasks ? (
+				<div className='kanban__dashboard-task_item-subtasks'>
+					<p>{`0 of ${subtasks && subtasks.length} completed`}</p>
+				</div>
+			) : (
+				''
+			)}
 		</div>
 	);
 };

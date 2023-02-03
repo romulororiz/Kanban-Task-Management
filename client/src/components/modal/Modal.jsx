@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import useOnClickOutside from '@hooks/useOnClickOutside';
+import { useNavigate } from 'react-router-dom';
 import '@styles/scss/modal/Modal.scss';
 
 const Modal = ({
@@ -10,12 +11,23 @@ const Modal = ({
 	setModalMode,
 	modalMode,
 }) => {
+	// initialize navigate
+	const navigate = useNavigate();
+
 	// reference to the dropdown menu
 	const modalRef = useRef();
 
 	// initialize useOnClickOutside hook
 	useOnClickOutside(modalRef, () => {
 		setShowModal(false);
+
+		if (
+			modalMode === 'viewTask' ||
+			modalMode === 'updateTask' ||
+			modalMode === 'updateColumn'
+		) {
+			navigate(-1);
+		}
 
 		switch (modalMode) {
 			case 'updateColumn':

@@ -4,7 +4,7 @@ import { GoKebabVertical } from 'react-icons/go';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { getBoardTasks } from '@features/tasks/taskSlice';
 import { deleteColumn } from '@features/columns/columnSlice';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import TaskItem from './TaskItem';
 import Modal from '@components/modal/Modal';
 import AddColumn from '@components/modal/content/addColumn/AddColumn';
@@ -27,7 +27,7 @@ const Column = ({ column }) => {
 	});
 
 	// get board id from params
-	const { id: boardId } = useParams();
+	const { id: boardId, columnId } = useParams();
 
 	// get useConfirm hook
 	const [setTitle, setMessage, setButtons] = useConfirmAlert();
@@ -40,6 +40,7 @@ const Column = ({ column }) => {
 
 	// initialize dispatch
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	// get tasks from board
 	useEffect(() => {
@@ -76,6 +77,7 @@ const Column = ({ column }) => {
 
 	// handle update column
 	const handleUpdateColumn = () => {
+		navigate(`/dashboard/boards/${boardId}/columns/${id}`);
 		setModalMode('updateColumn');
 		setShowModal(true);
 		setShowDropdown(false);
