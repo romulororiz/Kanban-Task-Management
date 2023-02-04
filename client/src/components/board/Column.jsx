@@ -38,8 +38,6 @@ const Column = ({ column }) => {
 	// get tasks from store
 	const { tasks } = useSelector(state => state.task);
 
-	console.log(tasks)
-
 	// initialize dispatch
 	const dispatch = useDispatch();
 	const navigate = useNavigate();

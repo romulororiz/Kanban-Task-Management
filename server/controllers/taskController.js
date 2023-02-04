@@ -149,7 +149,7 @@ const deleteTask = asyncHandler(async (req, res) => {
 // @desc Update a task
 // @access Private
 const updateTask = asyncHandler(async (req, res) => {
-	const { title, description, status } = req.body;
+	const { title, description, status, subtasks } = req.body;
 
 	try {
 		// Find task by id
@@ -175,6 +175,7 @@ const updateTask = asyncHandler(async (req, res) => {
 				description,
 				status,
 				column: status,
+				subtasks,
 			},
 			{ new: true }
 		);
