@@ -27,7 +27,7 @@ const Column = ({ column }) => {
 	});
 
 	// get board id from params
-	const { id: boardId, columnId } = useParams();
+	const { id: boardId } = useParams();
 
 	// get useConfirm hook
 	const [setTitle, setMessage, setButtons] = useConfirmAlert();
@@ -37,6 +37,8 @@ const Column = ({ column }) => {
 
 	// get tasks from store
 	const { tasks } = useSelector(state => state.task);
+
+	console.log(tasks)
 
 	// initialize dispatch
 	const dispatch = useDispatch();
@@ -197,6 +199,7 @@ const Column = ({ column }) => {
 							<TaskItem
 								key={task._id}
 								task={task}
+								subtasks={task.subtasks}
 								showModal={showModal}
 								modalMode={modalMode}
 								setShowModal={setShowModal}

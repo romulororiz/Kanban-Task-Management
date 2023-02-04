@@ -28,11 +28,9 @@ const TaskItem = ({
 			<div className='kanban__dashboard-task_item-title'>
 				<h3>{title}</h3>
 			</div>
-			{subtasks && (
-				<div className='kanban__dashboard-task_item-subtasks'>
-					<p>{`0 of ${subtasks && subtasks.length} completed`}</p>
-				</div>
-			)}
+			<div className='kanban__dashboard-task_item-subtasks'>
+				<p>{`0 of ${subtasks && subtasks.length} completed`}</p>
+			</div>
 		</div>
 	);
 };

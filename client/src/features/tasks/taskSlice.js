@@ -88,6 +88,7 @@ const taskSlice = createSlice({
 				_id: action.payload._id,
 				title: action.payload.title,
 				description: action.payload.description,
+				subtasks: action.payload.subtasks,
 				column: action.payload.column,
 				board: action.payload.board,
 			};
