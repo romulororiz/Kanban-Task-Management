@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { createTask, updateTask, getTaskById } from '@features/tasks/taskSlice';
+import {
+	createTask,
+	updateTask,
+	getTaskById,
+	deleteTask,
+} from '@features/tasks/taskSlice';
 import { GoKebabVertical } from 'react-icons/go';
 import { TiPlus } from 'react-icons/ti';
 import { useParams, useNavigate } from 'react-router-dom';
-import { createSubtask } from '@features/subtasks/subtaskSlice';
+import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import SubtaskInput from './SubtaskInput';
 import '@styles/scss/modal/addTask/AddTask.scss';
 
@@ -19,6 +24,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 	const [isUpdate, setIsUpdate] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const [subtaskTitle, setSubtaskTitle] = useState([]);
+	const [showDropdown, setShowDropdown] = useState(false);
 
 	// destructure form data
 	const { title, description, status, subtasks } = formData;
@@ -64,8 +70,6 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 			dispatch(getTaskById(taskId));
 		}
 	}, [dispatch, errors.length, isUpdate, modalMode, taskId]);
-
-	console.log(taskId);
 
 	// handle subtask input change
 	const onSubtaskChange = e => {
@@ -146,6 +150,20 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 		]
 	);
 
+	// handle update task
+	const onUpdateTask = () => {
+		setModalMode('updateTask');
+		setShowDropdown(false);
+	};
+
+	// handle delete task
+	const onDeleteTask = id => {
+		dispatch(deleteTask(id));
+		setShowDropdown(false);
+		setShowModal(false);
+		navigate(-1);
+	};
+
 	return (
 		<>
 			<div className='kanban__add-task'>
@@ -154,7 +172,27 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 						{modalMode === 'viewTask' ? (
 							<div className='kanban__task-title_container'>
 								<h3>{task.title}</h3>
-								<GoKebabVertical onClick={() => setModalMode('updateTask')} />
+								<GoKebabVertical onClick={() => setShowDropdown(true)} />
+								{showDropdown && (
+									<div className='kanban__add-task_dropdown'>
+										<ul>
+											<li
+												className='kanban__add-task_dropdown_item'
+												onClick={onUpdateTask}
+											>
+												<FaRegEdit />
+												Edit
+											</li>
+											<li
+												className='kanban__add-task_dropdown_item'
+												onClick={() => onDeleteTask(task._id)}
+											>
+												<FaRegTrashAlt />
+												Delete
+											</li>
+										</ul>
+									</div>
+								)}
 							</div>
 						) : (
 							<>
@@ -196,10 +234,10 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 								{subtasks &&
 									subtasks.map((subtask, index) => (
 										<SubtaskInput
-											subtask={subtask}
 											key={index}
-											onChange={onSubtaskChange}
 											index={index}
+											subtask={subtask}
+											onChange={onSubtaskChange}
 											onRemove={onRemoveSubtask}
 										/>
 									))}

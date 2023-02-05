@@ -44,6 +44,7 @@ const getTaskById = asyncHandler(async (req, res) => {
 		res.status(401);
 		throw new Error('Not authorized');
 	}
+
 	try {
 		res.status(200).json(task);
 	} catch (error) {
@@ -104,28 +105,28 @@ const createTask = asyncHandler(async (req, res) => {
 // @desc    Delete a task
 // @access  Private
 const deleteTask = asyncHandler(async (req, res) => {
+	// Find task by id
+	const task = await Task.findById(req.params.id);
+
+	// Check if task exists
+	if (!task) {
+		res.status(404);
+		throw new Error('Task not found');
+	}
+
+	// find column by id
+	const column = await Column.findById(task.column);
+
+	// Check if user owns task
+	if (task.user.toString() !== req.user.id) {
+		res.status(401);
+		throw new Error('Not authorized');
+	}
+
+	// Find all subtasks associated with the task
+	const subtasks = await Subtask.find({ task: task._id });
+
 	try {
-		// Find task by id
-		const task = await Task.findById(req.params.id);
-
-		// Check if task exists
-		if (!task) {
-			res.status(404);
-			throw new Error('Task not found');
-		}
-
-		// find column by id
-		const column = await Column.findById(task.column);
-
-		// Check if user owns task
-		if (task.user.toString() !== req.user.id) {
-			res.status(401);
-			throw new Error('Not authorized');
-		}
-
-		// Find all subtasks associated with the task
-		const subtasks = await Subtask.find({ task: task._id });
-
 		// Delete all subtasks associated with the task
 		subtasks.forEach(async subtask => {
 			await subtask.remove();
@@ -138,7 +139,7 @@ const deleteTask = asyncHandler(async (req, res) => {
 		column.tasks.pull(task._id);
 		await column.save();
 
-		res.status(200).json({ message: 'Task removed' });
+		res.status(200).json(task);
 	} catch (error) {
 		res.status(500);
 		throw new Error(error);
@@ -151,22 +152,21 @@ const deleteTask = asyncHandler(async (req, res) => {
 const updateTask = asyncHandler(async (req, res) => {
 	const { title, description, status, subtasks } = req.body;
 
+	// Find task by id
+	const task = await Task.findById(req.params.id);
+
+	// Check if task exists
+	if (!task) {
+		res.status(404);
+		throw new Error('Task not found');
+	}
+
+	// Check if user owns task
+	if (task.user.toString() !== req.user.id) {
+		res.status(401);
+		throw new Error('Not authorized');
+	}
 	try {
-		// Find task by id
-		const task = await Task.findById(req.params.id);
-
-		// Check if task exists
-		if (!task) {
-			res.status(404);
-			throw new Error('Task not found');
-		}
-
-		// Check if user owns task
-		if (task.user.toString() !== req.user.id) {
-			res.status(401);
-			throw new Error('Not authorized');
-		}
-
 		// Update task
 		const updatedTask = await Task.findByIdAndUpdate(
 			req.params.id,

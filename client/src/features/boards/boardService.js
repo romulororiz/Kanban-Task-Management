@@ -23,7 +23,6 @@ const getBoardById = async boardId => {
 // Update board
 const updateBoard = async (boardId, boardData) => {
 	const response = await axios.put(`${API_URL}/${boardId}`, boardData);
-
 	return response.data;
 };
 
