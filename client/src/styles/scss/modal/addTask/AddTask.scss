@@ -1,5 +1,42 @@
 @import '../../variables', '../../mixins', '../../breakpoints';
 
+.kanban__add-task-subtasks_container {
+	p {
+		@include headingSm;
+		color: $primary-gray;
+
+		&:first-child {
+			margin-bottom: 1rem;
+		}
+	}
+}
+
+.kanban__add-task_subtasks-container_update {
+
+	p {
+		@include headingSm;
+		color: $primary-gray;
+
+		&:first-child {
+			margin-bottom: 1rem;
+		}
+	}
+
+	.kanban__add-task_subtasks-btn {
+		@include buttonSecondary;
+		@include headingMd;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		margin-bottom: 1rem;
+
+		svg {
+			margin-right: 0.25rem;
+		}
+	}
+}
+
 .kanban__add-task_heading {
 	display: flex;
 	flex-direction: column;
@@ -8,6 +45,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		margin-bottom: 1rem;
+
+		h3 {
+			@include headingXl;
+		}
 
 		svg {
 			@include headingLg;
@@ -18,7 +60,7 @@
 		.kanban__add-task_dropdown {
 			@include headingSm;
 			position: absolute;
-			top: 45%;
+			top: 90px;
 			right: 36px;
 			min-width: 150px;
 			padding: 20px 15px;
@@ -40,6 +82,13 @@
 
 					svg {
 						margin-right: 0.5rem;
+						font-size: $font-size-l;
+						position: relative;
+						bottom: 1px;
+					}
+
+					&:hover {
+						color: $primary-purple;
 					}
 				}
 
@@ -49,12 +98,14 @@
 						color: $primary-red;
 					}
 				}
-
-				li:hover {
-					color: $primary-purple;
-				}
 			}
 		}
+	}
+
+	.kanban__add-task_description {
+		@include textL;
+		color: $primary-gray;
+		margin-bottom: 1rem;
 	}
 
 	input[type='text'],
@@ -74,7 +125,7 @@
 	textarea {
 		@include inputTextArea;
 		border: 1px solid rgba($primary-gray, 0.25);
-		height: 100px;
+		min-height: 100px;
 	}
 
 	select {
@@ -83,24 +134,8 @@
 	}
 }
 
-.kanban__add-task_subtasks-container {
-	p {
-		@include headingSm;
-		color: $primary-gray;
-		margin-bottom: 0.5rem;
-	}
-
-	.kanban__add-task_subtasks-btn {
-		@include buttonSecondary;
-		@include headingMd;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		margin-bottom: 1rem;
-
-		svg {
-			margin-right: 0.25rem;
-		}
-	}
+.kanban__add-task_status-container {
+	margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
 }

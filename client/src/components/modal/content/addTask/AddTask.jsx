@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useCallback } from 'react';
 import {
 	createTask,
 	updateTask,
@@ -12,9 +11,10 @@ import { TiPlus } from 'react-icons/ti';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import SubtaskInput from './SubtaskInput';
+import SubtaskItem from './SubtaskItem';
 import '@styles/scss/modal/addTask/AddTask.scss';
 
-const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
+const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 	const [formData, setFormData] = useState({
 		title: '',
 		description: '',
@@ -30,8 +30,13 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 	const { title, description, status, subtasks } = formData;
 
 	// get data from store
-	const { isLoading, columns } = useSelector(state => state.column);
+	const { columns } = useSelector(state => state.column);
 	const { errors: taskErrors, task } = useSelector(state => state.task);
+
+	// handle dropdown
+	const dropdownHandler = useCallback(() => {
+		setShowDropdown(prevState => !prevState);
+	}, []);
 
 	// initialize dispatch and navigate
 	const dispatch = useDispatch();
@@ -56,6 +61,10 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 			...prevState,
 			[name]: value,
 		}));
+
+		if (name === 'status' && modalMode === 'viewTask') {
+			dispatch(updateTask({ taskId, taskData: { status: value } }));
+		}
 	};
 
 	// clear errors on empty input and get task by id
@@ -94,7 +103,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 	};
 
 	// handle remove subtask input from array
-	const onRemoveSubtask = index => {
+	const onRemoveSubtaskDropdown = index => {
 		setFormData(prevState => ({
 			...prevState,
 			subtasks: prevState.subtasks.filter((_, i) => i !== index),
@@ -151,7 +160,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 	);
 
 	// handle update task
-	const onUpdateTask = () => {
+	const onUpdateTaskDropdown = () => {
 		setModalMode('updateTask');
 		setShowDropdown(false);
 	};
@@ -172,20 +181,20 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 						{modalMode === 'viewTask' ? (
 							<div className='kanban__task-title_container'>
 								<h3>{task.title}</h3>
-								<GoKebabVertical onClick={() => setShowDropdown(true)} />
+								<GoKebabVertical onClick={dropdownHandler} />
 								{showDropdown && (
 									<div className='kanban__add-task_dropdown'>
 										<ul>
 											<li
 												className='kanban__add-task_dropdown_item'
-												onClick={onUpdateTask}
+												onClick={onUpdateTaskDropdown}
 											>
 												<FaRegEdit />
 												Edit
 											</li>
 											<li
 												className='kanban__add-task_dropdown_item'
-												onClick={() => onDeleteTask(task._id)}
+												onClick={() => onDeleteTask(taskId)}
 											>
 												<FaRegTrashAlt />
 												Delete
@@ -209,8 +218,9 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 								/>
 							</>
 						)}
+
 						{modalMode === 'viewTask' ? (
-							<p>{task.description}</p>
+							<p className='kanban__add-task_description'>{task.description}</p>
 						) : (
 							<>
 								<label htmlFor='description'>Description</label>
@@ -227,9 +237,21 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 						)}
 
 						{modalMode === 'viewTask' ? (
-							<p>Subtasks</p>
+							<div className='kanban__add-task-subtasks_container'>
+								{/* //todo get number of subtasks */}
+								<p>Subtasks (2 of 3)</p>
+								{task.subtasks &&
+									task.subtasks.map((subtask, index) => (
+										<SubtaskItem
+											key={index}
+											index={index}
+											subtask={subtask}
+											task={task}
+										/>
+									))}
+							</div>
 						) : (
-							<div className='kanban__add-task_subtasks-container'>
+							<div className='kanban__add-task_subtasks-container_update'>
 								<p>Subtasks</p>
 								{subtasks &&
 									subtasks.map((subtask, index) => (
@@ -238,7 +260,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 											index={index}
 											subtask={subtask}
 											onChange={onSubtaskChange}
-											onRemove={onRemoveSubtask}
+											onRemove={onRemoveSubtaskDropdown}
 										/>
 									))}
 								<SubtaskInput
@@ -255,30 +277,26 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, column }) => {
 							</div>
 						)}
 
-						{modalMode === 'viewTask' ? (
-							<p>{column.name}</p>
-						) : (
-							<>
-								<label htmlFor='status'>Status</label>
-								<select
-									className={
-										errors.length ? 'kanban__add-task_input-error' : ''
-									}
-									type='text'
-									placeholder='e.g Todo'
-									name='status'
-									value={status}
-									onChange={onChangeHandler}
-								>
-									<option value=''>Select a column</option>
-									{columns.map(column => (
-										<option key={column._id} value={column._id}>
-											{column.name}
-										</option>
-									))}
-								</select>
-							</>
-						)}
+						<div className='kanban__add-task_status-container'>
+							<label htmlFor='status'>
+								{modalMode === 'viewTask' ? 'Current Status' : 'Status'}
+							</label>
+							<select
+								className={errors.length ? 'kanban__add-task_input-error' : ''}
+								type='text'
+								placeholder='e.g Todo'
+								name='status'
+								value={status}
+								onChange={onChangeHandler}
+							>
+								<option value=''>Select a column</option>
+								{columns.map(column => (
+									<option key={column._id} value={column._id}>
+										{column.name}
+									</option>
+								))}
+							</select>
+						</div>
 					</div>
 					{modalMode === 'viewTask' ? (
 						''

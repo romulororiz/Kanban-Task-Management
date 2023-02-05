@@ -162,22 +162,27 @@
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input::-webkit-input-placeholder {
   color: #000112;
   opacity: 0.25;
+  font-size: 13px;
 }
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input::-moz-placeholder {
   color: #000112;
   opacity: 0.25;
+  font-size: 13px;
 }
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input:-ms-input-placeholder {
   color: #000112;
   opacity: 0.25;
+  font-size: 13px;
 }
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input::-ms-input-placeholder {
   color: #000112;
   opacity: 0.25;
+  font-size: 13px;
 }
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input::placeholder {
   color: #000112;
   opacity: 0.25;
+  font-size: 13px;
 }
 @media screen and (max-width: 550px) {
   .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input {
@@ -204,22 +209,27 @@
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-webkit-input-placeholder {
   color: #000112;
   opacity: 0.25;
+  font-size: 13px;
 }
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-moz-placeholder {
   color: #000112;
   opacity: 0.25;
+  font-size: 13px;
 }
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error:-ms-input-placeholder {
   color: #000112;
   opacity: 0.25;
+  font-size: 13px;
 }
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-ms-input-placeholder {
   color: #000112;
   opacity: 0.25;
+  font-size: 13px;
 }
 .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::placeholder {
   color: #000112;
   opacity: 0.25;
+  font-size: 13px;
 }
 @-webkit-keyframes shake {
   0% {
