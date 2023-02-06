@@ -173,6 +173,11 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 		navigate(-1);
 	};
 
+	// get completed subtasks count
+	const completedSubtasks =
+		task.subtasks &&
+		task.subtasks.filter(subtask => subtask.isCompleted).length;
+
 	return (
 		<>
 			<div className='kanban__add-task'>
@@ -239,7 +244,10 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 						{modalMode === 'viewTask' ? (
 							<div className='kanban__add-task-subtasks_container'>
 								{/* //todo get number of subtasks */}
-								<p>Subtasks (2 of 3)</p>
+								<p>
+									Subtasks ({completedSubtasks} of{' '}
+									{task.subtasks && task.subtasks.length})
+								</p>
 								{task.subtasks &&
 									task.subtasks.map((subtask, index) => (
 										<SubtaskItem

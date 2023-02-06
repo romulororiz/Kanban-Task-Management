@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { updateTask } from '@features/tasks/taskSlice';
 import '@styles/scss/modal/addTask/SubtaskItem.scss';
 
-const SubtaskItem = ({ subtask, task, index }) => {
+const SubtaskItem = ({ subtask, task }) => {
 	const [isChecked, setIsChecked] = useState(false);
 
 	// get task id from url
