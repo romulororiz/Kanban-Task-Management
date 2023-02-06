@@ -46,15 +46,5 @@ const taskSchema = new mongoose.Schema(
 	}
 );
 
-// Delete all subtasks when a task is deleted
-taskSchema.pre('remove', async function (next) {
-	try {
-		await this.model('Subtask').deleteMany({ task: this._id });
-		next();
-	} catch (err) {
-		next(err);
-	}
-});
-
 const Task = mongoose.model('Task', taskSchema);
 module.exports = Task;

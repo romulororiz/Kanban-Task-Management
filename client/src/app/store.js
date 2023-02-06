@@ -4,7 +4,6 @@ import authReducer from '@features/auth/authSlice';
 import boardReducer from '@features/boards/boardSlice';
 import columnReducer from '@features/columns/columnSlice';
 import taskReducer from '@features/tasks/taskSlice';
-import subtaskReducer from '@features/subtasks/subtaskSlice';
 
 export default configureStore({
 	reducer: {
@@ -12,6 +11,5 @@ export default configureStore({
 		board: boardReducer,
 		column: columnReducer,
 		task: taskReducer,
-		subtask: subtaskReducer,
 	},
 });

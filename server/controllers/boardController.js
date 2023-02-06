@@ -13,10 +13,6 @@ const getBoards = asyncHandler(async (req, res) => {
 			populate: {
 				path: 'tasks',
 				model: 'Task',
-				populate: {
-					path: 'subtasks',
-					model: 'Subtask',
-				},
 			},
 		});
 
@@ -75,10 +71,6 @@ const getBoard = asyncHandler(async (req, res) => {
 			populate: {
 				path: 'tasks',
 				model: 'Task',
-				populate: {
-					path: 'subtasks',
-					model: 'Subtask',
-				},
 			},
 		});
 

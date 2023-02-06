@@ -69,10 +69,7 @@ const getBoardColumns = asyncHandler(async (req, res) => {
 		// Get all columns for board and populate tasks
 		const columns = await Column.find({ board: req.params.id }).populate({
 			path: 'tasks',
-			populate: {
-				path: 'subtasks',
-				model: 'Subtask',
-			},
+			model: 'Task',
 		});
 
 		res.status(200).json(columns);

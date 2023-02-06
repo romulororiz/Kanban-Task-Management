@@ -2,7 +2,6 @@ const asyncHandler = require('express-async-handler');
 const Column = require('../models/columnModel');
 const Task = require('../models/taskModel');
 const { validationResult } = require('express-validator');
-const Subtask = require('../models/subtaskModel');
 
 // @route   GET api/tasks/:boardId
 // @desc    Get all tasks
@@ -11,7 +10,7 @@ const getTasks = asyncHandler(async (req, res) => {
 	try {
 		const { boardId } = req.params;
 
-		const tasks = await Task.find({ board: boardId }).populate('subtasks');
+		const tasks = await Task.find({ board: boardId });
 
 		// check if tasks exist
 		if (!tasks) {
@@ -31,7 +30,7 @@ const getTasks = asyncHandler(async (req, res) => {
 // @access  Private
 const getTaskById = asyncHandler(async (req, res) => {
 	// Get task by id
-	const task = await Task.findById(req.params.id).populate('subtasks');
+	const task = await Task.findById(req.params.id);
 
 	// Check if task exists
 	if (!task) {
@@ -123,15 +122,7 @@ const deleteTask = asyncHandler(async (req, res) => {
 		throw new Error('Not authorized');
 	}
 
-	// Find all subtasks associated with the task
-	const subtasks = await Subtask.find({ task: task._id });
-
 	try {
-		// Delete all subtasks associated with the task
-		subtasks.forEach(async subtask => {
-			await subtask.remove();
-		});
-
 		// Delete task
 		await task.remove();
 
