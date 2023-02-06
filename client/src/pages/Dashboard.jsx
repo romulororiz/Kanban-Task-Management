@@ -2,16 +2,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import Column from '@components/board/Column';
 import Modal from '@components/modal/Modal';
 import AddColumn from '@components/modal/content/addColumn/AddColumn';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getBoardColumns } from '@features/columns/columnSlice';
 import Spinner from '@components/Spinner';
 import { TiPlus } from 'react-icons/ti';
+import useWindowSize from '@hooks/useWindowSize';
+import { ReactComponent as EmptyBoard } from '@assets/dashboard/space-empty.svg';
 import '@styles/scss/boards/Dashboard.scss';
 
 const Dashboard = () => {
 	const [showModal, setShowModal] = useState(false);
 	const [modalMode, setModalMode] = useState('addColumn');
+
+	// get window width
+	const windowSize = useWindowSize();
+
+	// define isMobile variable
+	const isMobile = windowSize.width < 550;
 
 	// get columns from store
 	const { columns, isLoading } = useSelector(state => state.column);
@@ -45,7 +53,7 @@ const Dashboard = () => {
 		);
 
 	return (
-		<>
+		<div className='kanban__dashboard'>
 			{showModal && (
 				<Modal
 					title={modalMode === 'addColumn' ? 'Add Column' : 'Update Column'}
@@ -63,7 +71,8 @@ const Dashboard = () => {
 			)}
 			{boards.length <= 0 ? (
 				<div className='kanban__dashboard-empty_boards'>
-					You have no boards. Create a board to get started.
+					<p>You have no boards. Create a board to get started</p>
+					<EmptyBoard />
 				</div>
 			) : columns.length > 0 ? (
 				<div className='kanban__dashboard-board'>
@@ -82,7 +91,7 @@ const Dashboard = () => {
 				</div>
 			) : (
 				<div className='kanban__dashboard-empty'>
-					This board is empty. Add a column to get started.
+					<p>This board is empty. Add a column to get started.</p>
 					<div
 						className='kanban__dashboard-empty-button'
 						onClick={handleAddColumn}
@@ -92,7 +101,7 @@ const Dashboard = () => {
 					</div>
 				</div>
 			)}
-		</>
+		</div>
 	);
 };
 

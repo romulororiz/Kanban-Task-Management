@@ -14,9 +14,11 @@ const Layout = () => {
 	const [showSidebar, setShowSidebar] = useState(true);
 	const [showModal, setShowModal] = useState(false);
 
+	// get board and columns from store
 	const { board, boards } = useSelector(state => state.board);
 	const { columns } = useSelector(state => state.column);
 
+	// initialize dispatch
 	const dispatch = useDispatch();
 
 	// get board id from params
@@ -28,11 +30,7 @@ const Layout = () => {
 	// handle window size
 	const windowSize = useWindowSize();
 
-	useEffect(() => {
-		if (windowSize.width < 550) {
-			setShowSidebar(false);
-		}
-	}, [windowSize]);
+	
 
 	// get board and columns
 	useEffect(() => {

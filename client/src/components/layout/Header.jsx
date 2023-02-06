@@ -25,7 +25,7 @@ const Header = ({
 	const [modalMode, setModalMode] = useState('addTask');
 	const [isDisabled, setIsDisabled] = useState(false);
 
-	// get window width with useWindowSize hook
+	// get window width
 	const windowSize = useWindowSize();
 
 	// define isMobile variable
