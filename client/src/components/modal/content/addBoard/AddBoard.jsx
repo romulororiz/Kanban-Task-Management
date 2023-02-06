@@ -75,7 +75,7 @@ const AddBoard = ({ setShowModal, modalMode, setModalMode, board }) => {
 					<input
 						className={errors.length ? 'kanban__add-board_input-error' : ''}
 						type='text'
-						placeholder='e.g marketing plan'
+						placeholder='e.g Marketing Plan'
 						name='name'
 						// todo - add loading state
 						value={isUpdate && isLoading ? 'Loading...' : boardName}

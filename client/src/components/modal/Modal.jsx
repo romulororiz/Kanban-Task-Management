@@ -14,7 +14,7 @@ const Modal = ({
 	// initialize navigate
 	const navigate = useNavigate();
 
-	// reference to the dropdown menu
+	// reference to the modal container
 	const modalRef = useRef();
 
 	// initialize useOnClickOutside hook
