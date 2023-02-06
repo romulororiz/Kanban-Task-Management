@@ -79,6 +79,10 @@
 			svg {
 				margin-right: 0.25rem;
 			}
+
+			@include md {
+				@include headingSm;
+			}
 		}
 	}
 
