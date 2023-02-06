@@ -4,32 +4,16 @@
 	height: 100%;
 
 	.kanban__dashboard-empty_boards {
-		@include headingLg;
 		display: flex;
+		text-align: center;
 		justify-content: center;
 		align-items: center;
 		height: 100%;
-
-		p {
-			text-align: center;
-			color: $primary-gray;
-		}
-
-		svg {
-			max-width: 70px;
-			position: relative;
-			bottom: 5px;
-			margin-left: 2rem;
-			fill: rgba($primary-purple, 0.25);
-		}
+		@include headingLg;
+		color: $primary-gray;
 
 		@include md {
 			@include headingMd;
-
-			svg {
-				margin-left: 0.5rem;
-				width: 60px;
-			}
 		}
 	}
 
@@ -114,11 +98,11 @@
 			}
 		}
 	}
+}
 
-	.kanban__dashboard-loading {
-		height: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
+.kanban__dashboard-loading {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

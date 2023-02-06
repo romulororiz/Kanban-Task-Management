@@ -8,7 +8,6 @@ import { getBoardColumns } from '@features/columns/columnSlice';
 import Spinner from '@components/Spinner';
 import { TiPlus } from 'react-icons/ti';
 import useWindowSize from '@hooks/useWindowSize';
-import { ReactComponent as EmptyBoard } from '@assets/dashboard/space-empty.svg';
 import '@styles/scss/boards/Dashboard.scss';
 
 const Dashboard = () => {
@@ -70,10 +69,9 @@ const Dashboard = () => {
 				/>
 			)}
 			{boards.length <= 0 ? (
-				<div className='kanban__dashboard-empty_boards'>
-					<p>You have no boards. Create a board to get started</p>
-					<EmptyBoard />
-				</div>
+				<p className='kanban__dashboard-empty_boards'>
+					You have no boards. Create a board to get started.
+				</p>
 			) : columns.length > 0 ? (
 				<div className='kanban__dashboard-board'>
 					{columns.map(column => (
