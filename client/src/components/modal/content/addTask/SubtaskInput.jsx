@@ -1,7 +1,7 @@
 import { FaTimes } from 'react-icons/fa';
 import '@styles/scss/modal/addTask/SubtaskInput.scss';
 
-const SubtaskInput = ({ subtask, onChange, onRemove, index }) => {
+const SubtaskInput = ({ subtask, onChange, onRemove, index, name}) => {
 	return (
 		<div className='kanban__add-task_subtask-input'>
 			<input
@@ -11,6 +11,7 @@ const SubtaskInput = ({ subtask, onChange, onRemove, index }) => {
 				placeholder='e.g Make Coffee'
 				value={subtask.title}
 				onChange={onChange}
+				name={subtask.title}
 			/>
 			{onRemove && (
 				<FaTimes

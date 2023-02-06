@@ -174,9 +174,9 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 	};
 
 	// get completed subtasks count
-	const completedSubtasks =
-		task.subtasks &&
-		task.subtasks.filter(subtask => subtask.isCompleted).length;
+	const completedSubtasks = task.subtasks?.filter(
+		subtask => subtask.isCompleted
+	).length;
 
 	return (
 		<>
@@ -245,18 +245,16 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 							<div className='kanban__add-task-subtasks_container'>
 								{/* //todo get number of subtasks */}
 								<p>
-									Subtasks ({completedSubtasks} of{' '}
-									{task.subtasks && task.subtasks.length})
+									Subtasks ({completedSubtasks} of {task.subtasks?.length})
 								</p>
-								{task.subtasks &&
-									task.subtasks.map((subtask, index) => (
-										<SubtaskItem
-											key={index}
-											index={index}
-											subtask={subtask}
-											task={task}
-										/>
-									))}
+								{task.subtasks?.map((subtask, index) => (
+									<SubtaskItem
+										key={index}
+										index={index}
+										subtask={subtask}
+										task={task}
+									/>
+								))}
 							</div>
 						) : (
 							<div className='kanban__add-task_subtasks-container_update'>
@@ -294,7 +292,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 								type='text'
 								placeholder='e.g Todo'
 								name='status'
-								value={status}
+								value={modalMode === 'viewTask' ? task.status : status}
 								onChange={onChangeHandler}
 							>
 								<option value=''>Select a column</option>
