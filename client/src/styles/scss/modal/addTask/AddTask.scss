@@ -1,46 +1,6 @@
 @import '../../variables', '../../mixins', '../../breakpoints';
 
-.kanban__add-task-subtasks_container {
-	p {
-		@include headingSm;
-		color: $primary-gray;
-
-		&:first-child {
-			margin-bottom: 1rem;
-		}
-	}
-}
-
-.kanban__add-task_subtasks-container_update {
-
-	p {
-		@include headingSm;
-		color: $primary-gray;
-
-		&:first-child {
-			margin-bottom: 1rem;
-		}
-	}
-
-	.kanban__add-task_subtasks-btn {
-		@include buttonSecondary;
-		@include headingMd;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		margin-bottom: 1rem;
-
-		svg {
-			margin-right: 0.25rem;
-		}
-	}
-}
-
-.kanban__add-task_heading {
-	display: flex;
-	flex-direction: column;
-
+.kanban__add-task {
 	.kanban__task-title_container {
 		display: flex;
 		align-items: center;
@@ -61,6 +21,64 @@
 			@include dropdown;
 			top: 90px;
 			right: 36px;
+
+			li {
+				&:first-child:hover svg:first-child {
+					color: $primary-purple;
+				}
+
+				&:last-child:hover svg:last-child {
+					color: $primary-red;
+				}
+			}
+
+			svg {
+				position: relative;
+				bottom: 1px;
+				font-size: $font-size-l;
+			}
+		}
+	}
+
+	.kanban__task-title_container-update {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 1rem;
+	}
+
+	.kanban__add-task-subtasks_container {
+		p {
+			@include headingSm;
+			color: $primary-gray;
+
+			&:first-child {
+				margin-bottom: 1rem;
+			}
+		}
+	}
+
+	.kanban__add-task_subtasks-container_update {
+		p {
+			@include headingSm;
+			color: $primary-gray;
+
+			&:first-child {
+				margin-bottom: 1rem;
+			}
+		}
+
+		.kanban__add-task_subtasks-btn {
+			@include buttonSecondary;
+			@include headingMd;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			margin-bottom: 1rem;
+
+			svg {
+				margin-right: 0.25rem;
+			}
 		}
 	}
 
@@ -68,6 +86,11 @@
 		@include textL;
 		color: $primary-gray;
 		margin-bottom: 1rem;
+	}
+
+	.kanban__add-task_description-update {
+		display: flex;
+		flex-direction: column;
 	}
 
 	input[type='text'],
@@ -94,10 +117,10 @@
 		@include inputSelect;
 		border: 1px solid rgba($primary-gray, 0.25);
 	}
-}
 
-.kanban__add-task_status-container {
-	margin-top: 1rem;
-	display: flex;
-	flex-direction: column;
+	.kanban__add-task_status-container {
+		margin-top: 1rem;
+		display: flex;
+		flex-direction: column;
+	}
 }

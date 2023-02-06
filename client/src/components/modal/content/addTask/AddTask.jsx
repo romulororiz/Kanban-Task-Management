@@ -182,127 +182,111 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 		<>
 			<div className='kanban__add-task'>
 				<form onSubmit={onSubmit}>
-					<div className='kanban__add-task_heading'>
-						{modalMode === 'viewTask' ? (
-							<div className='kanban__task-title_container'>
-								<h3>{task.title}</h3>
-								<GoKebabVertical onClick={dropdownHandler} />
-								{showDropdown && (
-									<div className='kanban__add-task_dropdown'>
-										<ul>
-											<li
-												className='kanban__add-task_dropdown_item'
-												onClick={onUpdateTaskDropdown}
-											>
-												<FaRegEdit />
-												Edit
-											</li>
-											<li
-												className='kanban__add-task_dropdown_item'
-												onClick={() => onDeleteTask(taskId)}
-											>
-												<FaRegTrashAlt />
-												Delete
-											</li>
-										</ul>
-									</div>
-								)}
-							</div>
-						) : (
-							<>
-								<label htmlFor='title'>Title</label>
-								<input
-									className={
-										errors.length ? 'kanban__add-task_input-error' : ''
-									}
-									placeholder='e.g. Take coffee break'
-									name='title'
-									value={title}
-									onChange={onChangeHandler}
-									type='text'
-								/>
-							</>
-						)}
-
-						{modalMode === 'viewTask' ? (
-							<p className='kanban__add-task_description'>{task.description}</p>
-						) : (
-							<>
-								<label htmlFor='description'>Description</label>
-								<textarea
-									className={
-										errors.length ? 'kanban__add-task_input-error' : ''
-									}
-									placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'
-									name='description'
-									value={description}
-									onChange={onChangeHandler}
-								/>
-							</>
-						)}
-
-						{modalMode === 'viewTask' ? (
-							<div className='kanban__add-task-subtasks_container'>
-								{/* //todo get number of subtasks */}
-								<p>
-									Subtasks ({completedSubtasks} of {task.subtasks?.length})
-								</p>
-								{task.subtasks?.map((subtask, index) => (
-									<SubtaskItem
-										key={index}
-										index={index}
-										subtask={subtask}
-										task={task}
-									/>
-								))}
-							</div>
-						) : (
-							<div className='kanban__add-task_subtasks-container_update'>
-								<p>Subtasks</p>
-								{subtasks &&
-									subtasks.map((subtask, index) => (
-										<SubtaskInput
-											key={index}
-											index={index}
-											subtask={subtask}
-											onChange={onSubtaskChange}
-											onRemove={onRemoveSubtaskDropdown}
-										/>
-									))}
-								<SubtaskInput
-									subtask={subtaskTitle}
-									onChange={onSubtaskChange}
-								/>
-								<button
-									className='kanban__add-task_subtasks-btn'
-									onClick={onAddSubtask}
-								>
-									<TiPlus />
-									Add New Subtask
-								</button>
-							</div>
-						)}
-
-						<div className='kanban__add-task_status-container'>
-							<label htmlFor='status'>
-								{modalMode === 'viewTask' ? 'Current Status' : 'Status'}
-							</label>
-							<select
-								className={errors.length ? 'kanban__add-task_input-error' : ''}
-								type='text'
-								placeholder='e.g Todo'
-								name='status'
-								value={modalMode === 'viewTask' ? task.status : status}
-								onChange={onChangeHandler}
-							>
-								<option value=''>Select a column</option>
-								{columns.map(column => (
-									<option key={column._id} value={column._id}>
-										{column.name}
-									</option>
-								))}
-							</select>
+					{modalMode === 'viewTask' ? (
+						<div className='kanban__task-title_container'>
+							<h3>{task.title}</h3>
+							<GoKebabVertical onClick={dropdownHandler} />
+							{showDropdown && (
+								<div className='kanban__add-task_dropdown'>
+									<ul>
+										<li onClick={onUpdateTaskDropdown}>
+											<FaRegEdit />
+											Edit
+										</li>
+										<li onClick={() => onDeleteTask(taskId)}>
+											<FaRegTrashAlt />
+											Delete
+										</li>
+									</ul>
+								</div>
+							)}
 						</div>
+					) : (
+						<div className='kanban__task-title_container-update'>
+							<label htmlFor='title'>Title</label>
+							<input
+								className={errors.length ? 'kanban__add-task_input-error' : ''}
+								placeholder='e.g. Take coffee break'
+								name='title'
+								value={title}
+								onChange={onChangeHandler}
+								type='text'
+							/>
+						</div>
+					)}
+
+					{modalMode === 'viewTask' ? (
+						<p className='kanban__add-task_description'>{task.description}</p>
+					) : (
+						<div className='kanban__add-task_description-update'>
+							<label htmlFor='description'>Description</label>
+							<textarea
+								className={errors.length ? 'kanban__add-task_input-error' : ''}
+								placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'
+								name='description'
+								value={description}
+								onChange={onChangeHandler}
+							/>
+						</div>
+					)}
+
+					{modalMode === 'viewTask' ? (
+						<div className='kanban__add-task-subtasks_container'>
+							{/* //todo get number of subtasks */}
+							<p>
+								Subtasks ({completedSubtasks} of {task.subtasks?.length})
+							</p>
+							{task.subtasks?.map((subtask, index) => (
+								<SubtaskItem
+									key={index}
+									index={index}
+									subtask={subtask}
+									task={task}
+								/>
+							))}
+						</div>
+					) : (
+						<div className='kanban__add-task_subtasks-container_update'>
+							<p>Subtasks</p>
+							{subtasks?.map((subtask, index) => (
+								<SubtaskInput
+									key={index}
+									index={index}
+									subtask={subtask}
+									onChange={onSubtaskChange}
+									onRemove={onRemoveSubtaskDropdown}
+								/>
+							))}
+							<SubtaskInput subtask={subtaskTitle} onChange={onSubtaskChange} />
+							<button
+								className='kanban__add-task_subtasks-btn'
+								onClick={onAddSubtask}
+							>
+								<TiPlus />
+								Add New Subtask
+							</button>
+						</div>
+					)}
+
+					<div className='kanban__add-task_status-container'>
+						<label htmlFor='status'>
+							{modalMode === 'viewTask' ? 'Current Status' : 'Status'}
+						</label>
+						<select
+							className={errors.length ? 'kanban__add-task_input-error' : ''}
+							type='text'
+							placeholder='e.g Todo'
+							name='status'
+							value={status}
+							onChange={onChangeHandler}
+						>
+							<option value=''>Select a column</option>
+							{columns.map(column => (
+								<option key={column._id} value={column._id}>
+									{column.name}
+								</option>
+							))}
+						</select>
 					</div>
 					{modalMode === 'viewTask' ? (
 						''

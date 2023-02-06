@@ -196,21 +196,21 @@
 			align-items: center;
 			margin-bottom: 1rem;
 			cursor: pointer;
+			
+			&:hover {
+				color: $primary-purple;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+				&:hover {
+					color: $primary-red;
+				}
+			}
 
 			svg {
 				margin-right: 0.5rem;
 			}
-		}
-
-		li:last-child {
-			margin-bottom: 0;
-			&:hover {
-				color: $primary-red;
-			}
-		}
-
-		li:hover {
-			color: $primary-purple;
 		}
 	}
 }
