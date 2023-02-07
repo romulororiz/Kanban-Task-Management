@@ -54,6 +54,7 @@ const AddBoard = ({ setShowModal, modalMode, setModalMode, board }) => {
 			setIsUpdate(false);
 			setModalMode('addBoard');
 			setShowModal(false);
+			navigate(0)
 		} else if (!errors.length) {
 			// create board
 			dispatch(createBoard(boardData)).then(res => {

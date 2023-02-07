@@ -15,7 +15,7 @@ const Layout = () => {
 	const [showModal, setShowModal] = useState(false);
 
 	// get board and columns from store
-	const { board, boards } = useSelector(state => state.board);
+	const { board, boards, isLoading } = useSelector(state => state.board);
 	const { columns } = useSelector(state => state.column);
 
 	// initialize dispatch
@@ -29,8 +29,6 @@ const Layout = () => {
 
 	// handle window size
 	const windowSize = useWindowSize();
-
-	
 
 	// get board and columns
 	useEffect(() => {
@@ -56,6 +54,7 @@ const Layout = () => {
 				board={board}
 				boards={boards}
 				columns={columns}
+				isLoading={isLoading}
 			/>
 			<main
 				className={`kanban__main-content ${

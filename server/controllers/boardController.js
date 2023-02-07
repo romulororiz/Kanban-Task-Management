@@ -139,7 +139,7 @@ const deleteBoard = asyncHandler(async (req, res) => {
 
 	try {
 		await board.remove();
-		res.status(200).json({ message: 'Board removed', board });
+		res.status(200).json(board);
 	} catch (error) {
 		res.status(400);
 		throw new Error(error);

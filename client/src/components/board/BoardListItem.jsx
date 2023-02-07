@@ -1,10 +1,10 @@
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { deleteBoard } from '@features/boards/boardSlice';
+import { useNavigate } from 'react-router-dom';
 import { TbLayoutBoardSplit } from 'react-icons/tb';
 import { TiPlus } from 'react-icons/ti';
 import useConfirmAlert from '@hooks/useConfirmAlert';
-import { getBoardById } from '@features/boards/boardSlice';
+import { getBoardById, deleteBoard } from '@features/boards/boardSlice';
 import '@styles/scss/boards/BoardListItem.scss';
 
 const BoardListItem = ({
@@ -15,9 +15,9 @@ const BoardListItem = ({
 	setModalMode,
 	setShowModal,
 }) => {
-
 	// initialize dispatch and navigate
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	// use confirm alert
 	const [setTitle, setMessage, setButtons] = useConfirmAlert();
@@ -45,7 +45,7 @@ const BoardListItem = ({
 	};
 
 	// handle onClickUpdate
-	const handleOnClickUpdate = (id) => {
+	const handleOnClickUpdate = id => {
 		setModalMode('updateBoard');
 		setShowModal(true);
 		dispatch(getBoardById(id));

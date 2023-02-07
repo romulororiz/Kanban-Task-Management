@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getBoards } from '@features/boards/boardSlice';
 import BoardListItem from '@components/board/BoardListItem';
 import LogoDark from '@assets/dashboard/logo-dark.svg';
 import ToggleSwitch from './ToggleSwitch';
-import Modal from '../modal/Modal';
-import AddBoard from '../modal/content/addBoard/AddBoard';
+import Modal from '@components/modal/Modal';
+import AddBoard from '@components/modal/content/addBoard/AddBoard';
 import { FaEyeSlash } from 'react-icons/fa';
 import '@styles/scss/layout/Sidebar.scss';
 
@@ -28,7 +28,7 @@ const Sidebar = ({
 	const { id: boardId } = useParams();
 
 	// get boards from store
-	const { boards } = useSelector(state => state.board);
+	const { boards, isLoading } = useSelector(state => state.board);
 
 	useEffect(() => {
 		const boardExists = boards.find(board => board._id === boardId);
@@ -93,6 +93,7 @@ const Sidebar = ({
 					<div className='kanban__sidebar-logo'>
 						<img src={LogoDark} alt='logo dark' />
 					</div>
+
 					<h1>All Boards ({boards.length})</h1>
 					<div className='kanban__sidebar-boards'>
 						{boards.map(board => (

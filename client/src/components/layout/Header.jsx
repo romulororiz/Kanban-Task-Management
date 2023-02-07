@@ -10,6 +10,7 @@ import useWindowSize from '@hooks/useWindowSize';
 import { TiPlus } from 'react-icons/ti';
 import Modal from '@components/modal/Modal';
 import AddTask from '@components/modal/content/addTask/AddTask';
+import Spinner from '@components/Spinner';
 import '@styles/scss/layout/Header.scss';
 
 const Header = ({
@@ -19,6 +20,7 @@ const Header = ({
 	boards,
 	board,
 	columns,
+	isLoading,
 }) => {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [showModal, setShowModal] = useState(false);
@@ -50,7 +52,7 @@ const Header = ({
 		} else {
 			setIsDisabled(false);
 		}
-	}, [boards, columns, board]);
+	}, [boards, columns]);
 
 	return (
 		<>
@@ -88,7 +90,7 @@ const Header = ({
 							showSidebar && isMobile && 'kanban__header-board_name-hide'
 						}`}
 					>
-						{board.name}
+						{isLoading ? <Spinner /> : board.name}
 					</div>
 					<div
 						className={`kanban__header-board_actions ${

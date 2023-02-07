@@ -142,8 +142,7 @@ const boardSlice = createSlice({
 			})
 			.addCase(deleteBoard.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
-				const { boardId } = payload;
-				state.boards = state.boards.filter(board => board._id !== boardId);
+				state.boards = state.boards.filter(board => board._id !== payload._id);
 			})
 			.addCase(deleteBoard.rejected, (state, { payload }) => {
 				state.isLoading = false;
