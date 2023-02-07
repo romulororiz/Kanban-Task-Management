@@ -70,6 +70,7 @@ const LoginForm = () => {
 			// dispatch register action if no errors
 			if (!errors.length) {
 				dispatch(login(userData));
+				dispatch(clearErrors());
 			}
 		},
 		[errors, email, password, dispatch]

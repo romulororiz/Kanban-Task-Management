@@ -66,6 +66,7 @@ const RegisterForm = () => {
 			// dispatch register action if no errors
 			if (!errors.length) {
 				dispatch(register(userData));
+				dispatch(clearErrors());
 			}
 		},
 		[errors, firstName, lastName, email, password, confirmPassword, dispatch]
