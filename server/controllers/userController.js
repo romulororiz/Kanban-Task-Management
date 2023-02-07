@@ -39,7 +39,7 @@ const registerUser = asyncHandler(async (req, res) => {
 		// create a new token and save it to a cookie
 		const token = generateToken(newUser._id);
 
-		// Set cookie options
+		// Set cookie options for 30 days
 		const options = {
 			maxAge: 24 * 60 * 60 * 1000, // 30 days
 			httpOnly: true,
@@ -47,8 +47,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
 		// Set cookie
 		res.cookie('access_token', token, options);
-
-		// Return user
 
 		res.status(201).json({
 			_id: newUser._id,

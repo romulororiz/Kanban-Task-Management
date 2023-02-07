@@ -29,7 +29,7 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 			setColumnName(column.name);
 			setColumnColor(column.color);
 		}
-	}, [modalMode, dispatch]);
+	}, [modalMode, column]);
 
 	// clear errors on empty input
 	useEffect(() => {
@@ -91,9 +91,8 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 							className={errors.length ? 'kanban__add-column_input-error' : ''}
 							type='text'
 							placeholder='e.g Todo'
-							name='columnName'
 							// todo - add loading state
-							value={isUpdate && isLoading ? 'Loading...' : columnName}
+							value={columnName}
 							onChange={e => setColumnName(e.target.value)}
 						/>
 						<Error errors={errors} />

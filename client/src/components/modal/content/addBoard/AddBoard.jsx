@@ -11,20 +11,17 @@ const AddBoard = ({ setShowModal, modalMode, setModalMode, board }) => {
 	const [isUpdate, setIsUpdate] = useState(false);
 	const [errors, setErrors] = useState([]);
 
-	// get board from store
-	const { isLoading } = useSelector(state => state.board);
-
 	// initialize dispatch
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	// check modal mode
 	useEffect(() => {
-		if (modalMode === 'updateBoard' && board) {
+		if (modalMode === 'updateBoard') {
 			setIsUpdate(true);
 			setBoardName(board.name);
 		}
-	}, [modalMode, dispatch, board.name]);
+	}, [modalMode, board]);
 
 	// clear errors on empty input
 	useEffect(() => {
@@ -76,9 +73,8 @@ const AddBoard = ({ setShowModal, modalMode, setModalMode, board }) => {
 						className={errors.length ? 'kanban__add-board_input-error' : ''}
 						type='text'
 						placeholder='e.g Marketing Plan'
-						name='name'
 						// todo - add loading state
-						value={isUpdate && isLoading ? 'Loading...' : boardName}
+						value={boardName}
 						onChange={e => setBoardName(e.target.value)}
 					/>
 					<Error errors={errors} />
