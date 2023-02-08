@@ -55,6 +55,12 @@
 	}
 
 	.kanban__dashboard-column_tasks-container_empty {
+		@extend .kanban__dashboard-column_tasks-container;
 		border: 3px dashed lighten($color: $light-primary-gray, $amount: 25%);
+	}
+
+	.kanban__dashboard-column_tasks-container_empty-dark {
+		@extend .kanban__dashboard-column_tasks-container;
+		border: 3px dashed $light-primary-gray;
 	}
 }

@@ -75,7 +75,7 @@ const Dashboard = ({ theme }) => {
 			) : columns.length > 0 ? (
 				<div className='kanban__dashboard-board'>
 					{columns.map(column => (
-						<Column key={column._id} column={column} />
+						<Column key={column._id} column={column} theme={theme} />
 					))}
 					<div className='kanban__dashboard-add_column'>
 						<div

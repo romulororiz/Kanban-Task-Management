@@ -13,7 +13,7 @@ import useOnClickOutside from '@hooks/useOnClickOutside';
 import AddTask from '../modal/content/addTask/AddTask';
 import '@styles/scss/boards/Column.scss';
 
-const Column = ({ column }) => {
+const Column = ({ column, theme }) => {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [modalMode, setModalMode] = useState('addColumn');
@@ -188,7 +188,9 @@ const Column = ({ column }) => {
 					className={
 						hasTasks
 							? 'kanban__dashboard-column_tasks-container'
-							: 'kanban__dashboard-column_tasks-container kanban__dashboard-column_tasks-container_empty'
+							: theme === 'light'
+							? 'kanban__dashboard-column_tasks-container_empty'
+							: 'kanban__dashboard-column_tasks-container_empty-dark'
 					}
 				>
 					{tasks
