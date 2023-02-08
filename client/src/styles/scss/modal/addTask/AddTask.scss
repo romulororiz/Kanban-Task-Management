@@ -1,6 +1,16 @@
 @import '../../variables', '../../mixins', '../../breakpoints';
 
 .kanban__add-task {
+	p {
+		@include headingSm;
+		color: $primary-gray;
+		margin-bottom: 0.5rem;
+
+		&:first-child {
+			margin-bottom: 1rem;
+		}
+	}
+
 	.kanban__task-title_container {
 		display: flex;
 		align-items: center;
@@ -47,6 +57,48 @@
 	}
 
 	.kanban__add-task-subtasks_container {
+		max-height: 200px;
+		overflow-y: auto;
+
+		&::-webkit-scrollbar {
+			width: 0.5rem;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: rgba($primary-gray, 0.1);
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: rgba($secondary-purple, 0.5);
+			border-radius: 0.25rem;
+
+			&:hover {
+				background: rgba($secondary-purple, 0.75);
+			}
+		}
+	}
+
+	.kanban__add-task_subtasks-container_add-update {
+		max-height: 200px;
+		overflow-y: auto;
+
+		&::-webkit-scrollbar {
+			width: 0.5rem;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: rgba($primary-gray, 0.1);
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: rgba($secondary-purple, 0.5);
+			border-radius: 0.25rem;
+
+			&:hover {
+				background: rgba($secondary-purple, 0.75);
+			}
+		}
+
 		p {
 			@include headingSm;
 			color: $primary-gray;
@@ -57,32 +109,22 @@
 		}
 	}
 
-	.kanban__add-task_subtasks-container_update {
-		p {
-			@include headingSm;
-			color: $primary-gray;
+	.kanban__add-task_subtasks-btn {
+		@include buttonSecondary;
+		@include headingMd;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		margin-bottom: 1rem;
+		margin-top: 1rem;
 
-			&:first-child {
-				margin-bottom: 1rem;
-			}
+		svg {
+			margin-right: 0.25rem;
 		}
 
-		.kanban__add-task_subtasks-btn {
-			@include buttonSecondary;
-			@include headingMd;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 100%;
-			margin-bottom: 1rem;
-
-			svg {
-				margin-right: 0.25rem;
-			}
-
-			@include md {
-				@include headingSm;
-			}
+		@include md {
+			@include headingSm;
 		}
 	}
 

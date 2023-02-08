@@ -13,9 +13,6 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 	const [isUpdate, setIsUpdate] = useState(false);
 	const [errors, setErrors] = useState([]);
 
-	// get data from store
-	const { isLoading } = useSelector(state => state.column);
-
 	// get boardId from url
 	const { id: boardId } = useParams();
 
@@ -69,16 +66,7 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 				setShowModal(false);
 			}
 		},
-		[
-			dispatch,
-			setIsUpdate,
-			columnName,
-			columnColor,
-			isUpdate,
-			setShowModal,
-			setModalMode,
-			column,
-		]
+		[columnName, columnColor, isUpdate, dispatch]
 	);
 
 	return (

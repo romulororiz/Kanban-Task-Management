@@ -10,8 +10,8 @@ import Modal from '@components/modal/Modal';
 import AddColumn from '@components/modal/content/addColumn/AddColumn';
 import useConfirmAlert from '@hooks/useConfirmAlert';
 import useOnClickOutside from '@hooks/useOnClickOutside';
-import '@styles/scss/boards/Column.scss';
 import AddTask from '../modal/content/addTask/AddTask';
+import '@styles/scss/boards/Column.scss';
 
 const Column = ({ column }) => {
 	const [showDropdown, setShowDropdown] = useState(false);

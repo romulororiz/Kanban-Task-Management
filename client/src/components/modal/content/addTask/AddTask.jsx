@@ -94,6 +94,11 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 			title: subtaskTitle,
 		};
 
+		// // check if subtask title is empty
+		// if (!subtaskTitle) {
+		// 	return;
+		// }
+
 		setFormData(prevState => ({
 			...prevState,
 			subtasks: [...prevState.subtasks, subtaskData],
@@ -231,33 +236,39 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 					)}
 
 					{modalMode === 'viewTask' ? (
-						<div className='kanban__add-task-subtasks_container'>
-							{/* //todo get number of subtasks */}
+						<>
 							<p>
 								Subtasks ({completedSubtasks} of {task.subtasks?.length})
 							</p>
-							{task.subtasks?.map((subtask, index) => (
-								<SubtaskItem
-									key={index}
-									index={index}
-									subtask={subtask}
-									task={task}
-								/>
-							))}
-						</div>
+							<div className='kanban__add-task-subtasks_container'>
+								{task.subtasks?.map((subtask, index) => (
+									<SubtaskItem
+										key={index}
+										index={index}
+										subtask={subtask}
+										task={task}
+									/>
+								))}
+							</div>
+						</>
 					) : (
-						<div className='kanban__add-task_subtasks-container_update'>
+						<>
 							<p>Subtasks</p>
-							{subtasks?.map((subtask, index) => (
+							<div className='kanban__add-task_subtasks-container_add-update'>
+								{subtasks?.map((subtask, index) => (
+									<SubtaskInput
+										key={index}
+										index={index}
+										subtask={subtask}
+										onChange={onSubtaskChange}
+										onRemove={onRemoveSubtaskDropdown}
+									/>
+								))}
 								<SubtaskInput
-									key={index}
-									index={index}
-									subtask={subtask}
+									subtask={subtaskTitle}
 									onChange={onSubtaskChange}
-									onRemove={onRemoveSubtaskDropdown}
 								/>
-							))}
-							<SubtaskInput subtask={subtaskTitle} onChange={onSubtaskChange} />
+							</div>
 							<button
 								className='kanban__add-task_subtasks-btn'
 								onClick={onAddSubtask}
@@ -265,7 +276,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 								<TiPlus />
 								Add New Subtask
 							</button>
-						</div>
+						</>
 					)}
 
 					<div className='kanban__add-task_status-container'>
