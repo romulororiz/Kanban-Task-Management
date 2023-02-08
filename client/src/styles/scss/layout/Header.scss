@@ -7,7 +7,6 @@
 	width: 100%;
 	z-index: 100;
 	border-bottom: 1px solid darken($color: $light-secondary-gray, $amount: 5%);
-	transition: $ease-2;
 
 	.kanban__header-logo {
 		height: 100%;
@@ -49,7 +48,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		transition: $ease-3;
+		transition: $ease-2;
 
 		@include lg {
 			margin-left: 260px;

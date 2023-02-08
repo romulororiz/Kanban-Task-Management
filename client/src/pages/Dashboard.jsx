@@ -74,7 +74,13 @@ const Dashboard = ({ theme }) => {
 					You have no boards. Create a board to get started.
 				</p>
 			) : columns.length > 0 ? (
-				<div className='kanban__dashboard-board'>
+				<div
+					className={
+						theme === 'dark'
+							? 'kanban__dashboard-board-dark'
+							: 'kanban__dashboard-board'
+					}
+				>
 					{columns.map(column => (
 						<Column key={column._id} column={column} theme={theme} />
 					))}
