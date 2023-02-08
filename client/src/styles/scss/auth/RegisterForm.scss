@@ -7,9 +7,12 @@
 	height: 100%;
 	margin-left: 2rem;
 
-	// Media queries
-	@include md {
+	@include lg {
 		margin-left: 0;
+		padding: 0;
+	}
+
+	@include md {
 		padding: 0 1rem;
 	}
 
@@ -144,12 +147,13 @@
 			bottom: 0;
 			padding-right: 4rem;
 
-			// Media queries
 			@include lg {
 				flex-direction: column-reverse;
 				align-items: center;
 				text-align: center;
 				padding-right: 0;
+				position: relative;
+				margin-top: 1rem;
 
 				button {
 					margin-bottom: 0.5rem;
@@ -186,7 +190,26 @@
 				@include headingSm;
 				font-weight: 500;
 				text-decoration: none;
+				margin-left: 0.5rem;
 			}
+		}
+	}
+}
+
+.kanban__auth-register_dark {
+	@extend .kanban__auth-register;
+
+	label {
+		color: $light-primary-white !important;
+	}
+
+	input {
+		background-color: $dark-primary-gray !important;
+		color: $light-primary-white !important;
+		border: 1px solid rgba($light-secondary-gray, 0.15) !important;
+
+		&::placeholder {
+			color: $light-primary-white !important;
 		}
 	}
 }

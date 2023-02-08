@@ -10,9 +10,21 @@
 	background-color: $light-primary-white;
 	border-radius: 10px;
 	box-shadow: $box-shadow;
+	position: relative;
 
 	@include sm {
 		min-height: auto;
+	}
+
+	.kanban__auth-toggle {
+		width: 150px;
+		height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		right: 0.25rem;
+		top: 0.5rem;
 	}
 
 	.kanban__auth-card__left-side {
@@ -22,7 +34,7 @@
 		display: flex;
 		justify-content: center;
 
-		@include sm {
+		@include md {
 			display: none;
 		}
 
@@ -68,4 +80,10 @@
 			height: 100%;
 		}
 	}
+}
+
+.kanban__auth-card_dark {
+	@extend .kanban__auth-card;
+	background-color: $dark-primary-gray;
+	color: $light-primary-white;
 }

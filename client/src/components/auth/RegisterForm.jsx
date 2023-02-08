@@ -7,7 +7,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useCallback } from 'react';
 import '@styles/scss/auth/RegisterForm.scss';
 
-const RegisterForm = () => {
+const RegisterForm = ({ theme }) => {
 	const [formData, setFormData] = useState({
 		firstName: '',
 		lastName: '',
@@ -87,7 +87,11 @@ const RegisterForm = () => {
 	};
 
 	return (
-		<div className='kanban__auth-register'>
+		<div
+			className={`${
+				theme === 'dark' ? 'kanban__auth-register_dark' : 'kanban__auth-register'
+			}`}
+		>
 			<div className='kanban__auth-register_heading'>
 				<h1 className='kanban__auth-register_title'>Register</h1>
 				<p className='kanban__auth-register_lead'>

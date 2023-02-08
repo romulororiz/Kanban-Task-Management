@@ -1,4 +1,4 @@
-.kanban__auth-card {
+.kanban__auth-card, .kanban__auth-card_dark {
   width: 100%;
   max-width: 940px;
   min-height: 600px;
@@ -13,13 +13,30 @@
   border-radius: 10px;
   -webkit-box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.0951141);
   box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.0951141);
+  position: relative;
 }
 @media screen and (max-width: 480px) {
-  .kanban__auth-card {
+  .kanban__auth-card, .kanban__auth-card_dark {
     min-height: auto;
   }
 }
-.kanban__auth-card .kanban__auth-card__left-side {
+.kanban__auth-card .kanban__auth-toggle, .kanban__auth-card_dark .kanban__auth-toggle {
+  width: 150px;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  right: 0.25rem;
+  top: 0.5rem;
+}
+.kanban__auth-card .kanban__auth-card__left-side, .kanban__auth-card_dark .kanban__auth-card__left-side {
   color: #ffffff;
   -webkit-box-flex: 1;
   -ms-flex: 1;
@@ -32,12 +49,12 @@
   -ms-flex-pack: center;
   justify-content: center;
 }
-@media screen and (max-width: 480px) {
-  .kanban__auth-card .kanban__auth-card__left-side {
+@media screen and (max-width: 550px) {
+  .kanban__auth-card .kanban__auth-card__left-side, .kanban__auth-card_dark .kanban__auth-card__left-side {
     display: none;
   }
 }
-.kanban__auth-card .kanban__auth-card__left-side .kanban__auth-card__left-side_container {
+.kanban__auth-card .kanban__auth-card__left-side .kanban__auth-card__left-side_container, .kanban__auth-card_dark .kanban__auth-card__left-side .kanban__auth-card__left-side_container {
   background: url("../../../assets/auth/bg-sidebar-desktop.svg") no-repeat center center;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -56,7 +73,7 @@
   margin: 0 1rem;
   padding: 0 2rem;
 }
-.kanban__auth-card .kanban__auth-card__left-side .kanban__auth-card__left-side_container .kanban__auth-card__left-side_container-logo {
+.kanban__auth-card .kanban__auth-card__left-side .kanban__auth-card__left-side_container .kanban__auth-card__left-side_container-logo, .kanban__auth-card_dark .kanban__auth-card__left-side .kanban__auth-card__left-side_container .kanban__auth-card__left-side_container-logo {
   width: 100%;
   max-width: 200px;
   margin-bottom: 2rem;
@@ -67,13 +84,13 @@
   -ms-flex-pack: center;
   justify-content: center;
 }
-.kanban__auth-card .kanban__auth-card__left-side .kanban__auth-card__left-side_container .kanban__auth-card__left-side_container-logo img {
+.kanban__auth-card .kanban__auth-card__left-side .kanban__auth-card__left-side_container .kanban__auth-card__left-side_container-logo img, .kanban__auth-card_dark .kanban__auth-card__left-side .kanban__auth-card__left-side_container .kanban__auth-card__left-side_container-logo img {
   pointer-events: none;
 }
-.kanban__auth-card .kanban__auth-card__left-side .kanban__auth-card__left-side_container .kanban__auth-card__left-side_container-text {
+.kanban__auth-card .kanban__auth-card__left-side .kanban__auth-card__left-side_container .kanban__auth-card__left-side_container-text, .kanban__auth-card_dark .kanban__auth-card__left-side .kanban__auth-card__left-side_container .kanban__auth-card__left-side_container-text {
   font-size: 12px;
 }
-.kanban__auth-card .kanban__auth-card__right-side {
+.kanban__auth-card .kanban__auth-card__right-side, .kanban__auth-card_dark .kanban__auth-card__right-side {
   -webkit-box-flex: 2;
   -ms-flex: 2;
   flex: 2;
@@ -89,7 +106,12 @@
   align-items: center;
   margin: 1rem;
 }
-.kanban__auth-card .kanban__auth-card__right-side .kanban__auth-card__right-side_container {
+.kanban__auth-card .kanban__auth-card__right-side .kanban__auth-card__right-side_container, .kanban__auth-card_dark .kanban__auth-card__right-side .kanban__auth-card__right-side_container {
   width: 100%;
   height: 100%;
+}
+
+.kanban__auth-card_dark {
+  background-color: #2b2c37;
+  color: #ffffff;
 }

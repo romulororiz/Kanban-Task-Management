@@ -1,4 +1,4 @@
-.kanban__auth-register {
+.kanban__auth-register, .kanban__auth-register_dark {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -12,13 +12,18 @@
   height: 100%;
   margin-left: 2rem;
 }
-@media screen and (max-width: 550px) {
-  .kanban__auth-register {
+@media screen and (max-width: 768px) {
+  .kanban__auth-register, .kanban__auth-register_dark {
     margin-left: 0;
+    padding: 0;
+  }
+}
+@media screen and (max-width: 550px) {
+  .kanban__auth-register, .kanban__auth-register_dark {
     padding: 0 1rem;
   }
 }
-.kanban__auth-register .kanban__auth-register_heading {
+.kanban__auth-register .kanban__auth-register_heading, .kanban__auth-register_dark .kanban__auth-register_heading {
   width: 100%;
   margin-top: 3rem;
   font-size: 15px;
@@ -26,7 +31,7 @@
   font-weight: 700;
 }
 @media screen and (max-width: 550px) {
-  .kanban__auth-register .kanban__auth-register_heading {
+  .kanban__auth-register .kanban__auth-register_heading, .kanban__auth-register_dark .kanban__auth-register_heading {
     font-size: 12px;
     line-height: 15px;
     font-weight: 700;
@@ -35,7 +40,7 @@
   }
 }
 @media screen and (max-width: 480px) {
-  .kanban__auth-register .kanban__auth-register_heading {
+  .kanban__auth-register .kanban__auth-register_heading, .kanban__auth-register_dark .kanban__auth-register_heading {
     text-align: left;
     font-size: 12px;
     line-height: 15px;
@@ -43,10 +48,10 @@
     kerning: 2.4px;
   }
 }
-.kanban__auth-register .kanban__auth-register_heading h1 {
+.kanban__auth-register .kanban__auth-register_heading h1, .kanban__auth-register_dark .kanban__auth-register_heading h1 {
   margin-bottom: 1rem;
 }
-.kanban__auth-register .kanban__auth-register_heading p {
+.kanban__auth-register .kanban__auth-register_heading p, .kanban__auth-register_dark .kanban__auth-register_heading p {
   color: #828fa3;
   font-size: 15px;
   line-height: 19px;
@@ -54,7 +59,7 @@
   font-weight: 400;
 }
 @media screen and (max-width: 480px) {
-  .kanban__auth-register .kanban__auth-register_heading p {
+  .kanban__auth-register .kanban__auth-register_heading p, .kanban__auth-register_dark .kanban__auth-register_heading p {
     font-size: 12px;
     line-height: 15px;
     font-weight: 700;
@@ -62,7 +67,7 @@
     font-weight: 400;
   }
 }
-.kanban__auth-register .kanban__auth-register_form {
+.kanban__auth-register .kanban__auth-register_form, .kanban__auth-register_dark .kanban__auth-register_form {
   width: 100%;
   height: 100%;
   padding: 2rem 4rem 0 0;
@@ -77,16 +82,16 @@
   position: relative;
 }
 @media screen and (max-width: 768px) {
-  .kanban__auth-register .kanban__auth-register_form {
+  .kanban__auth-register .kanban__auth-register_form, .kanban__auth-register_dark .kanban__auth-register_form {
     padding: 2rem 0;
   }
 }
 @media screen and (max-width: 550px) {
-  .kanban__auth-register .kanban__auth-register_form {
+  .kanban__auth-register .kanban__auth-register_form, .kanban__auth-register_dark .kanban__auth-register_form {
     padding: 2rem 0 0 0;
   }
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-inputs_wrapper {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-inputs_wrapper, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-inputs_wrapper {
   width: 100%;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
@@ -97,7 +102,7 @@
   gap: 1rem;
 }
 @media screen and (max-width: 768px) {
-  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-inputs_wrapper {
+  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-inputs_wrapper, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-inputs_wrapper {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -105,10 +110,10 @@
     gap: 0;
   }
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-inputs_wrapper .kanban__auth-register_form-input {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-inputs_wrapper .kanban__auth-register_form-input, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-inputs_wrapper .kanban__auth-register_form-input {
   width: 100%;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -122,12 +127,12 @@
   margin-bottom: 1rem;
 }
 @media screen and (max-width: 768px) {
-  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input {
+  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input {
     width: 100%;
     margin-bottom: 0.5rem;
   }
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input label {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input label, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input label {
   font-size: 12px;
   line-height: 15px;
   font-weight: 700;
@@ -135,10 +140,10 @@
   font-weight: 400;
   margin-bottom: 0.5rem;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_password-wrapper {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_password-wrapper, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_password-wrapper {
   position: relative;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_password-wrapper .kanban__auth-register_form-input_password-icon {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_password-wrapper .kanban__auth-register_form-input_password-icon, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_password-wrapper .kanban__auth-register_form-input_password-icon {
   position: absolute;
   top: 50%;
   right: 1rem;
@@ -146,10 +151,10 @@
   transform: translateY(-50%);
   cursor: pointer;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_password-wrapper input {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_password-wrapper input, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_password-wrapper input {
   width: 100%;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input input {
   padding: 6px 12px;
   background-color: #ffffff;
   outline: none;
@@ -159,45 +164,45 @@
   color: #000112;
   border: 1px solid #bdc4ce;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input::-webkit-input-placeholder {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input::-webkit-input-placeholder, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input input::-webkit-input-placeholder {
   color: #000112;
   opacity: 0.25;
   font-size: 13px;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input::-moz-placeholder {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input::-moz-placeholder, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input input::-moz-placeholder {
   color: #000112;
   opacity: 0.25;
   font-size: 13px;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input:-ms-input-placeholder {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input:-ms-input-placeholder, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input input:-ms-input-placeholder {
   color: #000112;
   opacity: 0.25;
   font-size: 13px;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input::-ms-input-placeholder {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input::-ms-input-placeholder, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input input::-ms-input-placeholder {
   color: #000112;
   opacity: 0.25;
   font-size: 13px;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input::placeholder {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input::placeholder, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input input::placeholder {
   color: #000112;
   opacity: 0.25;
   font-size: 13px;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input:focus {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input:focus, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input input:focus {
   border: 1px solid #a8a4ff;
 }
 @media screen and (max-width: 550px) {
-  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input {
+  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input input {
     width: 100%;
   }
 }
 @media screen and (max-width: 480px) {
-  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input {
+  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input input, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input input {
     width: 100%;
   }
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error {
   padding: 6px 12px;
   background-color: #ffffff;
   outline: none;
@@ -209,32 +214,32 @@
   -webkit-animation: shake 0.2s ease-out;
   animation: shake 0.2s ease-out;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-webkit-input-placeholder {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-webkit-input-placeholder, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-webkit-input-placeholder {
   color: #000112;
   opacity: 0.25;
   font-size: 13px;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-moz-placeholder {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-moz-placeholder, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-moz-placeholder {
   color: #000112;
   opacity: 0.25;
   font-size: 13px;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error:-ms-input-placeholder {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error:-ms-input-placeholder, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error:-ms-input-placeholder {
   color: #000112;
   opacity: 0.25;
   font-size: 13px;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-ms-input-placeholder {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-ms-input-placeholder, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::-ms-input-placeholder {
   color: #000112;
   opacity: 0.25;
   font-size: 13px;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::placeholder {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::placeholder, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error::placeholder {
   color: #000112;
   opacity: 0.25;
   font-size: 13px;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error:focus {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error:focus, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-input .kanban__auth-register_form-input_error:focus {
   border: 1px solid #a8a4ff;
 }
 @-webkit-keyframes shake {
@@ -281,7 +286,7 @@
     transform: translateX(0);
   }
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-btn {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -297,7 +302,7 @@
   padding-right: 4rem;
 }
 @media screen and (max-width: 768px) {
-  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn {
+  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-btn {
     -webkit-box-orient: vertical;
     -webkit-box-direction: reverse;
     -ms-flex-direction: column-reverse;
@@ -307,22 +312,24 @@
     align-items: center;
     text-align: center;
     padding-right: 0;
+    position: relative;
+    margin-top: 1rem;
   }
-  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn button {
+  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn button, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-btn button {
     margin-bottom: 0.5rem;
   }
 }
 @media screen and (max-width: 550px) {
-  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn {
+  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-btn {
     position: relative;
     margin-top: 2rem;
   }
-  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn button {
+  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn button, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-btn button {
     display: block;
     width: 100%;
   }
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn button {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn button, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-btn button {
   padding: 12px 32px;
   border: none;
   outline: none;
@@ -336,20 +343,20 @@
   background-color: #483eff;
   border-radius: 5px;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn button:hover {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-btn button:hover, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-btn button:hover {
   background-color: #a8a4ff;
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-register {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-register, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-register {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 @media screen and (max-width: 550px) {
-  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-register {
+  .kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-register, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-register {
     font-size: 12px;
   }
 }
-.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-register a {
+.kanban__auth-register .kanban__auth-register_form .kanban__auth-register_form-register a, .kanban__auth-register_dark .kanban__auth-register_form .kanban__auth-register_form-register a {
   color: #635fc7;
   font-size: 12px;
   line-height: 15px;
@@ -357,4 +364,29 @@
   kerning: 2.4px;
   font-weight: 500;
   text-decoration: none;
+  margin-left: 0.5rem;
+}
+
+.kanban__auth-register_dark label {
+  color: #ffffff !important;
+}
+.kanban__auth-register_dark input {
+  background-color: #2b2c37 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(244, 247, 253, 0.15) !important;
+}
+.kanban__auth-register_dark input::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+.kanban__auth-register_dark input::-moz-placeholder {
+  color: #ffffff !important;
+}
+.kanban__auth-register_dark input:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+.kanban__auth-register_dark input::-ms-input-placeholder {
+  color: #ffffff !important;
+}
+.kanban__auth-register_dark input::placeholder {
+  color: #ffffff !important;
 }

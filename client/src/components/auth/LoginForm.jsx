@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 import Error from '@components/Error';
 import '@styles/scss/auth/LoginForm.scss';
 
-const LoginForm = () => {
+const LoginForm = ({ theme }) => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -82,7 +82,11 @@ const LoginForm = () => {
 	};
 
 	return (
-		<div className='kanban__auth-login'>
+		<div
+			className={`${
+				theme === 'dark' ? 'kanban__auth-login_dark' : 'kanban__auth-login'
+			}`}
+		>
 			<div className='kanban__auth-login_heading'>
 				<h1 className='kanban__auth-login_title'>Login</h1>
 				<p className='kanban__auth-login_lead'>
