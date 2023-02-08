@@ -1,14 +1,14 @@
 @import '../variables', '../breakpoints';
 
 .kanban__show-sidebar {
-	background-color: $primary-purple;
+	background-color: $light-primary-purple;
 	position: fixed;
 	left: 0;
 	bottom: 3rem;
 	padding: 20px;
 	border-radius: 0px 100px 100px 0px;
 	cursor: pointer;
-	color: $primary-white;
+	color: $light-primary-white;
 
 	svg {
 		font-size: 20px;

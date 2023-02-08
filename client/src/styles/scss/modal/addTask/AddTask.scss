@@ -3,7 +3,7 @@
 .kanban__add-task {
 	p {
 		@include headingSm;
-		color: $primary-gray;
+		color: $light-primary-gray;
 		margin-bottom: 0.5rem;
 
 		&:first-child {
@@ -23,7 +23,7 @@
 
 		svg {
 			@include headingLg;
-			color: $primary-gray;
+			color: $light-primary-gray;
 			cursor: pointer;
 		}
 
@@ -34,11 +34,11 @@
 
 			li {
 				&:first-child:hover svg:first-child {
-					color: $primary-purple;
+					color: $light-primary-purple;
 				}
 
 				&:last-child:hover svg:last-child {
-					color: $primary-red;
+					color: $light-primary-red;
 				}
 			}
 
@@ -64,26 +64,26 @@
 		}
 
 		&::-webkit-scrollbar-track {
-			background: rgba($primary-gray, 0.1);
+			background: rgba($light-primary-gray, 0.1);
 		}
 
 		&::-webkit-scrollbar-thumb {
-			background: rgba($secondary-purple, 0.5);
+			background: rgba($light-secondary-purple, 0.5);
 			border-radius: 0.25rem;
 
 			&:hover {
-				background: rgba($secondary-purple, 0.75);
+				background: rgba($light-secondary-purple, 0.75);
 			}
 		}
 	}
 
 	.kanban__add-task_subtasks-container_add-update {
 		@extend .kanban__add-task-subtasks_container;
-		margin-bottom: .5rem;
+		margin-bottom: 0.5rem;
 
 		p {
 			@include headingSm;
-			color: $primary-gray;
+			color: $light-primary-gray;
 
 			&:first-child {
 				margin-bottom: 1rem;
@@ -111,7 +111,7 @@
 
 	.kanban__add-task_description {
 		@include textL;
-		color: $primary-gray;
+		color: $light-primary-gray;
 		margin-bottom: 1rem;
 	}
 
@@ -130,19 +130,19 @@
 	.kanban__add-task_input-error {
 		@include inputTextError;
 		@include inputError(shake);
-		border: 1px solid $primary-red;
+		border: 1px solid $light-primary-red;
 		animation: shake $ease-2;
 	}
 
 	textarea {
 		@include inputTextArea;
-		border: 1px solid rgba($primary-gray, 0.25);
+		border: 1px solid rgba($light-primary-gray, 0.25);
 		min-height: 100px;
 	}
 
 	select {
 		@include inputSelect;
-		border: 1px solid rgba($primary-gray, 0.25);
+		border: 1px solid rgba($light-primary-gray, 0.25);
 	}
 
 	.kanban__add-task_status-container {

@@ -5,13 +5,13 @@
 	align-items: center;
 	padding: 0.5rem;
 	border-radius: 4px;
-	background-color: $secondary-gray;
+	background-color: $light-secondary-gray;
 	margin-bottom: 0.5rem;
 	margin-right: 1rem;
 
 	p {
 		@include headingSm;
-		color: $primary-black !important;
+		color: $light-primary-black !important;
 		margin-bottom: 0.5rem;
 		position: relative;
 		top: 4px;
@@ -26,6 +26,6 @@
 
 	.kanban__add-task_subtask-item_checked {
 		text-decoration: line-through;
-		color: $primary-gray !important;
+		color: $light-primary-gray !important;
 	}
 }

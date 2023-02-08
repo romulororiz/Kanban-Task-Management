@@ -17,7 +17,7 @@ body.react-confirm-alert-body-element {
 	@include modal;
 	@include modalFadeIn(fadeIn);
 	animation: fadeIn 0.4s forwards;
-	color: $primary-gray;
+	color: $light-primary-gray;
 	margin: 0;
 
 	@include md {
@@ -33,7 +33,7 @@ body.react-confirm-alert-body-element {
 
 .react-confirm-alert-body > h1 {
 	@include headingXl;
-	color: $primary-red;
+	color: $light-primary-red;
 	margin-bottom: 1rem;
 
 	@include md {
@@ -71,20 +71,20 @@ body.react-confirm-alert-body-element {
 	}
 
 	&:first-child {
-		background: $primary-red;
-		color: $primary-white;
+		background: $light-primary-red;
+		color: $light-primary-white;
 
 		&:hover {
-			background: $secondary-red;
+			background: $light-secondary-red;
 		}
 	}
 
 	&:last-child {
-		background: rgba($primary-purple, 0.1);
-		color: $primary-purple;
+		background: rgba($light-primary-purple, 0.1);
+		color: $light-primary-purple;
 
 		&:hover {
-			background: rgba($primary-purple, 0.25);
+			background: rgba($light-primary-purple, 0.25);
 		}
 	}
 }

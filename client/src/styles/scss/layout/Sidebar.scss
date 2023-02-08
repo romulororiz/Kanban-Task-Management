@@ -8,11 +8,11 @@
 	width: 300px;
 	background-color: #fff;
 	transition: $ease-1;
-	border-right: 1px solid darken($color: $secondary-gray, $amount: 5%);
+	border-right: 1px solid darken($color: $light-secondary-gray, $amount: 5%);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	color: $primary-gray;
+	color: $light-primary-gray;
 	z-index: 101;
 
 	@include lg {
@@ -57,7 +57,7 @@
 		flex-direction: column;
 
 		.kanban__sidebar-toggle {
-			background-color: $secondary-gray;
+			background-color: $light-secondary-gray;
 			margin: 0 1rem 1rem 1rem;
 			padding: 1rem 4rem;
 			display: flex;
@@ -84,8 +84,8 @@
 			}
 
 			&:hover {
-				background-color: rgba($secondary-purple, 0.1);
-				color: $primary-purple;
+				background-color: rgba($light-secondary-purple, 0.1);
+				color: $light-primary-purple;
 			}
 
 			svg {

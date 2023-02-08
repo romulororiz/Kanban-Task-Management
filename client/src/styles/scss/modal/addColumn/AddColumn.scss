@@ -7,7 +7,7 @@
 	.kanban__add-column_input-error {
 		@include inputTextError;
 		@include inputError(shake);
-		border: 1px solid $primary-red;
+		border: 1px solid $light-primary-red;
 		animation: shake $ease-2;
 	}
 }

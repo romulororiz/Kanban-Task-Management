@@ -7,7 +7,7 @@
 	margin: 0 2rem;
 	display: flex;
 	@include textL;
-	background-color: $primary-white;
+	background-color: $light-primary-white;
 	border-radius: 10px;
 	box-shadow: $box-shadow;
 
@@ -16,7 +16,7 @@
 	}
 
 	.kanban__auth-card__left-side {
-		color: $primary-white;
+		color: $light-primary-white;
 		flex: 1;
 		max-width: 320px;
 		display: flex;

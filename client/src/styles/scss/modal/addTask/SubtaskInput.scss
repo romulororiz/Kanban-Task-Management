@@ -10,8 +10,8 @@
 }
 
 .kanban__add-task_subtask-input_disabled {
-	background-color: rgba($primary-gray, .15);
-	color: $primary-gray;
+	background-color: rgba($light-primary-gray, 0.15);
+	color: $light-primary-gray;
 	border: none;
 }
 
@@ -19,6 +19,6 @@
 	position: relative;
 	top: 12px;
 	margin-left: 0.5rem;
-	color: $primary-gray;
+	color: $light-primary-gray;
 	cursor: pointer;
 }

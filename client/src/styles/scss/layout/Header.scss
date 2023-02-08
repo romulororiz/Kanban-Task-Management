@@ -2,11 +2,11 @@
 
 .kanban__header {
 	height: 96px;
-	background-color: $primary-white;
+	background-color: $light-primary-white;
 	position: fixed;
 	width: 100%;
 	z-index: 100;
-	border-bottom: 1px solid darken($color: $secondary-gray, $amount: 5%);
+	border-bottom: 1px solid darken($color: $light-secondary-gray, $amount: 5%);
 
 	.kanban__header-logo {
 		height: 100%;
@@ -34,7 +34,7 @@
 	}
 
 	.kanban__header-logo_no-sidebar {
-		border-right: 1px solid darken($color: $secondary-gray, $amount: 5%);
+		border-right: 1px solid darken($color: $light-secondary-gray, $amount: 5%);
 
 		img {
 			pointer-events: none;
@@ -77,10 +77,10 @@
 			}
 
 			.kanban__header-board_actions-add_small {
-				background-color: $primary-purple;
+				background-color: $light-primary-purple;
 				margin-right: 1rem;
 				border-radius: 50%;
-				color: $primary-white;
+				color: $light-primary-white;
 				cursor: pointer;
 
 				svg {
@@ -96,11 +96,11 @@
 			}
 
 			.kanban__header-board_actions-add_disabled {
-				background-color: $secondary-gray;
+				background-color: $light-secondary-gray;
 				pointer-events: none;
 
 				&:hover {
-					background-color: $secondary-gray;
+					background-color: $light-secondary-gray;
 				}
 			}
 

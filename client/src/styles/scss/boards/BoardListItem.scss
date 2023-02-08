@@ -14,8 +14,8 @@
 	}
 
 	&:hover {
-		background-color: $primary-purple;
-		color: $primary-white;
+		background-color: $light-primary-purple;
+		color: $light-primary-white;
 	}
 
 	.kanban__board-item_icon {
@@ -50,7 +50,7 @@
 }
 
 .kanban__board-item_create {
-	color: $primary-purple;
+	color: $light-primary-purple;
 
 	.kanban__board-item_text_create {
 		display: flex;
@@ -65,6 +65,6 @@
 }
 
 .kanban__board-item-active {
-	background-color: $primary-purple;
-	color: $primary-white;
+	background-color: $light-primary-purple;
+	color: $light-primary-white;
 }

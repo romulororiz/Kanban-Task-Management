@@ -27,11 +27,11 @@
 			height: 0;
 
 			&:checked + .slider {
-				background-color: $secondary-purple;
+				background-color: $light-secondary-purple;
 			}
 
 			&:focus + .slider {
-				box-shadow: 0 0 1px $secondary-purple;
+				box-shadow: 0 0 1px $light-secondary-purple;
 			}
 
 			&:checked + .slider:before {
@@ -48,7 +48,7 @@
 			left: 0;
 			right: -4px;
 			bottom: 0;
-			background-color: $primary-purple;
+			background-color: $light-primary-purple;
 			-webkit-transition: 0.4s;
 			transition: 0.4s;
 

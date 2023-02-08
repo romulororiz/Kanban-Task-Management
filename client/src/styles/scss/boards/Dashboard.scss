@@ -10,7 +10,7 @@
 		align-items: center;
 		height: 100%;
 		@include headingLg;
-		color: $primary-gray;
+		color: $light-primary-gray;
 
 		@include md {
 			@include headingMd;
@@ -32,9 +32,9 @@
 			height: calc(100vh - 250px);
 			margin-top: 4rem;
 			width: 280px;
-			color: $primary-gray;
+			color: $light-primary-gray;
 			border-radius: 6px;
-			background: $tertiary-purple;
+			background: $light-tertiary-purple;
 			cursor: pointer;
 			box-shadow: 0px 4px 6px 1px rgba(54, 78, 126, 0.101545);
 
@@ -51,11 +51,11 @@
 
 			&:hover {
 				p {
-					color: $primary-purple;
+					color: $light-primary-purple;
 				}
 
 				svg {
-					color: $primary-purple;
+					color: $light-primary-purple;
 				}
 			}
 		}
@@ -69,7 +69,7 @@
 		text-align: center;
 		height: 100%;
 		@include headingLg;
-		color: $primary-gray;
+		color: $light-primary-gray;
 
 		@include md {
 			@include headingMd;

@@ -1,7 +1,7 @@
 @import '../variables', '../mixins', '../breakpoints';
 
 .kanban__dashboard-task_item {
-	background-color: $primary-white;
+	background-color: $light-primary-white;
 	@include headingSm;
 	display: flex;
 	flex-direction: column;
@@ -18,6 +18,6 @@
 
 	p {
 		font-size: $font-size-m;
-		color: $primary-gray;
+		color: $light-primary-gray;
 	}
 }

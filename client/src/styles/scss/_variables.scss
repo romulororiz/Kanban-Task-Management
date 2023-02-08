@@ -2,28 +2,39 @@
 //  Theme Colors
 //  -----------------------------
 
+// Light-theme colors
 // Purple
-$primary-purple: #635fc7;
-$secondary-purple: #a8a4ff;
-$tertiary-purple: linear-gradient(
+$light-primary-purple: #635fc7;
+$light-secondary-purple: #a8a4ff;
+$light-tertiary-purple: linear-gradient(
 	180deg,
 	#e9effa 0%,
 	rgba(233, 239, 250, 0.5) 100%
 );
 
 // gray
-$primary-gray: #828fa3;
-$secondary-gray: #f4f7fd;
+$light-primary-gray: #828fa3;
+$light-secondary-gray: #f4f7fd;
 
 // red
-$primary-red: #ea5555;
-$secondary-red: #ff9898;
+$light-primary-red: #ea5555;
+$light-secondary-red: #ff9898;
 
 // black
-$primary-black: #000112;
+$light-primary-black: #000112;
 
 // white
-$primary-white: #ffffff;
+$light-primary-white: #ffffff;
+
+// Dark-theme colors
+// gray
+$dark-primary-gray: #2b2c37;
+$darker-primary-gray: #20212c;
+$dark-tertiary-gray: linear-gradient(
+	180deg,
+	rgba(43, 44, 55, 0.25) 0%,
+	rgba(43, 44, 55, 0.125) 100%
+);
 
 //  ---------------------------
 //  Heading Sizes

@@ -11,7 +11,7 @@
 		justify-content: space-between;
 		margin-bottom: 2rem;
 		margin-top: 1rem;
-		color: $primary-gray;
+		color: $light-primary-gray;
 		position: relative;
 
 		.kanban__dashboard-column_heading-icon {
@@ -37,7 +37,7 @@
 				margin-left: 1rem;
 				letter-spacing: 2.4px;
 				text-transform: uppercase;
-				color: $primary-gray;
+				color: $light-primary-gray;
 				@include headingMd;
 				font-weight: 500;
 			}
@@ -55,6 +55,6 @@
 	}
 
 	.kanban__dashboard-column_tasks-container_empty {
-		border: 3px dashed lighten($color: $primary-gray, $amount: 25%);
+		border: 3px dashed lighten($color: $light-primary-gray, $amount: 25%);
 	}
 }

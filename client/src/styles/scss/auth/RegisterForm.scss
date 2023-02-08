@@ -34,7 +34,7 @@
 		}
 
 		p {
-			color: $primary-gray;
+			color: $light-primary-gray;
 			@include headingMd;
 			font-weight: 400;
 
@@ -116,7 +116,7 @@
 
 			input {
 				@include inputText;
-				border: 1px solid lighten($primary-gray, 20%);
+				border: 1px solid lighten($light-primary-gray, 20%);
 
 				// Media queries
 				@include md {
@@ -182,7 +182,7 @@
 			}
 
 			a {
-				color: $primary-purple;
+				color: $light-primary-purple;
 				@include headingSm;
 				font-weight: 500;
 				text-decoration: none;
