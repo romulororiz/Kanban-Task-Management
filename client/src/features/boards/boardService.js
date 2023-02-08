@@ -29,7 +29,6 @@ const updateBoard = async (boardId, boardData) => {
 // Delete board
 const deleteBoard = async boardId => {
 	const response = await axios.delete(`${API_URL}/${boardId}`);
-	console.log(response.data)
 	return response.data;
 };
 

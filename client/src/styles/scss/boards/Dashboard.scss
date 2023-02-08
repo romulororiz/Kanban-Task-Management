@@ -59,6 +59,11 @@
 				}
 			}
 		}
+
+		.kanban__dashboard-add_column-content-dark {
+			@extend .kanban__dashboard-add_column-content;
+			background: $dark-tertiary-gray;
+		}
 	}
 
 	.kanban__dashboard-empty {

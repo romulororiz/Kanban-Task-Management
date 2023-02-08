@@ -79,7 +79,11 @@ const Dashboard = ({ theme }) => {
 					))}
 					<div className='kanban__dashboard-add_column'>
 						<div
-							className='kanban__dashboard-add_column-content'
+							className={
+								theme === 'dark'
+									? 'kanban__dashboard-add_column-content-dark'
+									: 'kanban__dashboard-add_column-content'
+							}
 							onClick={() => setShowModal(true)}
 						>
 							<TiPlus />
