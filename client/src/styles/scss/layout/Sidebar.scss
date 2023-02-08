@@ -115,4 +115,7 @@
 	background-color: $dark-primary-gray;
 	border-right: 1px solid $light-dark-primary-gray;
 
+	.kanban__sidebar-toggle {
+		background-color: $darker-primary-gray !important;
+	}
 }

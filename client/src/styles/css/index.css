@@ -25,6 +25,8 @@ li {
 
 body {
   height: 100%;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
 }
 
 body {

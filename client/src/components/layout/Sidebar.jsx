@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getBoards } from '@features/boards/boardSlice';
 import BoardListItem from '@components/board/BoardListItem';
 import LogoDark from '@assets/dashboard/logo-dark.svg';
+import LogoLight from '@assets/dashboard/logo-light.svg';
 import ToggleSwitch from './ToggleSwitch';
 import Modal from '@components/modal/Modal';
 import AddBoard from '@components/modal/content/addBoard/AddBoard';
@@ -92,7 +93,10 @@ const Sidebar = ({
 			>
 				<div className='kanban__sidebar-boards_container'>
 					<div className='kanban__sidebar-logo'>
-						<img src={LogoDark} alt='logo dark' />
+						<img
+							src={theme === 'dark' ? LogoLight : LogoDark}
+							alt='logo dark'
+						/>
 					</div>
 
 					<h1>All Boards ({boards.length})</h1>

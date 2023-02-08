@@ -14,8 +14,6 @@ const Dashboard = ({ theme }) => {
 	const [showModal, setShowModal] = useState(false);
 	const [modalMode, setModalMode] = useState('addColumn');
 
-	console.log(theme)
-
 	// get window width
 	const windowSize = useWindowSize();
 
