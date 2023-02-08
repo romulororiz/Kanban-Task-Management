@@ -12,6 +12,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import SubtaskInput from './SubtaskInput';
 import SubtaskItem from './SubtaskItem';
+import Error from '@components/Error';
 import '@styles/scss/modal/addTask/AddTask.scss';
 
 const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
@@ -31,7 +32,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 
 	// get data from store
 	const { columns } = useSelector(state => state.column);
-	const { errors: taskErrors, task } = useSelector(state => state.task);
+	const { task } = useSelector(state => state.task);
 
 	// handle dropdown
 	const dropdownHandler = useCallback(() => {
@@ -94,10 +95,15 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 			title: subtaskTitle,
 		};
 
-		// // check if subtask title is empty
-		// if (!subtaskTitle) {
-		// 	return;
-		// }
+		if (!subtaskTitle.length) {
+			setErrors([
+				{
+					msg: 'cannot be empty',
+					param: 'subtask',
+				},
+			]);
+			return;
+		}
 
 		setFormData(prevState => ({
 			...prevState,
@@ -120,18 +126,39 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 		e => {
 			e.preventDefault();
 
-			// if (!title || !description || !status) {
-			// 	// concatenate all errors into one array
-			// 	const allErrors = [
-			// 		...(!title ? ['Title is required'] : []),
-			// 		...(!description ? ['Description is required'] : []),
-			// 		...(!status ? ['Status is required'] : []),
-			// 	];
+			if (!title || !description || !status) {
+				// concatenate all errors into one array
+				const allErrors = [
+					...(!title
+						? [
+								{
+									msg: 'cannot be empty',
+									param: 'title',
+								},
+						  ]
+						: []),
+					...(!description
+						? [
+								{
+									msg: 'cannot be empty',
+									param: 'description',
+								},
+						  ]
+						: []),
+					...(!status
+						? [
+								{
+									msg: 'Select a status',
+									param: 'status',
+								},
+						  ]
+						: []),
+				];
 
-			// 	setErrors(allErrors);
+				setErrors(allErrors);
 
-			// 	return;
-			// }
+				return;
+			}
 
 			const taskData = {
 				title,
@@ -207,16 +234,21 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 							)}
 						</div>
 					) : (
-						<div className='kanban__task-title_container-update'>
+						<div className='kanban__task-title_container-add-update'>
 							<label htmlFor='title'>Title</label>
 							<input
-								className={errors.length ? 'kanban__add-task_input-error' : ''}
+								className={
+									errors.map(err => err.param).includes('title')
+										? 'kanban__add-task_input-error'
+										: ''
+								}
 								placeholder='e.g. Take coffee break'
 								name='title'
 								value={title}
 								onChange={onChangeHandler}
 								type='text'
 							/>
+							<Error errors={errors} errorParam='title' />
 						</div>
 					)}
 
@@ -226,12 +258,17 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 						<div className='kanban__add-task_description-update'>
 							<label htmlFor='description'>Description</label>
 							<textarea
-								className={errors.length ? 'kanban__add-task_input-error' : ''}
+								className={
+									errors.map(err => err.param).includes('description')
+										? 'kanban__add-task_input-error'
+										: ''
+								}
 								placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'
 								name='description'
 								value={description}
 								onChange={onChangeHandler}
 							/>
+							<Error errors={errors} errorParam='description' />
 						</div>
 					)}
 
@@ -267,7 +304,9 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 								<SubtaskInput
 									subtask={subtaskTitle}
 									onChange={onSubtaskChange}
+									errors={errors}
 								/>
+								<Error errors={errors} errorParam='subtask' />
 							</div>
 							<button
 								className='kanban__add-task_subtasks-btn'
@@ -284,7 +323,11 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 							{modalMode === 'viewTask' ? 'Current Status' : 'Status'}
 						</label>
 						<select
-							className={errors.length ? 'kanban__add-task_input-error' : ''}
+							className={
+								errors.map(err => err.param).includes('status')
+									? 'kanban__add-task_input-error'
+									: ''
+							}
 							type='text'
 							placeholder='e.g Todo'
 							name='status'
@@ -298,6 +341,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 								</option>
 							))}
 						</select>
+						<Error errors={errors} errorParam='status' />
 					</div>
 					{modalMode === 'viewTask' ? (
 						''

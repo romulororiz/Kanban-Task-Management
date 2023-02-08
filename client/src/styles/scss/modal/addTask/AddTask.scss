@@ -50,10 +50,9 @@
 		}
 	}
 
-	.kanban__task-title_container-update {
+	.kanban__task-title_container-add-update {
 		display: flex;
 		flex-direction: column;
-		margin-bottom: 1rem;
 	}
 
 	.kanban__add-task-subtasks_container {
@@ -79,25 +78,8 @@
 	}
 
 	.kanban__add-task_subtasks-container_add-update {
-		max-height: 200px;
-		overflow-y: auto;
-
-		&::-webkit-scrollbar {
-			width: 0.5rem;
-		}
-
-		&::-webkit-scrollbar-track {
-			background: rgba($primary-gray, 0.1);
-		}
-
-		&::-webkit-scrollbar-thumb {
-			background: rgba($secondary-purple, 0.5);
-			border-radius: 0.25rem;
-
-			&:hover {
-				background: rgba($secondary-purple, 0.75);
-			}
-		}
+		@extend .kanban__add-task-subtasks_container;
+		margin-bottom: .5rem;
 
 		p {
 			@include headingSm;
@@ -117,7 +99,6 @@
 		align-items: center;
 		width: 100%;
 		margin-bottom: 1rem;
-		margin-top: 1rem;
 
 		svg {
 			margin-right: 0.25rem;

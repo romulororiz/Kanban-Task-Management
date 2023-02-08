@@ -11,7 +11,17 @@ const Error = ({ errors, errorParam, error }) => {
 				errors.map(
 					({ param, msg }, index) =>
 						param === errorParam && (
-							<div key={index} className='kanban__input-error'>
+							<div
+								key={index}
+								className={`kanban__input-error ${
+									errorParam === 'subtask' ||
+									errorParam === 'title' ||
+									errorParam === 'description' ||
+									errorParam === 'status'
+										? 'kanban__input-error-task'
+										: ''
+								}`}
+							>
 								{msg}
 							</div>
 						)

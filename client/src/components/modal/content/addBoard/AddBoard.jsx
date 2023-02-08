@@ -39,7 +39,7 @@ const AddBoard = ({ setShowModal, modalMode, setModalMode, board }) => {
 		if (!boardName) {
 			setErrors([
 				{
-					msg: 'Name cannot be empty',
+					msg: 'cannot be empty',
 				},
 			]);
 			return;
@@ -54,7 +54,7 @@ const AddBoard = ({ setShowModal, modalMode, setModalMode, board }) => {
 			setIsUpdate(false);
 			setModalMode('addBoard');
 			setShowModal(false);
-			navigate(0)
+			navigate(0);
 		} else if (!errors.length) {
 			// create board
 			dispatch(createBoard(boardData)).then(res => {

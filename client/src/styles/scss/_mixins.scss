@@ -132,6 +132,10 @@
 		opacity: 0.25;
 		font-size: $font-size-l;
 	}
+
+	&:focus {
+		border: 1px solid $secondary-purple;
+	}
 }
 
 @mixin inputText {

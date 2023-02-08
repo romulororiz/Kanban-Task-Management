@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateColumn, createColumn } from '@features/columns/columnSlice';
 import { GithubPicker } from 'react-color';
 import { useParams } from 'react-router-dom';
@@ -45,7 +45,7 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 			if (!columnName) {
 				setErrors([
 					{
-						msg: 'Name cannot be empty',
+						msg: 'cannot be empty',
 					},
 				]);
 				return;

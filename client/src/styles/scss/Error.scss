@@ -8,3 +8,11 @@
 	color: $primary-red;
 	animation: fadeIn $ease-1;
 }
+
+.kanban__input-error-task {
+	@extend .kanban__input-error;
+	position: relative;
+	bottom: 15px;
+}
+
+

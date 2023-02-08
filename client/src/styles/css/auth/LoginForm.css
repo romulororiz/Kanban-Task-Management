@@ -153,6 +153,9 @@
   opacity: 0.25;
   font-size: 13px;
 }
+.kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-input input:focus {
+  border: 1px solid #a8a4ff;
+}
 @media screen and (max-width: 550px) {
   .kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-input input {
     width: 100%;
@@ -199,6 +202,9 @@
   color: #000112;
   opacity: 0.25;
   font-size: 13px;
+}
+.kanban__auth-login .kanban__auth-login_form .kanban__auth-login_form-input .kanban__auth-login_form-input_error:focus {
+  border: 1px solid #a8a4ff;
 }
 @-webkit-keyframes shake {
   0% {
