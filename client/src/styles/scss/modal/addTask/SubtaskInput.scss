@@ -12,7 +12,7 @@
 .kanban__add-task_subtask-input_disabled {
 	background-color: rgba($light-primary-gray, 0.15);
 	color: $light-primary-gray;
-	border: none;
+	border: 1px solid rgba($light-secondary-gray, 0.15);
 }
 
 .kanban__add-task_remove-icon {

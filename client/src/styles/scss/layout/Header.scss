@@ -137,6 +137,11 @@
 			.kanban__header-board_dropdown-hide {
 				display: none;
 			}
+
+			.kanban__header-board_dropdown-dark {
+				@extend .kanban__header-board_dropdown;
+				background-color: $dark-primary-gray;
+			}
 		}
 
 		.kanban__header-board_actions-sidebar {

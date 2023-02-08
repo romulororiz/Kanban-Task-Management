@@ -114,12 +114,14 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 	};
 
 	// handle remove subtask input from array
-	const onRemoveSubtaskDropdown = index => {
+	const onRemoveSubtask = index => {
 		setFormData(prevState => ({
 			...prevState,
 			subtasks: prevState.subtasks.filter((_, i) => i !== index),
 		}));
 	};
+
+	console.log(errors);
 
 	// Submit new column / edit column and save to the database
 	const onSubmit = useCallback(
@@ -198,7 +200,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 	};
 
 	// handle delete task
-	const onDeleteTask = id => {
+	const onDeleteTaskDropdown = id => {
 		dispatch(deleteTask(id));
 		setShowDropdown(false);
 		setShowModal(false);
@@ -212,11 +214,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 
 	return (
 		<>
-			<div
-				className={`${
-					theme === 'dark' ? 'kanban__add-task-dark' : 'kanban__add-task'
-				}`}
-			>
+			<div className='kanban__add-task'>
 				<form onSubmit={onSubmit}>
 					{modalMode === 'viewTask' ? (
 						<div className='kanban__task-title_container'>
@@ -235,7 +233,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 											<FaRegEdit />
 											Edit
 										</li>
-										<li onClick={() => onDeleteTask(taskId)}>
+										<li onClick={() => onDeleteTaskDropdown(taskId)}>
 											<FaRegTrashAlt />
 											Delete
 										</li>
@@ -308,7 +306,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 										index={index}
 										subtask={subtask}
 										onChange={onSubtaskChange}
-										onRemove={onRemoveSubtaskDropdown}
+										onRemove={onRemoveSubtask}
 									/>
 								))}
 								<SubtaskInput

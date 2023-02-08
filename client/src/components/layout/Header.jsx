@@ -137,7 +137,7 @@ const Header = ({
 									showDropdown
 										? 'kanban__header-board_dropdown'
 										: 'kanban__header-board_dropdown-hide'
-								}`}
+								} ${theme === 'dark' && 'kanban__header-board_dropdown-dark'}`}
 							>
 								<ul>
 									<li>

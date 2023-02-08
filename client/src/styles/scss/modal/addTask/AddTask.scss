@@ -31,6 +31,7 @@
 			@include dropdown;
 			top: 90px;
 			right: 36px;
+			background-color: $light-primary-white;
 
 			li {
 				&:first-child:hover svg:first-child {
@@ -49,7 +50,7 @@
 			}
 		}
 
-		.kanban__add-task_dropdown {
+		.kanban__add-task_dropdown-dark {
 			@extend .kanban__add-task_dropdown;
 			background-color: $darker-primary-gray;
 		}
@@ -162,21 +163,6 @@
 		select {
 			@include inputSelect;
 			border: 1px solid rgba($light-primary-gray, 0.25);
-		}
-	}
-}
-
-.kanban__add-task-dark {
-	@extend .kanban__add-task;
-
-	textarea,
-	select,
-	input[type='text'] {
-		background-color: $dark-primary-gray !important;
-		color: $light-primary-white !important;
-
-		&::placeholder {
-			color: rgba($light-primary-white, 0.45) !important;
 		}
 	}
 }

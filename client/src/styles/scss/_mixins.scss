@@ -146,7 +146,7 @@
 
 @mixin inputTextError {
 	@include inputText;
-	border: 1px solid $light-primary-red;
+	border: 1px solid $light-primary-red !important;
 }
 
 @mixin inputTextArea {

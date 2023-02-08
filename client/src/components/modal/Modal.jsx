@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getBoards } from '@features/boards/boardSlice';
 import '@styles/scss/modal/Modal.scss';
 
 const Modal = ({

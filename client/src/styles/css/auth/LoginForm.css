@@ -174,7 +174,7 @@
   height: 40px;
   border: 1px solid #828fa3;
   color: #000112;
-  border: 1px solid #ea5555;
+  border: 1px solid #ea5555 !important;
   -webkit-animation: shake 0.2s ease-out;
   animation: shake 0.2s ease-out;
 }

@@ -46,5 +46,21 @@
 		@extend .kanban__modal-container;
 		background-color: $dark-primary-gray;
 		color: $light-primary-white;
+
+		input[type='text'],
+		textarea {
+			background-color: $dark-primary-gray;
+			color: $light-primary-white;
+
+			&::placeholder {
+				color: $light-primary-white;
+			}
+		}
+
+		select {
+			background-color: $dark-primary-gray !important;
+			border: 1px solid $light-secondary-gray;
+			color: $light-primary-white !important;
+		}
 	}
 }

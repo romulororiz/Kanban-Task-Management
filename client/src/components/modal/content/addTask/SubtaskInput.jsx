@@ -14,7 +14,7 @@ const SubtaskInput = ({ subtask, onChange, onRemove, index, errors }) => {
 				}
 				disabled={subtask.title}
 				type='text'
-				placeholder='e.g Make Coffee'
+				placeholder='e.g. Make Coffee'
 				value={subtask.title}
 				onChange={onChange}
 				name={subtask.title}

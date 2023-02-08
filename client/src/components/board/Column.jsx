@@ -120,6 +120,7 @@ const Column = ({ column, theme }) => {
 						modalMode={modalMode}
 						setModalMode={setModalMode}
 						column={column}
+						theme={theme}
 					/>
 				);
 			case 'updateTask':
@@ -129,6 +130,7 @@ const Column = ({ column, theme }) => {
 						modalMode={modalMode}
 						setModalMode={setModalMode}
 						column={column}
+						theme={theme}
 					/>
 				);
 			default:
