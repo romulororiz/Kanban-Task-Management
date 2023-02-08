@@ -65,6 +65,10 @@
 		max-height: 200px;
 		overflow-y: auto;
 
+		@include sm {
+			max-height: 100px;
+		}
+
 		&::-webkit-scrollbar {
 			width: 0.5rem;
 		}
@@ -153,6 +157,10 @@
 		@include inputTextArea;
 		border: 1px solid rgba($light-primary-gray, 0.25);
 		min-height: 100px;
+
+		@include sm {
+			min-height: 80px;
+		}
 	}
 
 	.kanban__add-task_status-container {

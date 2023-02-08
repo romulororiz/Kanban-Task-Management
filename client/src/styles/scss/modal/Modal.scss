@@ -28,6 +28,10 @@
 		.kanban__modal-footer {
 			margin-top: 1rem;
 
+			@include sm {
+				margin-top: 0;
+			}
+
 			.kanban__modal-button {
 				@include buttonPrimary;
 				@include headingMd;
