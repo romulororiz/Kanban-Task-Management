@@ -156,3 +156,14 @@
 		}
 	}
 }
+
+.kanban__header-dark {
+	@extend .kanban__header;
+	background-color: $dark-primary-gray;
+	border-bottom: 1px solid $light-dark-primary-gray;
+	color: $light-primary-white;
+
+	.kanban__header-logo_no-sidebar {
+		border-right: 1px solid $light-dark-primary-gray;
+	}
+}

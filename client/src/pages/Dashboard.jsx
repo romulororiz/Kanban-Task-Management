@@ -10,9 +10,11 @@ import { TiPlus } from 'react-icons/ti';
 import useWindowSize from '@hooks/useWindowSize';
 import '@styles/scss/boards/Dashboard.scss';
 
-const Dashboard = () => {
+const Dashboard = ({ theme }) => {
 	const [showModal, setShowModal] = useState(false);
 	const [modalMode, setModalMode] = useState('addColumn');
+
+	console.log(theme)
 
 	// get window width
 	const windowSize = useWindowSize();

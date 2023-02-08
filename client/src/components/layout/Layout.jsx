@@ -10,7 +10,7 @@ import { getBoardById } from '@features/boards/boardSlice';
 import { getBoardColumns } from '@features/columns/columnSlice';
 import '@styles/scss/layout/Layout.scss';
 
-const Layout = () => {
+const Layout = ({ theme }) => {
 	const [showSidebar, setShowSidebar] = useState(true);
 	const [showModal, setShowModal] = useState(false);
 
@@ -46,6 +46,7 @@ const Layout = () => {
 				showModal={showModal}
 				setShowModal={setShowModal}
 				board={board}
+				theme={theme}
 			/>
 			<Header
 				user={user}
@@ -55,6 +56,7 @@ const Layout = () => {
 				boards={boards}
 				columns={columns}
 				isLoading={isLoading}
+				theme={theme}
 			/>
 			<main
 				className={`kanban__main-content ${

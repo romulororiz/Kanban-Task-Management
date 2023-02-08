@@ -1,5 +1,6 @@
 import Ellipsis from '@assets/dashboard/icon-vertical-ellipsis.svg';
 import LogoDark from '@assets/dashboard/logo-dark.svg';
+import LogoLight from '@assets/dashboard/logo-light.svg';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import { logout } from '@features/auth/authSlice';
 import { useEffect, useRef, useState } from 'react';
@@ -21,6 +22,7 @@ const Header = ({
 	board,
 	columns,
 	isLoading,
+	theme,
 }) => {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [showModal, setShowModal] = useState(false);
@@ -72,7 +74,11 @@ const Header = ({
 					}
 				/>
 			)}
-			<div className='kanban__header'>
+			<div
+				className={`${
+					theme === 'dark' ? 'kanban__header-dark' : 'kanban__header'
+				}`}
+			>
 				<div
 					className={`kanban__header-container ${
 						!showSidebar && 'kanban__header-container_no-sidebar'
@@ -83,7 +89,7 @@ const Header = ({
 							!showSidebar && 'kanban__header-logo_no-sidebar'
 						}`}
 					>
-						<img src={LogoDark} alt='logo dark' />
+						<img src={theme === 'dark' ? LogoLight : LogoDark} alt='logo dark' />
 					</div>
 					<div
 						className={`kanban__header-board_name ${
