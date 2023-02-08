@@ -43,6 +43,13 @@ const AddBoard = ({ setShowModal, modalMode, setModalMode, board }) => {
 				},
 			]);
 			return;
+		} else if (boardName.length > 15) {
+			setErrors([
+				{
+					msg: 'cannot be more than 15 characters',
+				},
+			]);
+			return;
 		}
 
 		const boardData = {

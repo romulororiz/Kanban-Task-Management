@@ -49,6 +49,13 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 					},
 				]);
 				return;
+			} else if (columnName.length > 15) {
+				setErrors([
+					{
+						msg: 'cannot be more than 15 characters',
+					},
+				]);
+				return;
 			}
 
 			const columnData = {

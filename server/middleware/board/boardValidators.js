@@ -4,8 +4,8 @@ const { check } = require('express-validator');
 const boardValidator = [
 	check('name').not().isEmpty().withMessage('cannot be empty'),
 	check('name')
-		.isLength({ max: 15 })
-		.withMessage('Name should be less than 15 characters'),
+		.isLength({ max: 16 })
+		.withMessage('Name should be less than 16 characters'),
 ];
 
 // Add Column validation
