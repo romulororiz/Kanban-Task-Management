@@ -1,5 +1,9 @@
 @import '../variables', '../mixins', '../breakpoints';
 
+.react-confirm-alert {
+	margin: 0 2rem;
+}
+
 body.react-confirm-alert-body-element {
 	overflow: hidden;
 }
@@ -14,6 +18,11 @@ body.react-confirm-alert-body-element {
 	@include modalFadeIn(fadeIn);
 	animation: fadeIn 0.4s forwards;
 	color: $primary-gray;
+	margin: 0;
+
+	@include md {
+		font-size: $font-size-m;
+	}
 }
 
 .react-confirm-alert-svg {
@@ -26,6 +35,10 @@ body.react-confirm-alert-body-element {
 	@include headingXl;
 	color: $primary-red;
 	margin-bottom: 1rem;
+
+	@include md {
+		@include headingMd;
+	}
 }
 
 .react-confirm-alert-body > h3 {
@@ -54,6 +67,7 @@ body.react-confirm-alert-body-element {
 
 	@include md {
 		font-size: $font-size-m;
+		padding: 5px;
 	}
 
 	&:first-child {
