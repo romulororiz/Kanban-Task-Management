@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import '@styles/scss/boards/TaskItem.scss';
 
-const TaskItem = ({ task, setShowModal, setModalMode }) => {
+const TaskItem = ({ task, setShowModal, setModalMode, theme }) => {
 	// initialize navigate
 	const navigate = useNavigate();
 
@@ -23,7 +23,14 @@ const TaskItem = ({ task, setShowModal, setModalMode }) => {
 	).length;
 
 	return (
-		<div className='kanban__dashboard-task_item' onClick={handleUpdateTask}>
+		<div
+			className={`${
+				theme === 'dark'
+					? 'kanban__dashboard-task_item-dark'
+					: 'kanban__dashboard-task_item'
+			}`}
+			onClick={handleUpdateTask}
+		>
 			<div className='kanban__dashboard-task_item-title'>
 				<h3>{title}</h3>
 			</div>

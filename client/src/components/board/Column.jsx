@@ -170,6 +170,8 @@ const Column = ({ column, theme }) => {
 							showDropdown
 								? 'kanban__dashboard-column_dropdown'
 								: 'kanban__dashboard-column_dropdown-hide'
+						} ${
+							theme === 'dark' ? 'kanban__dashboard-column_dropdown-dark' : ''
 						}`}
 					>
 						<ul>
@@ -204,6 +206,7 @@ const Column = ({ column, theme }) => {
 								modalMode={modalMode}
 								setShowModal={setShowModal}
 								setModalMode={setModalMode}
+								theme={theme}
 							/>
 						))}
 				</div>

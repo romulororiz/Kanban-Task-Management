@@ -28,6 +28,11 @@
 			display: none;
 		}
 
+		.kanban__dashboard-column_dropdown-dark {
+			@include dropdown;
+			background-color: $dark-primary-gray;
+		}
+
 		.kanban__dashboard-column_heading-title_container {
 			width: 100%;
 			display: flex;

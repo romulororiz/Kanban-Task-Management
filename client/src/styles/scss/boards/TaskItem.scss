@@ -21,3 +21,10 @@
 		color: $light-primary-gray;
 	}
 }
+
+.kanban__dashboard-task_item-dark {
+	@extend .kanban__dashboard-task_item;
+	background-color: $dark-primary-gray;
+	color: $light-primary-white;
+	box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
+}
