@@ -89,7 +89,10 @@ const Header = ({
 							!showSidebar && 'kanban__header-logo_no-sidebar'
 						}`}
 					>
-						<img src={theme === 'dark' ? LogoLight : LogoDark} alt='logo dark' />
+						<img
+							src={theme === 'dark' ? LogoLight : LogoDark}
+							alt='logo dark'
+						/>
 					</div>
 					<div
 						className={`kanban__header-board_name ${

@@ -16,6 +16,7 @@ const Sidebar = ({
 	showModal,
 	setShowModal,
 	board,
+	theme,
 }) => {
 	const [activeBoard, setActiveBoard] = useState(null);
 	const [modalMode, setModalMode] = useState('addBoard');
@@ -85,9 +86,9 @@ const Sidebar = ({
 				/>
 			)}
 			<div
-				className={`kanban__sidebar ${
-					showSidebar ? 'kanban__sidebar-show' : 'kanban__sidebar-hide'
-				}`}
+				className={`${
+					theme === 'dark' ? 'kanban__sidebar-dark' : 'kanban__sidebar'
+				} ${showSidebar ? 'kanban__sidebar-show' : 'kanban__sidebar-hide'}`}
 			>
 				<div className='kanban__sidebar-boards_container'>
 					<div className='kanban__sidebar-logo'>

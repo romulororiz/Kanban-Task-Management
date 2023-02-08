@@ -109,3 +109,10 @@
 	transform: translateX(0);
 	transition: $ease-3;
 }
+
+.kanban__sidebar-dark {
+	@extend .kanban__sidebar;
+	background-color: $dark-primary-gray;
+	border-right: 1px solid $light-dark-primary-gray;
+
+}
