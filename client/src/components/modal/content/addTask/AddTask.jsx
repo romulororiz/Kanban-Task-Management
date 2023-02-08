@@ -15,7 +15,7 @@ import SubtaskItem from './SubtaskItem';
 import Error from '@components/Error';
 import '@styles/scss/modal/addTask/AddTask.scss';
 
-const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
+const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 	const [formData, setFormData] = useState({
 		title: '',
 		description: '',
@@ -212,14 +212,24 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 
 	return (
 		<>
-			<div className='kanban__add-task'>
+			<div
+				className={`${
+					theme === 'dark' ? 'kanban__add-task-dark' : 'kanban__add-task'
+				}`}
+			>
 				<form onSubmit={onSubmit}>
 					{modalMode === 'viewTask' ? (
 						<div className='kanban__task-title_container'>
 							<h3>{task.title}</h3>
 							<GoKebabVertical onClick={dropdownHandler} />
 							{showDropdown && (
-								<div className='kanban__add-task_dropdown'>
+								<div
+									className={`${
+										theme === 'dark'
+											? 'kanban__add-task_dropdown-dark'
+											: 'kanban__add-task_dropdown'
+									}`}
+								>
 									<ul>
 										<li onClick={onUpdateTaskDropdown}>
 											<FaRegEdit />
@@ -309,7 +319,11 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 								<Error errors={errors} errorParam='subtask' />
 							</div>
 							<button
-								className='kanban__add-task_subtasks-btn'
+								className={
+									theme === 'dark'
+										? 'kanban__add-task_subtasks-btn-dark'
+										: 'kanban__add-task_subtasks-btn'
+								}
 								onClick={onAddSubtask}
 							>
 								<TiPlus />

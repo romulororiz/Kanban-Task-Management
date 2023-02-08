@@ -41,4 +41,10 @@
 			}
 		}
 	}
+
+	.kanban__modal-container-dark {
+		@extend .kanban__modal-container;
+		background-color: $dark-primary-gray;
+		color: $light-primary-white;
+	}
 }

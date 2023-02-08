@@ -2,10 +2,16 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { updateTask } from '@features/tasks/taskSlice';
+import { useThemeContext } from '@hooks/useThemeContext';
 import '@styles/scss/modal/addTask/SubtaskItem.scss';
 
 const SubtaskItem = ({ subtask, task }) => {
 	const [isChecked, setIsChecked] = useState(false);
+
+	// get theme from context
+	const {
+		state: { theme },
+	} = useThemeContext();
 
 	// get task id from url
 	const { taskId } = useParams();
@@ -45,7 +51,13 @@ const SubtaskItem = ({ subtask, task }) => {
 	}, [subtask.isCompleted]);
 
 	return (
-		<div className='kanban__add-task_subtask-item'>
+		<div
+			className={`${
+				theme === 'dark'
+					? 'kanban__add-task_subtask-item-dark'
+					: 'kanban__add-task_subtask-item'
+			}`}
+		>
 			<input
 				type='checkbox'
 				value={subtask._id}

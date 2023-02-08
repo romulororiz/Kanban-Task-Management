@@ -59,6 +59,7 @@ const Dashboard = ({ theme }) => {
 					setShowModal={setShowModal}
 					showModal={showModal}
 					setModalMode={setModalMode}
+					theme={theme}
 					content={
 						<AddColumn
 							showModal={showModal}

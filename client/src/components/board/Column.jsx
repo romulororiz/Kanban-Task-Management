@@ -146,6 +146,7 @@ const Column = ({ column, theme }) => {
 					setShowModal={setShowModal}
 					showModal={showModal}
 					content={content}
+					theme={theme}
 				/>
 			)}
 			<div className='kanban__dashboard-column'>

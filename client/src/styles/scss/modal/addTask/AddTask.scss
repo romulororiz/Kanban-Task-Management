@@ -48,6 +48,11 @@
 				font-size: $font-size-l;
 			}
 		}
+
+		.kanban__add-task_dropdown {
+			@extend .kanban__add-task_dropdown;
+			background-color: $darker-primary-gray;
+		}
 	}
 
 	.kanban__task-title_container-add-update {
@@ -109,6 +114,15 @@
 		}
 	}
 
+	.kanban__add-task_subtasks-btn-dark {
+		@extend .kanban__add-task_subtasks-btn;
+		background-color: $light-primary-white;
+
+		&:hover {
+			background-color: $light-primary-white;
+		}
+	}
+
 	.kanban__add-task_description {
 		@include textL;
 		color: $light-primary-gray;
@@ -140,14 +154,29 @@
 		min-height: 100px;
 	}
 
-	select {
-		@include inputSelect;
-		border: 1px solid rgba($light-primary-gray, 0.25);
-	}
-
 	.kanban__add-task_status-container {
 		margin-top: 1rem;
 		display: flex;
 		flex-direction: column;
+
+		select {
+			@include inputSelect;
+			border: 1px solid rgba($light-primary-gray, 0.25);
+		}
+	}
+}
+
+.kanban__add-task-dark {
+	@extend .kanban__add-task;
+
+	textarea,
+	select,
+	input[type='text'] {
+		background-color: $dark-primary-gray !important;
+		color: $light-primary-white !important;
+
+		&::placeholder {
+			color: rgba($light-primary-white, 0.45) !important;
+		}
 	}
 }

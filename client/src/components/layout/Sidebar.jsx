@@ -76,6 +76,7 @@ const Sidebar = ({
 					title={modalMode === 'addBoard' ? 'Create New Board' : 'Edit Board'}
 					setModalMode={setModalMode}
 					modalMode={modalMode}
+					theme={theme}
 					content={
 						<AddBoard
 							setShowModal={setShowModal}

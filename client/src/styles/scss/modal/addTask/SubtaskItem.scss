@@ -29,3 +29,12 @@
 		color: $light-primary-gray !important;
 	}
 }
+
+.kanban__add-task_subtask-item-dark {
+	@extend .kanban__add-task_subtask-item;
+	background-color: $darker-primary-gray;
+
+	p {
+		color: $light-primary-white !important;
+	}
+}

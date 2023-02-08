@@ -65,11 +65,13 @@ const Header = ({
 					setShowModal={setShowModal}
 					modalMode={modalMode}
 					setModalMode={setModalMode}
+					theme={theme}
 					content={
 						<AddTask
 							setShowModal={setShowModal}
 							setModalMode={setModalMode}
 							modalMode={modalMode}
+							theme={theme}
 						/>
 					}
 				/>

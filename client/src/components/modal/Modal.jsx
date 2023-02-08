@@ -11,6 +11,7 @@ const Modal = ({
 	setShowModal,
 	setModalMode,
 	modalMode,
+	theme,
 }) => {
 	// initialize navigate and dispatch
 	const dispatch = useDispatch();
@@ -54,7 +55,14 @@ const Modal = ({
 
 	return (
 		<div className='kanban__modal-overlay'>
-			<div ref={modalRef} className='kanban__modal-container'>
+			<div
+				ref={modalRef}
+				className={`${
+					theme === 'dark'
+						? 'kanban__modal-container-dark'
+						: 'kanban__modal-container'
+				}`}
+			>
 				<div className='kanban__modal-header'>
 					<h3 className='kanban__modal-title'>{title}</h3>
 				</div>
