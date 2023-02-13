@@ -13,7 +13,7 @@ import useOnClickOutside from '@hooks/useOnClickOutside';
 import AddTask from '../modal/content/addTask/AddTask';
 import '@styles/scss/boards/Column.scss';
 
-const Column = ({ column, theme }) => {
+const Column = ({ column, theme, provided }) => {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [modalMode, setModalMode] = useState('addColumn');
@@ -166,7 +166,6 @@ const Column = ({ column, theme }) => {
 						className='kanban__dashboard-column_heading-icon'
 						onClick={() => setShowDropdown(true)}
 					/>
-					{/* create dropdown for column */}
 					<div
 						ref={DropdownRef}
 						className={`${

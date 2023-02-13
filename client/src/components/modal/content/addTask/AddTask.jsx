@@ -121,8 +121,6 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 		}));
 	};
 
-	console.log(errors);
-
 	// Submit new column / edit column and save to the database
 	const onSubmit = useCallback(
 		e => {
@@ -180,17 +178,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 				setShowModal(false);
 			}
 		},
-		[
-			dispatch,
-			title,
-			description,
-			status,
-			subtasks,
-			isUpdate,
-			setModalMode,
-			setShowModal,
-			errors,
-		]
+		[dispatch, title, description, status, subtasks, isUpdate, errors]
 	);
 
 	// handle update task

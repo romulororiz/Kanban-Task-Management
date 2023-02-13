@@ -17,6 +17,7 @@ export const getTaskById = async taskId => {
 // Create a task
 export const createTask = async (columnId, taskData) => {
 	const response = await axios.post(`${API_URL}/${columnId}/create`, taskData);
+	console.log(response.data);
 	return response.data;
 };
 

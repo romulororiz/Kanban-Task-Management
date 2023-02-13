@@ -105,7 +105,7 @@ const boardSlice = createSlice({
 					_id: payload._id,
 					name: payload.name,
 				};
-				state.boards = [newBoard, ...state.boards];
+				state.boards.push(newBoard);
 			})
 			.addCase(createBoard.rejected, (state, { payload }) => {
 				state.isLoading = false;

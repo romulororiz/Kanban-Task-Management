@@ -1,5 +1,5 @@
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { TbLayoutBoardSplit } from 'react-icons/tb';
 import { TiPlus } from 'react-icons/ti';
@@ -14,6 +14,7 @@ const BoardListItem = ({
 	onClick,
 	setModalMode,
 	setShowModal,
+	boards,
 }) => {
 	// initialize dispatch and navigate
 	const dispatch = useDispatch();
@@ -24,7 +25,6 @@ const BoardListItem = ({
 
 	// handle remove board based on id
 	const handleRemoveBoard = id => {
-		// remove board from store
 		// confirm alert
 		setTitle('Delete this board?');
 		setMessage(
@@ -34,7 +34,11 @@ const BoardListItem = ({
 			{
 				label: 'Delete',
 				onClick: () => {
-					dispatch(deleteBoard(id));
+					dispatch(deleteBoard(id)).then(() => {
+						if (boards.length === 1) {
+							navigate(0);
+						}
+					});
 				},
 			},
 			{

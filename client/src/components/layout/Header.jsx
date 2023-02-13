@@ -1,14 +1,14 @@
+import { useEffect, useRef, useState } from 'react';
 import Ellipsis from '@assets/dashboard/icon-vertical-ellipsis.svg';
 import LogoDark from '@assets/dashboard/logo-dark.svg';
 import LogoLight from '@assets/dashboard/logo-light.svg';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import { logout } from '@features/auth/authSlice';
-import { useEffect, useRef, useState } from 'react';
 import { FaAt } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { CgLogOut } from 'react-icons/cg';
-import useWindowSize from '@hooks/useWindowSize';
 import { TiPlus } from 'react-icons/ti';
+import useWindowSize from '@hooks/useWindowSize';
 import Modal from '@components/modal/Modal';
 import AddTask from '@components/modal/content/addTask/AddTask';
 import Spinner from '@components/Spinner';
@@ -55,6 +55,8 @@ const Header = ({
 			setIsDisabled(false);
 		}
 	}, [boards, columns]);
+
+	console.log(board);
 
 	return (
 		<>

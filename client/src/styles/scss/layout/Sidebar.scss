@@ -47,6 +47,15 @@
 				padding-left: 20px;
 			}
 		}
+
+		.kanban__sidebar-boards {
+			max-height: 500px;
+			overflow-y: auto;
+
+			@include md {
+				max-height: 250px;
+			}
+		}
 	}
 
 	.kanban__sidebar-bottom_container {
@@ -58,7 +67,7 @@
 		.kanban__sidebar-toggle {
 			background-color: $light-secondary-gray;
 			margin: 0 1rem 1rem 1rem;
-			padding: 1rem 4rem;
+			padding: 1rem 3rem;
 			display: flex;
 			justify-content: space-around;
 			align-items: center;
@@ -66,6 +75,10 @@
 
 			@include lg {
 				padding: 1rem 3rem;
+			}
+
+			@include md {
+				padding: .5rem 3rem;
 			}
 		}
 

@@ -11,6 +11,10 @@
 		top: -0.25rem;
 		font-size: 1.2rem;
 
+		@include md {
+			top: 0;
+		}
+
 		&:first-child {
 			margin-right: -0.25rem;
 		}
@@ -20,6 +24,10 @@
 		position: relative;
 		width: 50px;
 		height: 27px;
+
+		@include md {
+			top: 0.25rem;
+		}
 
 		input {
 			opacity: 0;
