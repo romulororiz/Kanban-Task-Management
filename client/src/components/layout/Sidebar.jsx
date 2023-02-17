@@ -14,13 +14,11 @@ import '@styles/scss/layout/Sidebar.scss';
 const Sidebar = ({
 	showSidebar,
 	setShowSidebar,
-	showModal,
 	setShowModal,
-	board,
+	setModalMode,
 	theme,
 }) => {
 	const [activeBoard, setActiveBoard] = useState(null);
-	const [modalMode, setModalMode] = useState('addBoard');
 
 	// initialize dispatch and navigate
 	const dispatch = useDispatch();
@@ -66,69 +64,50 @@ const Sidebar = ({
 	};
 
 	return (
-		<>
-			{showModal && (
-				<Modal
-					setShowModal={setShowModal}
-					title={modalMode === 'addBoard' ? 'Create New Board' : 'Edit Board'}
-					setModalMode={setModalMode}
-					modalMode={modalMode}
-					theme={theme}
-					content={
-						<AddBoard
-							setShowModal={setShowModal}
-							modalMode={modalMode}
-							setModalMode={setModalMode}
-							board={board}
-						/>
-					}
-				/>
-			)}
-			<div
-				className={`${
-					theme === 'dark' ? 'kanban__sidebar-dark' : 'kanban__sidebar'
-				} ${showSidebar ? 'kanban__sidebar-show' : 'kanban__sidebar-hide'}`}
-			>
-				<div className='kanban__sidebar-boards_container'>
-					<div className='kanban__sidebar-logo'>
-						<img
-							src={theme === 'dark' ? LogoLight : LogoDark}
-							alt='logo dark'
-						/>
-					</div>
-
-					<h1>All Boards ({boards.length})</h1>
-					<div className='kanban__sidebar-boards'>
-						{boards.map(board => (
-							<BoardListItem
-								key={board._id}
-								board={board}
-								boards={boards}
-								isActive={board._id === activeBoard}
-								onClick={handleOnClickBoard}
-								setModalMode={setModalMode}
-								setShowModal={setShowModal}
-							/>
-						))}
-					</div>
-					<div
-						className='kanban__sidebar-create_board'
-						onClick={() => setShowModal(true)}
-					>
-						<BoardListItem text='Create New Board' />
-					</div>
+		<div
+			className={`${
+				theme === 'dark' ? 'kanban__sidebar-dark' : 'kanban__sidebar'
+			} ${showSidebar ? 'kanban__sidebar-show' : 'kanban__sidebar-hide'}`}
+		>
+			<div className='kanban__sidebar-boards_container'>
+				<div className='kanban__sidebar-logo'>
+					<img src={theme === 'dark' ? LogoLight : LogoDark} alt='logo dark' />
 				</div>
-				<div className='kanban__sidebar-bottom_container'>
-					<div className='kanban__sidebar-toggle'>
-						<ToggleSwitch />
-					</div>
-					<div className='kanban__sidebar-hide-container'>
-						<FaEyeSlash />
-						<p onClick={() => setShowSidebar(false)}>Hide Sidebar</p>
-					</div>
+
+				<h1>All Boards ({boards.length})</h1>
+				<div className='kanban__sidebar-boards'>
+					{boards.map(board => (
+						<BoardListItem
+							key={board._id}
+							board={board}
+							boards={boards}
+							isActive={board._id === activeBoard}
+							onClick={handleOnClickBoard}
+							setModalMode={setModalMode}
+							setShowModal={setShowModal}
+						/>
+					))}
+				</div>
+				<div
+					className='kanban__sidebar-create_board'
+					onClick={() => {
+						setShowModal(true);
+						setModalMode('addBoard');
+					}}
+				>
+					<BoardListItem text='Create New Board' />
 				</div>
 			</div>
-		</>
+			<div className='kanban__sidebar-bottom_container'>
+				<div className='kanban__sidebar-toggle'>
+					<ToggleSwitch />
+				</div>
+				<div className='kanban__sidebar-hide-container'>
+					<FaEyeSlash />
+					<p onClick={() => setShowSidebar(false)}>Hide Sidebar</p>
+				</div>
+			</div>
+		</div>
 	);
 };
 export default Sidebar;

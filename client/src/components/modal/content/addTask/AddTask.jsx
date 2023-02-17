@@ -27,7 +27,6 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 	const [subtaskTitle, setSubtaskTitle] = useState([]);
 	const [showDropdown, setShowDropdown] = useState(false);
 
-	// destructure form data
 	const { title, description, status, subtasks } = formData;
 
 	// get data from store

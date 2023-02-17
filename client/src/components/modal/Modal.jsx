@@ -8,9 +8,7 @@ import '@styles/scss/modal/Modal.scss';
 const Modal = ({
 	title,
 	content,
-	showModal,
 	setShowModal,
-	setModalMode,
 	modalMode,
 	theme,
 }) => {
@@ -35,22 +33,6 @@ const Modal = ({
 
 		if (modalMode === 'updateBoard') {
 			dispatch(getBoards());
-		}
-
-		switch (modalMode) {
-			case 'updateColumn':
-				setModalMode('addColumn');
-				break;
-			case 'updateBoard':
-				setModalMode('addBoard');
-				break;
-			case 'updateTask':
-				setModalMode('addTask');
-				break;
-			case 'viewTask':
-				setModalMode('addTask');
-			default:
-				break;
 		}
 	});
 

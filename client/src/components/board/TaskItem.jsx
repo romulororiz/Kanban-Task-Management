@@ -9,7 +9,7 @@ const TaskItem = ({ task, setShowModal, setModalMode, theme }) => {
 	const { title, subtasks } = task;
 
 	// handle update task
-	const handleUpdateTask = () => {
+	const handleViewTask = () => {
 		setModalMode('viewTask');
 		setShowModal(true);
 		navigate(
@@ -29,7 +29,7 @@ const TaskItem = ({ task, setShowModal, setModalMode, theme }) => {
 					? 'kanban__dashboard-task_item-dark'
 					: 'kanban__dashboard-task_item'
 			}`}
-			onClick={handleUpdateTask}
+			onClick={handleViewTask}
 		>
 			<div className='kanban__dashboard-task_item-title'>
 				<h3>{title}</h3>

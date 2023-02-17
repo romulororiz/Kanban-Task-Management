@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Column from '@components/board/Column';
-import Modal from '@components/modal/Modal';
-import AddColumn from '@components/modal/content/addColumn/AddColumn';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getBoardColumns } from '@features/columns/columnSlice';
 import Spinner from '@components/Spinner';
@@ -10,10 +8,13 @@ import { TiPlus } from 'react-icons/ti';
 import useWindowSize from '@hooks/useWindowSize';
 import '@styles/scss/boards/Dashboard.scss';
 
-const Dashboard = ({ theme }) => {
-	const [showModal, setShowModal] = useState(false);
-	const [modalMode, setModalMode] = useState('addColumn');
-
+const Dashboard = ({
+	theme,
+	showModal,
+	setShowModal,
+	modalMode,
+	setModalMode,
+}) => {
 	// get window width
 	const windowSize = useWindowSize();
 
@@ -53,22 +54,6 @@ const Dashboard = ({ theme }) => {
 
 	return (
 		<div className='kanban__dashboard'>
-			{showModal && (
-				<Modal
-					title={modalMode === 'addColumn' ? 'Add Column' : 'Update Column'}
-					setShowModal={setShowModal}
-					showModal={showModal}
-					setModalMode={setModalMode}
-					theme={theme}
-					content={
-						<AddColumn
-							showModal={showModal}
-							setShowModal={setShowModal}
-							setModalMode={setModalMode}
-						/>
-					}
-				/>
-			)}
 			{boards.length <= 0 ? (
 				<p className='kanban__dashboard-empty_boards'>
 					You have no boards. Create a board to get started.
@@ -82,7 +67,15 @@ const Dashboard = ({ theme }) => {
 					}
 				>
 					{columns.map(column => (
-						<Column key={column._id} column={column} theme={theme} />
+						<Column
+							key={column._id}
+							column={column}
+							theme={theme}
+							modalMode={modalMode}
+							setModalMode={setModalMode}
+							setShowModal={setShowModal}
+							showModal={showModal}
+						/>
 					))}
 					<div className='kanban__dashboard-add_column'>
 						<div
@@ -91,7 +84,10 @@ const Dashboard = ({ theme }) => {
 									? 'kanban__dashboard-add_column-content-dark'
 									: 'kanban__dashboard-add_column-content'
 							}
-							onClick={() => setShowModal(true)}
+							onClick={() => {
+								setShowModal(true);
+								setModalMode('addColumn');
+							}}
 						>
 							<TiPlus />
 							<p>New Column</p>

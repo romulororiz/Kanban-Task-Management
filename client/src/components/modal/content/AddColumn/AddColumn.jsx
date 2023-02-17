@@ -2,19 +2,21 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateColumn, createColumn } from '@features/columns/columnSlice';
 import { GithubPicker } from 'react-color';
-import { useParams } from 'react-router-dom';
 import { useCallback } from 'react';
 import Error from '@components/Error';
 import '@styles/scss/modal/addColumn/AddColumn.scss';
 
-const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
+const AddColumn = ({
+	setShowModal,
+	modalMode,
+	setModalMode,
+	column,
+	board,
+}) => {
 	const [columnName, setColumnName] = useState('');
 	const [columnColor, setColumnColor] = useState('');
 	const [isUpdate, setIsUpdate] = useState(false);
 	const [errors, setErrors] = useState([]);
-
-	// get boardId from url
-	const { id: boardId } = useParams();
 
 	// initialize dispatch
 	const dispatch = useDispatch();
@@ -69,7 +71,7 @@ const AddColumn = ({ setShowModal, modalMode, setModalMode, column }) => {
 				setModalMode('addColumn');
 				setShowModal(false);
 			} else if (!errors.length) {
-				dispatch(createColumn({ columnData, boardId }));
+				dispatch(createColumn({ columnData, boardId: board._id }));
 				setShowModal(false);
 			}
 		},

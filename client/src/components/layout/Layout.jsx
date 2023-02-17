@@ -10,9 +10,14 @@ import { getBoardById } from '@features/boards/boardSlice';
 import { getBoardColumns } from '@features/columns/columnSlice';
 import '@styles/scss/layout/Layout.scss';
 
-const Layout = ({ theme }) => {
+const Layout = ({
+	theme,
+	showModal,
+	setShowModal,
+	modalMode,
+	setModalMode,
+}) => {
 	const [showSidebar, setShowSidebar] = useState(true);
-	const [showModal, setShowModal] = useState(false);
 
 	// get board and columns from store
 	const { board, boards, isLoading } = useSelector(state => state.board);
@@ -45,13 +50,15 @@ const Layout = ({ theme }) => {
 				setShowSidebar={setShowSidebar}
 				showModal={showModal}
 				setShowModal={setShowModal}
-				board={board}
+				setModalMode={setModalMode}
 				theme={theme}
 			/>
 			<Header
 				user={user}
 				showSidebar={showSidebar}
 				setShowSidebar={setShowSidebar}
+				setShowModal={setShowModal}
+				setModalMode={setModalMode}
 				board={board}
 				boards={boards}
 				columns={columns}

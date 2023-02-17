@@ -11,9 +11,10 @@ import AddColumn from '@components/modal/content/addColumn/AddColumn';
 import useConfirmAlert from '@hooks/useConfirmAlert';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import AddTask from '../modal/content/addTask/AddTask';
+import { ModalTitle } from '../../utils/ModalTitle';
 import '@styles/scss/boards/Column.scss';
 
-const Column = ({ column, theme, provided }) => {
+const Column = ({ column, theme }) => {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [modalMode, setModalMode] = useState('addColumn');
@@ -83,24 +84,6 @@ const Column = ({ column, theme, provided }) => {
 		setShowDropdown(false);
 	};
 
-	// handle modal title
-	const modalTitle = useMemo(() => {
-		switch (modalMode) {
-			case 'addColumn':
-				return 'Add a column';
-			case 'updateColumn':
-				return 'Update column';
-			case 'addTask':
-				return 'Add a task';
-			case 'updateTask':
-				return 'Update task';
-			case 'viewTask':
-				return '';
-			default:
-				break;
-		}
-	}, [modalMode]);
-
 	// handle content
 	const content = useMemo(() => {
 		switch (modalMode) {
@@ -142,8 +125,7 @@ const Column = ({ column, theme, provided }) => {
 		<>
 			{showModal && (
 				<Modal
-					title={modalTitle}
-					setModalMode={setModalMode}
+					title={ModalTitle(modalMode)}
 					modalMode={modalMode}
 					setShowModal={setShowModal}
 					showModal={showModal}

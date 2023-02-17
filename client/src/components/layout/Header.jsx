@@ -23,10 +23,10 @@ const Header = ({
 	columns,
 	isLoading,
 	theme,
+	setShowModal,
+	setModalMode,
 }) => {
 	const [showDropdown, setShowDropdown] = useState(false);
-	const [showModal, setShowModal] = useState(false);
-	const [modalMode, setModalMode] = useState('addTask');
 	const [isDisabled, setIsDisabled] = useState(false);
 
 	// get window width
@@ -56,107 +56,81 @@ const Header = ({
 		}
 	}, [boards, columns]);
 
-	console.log(board);
-
 	return (
-		<>
-			{showModal && (
-				<Modal
-					title={modalMode === 'addTask' ? 'Add Task' : 'Edit Task'}
-					showModal={showModal}
-					setShowModal={setShowModal}
-					modalMode={modalMode}
-					setModalMode={setModalMode}
-					theme={theme}
-					content={
-						<AddTask
-							setShowModal={setShowModal}
-							setModalMode={setModalMode}
-							modalMode={modalMode}
-							theme={theme}
-						/>
-					}
-				/>
-			)}
+		<div
+			className={`${
+				theme === 'dark' ? 'kanban__header-dark' : 'kanban__header'
+			}`}
+		>
 			<div
-				className={`${
-					theme === 'dark' ? 'kanban__header-dark' : 'kanban__header'
+				className={`kanban__header-container ${
+					!showSidebar && 'kanban__header-container_no-sidebar'
 				}`}
 			>
 				<div
-					className={`kanban__header-container ${
-						!showSidebar && 'kanban__header-container_no-sidebar'
+					className={`kanban__header-logo ${
+						!showSidebar && 'kanban__header-logo_no-sidebar'
 					}`}
 				>
-					<div
-						className={`kanban__header-logo ${
-							!showSidebar && 'kanban__header-logo_no-sidebar'
-						}`}
+					<img src={theme === 'dark' ? LogoLight : LogoDark} alt='logo dark' />
+				</div>
+				<div
+					className={`kanban__header-board_name ${
+						showSidebar && isMobile && 'kanban__header-board_name-hide'
+					}`}
+				>
+					{isLoading ? <Spinner /> : board.name}
+				</div>
+				<div
+					className={`kanban__header-board_actions ${
+						showSidebar && 'kanban__header-board_actions-sidebar'
+					}`}
+				>
+					<button
+						type='button'
+						className={`${
+							isTablet ? 'kanban__header-board_actions-add_small ' : ''
+						} ${isDisabled ? 'kanban__header-board_actions-add_disabled' : ''}`}
+						onClick={() => {
+							setShowModal(true);
+							setModalMode('addTask');
+						}}
 					>
+						<TiPlus />
+						{!isTablet ? 'Add New Task' : ''}
+					</button>
+					<div className='kanban__header-board_actions-menu'>
 						<img
-							src={theme === 'dark' ? LogoLight : LogoDark}
-							alt='logo dark'
-						/>
-					</div>
-					<div
-						className={`kanban__header-board_name ${
-							showSidebar && isMobile && 'kanban__header-board_name-hide'
-						}`}
-					>
-						{isLoading ? <Spinner /> : board.name}
-					</div>
-					<div
-						className={`kanban__header-board_actions ${
-							showSidebar && 'kanban__header-board_actions-sidebar'
-						}`}
-					>
-						<button
-							type='button'
-							className={`${
-								isTablet ? 'kanban__header-board_actions-add_small ' : ''
-							} ${
-								isDisabled ? 'kanban__header-board_actions-add_disabled' : ''
-							}`}
+							src={Ellipsis}
+							alt='menu icon'
 							onClick={() => {
-								setShowModal(true);
+								setShowDropdown(true);
+								isMobile && setShowSidebar(false);
 							}}
+						/>
+						<div
+							ref={dropdownRef}
+							className={`${
+								showDropdown
+									? 'kanban__header-board_dropdown'
+									: 'kanban__header-board_dropdown-hide'
+							} ${theme === 'dark' && 'kanban__header-board_dropdown-dark'}`}
 						>
-							<TiPlus />
-							{!isTablet ? 'Add New Task' : ''}
-						</button>
-						<div className='kanban__header-board_actions-menu'>
-							<img
-								src={Ellipsis}
-								alt='menu icon'
-								onClick={() => {
-									setShowDropdown(true);
-									isMobile && setShowSidebar(false);
-								}}
-							/>
-							<div
-								ref={dropdownRef}
-								className={`${
-									showDropdown
-										? 'kanban__header-board_dropdown'
-										: 'kanban__header-board_dropdown-hide'
-								} ${theme === 'dark' && 'kanban__header-board_dropdown-dark'}`}
-							>
-								<ul>
-									<li>
-										<FaAt />
-										{user && user.email}
-									</li>
-									<li onClick={() => dispatch(logout())}>
-										<CgLogOut />
-										Logout
-									</li>
-								</ul>
-							</div>
+							<ul>
+								<li>
+									<FaAt />
+									{user && user.email}
+								</li>
+								<li onClick={() => dispatch(logout())}>
+									<CgLogOut />
+									Logout
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 export default Header;
