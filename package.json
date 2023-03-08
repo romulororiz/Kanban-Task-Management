@@ -1,6 +1,9 @@
 {
 	"name": "kanban-task-management",
 	"version": "1.0.0",
+	"engines": {
+		"node": ">= 12.0.0"
+	},
 	"description": "A Kanban task management platform for defining, managing, and improving services that deliver knowledge work.",
 	"main": "index.js",
 	"scripts": {
