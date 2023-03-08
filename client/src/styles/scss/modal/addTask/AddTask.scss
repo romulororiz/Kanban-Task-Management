@@ -140,9 +140,12 @@
 	}
 
 	input[type='text'],
-	textarea,
 	select {
 		margin-bottom: 1rem;
+		font-size: $font-size-l;
+	}
+
+	textarea {
 		font-size: $font-size-l;
 	}
 
