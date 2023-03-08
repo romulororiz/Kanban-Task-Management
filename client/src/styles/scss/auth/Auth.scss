@@ -5,6 +5,27 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
+
+	.copyright {
+		width: fit-content;
+		color: #000;
+		margin: 0 auto;
+		padding: 0 1.5rem;
+		position: absolute;
+		bottom: 1.5rem;
+		font-size: $font-size-l;
+		font-weight: 500;
+
+		span {
+			margin-left: 0.2rem;
+		}
+	}
+
+	.copyright-dark {
+		@extend .copyright;
+		color: #fff;
+	}
 }
 
 @include xs {
