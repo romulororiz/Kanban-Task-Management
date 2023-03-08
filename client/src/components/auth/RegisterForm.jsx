@@ -36,7 +36,7 @@ const RegisterForm = ({ theme }) => {
 		if (errors) {
 			setTimeout(() => {
 				setErrors([]);
-			}, 5000);
+			}, 3000);
 		}
 	}, [registrationErrors]);
 
@@ -89,7 +89,9 @@ const RegisterForm = ({ theme }) => {
 	return (
 		<div
 			className={`${
-				theme === 'dark' ? 'kanban__auth-register_dark' : 'kanban__auth-register'
+				theme === 'dark'
+					? 'kanban__auth-register_dark'
+					: 'kanban__auth-register'
 			}`}
 		>
 			<div className='kanban__auth-register_heading'>

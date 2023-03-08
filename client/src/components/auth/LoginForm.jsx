@@ -34,7 +34,7 @@ const LoginForm = ({ theme }) => {
 		return () => {
 			setTimeout(() => {
 				setErrors([]);
-			}, 5000);
+			}, 3000);
 		};
 	}, [loginErrors]);
 

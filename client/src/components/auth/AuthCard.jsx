@@ -12,16 +12,6 @@ const AuthCard = ({ form, setForm }) => {
 		state: { theme },
 	} = useThemeContext();
 
-	const { isLoading } = useSelector(state => state.auth);
-
-	if (isLoading) {
-		return (
-			<div className='kanban__auth-card__spinner'>
-				<Spinner />
-			</div>
-		);
-	}
-
 	return (
 		<div
 			className={`${
