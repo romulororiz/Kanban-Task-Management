@@ -3,12 +3,24 @@ import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import ToggleSwtich from '@components/layout/ToggleSwitch';
 import { useThemeContext } from '@hooks/useThemeContext';
+import { useSelector } from 'react-redux';
+import Spinner from '@components/Spinner';
 import '@styles/scss/auth/AuthCard.scss';
 
 const AuthCard = ({ form, setForm }) => {
 	const {
 		state: { theme },
 	} = useThemeContext();
+
+	const { isLoading } = useSelector(state => state.auth);
+
+	if (isLoading) {
+		return (
+			<div className='kanban__auth-card__spinner'>
+				<Spinner />
+			</div>
+		);
+	}
 
 	return (
 		<div

@@ -10,17 +10,11 @@ import { getBoardById } from '@features/boards/boardSlice';
 import { getBoardColumns } from '@features/columns/columnSlice';
 import '@styles/scss/layout/Layout.scss';
 
-const Layout = ({
-	theme,
-	showModal,
-	setShowModal,
-	modalMode,
-	setModalMode,
-}) => {
+const Layout = ({ ...commonProps }) => {
 	const [showSidebar, setShowSidebar] = useState(true);
 
 	// get board and columns from store
-	const { board, boards, isLoading } = useSelector(state => state.board);
+	const { board, boards } = useSelector(state => state.board);
 	const { columns } = useSelector(state => state.column);
 
 	// initialize dispatch
@@ -46,24 +40,18 @@ const Layout = ({
 	return (
 		<div>
 			<Sidebar
+				{...commonProps}
 				showSidebar={showSidebar}
 				setShowSidebar={setShowSidebar}
-				showModal={showModal}
-				setShowModal={setShowModal}
-				setModalMode={setModalMode}
-				theme={theme}
 			/>
 			<Header
+				{...commonProps}
 				user={user}
 				showSidebar={showSidebar}
 				setShowSidebar={setShowSidebar}
-				setShowModal={setShowModal}
-				setModalMode={setModalMode}
 				board={board}
 				boards={boards}
 				columns={columns}
-				isLoading={isLoading}
-				theme={theme}
 			/>
 			<main
 				className={`kanban__main-content ${

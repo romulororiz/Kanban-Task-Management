@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const User = require('../../models/userModel');
 const asyncHandler = require('express-async-handler');
+const { logoutUser } = require('../../controllers/userController');
+const checkTokenExpiration = require('../../utils/checkTokenExpire');
 
 const protectRoute = asyncHandler(async (req, res, next) => {
 	// Get user token from cookie
@@ -10,6 +12,13 @@ const protectRoute = asyncHandler(async (req, res, next) => {
 	if (!token) {
 		res.status(401);
 		throw new Error('Not authorized, no token');
+	}
+
+	// Check if token is expired
+	if (checkTokenExpiration(token)) {
+		logoutUser();
+		res.status(401);
+		throw new Error('Not authorized, token expired');
 	}
 
 	// verify token

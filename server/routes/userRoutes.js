@@ -1,5 +1,9 @@
 const express = require('express');
-const { registerUser, loginUser } = require('../controllers/userController');
+const {
+	registerUser,
+	loginUser,
+	logoutUser,
+} = require('../controllers/userController');
 const {
 	validateRegistration,
 	validateLogin,
@@ -15,5 +19,10 @@ router.post('/register', validateRegistration, registerUser);
 // @desc    Login a user
 // @access  Public
 router.post('/login', validateLogin, loginUser);
+
+// @route   GET api/users/logout
+// @desc    Logout a user
+// @access  Public
+router.get('/logout', logoutUser);
 
 module.exports = router;

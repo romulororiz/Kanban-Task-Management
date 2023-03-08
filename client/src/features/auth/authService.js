@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 const API_URL = '/api/users';
 
@@ -26,9 +25,14 @@ const loginUser = async userData => {
 };
 
 // Logout user
-const logout = () => {
-	localStorage.removeItem('user');
-	Cookies.remove('access_token');
+const logout = async () => {
+	const response = await axios.get(`${API_URL}/logout`);
+
+	if (response.data) {
+		localStorage.removeItem('user');
+	}
+
+	return response.data;
 };
 
 const authService = {

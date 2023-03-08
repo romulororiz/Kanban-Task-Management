@@ -6,8 +6,9 @@ import {
 	getTaskById,
 	deleteTask,
 } from '@features/tasks/taskSlice';
-import { GoKebabVertical } from 'react-icons/go';
+import { useThemeContext } from '@hooks/useThemeContext';
 import { TiPlus } from 'react-icons/ti';
+import { GoKebabVertical } from 'react-icons/go';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import SubtaskInput from './SubtaskInput';
@@ -15,7 +16,7 @@ import SubtaskItem from './SubtaskItem';
 import Error from '@components/Error';
 import '@styles/scss/modal/addTask/AddTask.scss';
 
-const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
+const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 	const [formData, setFormData] = useState({
 		title: '',
 		description: '',
@@ -28,6 +29,11 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 	const [showDropdown, setShowDropdown] = useState(false);
 
 	const { title, description, status, subtasks } = formData;
+
+	// get theme from context
+	const {
+		state: { theme },
+	} = useThemeContext();
 
 	// get data from store
 	const { columns } = useSelector(state => state.column);
@@ -195,6 +201,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 	};
 
 	// get completed subtasks count
+	// todo - make it update in real time
 	const completedSubtasks = task.subtasks?.filter(
 		subtask => subtask.isCompleted
 	).length;
@@ -267,9 +274,9 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 						</div>
 					)}
 
-					{modalMode === 'viewTask' ? (
+					{/* {modalMode === 'viewTask' ? (
 						<>
-							<p>
+							<p className='kanban__add-task_subtasks-count'>
 								Subtasks ({completedSubtasks} of {task.subtasks?.length})
 							</p>
 							<div className='kanban__add-task-subtasks_container'>
@@ -315,7 +322,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 								Add New Subtask
 							</button>
 						</>
-					)}
+					)} */}
 
 					<div className='kanban__add-task_status-container'>
 						<label htmlFor='status'>
@@ -342,9 +349,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode, theme }) => {
 						</select>
 						<Error errors={errors} errorParam='status' />
 					</div>
-					{modalMode === 'viewTask' ? (
-						''
-					) : (
+					{modalMode === 'viewTask' ? null : (
 						<div className='kanban__modal-footer'>
 							<button type='submit' className='kanban__modal-button'>
 								{isUpdate ? 'Update' : 'Create'}

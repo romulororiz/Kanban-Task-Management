@@ -40,8 +40,8 @@ export const login = createAsyncThunk(
 );
 
 // Logout user
-export const logout = createAsyncThunk('auth/logout', () => {
-	authService.logout();
+export const logout = createAsyncThunk('auth/logout', async () => {
+	await authService.logout();
 });
 
 // Auth Slice Reducer
@@ -78,7 +78,6 @@ const authSlice = createSlice({
 				state.isLoading = false;
 				state.errors = payload;
 			})
-			// Logout
 			.addCase(logout.fulfilled, state => {
 				state.user = null;
 			});

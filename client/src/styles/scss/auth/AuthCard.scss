@@ -1,18 +1,18 @@
 @import '../variables', '../breakpoints', '../mixins';
 
 .kanban__auth-card {
+	@include textL;
 	width: 100%;
 	max-width: 940px;
 	min-height: 600px;
 	margin: 0 2rem;
 	display: flex;
-	@include textL;
 	background-color: $light-primary-white;
 	border-radius: 10px;
 	box-shadow: $box-shadow;
 	position: relative;
 
-	@include sm {
+	@include md {
 		min-height: auto;
 	}
 
@@ -80,6 +80,13 @@
 			height: 100%;
 		}
 	}
+}
+
+.kanban__auth-card__spinner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .kanban__auth-card_dark {

@@ -34,8 +34,6 @@ app.use('/api/tasks', require('./routes/taskRoutes'));
 app.use(errorHandler);
 
 if (process.env.NODE_ENV === 'production') {
-	// Serve frontend
-	// Set build folder as static
 	app.use(express.static(path.join(__dirname, 'client/dist')));
 	app.get('*', (req, res) => {
 		res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));

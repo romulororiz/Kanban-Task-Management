@@ -130,6 +130,10 @@
 					&:first-child {
 						pointer-events: none;
 					}
+
+					@include md {
+						font-size: 0.8rem;
+					}
 				}
 			}
 

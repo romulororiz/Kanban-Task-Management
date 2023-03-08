@@ -34,9 +34,9 @@ const TaskItem = ({ task, setShowModal, setModalMode, theme }) => {
 			<div className='kanban__dashboard-task_item-title'>
 				<h3>{title}</h3>
 			</div>
-			<div className='kanban__dashboard-task_item-subtasks'>
+			{/* <div className='kanban__dashboard-task_item-subtasks'>
 				<p>{`${completedSubtasks} of ${subtasks.length} completed`}</p>
-			</div>
+			</div> */}
 		</div>
 	);
 };

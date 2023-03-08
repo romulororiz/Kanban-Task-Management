@@ -1,8 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Column from '@components/board/Column';
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getBoardColumns } from '@features/columns/columnSlice';
 import Spinner from '@components/Spinner';
 import { TiPlus } from 'react-icons/ti';
 import useWindowSize from '@hooks/useWindowSize';
@@ -27,24 +24,12 @@ const Dashboard = ({
 	// get boards from store
 	const { boards } = useSelector(state => state.board);
 
-	// initialize dispatch
-	const dispatch = useDispatch();
-
-	// get id from params
-	const { id: boardId } = useParams();
-
-	// get columns for the board that's being viewed
-	useEffect(() => {
-		dispatch(getBoardColumns(boardId));
-	}, [dispatch, boardId]);
-
 	// Handle open modal on empty board
 	const handleAddColumn = () => {
 		setShowModal(true);
 		setModalMode('addColumn');
 	};
 
-	// handle loading
 	if (isLoading)
 		return (
 			<div className='kanban__dashboard-loading'>
@@ -54,11 +39,11 @@ const Dashboard = ({
 
 	return (
 		<div className='kanban__dashboard'>
-			{boards.length <= 0 ? (
+			{!boards.length ? (
 				<p className='kanban__dashboard-empty_boards'>
 					You have no boards. Create a board to get started.
 				</p>
-			) : columns.length > 0 ? (
+			) : columns.length ? (
 				<div
 					className={
 						theme === 'dark'

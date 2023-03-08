@@ -1,19 +1,10 @@
 import { useRef } from 'react';
-import useOnClickOutside from '@hooks/useOnClickOutside';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getBoards } from '@features/boards/boardSlice';
+import useOnClickOutside from '@hooks/useOnClickOutside';
 import '@styles/scss/modal/Modal.scss';
 
-const Modal = ({
-	title,
-	content,
-	setShowModal,
-	modalMode,
-	theme,
-}) => {
+const Modal = ({ title, content, setShowModal, modalMode, theme }) => {
 	// initialize navigate and dispatch
-	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	// reference to the modal container
@@ -29,10 +20,6 @@ const Modal = ({
 			modalMode === 'updateColumn'
 		) {
 			navigate(-1);
-		}
-
-		if (modalMode === 'updateBoard') {
-			dispatch(getBoards());
 		}
 	});
 

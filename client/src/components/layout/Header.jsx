@@ -9,9 +9,6 @@ import { useDispatch } from 'react-redux';
 import { CgLogOut } from 'react-icons/cg';
 import { TiPlus } from 'react-icons/ti';
 import useWindowSize from '@hooks/useWindowSize';
-import Modal from '@components/modal/Modal';
-import AddTask from '@components/modal/content/addTask/AddTask';
-import Spinner from '@components/Spinner';
 import '@styles/scss/layout/Header.scss';
 
 const Header = ({
@@ -21,7 +18,6 @@ const Header = ({
 	boards,
 	board,
 	columns,
-	isLoading,
 	theme,
 	setShowModal,
 	setModalMode,
@@ -79,7 +75,7 @@ const Header = ({
 						showSidebar && isMobile && 'kanban__header-board_name-hide'
 					}`}
 				>
-					{isLoading ? <Spinner /> : board.name}
+					{board.name}
 				</div>
 				<div
 					className={`kanban__header-board_actions ${

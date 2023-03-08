@@ -8,11 +8,8 @@
 }
 
 @include xs {
-	// make mobile bg at the top of the page
 	.kanban__auth-body {
-		background: url('../../../assets/auth/bg-sidebar-mobile.svg') no-repeat
-			center top;
-
+		background: url('../../../assets/auth/bg-sidebar-mobile.svg') no-repeat;
 		width: 100%;
 	}
 }

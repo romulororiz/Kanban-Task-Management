@@ -41,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
 		// Set cookie options for 30 days
 		const options = {
-			maxAge: 24 * 60 * 60 * 1000, // 30 days
+			maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
 			httpOnly: true,
 		};
 
@@ -84,7 +84,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
 		// Set cookie options
 		const options = {
-			maxAge: 24 * 60 * 60 * 1000, // 30 days
+			maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
 			httpOnly: true,
 		};
 
@@ -105,7 +105,22 @@ const loginUser = asyncHandler(async (req, res) => {
 	}
 });
 
+// @route   GET api/users/logout
+// @desc    Logout a user
+// @access  Private
+// todo - handle clearing local storage upon cookie expiration
+
+const logoutUser = asyncHandler(async (req, res) => {
+	const options = {
+		maxAge: 0,
+	};
+	res.cookie('access_token', '', options);
+
+	res.status(200).json({ message: 'User logged out' });
+});
+
 module.exports = {
 	registerUser,
 	loginUser,
+	logoutUser,
 };
