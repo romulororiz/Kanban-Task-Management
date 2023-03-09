@@ -14,6 +14,7 @@ import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import SubtaskInput from './SubtaskInput';
 import SubtaskItem from './SubtaskItem';
 import Error from '@components/Error';
+import Spinner from '@components/Spinner';
 import '@styles/scss/modal/addTask/AddTask.scss';
 
 const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
@@ -37,7 +38,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 
 	// get data from store
 	const { columns } = useSelector(state => state.column);
-	const { task } = useSelector(state => state.task);
+	const { task, isLoading } = useSelector(state => state.task);
 
 	// handle dropdown
 	const dropdownHandler = useCallback(() => {
@@ -206,75 +207,84 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 		subtask => subtask.isCompleted
 	).length;
 
+	if (isLoading) {
+		return (
+			<div className='kanban__loader'>
+				<Spinner />
+			</div>
+		);
+	}
+
+	console.log(isLoading);
+
 	return (
-		<>
-			<div className='kanban__add-task'>
-				<form onSubmit={onSubmit}>
-					{modalMode === 'viewTask' ? (
-						<div className='kanban__task-title_container'>
-							<h3>{task.title}</h3>
-							<GoKebabVertical onClick={dropdownHandler} />
-							{showDropdown && (
-								<div
-									className={`${
-										theme === 'dark'
-											? 'kanban__add-task_dropdown-dark'
-											: 'kanban__add-task_dropdown'
-									}`}
-								>
-									<ul>
-										<li onClick={onUpdateTaskDropdown}>
-											<FaRegEdit />
-											Edit
-										</li>
-										<li onClick={() => onDeleteTaskDropdown(taskId)}>
-											<FaRegTrashAlt />
-											Delete
-										</li>
-									</ul>
-								</div>
-							)}
-						</div>
-					) : (
-						<div className='kanban__task-title_container-add-update'>
-							<label htmlFor='title'>Title</label>
-							<input
-								className={
-									errors.map(err => err.param).includes('title')
-										? 'kanban__add-task_input-error'
-										: ''
-								}
-								placeholder='e.g. Take coffee break'
-								name='title'
-								value={title}
-								onChange={onChangeHandler}
-								type='text'
-							/>
-							<Error errors={errors} errorParam='title' />
-						</div>
-					)}
+		<div className='kanban__add-task'>
+			<form onSubmit={onSubmit}>
+				{modalMode === 'viewTask' ? (
+					<div className='kanban__task-title_container'>
+						<h3>{task.title}</h3>
+						<GoKebabVertical onClick={dropdownHandler} />
+						{showDropdown && (
+							<div
+								className={`${
+									theme === 'dark'
+										? 'kanban__add-task_dropdown-dark'
+										: 'kanban__add-task_dropdown'
+								}`}
+							>
+								<ul>
+									<li onClick={onUpdateTaskDropdown}>
+										<FaRegEdit />
+										Edit
+									</li>
+									<li onClick={() => onDeleteTaskDropdown(taskId)}>
+										<FaRegTrashAlt />
+										Delete
+									</li>
+								</ul>
+							</div>
+						)}
+					</div>
+				) : (
+					<div className='kanban__task-title_container-add-update'>
+						<label htmlFor='title'>Title</label>
+						<input
+							className={
+								errors.map(err => err.param).includes('title')
+									? 'kanban__add-task_input-error'
+									: ''
+							}
+							placeholder='e.g. Take coffee break'
+							name='title'
+							value={title}
+							onChange={onChangeHandler}
+							type='text'
+						/>
+						<Error errors={errors} errorParam='title' />
+					</div>
+				)}
 
-					{modalMode === 'viewTask' ? (
-						<p className='kanban__add-task_description'>{task.description}</p>
-					) : (
-						<div className='kanban__add-task_description-update'>
-							<label htmlFor='description'>Description</label>
-							<textarea
-								className={
-									errors.map(err => err.param).includes('description')
-										? 'kanban__add-task_input-error'
-										: ''
-								}
-								placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'
-								name='description'
-								value={description}
-								onChange={onChangeHandler}
-							/>
-							<Error errors={errors} errorParam='description' />
-						</div>
-					)}
+				{modalMode === 'viewTask' ? (
+					<p className='kanban__add-task_description'>{task.description}</p>
+				) : (
+					<div className='kanban__add-task_description-update'>
+						<label htmlFor='description'>Description</label>
+						<textarea
+							className={
+								errors.map(err => err.param).includes('description')
+									? 'kanban__add-task_input-error'
+									: ''
+							}
+							placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'
+							name='description'
+							value={description}
+							onChange={onChangeHandler}
+						/>
+						<Error errors={errors} errorParam='description' />
+					</div>
+				)}
 
-					{/* {modalMode === 'viewTask' ? (
+				{/* {modalMode === 'viewTask' ? (
 						<>
 							<p className='kanban__add-task_subtasks-count'>
 								Subtasks ({completedSubtasks} of {task.subtasks?.length})
@@ -324,41 +334,40 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 						</>
 					)} */}
 
-					<div className='kanban__add-task_status-container'>
-						<label htmlFor='status'>
-							{modalMode === 'viewTask' ? 'Current Status' : 'Status'}
-						</label>
-						<select
-							className={
-								errors.map(err => err.param).includes('status')
-									? 'kanban__add-task_input-error'
-									: ''
-							}
-							type='text'
-							placeholder='e.g Todo'
-							name='status'
-							value={status}
-							onChange={onChangeHandler}
-						>
-							<option value=''>Select a column</option>
-							{columns.map(column => (
-								<option key={column._id} value={column._id}>
-									{column.name}
-								</option>
-							))}
-						</select>
-						<Error errors={errors} errorParam='status' />
+				<div className='kanban__add-task_status-container'>
+					<label htmlFor='status'>
+						{modalMode === 'viewTask' ? 'Current Status' : 'Status'}
+					</label>
+					<select
+						className={
+							errors.map(err => err.param).includes('status')
+								? 'kanban__add-task_input-error'
+								: ''
+						}
+						type='text'
+						placeholder='e.g Todo'
+						name='status'
+						value={status}
+						onChange={onChangeHandler}
+					>
+						<option value=''>Select a column</option>
+						{columns.map(column => (
+							<option key={column._id} value={column._id}>
+								{column.name}
+							</option>
+						))}
+					</select>
+					<Error errors={errors} errorParam='status' />
+				</div>
+				{modalMode === 'viewTask' ? null : (
+					<div className='kanban__modal-footer'>
+						<button type='submit' className='kanban__modal-button'>
+							{isUpdate ? 'Update' : 'Create'}
+						</button>
 					</div>
-					{modalMode === 'viewTask' ? null : (
-						<div className='kanban__modal-footer'>
-							<button type='submit' className='kanban__modal-button'>
-								{isUpdate ? 'Update' : 'Create'}
-							</button>
-						</div>
-					)}
-				</form>
-			</div>
-		</>
+				)}
+			</form>
+		</div>
 	);
 };
 
