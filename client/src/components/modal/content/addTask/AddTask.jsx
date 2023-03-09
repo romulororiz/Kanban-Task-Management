@@ -215,8 +215,6 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 		);
 	}
 
-	console.log(isLoading);
-
 	return (
 		<div className='kanban__add-task'>
 			<form onSubmit={onSubmit}>
